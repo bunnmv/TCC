@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Packet Rx Teste
-# Generated: Mon Oct  9 11:20:20 2017
+# Generated: Mon Oct  9 11:39:08 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -77,7 +77,7 @@ class packet_rx_teste(gr.top_block, Qt.QWidget):
         self.k = k = 7
         self.hdr_format = hdr_format = digital.header_format_counter(digital.packet_utils.default_access_code, 3, Const_PLD.bits_per_symbol())
         self.eb = eb = 0.22
-        self.samp_rate = samp_rate = 1e6
+        self.samp_rate = samp_rate = 2.88e6
 
         self.rx_rrc_taps = rx_rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, eb, 11*sps*nfilts)
 

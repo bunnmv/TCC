@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Packet Tx Teste
-# Generated: Mon Oct  9 11:20:25 2017
+# Generated: Mon Oct  9 11:39:17 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -81,7 +81,7 @@ class packet_tx_teste(gr.top_block, Qt.QWidget):
 
         self.tx_rrc_taps = tx_rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0, eb, 5*sps*nfilts)
 
-        self.samp_rate = samp_rate = 1e6
+        self.samp_rate = samp_rate = 2.88e6
         self.rep = rep = 3
         self.hdr_format = hdr_format = digital.header_format_counter(digital.packet_utils.default_access_code, 3, Const_PLD.bits_per_symbol())
 
@@ -171,7 +171,7 @@ class packet_tx_teste(gr.top_block, Qt.QWidget):
 
         self.blocks_random_pdu_0 = blocks.random_pdu(15, 150, chr(0xff), 1)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((0.5, ))
-        self.blocks_message_strobe_0 = blocks.message_strobe(pmt.intern("TEST"), 2000)
+        self.blocks_message_strobe_0 = blocks.message_strobe(pmt.intern("TEST"), 2000/2.88)
 
         ##################################################
         # Connections

@@ -658,7 +658,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1e6</value>
+      <value>2.88e6</value>
     </param>
   </block>
   <block>
@@ -865,7 +865,7 @@
     </param>
     <param>
       <key>period</key>
-      <value>2000</value>
+      <value>2000/2.88</value>
     </param>
   </block>
   <block>
@@ -892,7 +892,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 220)</value>
+      <value>(880, 220)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2027,7 +2027,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 196)</value>
+      <value>(1040, 196)</value>
     </param>
     <param>
       <key>_rotation</key>
