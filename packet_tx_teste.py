@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Packet Tx Teste
-# Generated: Mon Oct  9 11:39:17 2017
+# Generated: Wed Oct 11 14:22:38 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -75,13 +75,13 @@ class packet_tx_teste(gr.top_block, Qt.QWidget):
         self.k = k = 7
         self.eb = eb = 0.22
 
-        self.Const_PLD = Const_PLD = digital.constellation_calcdist((digital.psk_4()[0]), (digital.psk_4()[1]), 4, 1).base()
+        self.Const_PLD = Const_PLD = digital.constellation_dqpsk().base()
 
         self.Const_PLD.gen_soft_dec_lut(8)
 
         self.tx_rrc_taps = tx_rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0, eb, 5*sps*nfilts)
 
-        self.samp_rate = samp_rate = 2.88e6
+        self.samp_rate = samp_rate = 1e6
         self.rep = rep = 3
         self.hdr_format = hdr_format = digital.header_format_counter(digital.packet_utils.default_access_code, 3, Const_PLD.bits_per_symbol())
 
@@ -93,7 +93,7 @@ class packet_tx_teste(gr.top_block, Qt.QWidget):
         self.enc = enc = fec.cc_encoder_make(8000, k, rate, (polys), 0, fec.CC_TERMINATED, False)
 
 
-        self.Const_HDR = Const_HDR = digital.constellation_calcdist((digital.psk_2()[0]), (digital.psk_2()[1]), 2, 1).base()
+        self.Const_HDR = Const_HDR = digital.constellation_dqpsk().base()
 
         self.Const_HDR.gen_soft_dec_lut(8)
 
@@ -161,7 +161,7 @@ class packet_tx_teste(gr.top_block, Qt.QWidget):
         )
         self.osmosdr_sink_0 = osmosdr.sink( args="numchan=" + str(1) + " " + '' )
         self.osmosdr_sink_0.set_sample_rate(samp_rate)
-        self.osmosdr_sink_0.set_center_freq(300e6, 0)
+        self.osmosdr_sink_0.set_center_freq(314e6, 0)
         self.osmosdr_sink_0.set_freq_corr(0, 0)
         self.osmosdr_sink_0.set_gain(0, 0)
         self.osmosdr_sink_0.set_if_gain(30, 0)
@@ -169,18 +169,21 @@ class packet_tx_teste(gr.top_block, Qt.QWidget):
         self.osmosdr_sink_0.set_antenna('', 0)
         self.osmosdr_sink_0.set_bandwidth(0, 0)
 
-        self.blocks_random_pdu_0 = blocks.random_pdu(15, 150, chr(0xff), 1)
+        self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'packet_len')
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 480, 'packet_len')
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((0.5, ))
-        self.blocks_message_strobe_0 = blocks.message_strobe(pmt.intern("TEST"), 2000/2.88)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/2600-0.txt', False)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.blocks_message_strobe_0, 'strobe'), (self.blocks_random_pdu_0, 'generate'))
-        self.msg_connect((self.blocks_random_pdu_0, 'pdus'), (self.packet_tx_0, 'in'))
+        self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.packet_tx_0, 'in'))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.osmosdr_sink_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))
         self.connect((self.packet_tx_0, 0), (self.blocks_multiply_const_vxx_0, 0))
-        self.connect((self.packet_tx_0, 0), (self.qtgui_time_sink_x_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "packet_tx_teste")

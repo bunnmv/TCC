@@ -184,57 +184,6 @@
     </param>
   </block>
   <block>
-    <key>variable_constellation</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>const_points</key>
-      <value>digital.psk_2()[0]</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>calcdist</value>
-    </param>
-    <param>
-      <key>dims</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(704, 636)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>Const_PLD</value>
-    </param>
-    <param>
-      <key>rot_sym</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>soft_dec_lut</key>
-      <value>'auto'</value>
-    </param>
-    <param>
-      <key>precision</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>sym_map</key>
-      <value>digital.psk_2()[1]</value>
-    </param>
-  </block>
-  <block>
     <key>variable</key>
     <param>
       <key>comment</key>
@@ -1182,7 +1131,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>file</key>
@@ -1323,7 +1272,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1370,7 +1319,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1566,7 +1515,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1605,7 +1554,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>epsilon</key>
@@ -1613,7 +1562,7 @@
     </param>
     <param>
       <key>freq_offset</key>
-      <value>0</value>
+      <value>0.001</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1695,7 +1644,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>eb</key>
@@ -2212,7 +2161,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2781,7 +2730,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>

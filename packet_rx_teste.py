@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Packet Rx Teste
-# Generated: Mon Oct  9 11:39:08 2017
+# Generated: Tue Oct 17 11:24:19 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -77,7 +77,7 @@ class packet_rx_teste(gr.top_block, Qt.QWidget):
         self.k = k = 7
         self.hdr_format = hdr_format = digital.header_format_counter(digital.packet_utils.default_access_code, 3, Const_PLD.bits_per_symbol())
         self.eb = eb = 0.22
-        self.samp_rate = samp_rate = 2.88e6
+        self.samp_rate = samp_rate = 1e6
 
         self.rx_rrc_taps = rx_rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, eb, 11*sps*nfilts)
 
@@ -124,7 +124,7 @@ class packet_rx_teste(gr.top_block, Qt.QWidget):
 
         self.qtgui_time_sink_x_1.enable_tags(-1, True)
         self.qtgui_time_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "counter")
-        self.qtgui_time_sink_x_1.enable_autoscale(False)
+        self.qtgui_time_sink_x_1.enable_autoscale(True)
         self.qtgui_time_sink_x_1.enable_grid(False)
         self.qtgui_time_sink_x_1.enable_axis_labels(True)
         self.qtgui_time_sink_x_1.enable_control_panel(False)
@@ -172,14 +172,17 @@ class packet_rx_teste(gr.top_block, Qt.QWidget):
             sps=sps,
         )
         self.digital_fll_band_edge_cc_0 = digital.fll_band_edge_cc(sps, eb, 44, 0.05)
+        self.blocks_pdu_to_tagged_stream_0_0 = blocks.pdu_to_tagged_stream(blocks.byte_t, 'packet_len')
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((1, ))
-        self.blocks_message_debug_0 = blocks.message_debug()
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/teste.txt', False)
+        self.blocks_file_sink_0.set_unbuffered(True)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.packet_rx_0, 'pkt out'), (self.blocks_message_debug_0, 'print'))
+        self.msg_connect((self.packet_rx_0, 'pkt out'), (self.blocks_pdu_to_tagged_stream_0_0, 'pdus'))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.packet_rx_0, 0))
+        self.connect((self.blocks_pdu_to_tagged_stream_0_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.digital_fll_band_edge_cc_0, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.packet_rx_0, 1), (self.qtgui_time_sink_x_1, 0))
         self.connect((self.rtlsdr_source_0, 0), (self.digital_fll_band_edge_cc_0, 0))

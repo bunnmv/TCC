@@ -527,7 +527,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -652,7 +652,7 @@
     <key>blocks_unpacked_to_packed_xx</key>
     <param>
       <key>bits_per_chunk</key>
-      <value>int(np.log2(arity))</value>
+      <value>int(np.log2(8))</value>
     </param>
     <param>
       <key>alias</key>
@@ -668,7 +668,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>endianness</key>
@@ -723,7 +723,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -766,7 +766,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1317,7 +1317,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>fbw</key>
@@ -1368,7 +1368,7 @@
     </param>
     <param>
       <key>bb_gain0</key>
-      <value>20</value>
+      <value>30</value>
     </param>
     <param>
       <key>bw0</key>
@@ -1376,7 +1376,7 @@
     </param>
     <param>
       <key>dc_offset_mode0</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>corr0</key>
@@ -1392,7 +1392,7 @@
     </param>
     <param>
       <key>if_gain0</key>
-      <value>20</value>
+      <value>30</value>
     </param>
     <param>
       <key>iq_balance_mode0</key>
@@ -1400,7 +1400,7 @@
     </param>
     <param>
       <key>gain0</key>
-      <value>10</value>
+      <value>30</value>
     </param>
     <param>
       <key>ant10</key>
