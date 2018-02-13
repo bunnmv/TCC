@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Feb 13 16:08:38 2018
+# Generated: Tue Feb 13 18:27:05 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -21,6 +21,7 @@ from gnuradio import blocks
 from gnuradio import channels
 from gnuradio import digital
 from gnuradio import eng_notation
+from gnuradio import fec
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
@@ -71,9 +72,19 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 32000
         self.excess_bw = excess_bw = 0.35
 
+
+        self.DE = DE = fec.dummy_encoder_make(22)
+
+
+
+        self.DD = DD = fec.dummy_decoder.make(22)
+
+
         ##################################################
         # Blocks
         ##################################################
+        self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=DE, threading= None, puncpat='11')
+        self.fec_extended_decoder_0 = fec.extended_decoder(decoder_obj_list=DD, threading= None, ann=None, puncpat='11', integration_period=10000)
         self.digital_psk_mod_0 = digital.psk.psk_mod(
           constellation_points=8,
           mod_code="gray",
@@ -95,6 +106,7 @@ class top_block(gr.top_block, Qt.QWidget):
           log=False,
           )
         self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(hdr_format, 'len_key')
+        self.digital_map_bb_0 = digital.map_bb((-1,1))
         self.digital_correlate_access_code_xx_ts_1 = digital.correlate_access_code_bb_ts(digital.packet_utils.default_access_code,
           0, 'len_key2')
         self.channels_channel_model_0 = channels.channel_model(
@@ -116,6 +128,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/test.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
 
 
@@ -123,6 +136,7 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.blocks_message_debug_0, 'print'))
+        self.connect((self.blocks_char_to_float_0, 0), (self.fec_extended_decoder_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_head_0, 0))
         self.connect((self.blocks_head_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
@@ -130,12 +144,15 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_tagged_stream_mux_0, 1))
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.digital_protocol_formatter_bb_0, 0))
         self.connect((self.blocks_tagged_stream_mux_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.digital_psk_mod_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.fec_extended_encoder_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.digital_psk_demod_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_1, 0), (self.blocks_repack_bits_bb_0_0_0, 0))
+        self.connect((self.digital_map_bb_0, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.digital_protocol_formatter_bb_0, 0), (self.blocks_tagged_stream_mux_0, 0))
-        self.connect((self.digital_psk_demod_0, 0), (self.digital_correlate_access_code_xx_ts_1, 0))
+        self.connect((self.digital_psk_demod_0, 0), (self.digital_map_bb_0, 0))
         self.connect((self.digital_psk_mod_0, 0), (self.channels_channel_model_0, 0))
+        self.connect((self.fec_extended_decoder_0, 0), (self.digital_correlate_access_code_xx_ts_1, 0))
+        self.connect((self.fec_extended_encoder_0, 0), (self.digital_psk_mod_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -172,6 +189,18 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_excess_bw(self, excess_bw):
         self.excess_bw = excess_bw
+
+    def get_DE(self):
+        return self.DE
+
+    def set_DE(self, DE):
+        self.DE = DE
+
+    def get_DD(self):
+        return self.DD
+
+    def set_DD(self, DD):
+        self.DD = DD
 
 
 def argument_parser():

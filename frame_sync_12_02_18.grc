@@ -1727,7 +1727,7 @@ per bit</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>2</value>
+      <value>1</value>
     </param>
     <param>
       <key>encoder_list</key>
