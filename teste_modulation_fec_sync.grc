@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Tue Feb 13 18:24:27 2018</timestamp>
+  <timestamp>Tue Feb 13 16:09:44 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -109,11 +109,11 @@
     </param>
     <param>
       <key>framebits</key>
-      <value>2048</value>
+      <value>22</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 376)</value>
+      <value>(0, 372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -152,11 +152,11 @@
     </param>
     <param>
       <key>framebits</key>
-      <value>2048</value>
+      <value>22</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 312)</value>
+      <value>(0, 308)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -183,7 +183,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 8)</value>
+      <value>(144, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -237,7 +237,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(232, 8)</value>
+      <value>(232, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -272,7 +272,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 436)</value>
+      <value>(608, 428)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -327,7 +327,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 436)</value>
+      <value>(896, 412)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -378,7 +378,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 64)</value>
+      <value>(144, 60)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -430,7 +430,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(328, 72)</value>
+      <value>(328, 68)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -481,7 +481,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 248)</value>
+      <value>(976, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -490,6 +490,49 @@
     <param>
       <key>id</key>
       <value>blocks_message_debug_0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_pack_k_bits_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(488, 156)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pack_k_bits_bb_0</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -524,7 +567,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(576, 240)</value>
+      <value>(576, 236)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -571,7 +614,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 164)</value>
+      <value>(592, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -626,7 +669,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 132)</value>
+      <value>(776, 124)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -685,7 +728,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 240)</value>
+      <value>(792, 236)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -732,7 +775,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(744, 148)</value>
+      <value>(792, 20)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -768,6 +811,49 @@
     </param>
   </block>
   <block>
+    <key>blocks_unpack_k_bits_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(192, 156)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_unpack_k_bits_bb_0</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>channels_channel_model</key>
     <param>
       <key>alias</key>
@@ -799,7 +885,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(176, 276)</value>
+      <value>(200, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -854,7 +940,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(560, 324)</value>
+      <value>(184, 420)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -907,7 +993,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(200, 436)</value>
+      <value>(440, 428)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -954,7 +1040,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(528, 12)</value>
+      <value>(552, 20)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1009,7 +1095,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(328, 260)</value>
+      <value>(352, 252)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1084,7 +1170,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(944, 4)</value>
+      <value>(984, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1151,7 +1237,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 424)</value>
+      <value>(584, 328)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1206,7 +1292,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 12)</value>
+      <value>(320, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1249,7 +1335,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 248)</value>
+      <value>(0, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1296,7 +1382,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 96)</value>
+      <value>(0, 92)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1370,7 +1456,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 140)</value>
+      <value>(976, 164)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1397,7 +1483,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(120, 188)</value>
+      <value>(144, 204)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1426,6 +1512,12 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>blocks_head_0</source_block_id>
+    <sink_block_id>blocks_unpack_k_bits_bb_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_pack_k_bits_bb_0</source_block_id>
     <sink_block_id>blocks_stream_to_tagged_stream_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -1468,6 +1560,12 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
+    <sink_block_id>digital_psk_mod_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_unpack_k_bits_bb_0</source_block_id>
     <sink_block_id>fec_extended_encoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -1480,7 +1578,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>digital_correlate_access_code_xx_ts_1</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
+    <sink_block_id>digital_map_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1498,7 +1596,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>digital_psk_demod_0</source_block_id>
-    <sink_block_id>digital_map_bb_0</sink_block_id>
+    <sink_block_id>digital_correlate_access_code_xx_ts_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1510,13 +1608,13 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>fec_extended_decoder_0</source_block_id>
-    <sink_block_id>digital_correlate_access_code_xx_ts_1</sink_block_id>
+    <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>fec_extended_encoder_0</source_block_id>
-    <sink_block_id>digital_psk_mod_0</sink_block_id>
+    <sink_block_id>blocks_pack_k_bits_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

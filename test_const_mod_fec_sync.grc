@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Tue Feb 13 18:24:27 2018</timestamp>
+  <timestamp>Tue Feb 13 18:27:52 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -109,7 +109,7 @@
     </param>
     <param>
       <key>framebits</key>
-      <value>2048</value>
+      <value>22</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -152,7 +152,7 @@
     </param>
     <param>
       <key>framebits</key>
-      <value>2048</value>
+      <value>22</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -169,6 +169,57 @@
     <param>
       <key>ndim</key>
       <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_constellation</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>const_points</key>
+      <value>[-1-1j, -1+1j, 1+1j, 1-1j]</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>dqpsk</value>
+    </param>
+    <param>
+      <key>dims</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1136, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>MO</value>
+    </param>
+    <param>
+      <key>rot_sym</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>soft_dec_lut</key>
+      <value>None</value>
+    </param>
+    <param>
+      <key>precision</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>sym_map</key>
+      <value>[0, 1, 3, 2]</value>
     </param>
   </block>
   <block>
@@ -196,6 +247,60 @@
     <param>
       <key>value</key>
       <value>0.35</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 436)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>nfilts</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>32</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 204)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rrc_taps</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 45*nfilts)</value>
     </param>
   </block>
   <block>
@@ -253,53 +358,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_char_to_float</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(312, 436)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_char_to_float_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>scale</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_file_sink</key>
     <param>
       <key>append</key>
@@ -327,7 +385,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 436)</value>
+      <value>(848, 440)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -481,7 +539,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 248)</value>
+      <value>(880, 300)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -571,7 +629,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 164)</value>
+      <value>(248, 168)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -626,7 +684,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 132)</value>
+      <value>(552, 136)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -732,7 +790,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(744, 148)</value>
+      <value>(744, 152)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -799,7 +857,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(176, 276)</value>
+      <value>(176, 308)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -831,6 +889,112 @@
     </param>
   </block>
   <block>
+    <key>digital_constellation_modulator</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>constellation</key>
+      <value>MO</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>differential</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>0.35</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(952, 8)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_constellation_modulator_0</value>
+    </param>
+    <param>
+      <key>log</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>samples_per_symbol</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>verbose</key>
+      <value>False</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_constellation_soft_decoder_cf</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>constellation</key>
+      <value>MO</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(400, 548)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_constellation_soft_decoder_cf_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>digital_correlate_access_code_xx_ts</key>
     <param>
       <key>access_code</key>
@@ -854,7 +1018,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(560, 324)</value>
+      <value>(544, 372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -886,16 +1050,14 @@
     </param>
   </block>
   <block>
-    <key>digital_map_bb</key>
+    <key>digital_costas_loop_cc</key>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
-      <value>The floats are generally meant to represent soft decisions. 
-If the demodulator does not produce soft decisions, an easy alternative 
-is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -907,7 +1069,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(200, 436)</value>
+      <value>(368, 284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -915,11 +1077,11 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>id</key>
-      <value>digital_map_bb_0</value>
+      <value>digital_costas_loop_cc_0</value>
     </param>
     <param>
-      <key>map</key>
-      <value>-1,1</value>
+      <key>w</key>
+      <value>6.82/100</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -928,6 +1090,85 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     <param>
       <key>minoutbuf</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>order</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>use_snr</key>
+      <value>False</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_pfb_clock_sync_xxx</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>filter_size</key>
+      <value>nfilts</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(168, 436)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_pfb_clock_sync_xxx_0_0</value>
+    </param>
+    <param>
+      <key>init_phase</key>
+      <value>nfilts/2</value>
+    </param>
+    <param>
+      <key>loop_bw</key>
+      <value>6.82/100</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>max_dev</key>
+      <value>1.5</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>osps</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps*1.00</value>
+    </param>
+    <param>
+      <key>taps</key>
+      <value>rrc_taps</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>ccf</value>
     </param>
   </block>
   <block>
@@ -954,7 +1195,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(528, 12)</value>
+      <value>(528, 16)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -975,152 +1216,6 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_psk_demod</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>differential</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>excess_bw</key>
-      <value>0.35</value>
-    </param>
-    <param>
-      <key>freq_bw</key>
-      <value>6.28/100.0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(328, 260)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>mod_code</key>
-      <value>"gray"</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>digital_psk_demod_0</value>
-    </param>
-    <param>
-      <key>log</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation_points</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>phase_bw</key>
-      <value>6.28/100.0</value>
-    </param>
-    <param>
-      <key>samples_per_symbol</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>timing_bw</key>
-      <value>6.28/100.0</value>
-    </param>
-    <param>
-      <key>verbose</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_psk_mod</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>differential</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>excess_bw</key>
-      <value>0.35</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(944, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>mod_code</key>
-      <value>"gray"</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>digital_psk_mod_0</value>
-    </param>
-    <param>
-      <key>log</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation_points</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>samples_per_symbol</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>verbose</key>
-      <value>False</value>
     </param>
   </block>
   <block>
@@ -1151,7 +1246,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 424)</value>
+      <value>(664, 536)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1206,7 +1301,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 12)</value>
+      <value>(736, 16)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1370,7 +1465,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 140)</value>
+      <value>(976, 144)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1397,7 +1492,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(120, 188)</value>
+      <value>(144, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1412,12 +1507,6 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
       <value>TX</value>
     </param>
   </block>
-  <connection>
-    <source_block_id>blocks_char_to_float_0</source_block_id>
-    <sink_block_id>fec_extended_decoder_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
   <connection>
     <source_block_id>blocks_file_source_0</source_block_id>
     <sink_block_id>blocks_head_0</sink_block_id>
@@ -1474,7 +1563,19 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>channels_channel_model_0</source_block_id>
-    <sink_block_id>digital_psk_demod_0</sink_block_id>
+    <sink_block_id>digital_pfb_clock_sync_xxx_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_constellation_modulator_0</source_block_id>
+    <sink_block_id>virtual_sink_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_constellation_soft_decoder_cf_0</source_block_id>
+    <sink_block_id>fec_extended_decoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1485,26 +1586,20 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_map_bb_0</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
+    <source_block_id>digital_costas_loop_cc_0</source_block_id>
+    <sink_block_id>digital_constellation_soft_decoder_cf_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_pfb_clock_sync_xxx_0_0</source_block_id>
+    <sink_block_id>digital_costas_loop_cc_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>digital_protocol_formatter_bb_0</source_block_id>
     <sink_block_id>blocks_tagged_stream_mux_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_psk_demod_0</source_block_id>
-    <sink_block_id>digital_map_bb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_psk_mod_0</source_block_id>
-    <sink_block_id>virtual_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1516,7 +1611,7 @@ is to convert the hard decision 0's and 1's to -1 and +1 floats.</value>
   </connection>
   <connection>
     <source_block_id>fec_extended_encoder_0</source_block_id>
-    <sink_block_id>digital_psk_mod_0</sink_block_id>
+    <sink_block_id>digital_constellation_modulator_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

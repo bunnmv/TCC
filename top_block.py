@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Feb 13 18:27:05 2018
+# Generated: Wed Feb 14 11:25:41 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -69,8 +69,13 @@ class top_block(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.sps = sps = 2
+        self.nfilts = nfilts = 32
         self.samp_rate = samp_rate = 32000
+        self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 45*nfilts)
         self.excess_bw = excess_bw = 0.35
+
+        self.MO = MO = digital.constellation_dqpsk().base()
+
 
 
         self.DE = DE = fec.dummy_encoder_make(22)
@@ -85,30 +90,21 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=DE, threading= None, puncpat='11')
         self.fec_extended_decoder_0 = fec.extended_decoder(decoder_obj_list=DD, threading= None, ann=None, puncpat='11', integration_period=10000)
-        self.digital_psk_mod_0 = digital.psk.psk_mod(
-          constellation_points=8,
-          mod_code="gray",
-          differential=True,
-          samples_per_symbol=2,
-          excess_bw=0.35,
-          verbose=False,
-          log=False,
-          )
-        self.digital_psk_demod_0 = digital.psk.psk_demod(
-          constellation_points=8,
-          differential=True,
-          samples_per_symbol=2,
-          excess_bw=0.35,
-          phase_bw=6.28/100.0,
-          timing_bw=6.28/100.0,
-          mod_code="gray",
-          verbose=False,
-          log=False,
-          )
         self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(hdr_format, 'len_key')
-        self.digital_map_bb_0 = digital.map_bb((-1,1))
+        self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_ccf(sps*1.00, 6.82/100, (rrc_taps), nfilts, nfilts/2, 1.5, 1)
+        self.digital_costas_loop_cc_0 = digital.costas_loop_cc(6.82/100, 4, False)
         self.digital_correlate_access_code_xx_ts_1 = digital.correlate_access_code_bb_ts(digital.packet_utils.default_access_code,
           0, 'len_key2')
+        self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(MO)
+        self.digital_constellation_modulator_0 = digital.generic_mod(
+          constellation=MO,
+          differential=True,
+          samples_per_symbol=2,
+          pre_diff_code=True,
+          excess_bw=0.35,
+          verbose=False,
+          log=False,
+          )
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=0.0,
         	frequency_offset=0.0,
@@ -128,7 +124,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/test.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
-        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
 
 
@@ -136,7 +131,6 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.blocks_message_debug_0, 'print'))
-        self.connect((self.blocks_char_to_float_0, 0), (self.fec_extended_decoder_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_head_0, 0))
         self.connect((self.blocks_head_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
@@ -145,14 +139,15 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.digital_protocol_formatter_bb_0, 0))
         self.connect((self.blocks_tagged_stream_mux_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.fec_extended_encoder_0, 0))
-        self.connect((self.channels_channel_model_0, 0), (self.digital_psk_demod_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))
+        self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
+        self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.fec_extended_decoder_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_1, 0), (self.blocks_repack_bits_bb_0_0_0, 0))
-        self.connect((self.digital_map_bb_0, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
+        self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.digital_costas_loop_cc_0, 0))
         self.connect((self.digital_protocol_formatter_bb_0, 0), (self.blocks_tagged_stream_mux_0, 0))
-        self.connect((self.digital_psk_demod_0, 0), (self.digital_map_bb_0, 0))
-        self.connect((self.digital_psk_mod_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.fec_extended_decoder_0, 0), (self.digital_correlate_access_code_xx_ts_1, 0))
-        self.connect((self.fec_extended_encoder_0, 0), (self.digital_psk_mod_0, 0))
+        self.connect((self.fec_extended_encoder_0, 0), (self.digital_constellation_modulator_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -176,6 +171,14 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_sps(self, sps):
         self.sps = sps
+        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 45*self.nfilts))
+
+    def get_nfilts(self):
+        return self.nfilts
+
+    def set_nfilts(self, nfilts):
+        self.nfilts = nfilts
+        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 45*self.nfilts))
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -184,11 +187,24 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
+    def get_rrc_taps(self):
+        return self.rrc_taps
+
+    def set_rrc_taps(self, rrc_taps):
+        self.rrc_taps = rrc_taps
+        self.digital_pfb_clock_sync_xxx_0_0.update_taps((self.rrc_taps))
+
     def get_excess_bw(self):
         return self.excess_bw
 
     def set_excess_bw(self, excess_bw):
         self.excess_bw = excess_bw
+
+    def get_MO(self):
+        return self.MO
+
+    def set_MO(self, MO):
+        self.MO = MO
 
     def get_DE(self):
         return self.DE
