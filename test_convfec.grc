@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Tue Feb 13 18:27:52 2018</timestamp>
+  <timestamp>Tue Mar  6 23:52:36 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -90,6 +90,140 @@
     </param>
   </block>
   <block>
+    <key>variable_cc_decoder_def</key>
+    <param>
+      <key>padding</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>7</value>
+    </param>
+    <param>
+      <key>dim1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>dim2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>state_end</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>framebits</key>
+      <value>2048</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 640)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>CD</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"ok"</value>
+    </param>
+    <param>
+      <key>ndim</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>polys</key>
+      <value>[79,109]</value>
+    </param>
+    <param>
+      <key>rate</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>state_start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>mode</key>
+      <value>fec.CC_TERMINATED</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_cc_encoder_def</key>
+    <param>
+      <key>padding</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>7</value>
+    </param>
+    <param>
+      <key>dim1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>dim2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>framebits</key>
+      <value>2048</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 500)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>CE</value>
+    </param>
+    <param>
+      <key>ndim</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>polys</key>
+      <value>[79,109]</value>
+    </param>
+    <param>
+      <key>rate</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>state_start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>mode</key>
+      <value>fec.CC_TERMINATED</value>
+    </param>
+  </block>
+  <block>
     <key>variable_dummy_decoder_def</key>
     <param>
       <key>comment</key>
@@ -113,7 +247,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 376)</value>
+      <value>(0, 372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -156,7 +290,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 312)</value>
+      <value>(0, 308)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -354,7 +488,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>4</value>
+      <value>8</value>
     </param>
   </block>
   <block>
@@ -459,7 +593,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 440)</value>
+      <value>(848, 436)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -656,7 +790,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(576, 240)</value>
+      <value>(576, 236)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -817,7 +951,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 240)</value>
+      <value>(792, 236)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -986,7 +1120,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(376, 564)</value>
+      <value>(376, 596)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1037,7 +1171,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(952, 8)</value>
+      <value>(952, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1061,7 +1195,7 @@
     </param>
     <param>
       <key>samples_per_symbol</key>
-      <value>4</value>
+      <value>sps</value>
     </param>
     <param>
       <key>verbose</key>
@@ -1092,7 +1226,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(384, 492)</value>
+      <value>(384, 508)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1284,7 +1418,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 436)</value>
+      <value>(168, 460)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1398,7 +1532,7 @@
     </param>
     <param>
       <key>decoder_list</key>
-      <value>DD</value>
+      <value>CD</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1406,7 +1540,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(632, 656)</value>
+      <value>(632, 648)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1457,7 +1591,7 @@
     </param>
     <param>
       <key>encoder_list</key>
-      <value>DE</value>
+      <value>CE</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1508,7 +1642,7 @@
     </param>
     <param>
       <key>decoder_list</key>
-      <value>DD</value>
+      <value>CD</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1571,11 +1705,11 @@
     </param>
     <param>
       <key>encoder_list</key>
-      <value>DE</value>
+      <value>CE</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(760, 8)</value>
+      <value>(760, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1622,7 +1756,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 248)</value>
+      <value>(0, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1716,7 +1850,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(304, 8)</value>
+      <value>(304, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2804,7 +2938,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 144)</value>
+      <value>(1064, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
