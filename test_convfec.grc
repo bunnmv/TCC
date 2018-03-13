@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.12'?>
+<?grc format='1' created='3.7.11'?>
 <flow_graph>
   <timestamp>Tue Mar  6 23:52:36 2018</timestamp>
   <block>
@@ -73,20 +73,12 @@
       <value>True</value>
     </param>
     <param>
-      <key>sizing_mode</key>
-      <value>fixed</value>
-    </param>
-    <param>
       <key>thread_safe_setters</key>
       <value></value>
     </param>
     <param>
       <key>title</key>
       <value></value>
-    </param>
-    <param>
-      <key>placement</key>
-      <value>(0,0)</value>
     </param>
   </block>
   <block>
@@ -157,7 +149,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_STREAMING</value>
+      <value>fec.CC_TERMINATED</value>
     </param>
   </block>
   <block>
@@ -220,7 +212,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_STREAMING</value>
+      <value>fec.CC_TERMINATED</value>
     </param>
   </block>
   <block>
@@ -760,10 +752,6 @@
   <block>
     <key>blocks_file_source</key>
     <param>
-      <key>begin_tag</key>
-      <value>pmt.PMT_NIL</value>
-    </param>
-    <param>
       <key>alias</key>
       <value></value>
     </param>
@@ -785,7 +773,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 60)</value>
+      <value>(136, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -884,7 +872,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -943,7 +931,7 @@
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_key</value>
+      <value></value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -955,7 +943,7 @@
     </param>
     <param>
       <key>align_output</key>
-      <value>True</value>
+      <value>False</value>
     </param>
   </block>
   <block>
@@ -986,7 +974,7 @@
     </param>
     <param>
       <key>endianness</key>
-      <value>gr.GR_MSB_FIRST</value>
+      <value>gr.GR_LSB_FIRST</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1002,7 +990,7 @@
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_key2</value>
+      <value></value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1206,7 +1194,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1466,6 +1454,57 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
   </block>
   <block>
+    <key>digital_correlate_access_code_tag_bb</key>
+    <param>
+      <key>access_code</key>
+      <value>digital.packet_utils.default_access_code</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(624, 668)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_correlate_access_code_tag_bb_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>tagname</key>
+      <value>len_key2</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>digital_correlate_access_code_xx_ts</key>
     <param>
       <key>access_code</key>
@@ -1485,11 +1524,11 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(600, 500)</value>
+      <value>(808, 356)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1749,58 +1788,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
   </block>
   <block>
-    <key>fec_extended_encoder</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>encoder_list</key>
-      <value>CE</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(568, 100)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>fec_extended_encoder_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>puncpat</key>
-      <value>'11'</value>
-    </param>
-    <param>
-      <key>threadtype</key>
-      <value>none</value>
-    </param>
-  </block>
-  <block>
-    <key>fec_extended_tagged_decoder</key>
+    <key>fec_extended_decoder</key>
     <param>
       <key>ann</key>
       <value>None</value>
@@ -1827,7 +1815,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 684)</value>
+      <value>(440, 664)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1835,15 +1823,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>id</key>
-      <value>fec_extended_tagged_decoder_0</value>
-    </param>
-    <param>
-      <key>lentagname</key>
-      <value>None</value>
-    </param>
-    <param>
-      <key>mtu</key>
-      <value>68</value>
+      <value>fec_extended_decoder_1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1858,12 +1838,16 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
       <value>'11'</value>
     </param>
     <param>
+      <key>threadtype</key>
+      <value>capillary</value>
+    </param>
+    <param>
       <key>value</key>
       <value>fec_extended_decoder</value>
     </param>
   </block>
   <block>
-    <key>fec_extended_tagged_encoder</key>
+    <key>fec_extended_encoder</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1878,7 +1862,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>encoder_list</key>
@@ -1886,7 +1870,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(560, 24)</value>
+      <value>(576, 28)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1894,15 +1878,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>id</key>
-      <value>fec_extended_tagged_encoder_0</value>
-    </param>
-    <param>
-      <key>lentagname</key>
-      <value>len_key</value>
-    </param>
-    <param>
-      <key>mtu</key>
-      <value>frameLength</value>
+      <value>fec_extended_encoder_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1915,6 +1891,10 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     <param>
       <key>puncpat</key>
       <value>'11'</value>
+    </param>
+    <param>
+      <key>threadtype</key>
+      <value>ordinary</value>
     </param>
   </block>
   <block>
@@ -1945,15 +1925,11 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>label</key>
-      <value>(22 + 11 *)2</value>
+      <value></value>
     </param>
     <param>
       <key>short_id</key>
       <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -1961,7 +1937,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>value</key>
-      <value>68</value>
+      <value>272</value>
     </param>
   </block>
   <block>
@@ -1997,10 +1973,6 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     <param>
       <key>short_id</key>
       <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>part</value>
     </param>
     <param>
       <key>type</key>
@@ -3051,10 +3023,6 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
       <value>samp_rate*4</value>
     </param>
     <param>
-      <key>stemplot</key>
-      <value>False</value>
-    </param>
-    <param>
       <key>tr_chan</key>
       <value>0</value>
     </param>
@@ -3418,10 +3386,6 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
       <value>samp_rate*4</value>
     </param>
     <param>
-      <key>stemplot</key>
-      <value>False</value>
-    </param>
-    <param>
       <key>tr_chan</key>
       <value>0</value>
     </param>
@@ -3622,7 +3586,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
   </connection>
   <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0_0</source_block_id>
-    <sink_block_id>fec_extended_tagged_encoder_0</sink_block_id>
+    <sink_block_id>fec_extended_encoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3682,12 +3646,18 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
   </connection>
   <connection>
     <source_block_id>digital_constellation_soft_decoder_cf_0</source_block_id>
-    <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
+    <sink_block_id>fec_extended_decoder_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_correlate_access_code_xx_ts_1</source_block_id>
+    <source_block_id>digital_correlate_access_code_tag_bb_0</source_block_id>
+    <sink_block_id>blocks_char_to_float_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_correlate_access_code_tag_bb_0</source_block_id>
     <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -3717,25 +3687,13 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>fec_extended_decoder_1</source_block_id>
+    <sink_block_id>digital_correlate_access_code_tag_bb_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>fec_extended_encoder_0</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
-    <sink_block_id>digital_correlate_access_code_xx_ts_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>fec_extended_tagged_encoder_0</source_block_id>
     <sink_block_id>blocks_repack_bits_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
