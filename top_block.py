@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Mar 14 11:04:50 2018
+# Generated: Wed Mar 14 14:53:22 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -35,7 +35,7 @@ from gnuradio import qtgui
 
 class top_block(gr.top_block, Qt.QWidget):
 
-    def __init__(self, frameLength=34, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0)):
+    def __init__(self, frameLength=22, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0)):
         gr.top_block.__init__(self, "Top Block")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Top Block")
@@ -68,7 +68,7 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.sps = sps = 8
+        self.sps = sps = 4
         self.nfilts = nfilts = 32
         self.sps_costas = sps_costas = 8
         self.samp_rate = samp_rate = 32000
@@ -80,39 +80,31 @@ class top_block(gr.top_block, Qt.QWidget):
         self.MO.gen_soft_dec_lut(8)
 
 
-        self.DE = DE = fec.dummy_encoder_make(1500)
+        self.CE = CE = fec.cc_encoder_make(frameLength*8, 7, 2, ([79,109]), 0, fec.CC_TERMINATED, False)
 
 
 
-        self.DD = DD = fec.dummy_decoder.make(1500)
-
-
-
-        self.CE = CE = fec.cc_encoder_make(frameLength*8, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)
-
-
-
-        self.CD = CD = fec.cc_decoder.make(frameLength*8, 7, 2, ([79,109]), 0, -1, fec.CC_STREAMING, False)
+        self.CD = CD = fec.cc_decoder.make(frameLength*8, 7, 2, ([79,109]), 0, -1, fec.CC_TERMINATED, False)
 
 
         ##################################################
         # Blocks
         ##################################################
-        self.qtgui_const_sink_x_0_0 = qtgui.const_sink_c(
+        self.qtgui_const_sink_x_1_0 = qtgui.const_sink_c(
         	1024, #size
         	"", #name
         	1 #number of inputs
         )
-        self.qtgui_const_sink_x_0_0.set_update_time(0.10)
-        self.qtgui_const_sink_x_0_0.set_y_axis(-2, 2)
-        self.qtgui_const_sink_x_0_0.set_x_axis(-2, 2)
-        self.qtgui_const_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
-        self.qtgui_const_sink_x_0_0.enable_autoscale(False)
-        self.qtgui_const_sink_x_0_0.enable_grid(False)
-        self.qtgui_const_sink_x_0_0.enable_axis_labels(True)
+        self.qtgui_const_sink_x_1_0.set_update_time(0.10)
+        self.qtgui_const_sink_x_1_0.set_y_axis(-2, 2)
+        self.qtgui_const_sink_x_1_0.set_x_axis(-2, 2)
+        self.qtgui_const_sink_x_1_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
+        self.qtgui_const_sink_x_1_0.enable_autoscale(False)
+        self.qtgui_const_sink_x_1_0.enable_grid(False)
+        self.qtgui_const_sink_x_1_0.enable_axis_labels(True)
 
         if not True:
-          self.qtgui_const_sink_x_0_0.disable_legend()
+          self.qtgui_const_sink_x_1_0.disable_legend()
 
         labels = ['', '', '', '', '',
                   '', '', '', '', '']
@@ -128,32 +120,32 @@ class top_block(gr.top_block, Qt.QWidget):
                   1.0, 1.0, 1.0, 1.0, 1.0]
         for i in xrange(1):
             if len(labels[i]) == 0:
-                self.qtgui_const_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
+                self.qtgui_const_sink_x_1_0.set_line_label(i, "Data {0}".format(i))
             else:
-                self.qtgui_const_sink_x_0_0.set_line_label(i, labels[i])
-            self.qtgui_const_sink_x_0_0.set_line_width(i, widths[i])
-            self.qtgui_const_sink_x_0_0.set_line_color(i, colors[i])
-            self.qtgui_const_sink_x_0_0.set_line_style(i, styles[i])
-            self.qtgui_const_sink_x_0_0.set_line_marker(i, markers[i])
-            self.qtgui_const_sink_x_0_0.set_line_alpha(i, alphas[i])
+                self.qtgui_const_sink_x_1_0.set_line_label(i, labels[i])
+            self.qtgui_const_sink_x_1_0.set_line_width(i, widths[i])
+            self.qtgui_const_sink_x_1_0.set_line_color(i, colors[i])
+            self.qtgui_const_sink_x_1_0.set_line_style(i, styles[i])
+            self.qtgui_const_sink_x_1_0.set_line_marker(i, markers[i])
+            self.qtgui_const_sink_x_1_0.set_line_alpha(i, alphas[i])
 
-        self._qtgui_const_sink_x_0_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_const_sink_x_0_0_win)
-        self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
+        self._qtgui_const_sink_x_1_0_win = sip.wrapinstance(self.qtgui_const_sink_x_1_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_const_sink_x_1_0_win)
+        self.qtgui_const_sink_x_1 = qtgui.const_sink_c(
         	1024, #size
         	"", #name
         	1 #number of inputs
         )
-        self.qtgui_const_sink_x_0.set_update_time(0.10)
-        self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
-        self.qtgui_const_sink_x_0.enable_autoscale(False)
-        self.qtgui_const_sink_x_0.enable_grid(False)
-        self.qtgui_const_sink_x_0.enable_axis_labels(True)
+        self.qtgui_const_sink_x_1.set_update_time(0.10)
+        self.qtgui_const_sink_x_1.set_y_axis(-2, 2)
+        self.qtgui_const_sink_x_1.set_x_axis(-2, 2)
+        self.qtgui_const_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
+        self.qtgui_const_sink_x_1.enable_autoscale(False)
+        self.qtgui_const_sink_x_1.enable_grid(False)
+        self.qtgui_const_sink_x_1.enable_axis_labels(True)
 
         if not True:
-          self.qtgui_const_sink_x_0.disable_legend()
+          self.qtgui_const_sink_x_1.disable_legend()
 
         labels = ['', '', '', '', '',
                   '', '', '', '', '']
@@ -169,20 +161,19 @@ class top_block(gr.top_block, Qt.QWidget):
                   1.0, 1.0, 1.0, 1.0, 1.0]
         for i in xrange(1):
             if len(labels[i]) == 0:
-                self.qtgui_const_sink_x_0.set_line_label(i, "Data {0}".format(i))
+                self.qtgui_const_sink_x_1.set_line_label(i, "Data {0}".format(i))
             else:
-                self.qtgui_const_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_const_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_const_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_const_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_const_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
+                self.qtgui_const_sink_x_1.set_line_label(i, labels[i])
+            self.qtgui_const_sink_x_1.set_line_width(i, widths[i])
+            self.qtgui_const_sink_x_1.set_line_color(i, colors[i])
+            self.qtgui_const_sink_x_1.set_line_style(i, styles[i])
+            self.qtgui_const_sink_x_1.set_line_marker(i, markers[i])
+            self.qtgui_const_sink_x_1.set_line_alpha(i, alphas[i])
 
-        self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
+        self._qtgui_const_sink_x_1_win = sip.wrapinstance(self.qtgui_const_sink_x_1.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_const_sink_x_1_win)
         self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=CE, threading='ordinary', puncpat='11')
-        self.fec_extended_decoder_0 = fec.extended_decoder(decoder_obj_list=CD, threading='capillary', ann=None, puncpat='11', integration_period=10000)
-        self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(hdr_format, 'len_key')
+        self.fec_extended_decoder_1 = fec.extended_decoder(decoder_obj_list=CD, threading='capillary', ann=None, puncpat='11', integration_period=10000)
         self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_ccf(sps, 6.82/100, (rrc_taps), nfilts, nfilts/2, 1.5, 1)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(6.82/100, sps_costas, False)
         self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(MO)
@@ -196,7 +187,7 @@ class top_block(gr.top_block, Qt.QWidget):
           log=False,
           )
         self.channels_channel_model_0 = channels.channel_model(
-        	noise_voltage=0.0,
+        	noise_voltage=0,
         	frequency_offset=0.0,
         	epsilon=1.0,
         	taps=(1.0 + 1.0j, ),
@@ -204,42 +195,34 @@ class top_block(gr.top_block, Qt.QWidget):
         	block_tags=False
         )
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
-        self.blocks_tagged_stream_mux_0 = blocks.tagged_stream_mux(gr.sizeof_char*1, 'len_key', 0)
-        self.blocks_stream_to_tagged_stream_1 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 34, "packet_len")
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 22, "len_key")
-        self.blocks_repack_bits_bb_0_0_0_1 = blocks.repack_bits_bb(1, 8, "packet_len", False, gr.GR_MSB_FIRST)
-        self.blocks_repack_bits_bb_0_0_0_0_0_0 = blocks.repack_bits_bb(3, 8, '', False, gr.GR_MSB_FIRST)
-        self.blocks_repack_bits_bb_0_0_0_0_0 = blocks.repack_bits_bb(1, 3, '', False, gr.GR_MSB_FIRST)
         self.blocks_repack_bits_bb_0_0_0_0 = blocks.repack_bits_bb(8, 1, 'len_key', False, gr.GR_MSB_FIRST)
+        self.blocks_repack_bits_bb_0_0_0 = blocks.repack_bits_bb(1, 8, '', False, gr.GR_LSB_FIRST)
+        self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(1, 8, '', False, gr.GR_MSB_FIRST)
         self.blocks_head_0 = blocks.head(gr.sizeof_char*1, 110000)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/sender.txt', True)
-        self.blocks_file_sink_0_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/test.txt', False)
-        self.blocks_file_sink_0_0_0.set_unbuffered(True)
+        self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/test.txt', False)
+        self.blocks_file_sink_0_0.set_unbuffered(True)
 
         ##################################################
         # Connections
         ##################################################
         self.connect((self.blocks_file_source_0, 0), (self.blocks_head_0, 0))
         self.connect((self.blocks_head_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0, 0), (self.digital_constellation_modulator_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_repack_bits_bb_0_0_0_0, 0), (self.fec_extended_encoder_0, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0_0_0_0, 0), (self.blocks_repack_bits_bb_0_0_0_0_0_0, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.digital_constellation_modulator_0, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0_0_1, 0), (self.blocks_file_sink_0_0_0, 0))
-        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_tagged_stream_mux_0, 1))
-        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.digital_protocol_formatter_bb_0, 0))
-        self.connect((self.blocks_stream_to_tagged_stream_1, 0), (self.blocks_repack_bits_bb_0_0_0_1, 0))
-        self.connect((self.blocks_tagged_stream_mux_0, 0), (self.blocks_repack_bits_bb_0_0_0_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0_0_0_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))
         self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
-        self.connect((self.digital_constellation_modulator_0, 0), (self.qtgui_const_sink_x_0, 0))
-        self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.fec_extended_decoder_0, 0))
+        self.connect((self.digital_constellation_modulator_0, 0), (self.qtgui_const_sink_x_1_0, 0))
+        self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.fec_extended_decoder_1, 0))
         self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
-        self.connect((self.digital_costas_loop_cc_0, 0), (self.qtgui_const_sink_x_0_0, 0))
+        self.connect((self.digital_costas_loop_cc_0, 0), (self.qtgui_const_sink_x_1, 0))
         self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.digital_costas_loop_cc_0, 0))
-        self.connect((self.digital_protocol_formatter_bb_0, 0), (self.blocks_tagged_stream_mux_0, 0))
-        self.connect((self.fec_extended_decoder_0, 0), (self.blocks_stream_to_tagged_stream_1, 0))
-        self.connect((self.fec_extended_encoder_0, 0), (self.blocks_repack_bits_bb_0_0_0_0_0, 0))
+        self.connect((self.fec_extended_decoder_1, 0), (self.blocks_repack_bits_bb_0_0_0, 0))
+        self.connect((self.fec_extended_encoder_0, 0), (self.blocks_repack_bits_bb_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -304,18 +287,6 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_MO(self, MO):
         self.MO = MO
 
-    def get_DE(self):
-        return self.DE
-
-    def set_DE(self, DE):
-        self.DE = DE
-
-    def get_DD(self):
-        return self.DD
-
-    def set_DD(self, DD):
-        self.DD = DD
-
     def get_CE(self):
         return self.CE
 
@@ -332,7 +303,7 @@ class top_block(gr.top_block, Qt.QWidget):
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
-        "", "--frameLength", dest="frameLength", type="intx", default=34,
+        "", "--frameLength", dest="frameLength", type="intx", default=22,
         help="Set frameLength [default=%default]")
     return parser
 

@@ -30,7 +30,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 8)</value>
+      <value>(0, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1014,7 +1014,7 @@
     </param>
     <param>
       <key>packet_len</key>
-      <value>22</value>
+      <value>11</value>
     </param>
     <param>
       <key>type</key>
@@ -1324,7 +1324,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>22</value>
+      <value>11</value>
     </param>
   </block>
   <block>
