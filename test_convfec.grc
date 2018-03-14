@@ -1454,7 +1454,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
   </block>
   <block>
-    <key>digital_correlate_access_code_tag_bb</key>
+    <key>digital_correlate_access_code_xx_ts</key>
     <param>
       <key>access_code</key>
       <value>digital.packet_utils.default_access_code</value>
@@ -1473,11 +1473,11 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(624, 668)</value>
+      <value>(592, 724)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1485,7 +1485,11 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     </param>
     <param>
       <key>id</key>
-      <value>digital_correlate_access_code_tag_bb_0</value>
+      <value>digital_correlate_access_code_xx_ts_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -3651,13 +3655,13 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_correlate_access_code_tag_bb_0</source_block_id>
+    <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
     <sink_block_id>blocks_char_to_float_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_correlate_access_code_tag_bb_0</source_block_id>
+    <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
     <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -3688,7 +3692,7 @@ The modulator block requires packed bits as the input stream (that is, all 8 bit
   </connection>
   <connection>
     <source_block_id>fec_extended_decoder_1</source_block_id>
-    <sink_block_id>digital_correlate_access_code_tag_bb_0</sink_block_id>
+    <sink_block_id>digital_correlate_access_code_xx_ts_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
