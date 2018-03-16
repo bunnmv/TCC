@@ -1988,7 +1988,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>label1</key>
-      <value></value>
+      <value>TX const</value>
     </param>
     <param>
       <key>marker1</key>
@@ -2343,7 +2343,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>label1</key>
-      <value>Before Code</value>
+      <value>After Decoding</value>
     </param>
     <param>
       <key>marker1</key>
