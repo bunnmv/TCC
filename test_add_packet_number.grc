@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Wed Mar 14 14:55:38 2018</timestamp>
+  <timestamp>Thu Mar 15 23:49:04 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -329,7 +329,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 76)</value>
+      <value>(128, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -368,7 +368,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(424, 4)</value>
+      <value>(440, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -422,7 +422,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 4)</value>
+      <value>(608, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -449,7 +449,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 148)</value>
+      <value>(0, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -476,7 +476,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 12)</value>
+      <value>(0, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -492,6 +492,69 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(48, 444)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>snr</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>0.01</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>rangeType</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
+    </param>
+  </block>
+  <block>
     <key>variable</key>
     <param>
       <key>comment</key>
@@ -503,7 +566,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(496, 4)</value>
+      <value>(512, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -516,6 +579,45 @@
     <param>
       <key>value</key>
       <value>4</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_tag_object</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(296, 380)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>test</value>
+    </param>
+    <param>
+      <key>key</key>
+      <value>pmt.intern("packet_number")</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>src</key>
+      <value>pmt.intern("packet")</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>pmt.from_long(22)</value>
     </param>
   </block>
   <block>
@@ -534,7 +636,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -593,7 +695,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(920, 436)</value>
+      <value>(1048, 476)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -644,7 +746,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 76)</value>
+      <value>(136, 68)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -692,7 +794,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>2</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -747,7 +849,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1072, 596)</value>
+      <value>(992, 596)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -756,6 +858,100 @@
     <param>
       <key>id</key>
       <value>blocks_message_debug_0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_pdu_set</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(472, 396)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pdu_set_0</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>pmt.intern("size")</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>v</key>
+      <value>pmt.from_long(123)</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_pdu_to_tagged_stream</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(584, 372)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_pdu_to_tagged_stream_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>tag</key>
+      <value>len_key</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -853,7 +1049,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(616, 284)</value>
+      <value>(384, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -959,7 +1155,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(184, 284)</value>
+      <value>(184, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1156,6 +1352,65 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <block>
+    <key>blocks_vector_source_x</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(632, 272)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_vector_source_x_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>repeat</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>tags</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>vector</key>
+      <value>numpy.arange(0.0, 1,0.5)</value>
+    </param>
+  </block>
+  <block>
     <key>channels_channel_model</key>
     <param>
       <key>alias</key>
@@ -1187,7 +1442,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(216, 460)</value>
+      <value>(216, 524)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1207,7 +1462,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>noise_voltage</key>
-      <value>0.01</value>
+      <value>snr</value>
     </param>
     <param>
       <key>seed</key>
@@ -1251,7 +1506,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1008, 172)</value>
+      <value>(992, 172)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1553,6 +1808,57 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
   </block>
   <block>
+    <key>fec_ber_bf</key>
+    <param>
+      <key>berlimit</key>
+      <value>-7.0</value>
+    </param>
+    <param>
+      <key>berminerrors</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1040, 348)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>fec_ber_bf_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>test_mode</key>
+      <value>False</value>
+    </param>
+  </block>
+  <block>
     <key>fec_extended_tagged_decoder</key>
     <param>
       <key>ann</key>
@@ -1733,7 +2039,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(288, 4)</value>
+      <value>(312, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1780,7 +2086,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(208, 8)</value>
+      <value>(240, 8)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1866,11 +2172,11 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1120, 4)</value>
+      <value>(1008, 4)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2190,6 +2496,237 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
   </block>
   <block>
+    <key>qtgui_number_sink</key>
+    <param>
+      <key>autoscale</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>avg</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1168, 356)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>graph_type</key>
+      <value>qtgui.NUM_GRAPH_HORIZ</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>qtgui_number_sink_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>color1</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit1</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color10</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor10</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label10</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit10</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color2</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color3</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor3</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color4</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor4</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color5</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor5</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label5</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit5</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color6</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor6</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label6</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit6</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color7</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor7</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label7</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit7</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color8</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor8</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label8</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit8</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color9</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor9</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label9</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit9</key>
+      <value></value>
+    </param>
+    <param>
+      <key>max</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value>""</value>
+    </param>
+    <param>
+      <key>nconnections</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>update_time</key>
+      <value>0.10</value>
+    </param>
+  </block>
+  <block>
     <key>qtgui_time_sink_x</key>
     <param>
       <key>autoscale</key>
@@ -2221,11 +2758,11 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(816, 652)</value>
+      <value>(616, 652)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2584,6 +3121,60 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
   </block>
   <block>
+    <key>virtual_sink</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(304, 140)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>virtual_sink_0_0</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>ber1</value>
+    </param>
+  </block>
+  <block>
+    <key>virtual_sink</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(888, 540)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>virtual_sink_0_0_0</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>ber2</value>
+    </param>
+  </block>
+  <block>
     <key>virtual_source</key>
     <param>
       <key>comment</key>
@@ -2610,6 +3201,60 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
       <value>TX</value>
     </param>
   </block>
+  <block>
+    <key>virtual_source</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(848, 324)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>virtual_source_1</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>ber1</value>
+    </param>
+  </block>
+  <block>
+    <key>virtual_source</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(848, 388)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>virtual_source_1_0</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>ber2</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>blocks_char_to_float_1_1_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_0_0</sink_block_id>
@@ -2623,10 +3268,22 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_file_source_0</source_block_id>
+    <sink_block_id>virtual_sink_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_head_0</source_block_id>
     <sink_block_id>blocks_throttle_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_pdu_set_0</source_block_id>
+    <sink_block_id>blocks_pdu_to_tagged_stream_0</sink_block_id>
+    <source_key>pdus</source_key>
+    <sink_key>pdus</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
@@ -2637,6 +3294,12 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
   <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
     <sink_block_id>blocks_tagged_stream_to_pdu_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
+    <sink_block_id>virtual_sink_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2731,6 +3394,12 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>fec_ber_bf_0</source_block_id>
+    <sink_block_id>qtgui_number_sink_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
     <sink_block_id>blocks_char_to_float_1_1_0</sink_block_id>
     <source_key>0</source_key>
@@ -2753,5 +3422,17 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     <sink_block_id>channels_channel_model_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_1</source_block_id>
+    <sink_block_id>fec_ber_bf_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_1_0</source_block_id>
+    <sink_block_id>fec_ber_bf_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
   </connection>
 </flow_graph>
