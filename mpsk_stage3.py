@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Mpsk Stage3
-# Generated: Mon Feb 12 10:41:13 2018
+# Generated: Fri Mar 16 17:07:11 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -23,7 +23,6 @@ from gnuradio import channels
 from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import fec
-from gnuradio import filter
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
@@ -66,7 +65,7 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.sps = sps = 2
+        self.sps = sps = 4
         self.nfilts = nfilts = 32
         self.timing_loop_bw = timing_loop_bw = 6.82/100
         self.time_offset = time_offset = 1.00
@@ -74,10 +73,11 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 48e3
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 45*nfilts)
 
-        self.qpsk2 = qpsk2 = digital.constellation_8psk().base()
+        self.qpsk2 = qpsk2 = digital.constellation_dqpsk().base()
 
+        self.qpsk2.gen_soft_dec_lut(8)
         self.noise_volt = noise_volt = 0.0001
-        self.excess_bw = excess_bw = 0.75
+        self.excess_bw = excess_bw = 0.35
         self.delay = delay = 9
 
 
@@ -89,11 +89,11 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
 
 
 
-        self.CC_D = CC_D = fec.cc_decoder.make(2048, 7, 2, ([79,109]), 0, -1, fec.CC_STREAMING, False)
+        self.CE = CE = fec.cc_encoder_make(2048, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)
 
 
 
-        self.CC = CC = fec.cc_encoder_make(2048, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)
+        self.CD = CD = fec.cc_decoder.make(2048, 7, 2, ([79,109]), 0, -1, fec.CC_STREAMING, False)
 
 
         ##################################################
@@ -108,53 +108,6 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
         self._noise_volt_range = Range(0, 10, 0.01, 0.0001, 200)
         self._noise_volt_win = RangeWidget(self._noise_volt_range, self.set_noise_volt, 'Noise Voltage', "counter_slider", float)
         self.top_grid_layout.addWidget(self._noise_volt_win, 0,0,1,1)
-        self.qtgui_time_sink_x_1 = qtgui.time_sink_f(
-        	1024, #size
-        	samp_rate, #samp_rate
-        	"", #name
-        	1 #number of inputs
-        )
-        self.qtgui_time_sink_x_1.set_update_time(0.10)
-        self.qtgui_time_sink_x_1.set_y_axis(-1, 1)
-
-        self.qtgui_time_sink_x_1.set_y_label('Amplitude', "")
-
-        self.qtgui_time_sink_x_1.enable_tags(-1, True)
-        self.qtgui_time_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_1.enable_autoscale(True)
-        self.qtgui_time_sink_x_1.enable_grid(False)
-        self.qtgui_time_sink_x_1.enable_axis_labels(True)
-        self.qtgui_time_sink_x_1.enable_control_panel(False)
-
-        if not True:
-          self.qtgui_time_sink_x_1.disable_legend()
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-                   -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in xrange(1):
-            if len(labels[i]) == 0:
-                self.qtgui_time_sink_x_1.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_time_sink_x_1.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_1.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_1.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_1.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_1.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_1.set_line_alpha(i, alphas[i])
-
-        self._qtgui_time_sink_x_1_win = sip.wrapinstance(self.qtgui_time_sink_x_1.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_time_sink_x_1_win)
         self.qtgui_const_sink_x_0_0 = qtgui.const_sink_c(
         	2048, #size
         	'', #name
@@ -237,11 +190,10 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_const_sink_x_0_win, 1,0,1,2)
-        self.low_pass_filter_0 = filter.fir_filter_fff(2, firdes.low_pass(
-        	1, samp_rate, 20e3, 10e3, firdes.WIN_HAMMING, 6.76))
-        self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=DE, threading= None, puncpat='11')
-        self.fec_extended_decoder_0 = fec.extended_decoder(decoder_obj_list=DD, threading= None, ann=None, puncpat='11', integration_period=10000)
+        self.fec_extended_encoder_0 = fec.extended_encoder(encoder_obj_list=CE, threading= None, puncpat='11')
+        self.fec_extended_decoder_0 = fec.extended_decoder(decoder_obj_list=CD, threading= None, ann=None, puncpat='11', integration_period=10000)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps*1.00, timing_loop_bw, (rrc_taps), nfilts, nfilts/2, 1.5, 1)
+        self.digital_costas_loop_cc_0 = digital.costas_loop_cc(6.82/100, 4, False)
         self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(qpsk2)
         self.digital_constellation_modulator_0 = digital.generic_mod(
           constellation=qpsk2,
@@ -263,7 +215,7 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
         	noise_seed=0,
         	block_tags=False
         )
-        self.blocks_wavfile_source_0 = blocks.wavfile_source('/Users/marcusbunn/Documents/engtelecom/SDR/bob.wav', True)
+        self.blocks_wavfile_source_0 = blocks.wavfile_source('/Users/marcusbunn/Documents/engtelecom/SDR/bob.wav', False)
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_pack_k_bits_bb_0_0 = blocks.pack_k_bits_bb(8)
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(8)
@@ -276,7 +228,7 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_char_to_float_0_0, 0), (self.low_pass_filter_0, 0))
+        self.connect((self.blocks_char_to_float_0_0, 0), (self.audio_sink_0, 0))
         self.connect((self.blocks_float_to_char_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))
         self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.digital_constellation_modulator_0, 0))
         self.connect((self.blocks_pack_k_bits_bb_0_0, 0), (self.blocks_char_to_float_0_0, 0))
@@ -286,12 +238,11 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
         self.connect((self.channels_channel_model_0, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.fec_extended_decoder_0, 0))
-        self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
+        self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
+        self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.digital_costas_loop_cc_0, 0))
         self.connect((self.digital_pfb_clock_sync_xxx_0, 0), (self.qtgui_const_sink_x_0_0, 0))
         self.connect((self.fec_extended_decoder_0, 0), (self.blocks_pack_k_bits_bb_0_0, 0))
         self.connect((self.fec_extended_encoder_0, 0), (self.blocks_pack_k_bits_bb_0, 0))
-        self.connect((self.low_pass_filter_0, 0), (self.audio_sink_0, 0))
-        self.connect((self.low_pass_filter_0, 0), (self.qtgui_time_sink_x_1, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "mpsk_stage3")
@@ -338,8 +289,6 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.qtgui_time_sink_x_1.set_samp_rate(self.samp_rate)
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 20e3, 10e3, firdes.WIN_HAMMING, 6.76))
 
     def get_rrc_taps(self):
         return self.rrc_taps
@@ -385,17 +334,17 @@ class mpsk_stage3(gr.top_block, Qt.QWidget):
     def set_DD(self, DD):
         self.DD = DD
 
-    def get_CC_D(self):
-        return self.CC_D
+    def get_CE(self):
+        return self.CE
 
-    def set_CC_D(self, CC_D):
-        self.CC_D = CC_D
+    def set_CE(self, CE):
+        self.CE = CE
 
-    def get_CC(self):
-        return self.CC
+    def get_CD(self):
+        return self.CD
 
-    def set_CC(self, CC):
-        self.CC = CC
+    def set_CD(self, CD):
+        self.CD = CD
 
 
 def main(top_block_cls=mpsk_stage3, options=None):
