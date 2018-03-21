@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Mar 15 23:22:02 2018
+# Generated: Wed Mar 21 13:58:08 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -28,6 +28,7 @@ from gnuradio.filter import firdes
 from optparse import OptionParser
 import numpy
 import osmosdr
+import pmt
 import sip
 import sys
 import time
@@ -36,7 +37,7 @@ from gnuradio import qtgui
 
 class top_block(gr.top_block, Qt.QWidget):
 
-    def __init__(self, frameLength=34, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0), payloadLength=22):
+    def __init__(self, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0), payloadLength=44):
         gr.top_block.__init__(self, "Top Block")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Top Block")
@@ -64,18 +65,15 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Parameters
         ##################################################
-        self.frameLength = frameLength
         self.hdr_format = hdr_format
         self.payloadLength = payloadLength
 
         ##################################################
         # Variables
         ##################################################
+        self.frameLength = frameLength = int(payloadLength+12)
         self.sps = sps = 4
-        self.nfilts = nfilts = 32
         self.samp_rate = samp_rate = 2.88e6
-        self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 45*nfilts)
-        self.order_costas = order_costas = 8
         self.excess_bw = excess_bw = 0.35
 
         self.MO = MO = digital.constellation_8psk().base()
@@ -83,25 +81,12 @@ class top_block(gr.top_block, Qt.QWidget):
         self.MO.gen_soft_dec_lut(8)
 
 
-        self.CD = CD = fec.cc_decoder.make(frameLength*8, 7, 2, ([79,109]), 0, -1, fec.CC_STREAMING, False)
+        self.CE = CE = fec.cc_encoder_make(frameLength*8, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)
 
 
         ##################################################
         # Blocks
         ##################################################
-        self.rtlsdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + '' )
-        self.rtlsdr_source_0.set_sample_rate(samp_rate)
-        self.rtlsdr_source_0.set_center_freq(300e6, 0)
-        self.rtlsdr_source_0.set_freq_corr(0, 0)
-        self.rtlsdr_source_0.set_dc_offset_mode(2, 0)
-        self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
-        self.rtlsdr_source_0.set_gain_mode(True, 0)
-        self.rtlsdr_source_0.set_gain(30, 0)
-        self.rtlsdr_source_0.set_if_gain(30, 0)
-        self.rtlsdr_source_0.set_bb_gain(30, 0)
-        self.rtlsdr_source_0.set_antenna('', 0)
-        self.rtlsdr_source_0.set_bandwidth(0, 0)
-
         self.qtgui_sink_x_0 = qtgui.sink_c(
         	1024, #fftsize
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -121,46 +106,56 @@ class top_block(gr.top_block, Qt.QWidget):
 
 
 
-        self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='11', integration_period=10000, lentagname='len_key2', mtu=payloadLength)
-        self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_ccf(sps, 6.82/100, (rrc_taps), nfilts, nfilts/2, 1.5, 1)
-        self.digital_costas_loop_cc_0 = digital.costas_loop_cc(6.82/100, order_costas, False)
-        self.digital_correlate_access_code_xx_ts_0 = digital.correlate_access_code_ff_ts(digital.packet_utils.default_access_code,
-          0, 'len_key2')
-        self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(MO)
-        self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'len_key2')
-        self.blocks_repack_bits_bb_0_0_0 = blocks.repack_bits_bb(1, 8, 'len_key2', False, gr.GR_MSB_FIRST)
+        self.osmosdr_sink_0 = osmosdr.sink( args="numchan=" + str(1) + " " + '' )
+        self.osmosdr_sink_0.set_sample_rate(samp_rate)
+        self.osmosdr_sink_0.set_center_freq(300e6, 0)
+        self.osmosdr_sink_0.set_freq_corr(0, 0)
+        self.osmosdr_sink_0.set_gain(0, 0)
+        self.osmosdr_sink_0.set_if_gain(30, 0)
+        self.osmosdr_sink_0.set_bb_gain(30, 0)
+        self.osmosdr_sink_0.set_antenna('', 0)
+        self.osmosdr_sink_0.set_bandwidth(0, 0)
+
+        self.fec_extended_tagged_encoder_0 = fec.extended_tagged_encoder(encoder_obj_list=CE, puncpat='11', lentagname='len_key', mtu=payloadLength)
+        self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(hdr_format, 'len_key')
+        self.digital_constellation_modulator_0 = digital.generic_mod(
+          constellation=MO,
+          differential=False,
+          samples_per_symbol=sps,
+          pre_diff_code=True,
+          excess_bw=0.35,
+          verbose=True,
+          log=False,
+          )
+        self.blocks_tagged_stream_mux_0 = blocks.tagged_stream_mux(gr.sizeof_char*1, 'len_key', 0)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, payloadLength, "len_key")
+        self.blocks_repack_bits_bb_0_0_0_0_0_0 = blocks.repack_bits_bb(1, 8, 'len_key', False, gr.GR_MSB_FIRST)
+        self.blocks_repack_bits_bb_0_0_0_0 = blocks.repack_bits_bb(8, 1, 'len_key', False, gr.GR_MSB_FIRST)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((1, ))
-        self.blocks_message_debug_0 = blocks.message_debug()
-        self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/test.txt', False)
-        self.blocks_file_sink_0_0.set_unbuffered(True)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', False)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.blocks_message_debug_0, 'print'))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.osmosdr_sink_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.qtgui_sink_x_0, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))
-        self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.digital_correlate_access_code_xx_ts_0, 0))
-        self.connect((self.digital_correlate_access_code_xx_ts_0, 0), (self.fec_extended_tagged_decoder_0, 0))
-        self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
-        self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.digital_costas_loop_cc_0, 0))
-        self.connect((self.fec_extended_tagged_decoder_0, 0), (self.blocks_repack_bits_bb_0_0_0, 0))
-        self.connect((self.rtlsdr_source_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0_0_0_0, 0), (self.fec_extended_tagged_encoder_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.blocks_tagged_stream_mux_0, 1))
+        self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.digital_protocol_formatter_bb_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0_0_0_0, 0))
+        self.connect((self.blocks_tagged_stream_mux_0, 0), (self.digital_constellation_modulator_0, 0))
+        self.connect((self.digital_constellation_modulator_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.digital_protocol_formatter_bb_0, 0), (self.blocks_tagged_stream_mux_0, 0))
+        self.connect((self.fec_extended_tagged_encoder_0, 0), (self.blocks_repack_bits_bb_0_0_0_0_0_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
-
-    def get_frameLength(self):
-        return self.frameLength
-
-    def set_frameLength(self, frameLength):
-        self.frameLength = frameLength
 
     def get_hdr_format(self):
         return self.hdr_format
@@ -173,41 +168,29 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_payloadLength(self, payloadLength):
         self.payloadLength = payloadLength
+        self.set_frameLength(int(self.payloadLength+12))
+        self.blocks_stream_to_tagged_stream_0.set_packet_len(self.payloadLength)
+        self.blocks_stream_to_tagged_stream_0.set_packet_len_pmt(self.payloadLength)
+
+    def get_frameLength(self):
+        return self.frameLength
+
+    def set_frameLength(self, frameLength):
+        self.frameLength = frameLength
 
     def get_sps(self):
         return self.sps
 
     def set_sps(self, sps):
         self.sps = sps
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 45*self.nfilts))
-
-    def get_nfilts(self):
-        return self.nfilts
-
-    def set_nfilts(self, nfilts):
-        self.nfilts = nfilts
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 45*self.nfilts))
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.rtlsdr_source_0.set_sample_rate(self.samp_rate)
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
-
-    def get_rrc_taps(self):
-        return self.rrc_taps
-
-    def set_rrc_taps(self, rrc_taps):
-        self.rrc_taps = rrc_taps
-        self.digital_pfb_clock_sync_xxx_0_0.update_taps((self.rrc_taps))
-
-    def get_order_costas(self):
-        return self.order_costas
-
-    def set_order_costas(self, order_costas):
-        self.order_costas = order_costas
+        self.osmosdr_sink_0.set_sample_rate(self.samp_rate)
 
     def get_excess_bw(self):
         return self.excess_bw
@@ -221,20 +204,17 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_MO(self, MO):
         self.MO = MO
 
-    def get_CD(self):
-        return self.CD
+    def get_CE(self):
+        return self.CE
 
-    def set_CD(self, CD):
-        self.CD = CD
+    def set_CE(self, CE):
+        self.CE = CE
 
 
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
-        "", "--frameLength", dest="frameLength", type="intx", default=34,
-        help="Set frameLength [default=%default]")
-    parser.add_option(
-        "", "--payloadLength", dest="payloadLength", type="intx", default=22,
+        "", "--payloadLength", dest="payloadLength", type="intx", default=44,
         help="Set payloadLength [default=%default]")
     return parser
 
@@ -249,7 +229,7 @@ def main(top_block_cls=top_block, options=None):
         Qt.QApplication.setGraphicsSystem(style)
     qapp = Qt.QApplication(sys.argv)
 
-    tb = top_block_cls(frameLength=options.frameLength, payloadLength=options.payloadLength)
+    tb = top_block_cls(payloadLength=options.payloadLength)
     tb.start()
     tb.show()
 

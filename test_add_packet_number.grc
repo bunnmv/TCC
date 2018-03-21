@@ -395,6 +395,33 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(0, 180)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>frameLength</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>int(payloadLength+12)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(0, 452)</value>
     </param>
     <param>
@@ -435,6 +462,33 @@
     <param>
       <key>value</key>
       <value>8</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 236)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>payloadLength</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>23</value>
     </param>
   </block>
   <block>
@@ -618,6 +672,57 @@
     <param>
       <key>value</key>
       <value>pmt.from_long(22)</value>
+    </param>
+  </block>
+  <block>
+    <key>blks2_error_rate</key>
+    <param>
+      <key>bits_per_symbol</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1032, 268)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blks2_error_rate_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>'BER'</value>
+    </param>
+    <param>
+      <key>win_size</key>
+      <value>1000</value>
     </param>
   </block>
   <block>
@@ -861,100 +966,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_pdu_set</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(472, 396)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_pdu_set_0</value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>pmt.intern("size")</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>v</key>
-      <value>pmt.from_long(123)</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_pdu_to_tagged_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(584, 372)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_pdu_to_tagged_stream_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>tag</key>
-      <value>len_key</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_repack_bits_bb</key>
     <param>
       <key>k</key>
@@ -1049,7 +1060,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(384, 268)</value>
+      <value>(720, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1136,6 +1147,61 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <block>
+    <key>blocks_stream_mux</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(408, 260)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_stream_mux_0</value>
+    </param>
+    <param>
+      <key>lengths</key>
+      <value>1, 22</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_stream_to_tagged_stream</key>
     <param>
       <key>alias</key>
@@ -1155,7 +1221,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(184, 268)</value>
+      <value>(544, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1316,7 +1382,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(160, 156)</value>
+      <value>(160, 172)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1367,11 +1433,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(632, 272)</value>
+      <value>(144, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1391,7 +1457,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>type</key>
-      <value>complex</value>
+      <value>byte</value>
     </param>
     <param>
       <key>repeat</key>
@@ -1407,7 +1473,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>vector</key>
-      <value>numpy.arange(0.0, 1,0.5)</value>
+      <value>numpy.arange(65, 91,1)</value>
     </param>
   </block>
   <block>
@@ -1984,53 +2050,6 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(0, 196)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>frameLength</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>34</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
       <value>adds 12 bytes</value>
     </param>
     <param>
@@ -2099,53 +2118,6 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     <param>
       <key>import</key>
       <value>import numpy</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(0, 260)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>payloadLength</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>22</value>
     </param>
   </block>
   <block>
@@ -3132,7 +3104,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(304, 140)</value>
+      <value>(304, 100)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3213,7 +3185,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 324)</value>
+      <value>(840, 316)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3240,7 +3212,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 388)</value>
+      <value>(840, 388)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3280,12 +3252,6 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_pdu_set_0</source_block_id>
-    <sink_block_id>blocks_pdu_to_tagged_stream_0</sink_block_id>
-    <source_key>pdus</source_key>
-    <sink_key>pdus</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
     <sink_block_id>blocks_file_sink_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -3322,6 +3288,12 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_stream_mux_0</source_block_id>
+    <sink_block_id>blocks_stream_to_tagged_stream_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
     <sink_block_id>blocks_repack_bits_bb_0_0_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -3341,7 +3313,13 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0</sink_block_id>
+    <sink_block_id>blocks_stream_mux_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_vector_source_x_0</source_block_id>
+    <sink_block_id>blocks_stream_mux_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

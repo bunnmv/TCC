@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Mar 20 19:23:37 2018
+# Generated: Wed Mar 21 14:09:34 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -25,6 +25,7 @@ from gnuradio import fec
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
+from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
 import numpy
 import pmt
@@ -34,7 +35,7 @@ from gnuradio import qtgui
 
 class top_block(gr.top_block, Qt.QWidget):
 
-    def __init__(self, frameLength=34, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0), payloadLength=22):
+    def __init__(self, frameLength=35, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0), payloadLength=23):
         gr.top_block.__init__(self, "Top Block")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Top Block")
@@ -71,6 +72,8 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.sps = sps = 4
         self.nfilts = nfilts = 32
+        self.test = test = gr.tag_utils.python_to_tag((0, pmt.intern("packet_number"), pmt.from_long(22), pmt.intern("packet")))
+        self.snr = snr = 0
         self.samp_rate = samp_rate = 32000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 45*nfilts)
         self.order_costas = order_costas = 8
@@ -99,12 +102,13 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
+        self._snr_range = Range(0, 1, 0.01, 0, 200)
+        self._snr_win = RangeWidget(self._snr_range, self.set_snr, "snr", "counter_slider", float)
+        self.top_layout.addWidget(self._snr_win)
         self.fec_extended_tagged_encoder_0 = fec.extended_tagged_encoder(encoder_obj_list=CE, puncpat='11', lentagname='len_key', mtu=payloadLength)
         self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='11', integration_period=10000, lentagname='len_key2', mtu=payloadLength)
-        self.digital_scrambler_bb_0 = digital.scrambler_bb(0x8A, 0x7F, 7)
         self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(hdr_format, 'len_key')
         self.digital_pfb_clock_sync_xxx_0_0 = digital.pfb_clock_sync_ccf(sps, 6.82/100, (rrc_taps), nfilts, nfilts/2, 1.5, 1)
-        self.digital_descrambler_bb_0 = digital.descrambler_bb(0x8A, 0x7F, 7)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(6.82/100, order_costas, False)
         self.digital_correlate_access_code_xx_ts_0 = digital.correlate_access_code_ff_ts(digital.packet_utils.default_access_code,
           0, 'len_key2')
@@ -119,22 +123,23 @@ class top_block(gr.top_block, Qt.QWidget):
           log=False,
           )
         self.channels_channel_model_0 = channels.channel_model(
-        	noise_voltage=0,
+        	noise_voltage=snr,
         	frequency_offset=1e-4,
         	epsilon=1.001,
         	taps=(1.0 + 1.0j, ),
         	noise_seed=0,
         	block_tags=False
         )
+        self.blocks_vector_source_x_0 = blocks.vector_source_b(numpy.arange(65, 91,1), True, 1, [])
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
         self.blocks_tagged_stream_to_pdu_0 = blocks.tagged_stream_to_pdu(blocks.byte_t, 'len_key2')
         self.blocks_tagged_stream_mux_0 = blocks.tagged_stream_mux(gr.sizeof_char*1, 'len_key', 0)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, payloadLength, "len_key")
+        self.blocks_stream_mux_0 = blocks.stream_mux(gr.sizeof_char*1, (1, 22))
         self.blocks_repack_bits_bb_0_0_0_0_0_0 = blocks.repack_bits_bb(1, 8, 'len_key', False, gr.GR_MSB_FIRST)
         self.blocks_repack_bits_bb_0_0_0_0 = blocks.repack_bits_bb(8, 1, 'len_key', False, gr.GR_MSB_FIRST)
         self.blocks_repack_bits_bb_0_0_0 = blocks.repack_bits_bb(1, 8, 'len_key2', False, gr.GR_MSB_FIRST)
         self.blocks_message_debug_0 = blocks.message_debug()
-        self.blocks_head_0 = blocks.head(gr.sizeof_char*1, 110000)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/sender.txt', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/test.txt', False)
@@ -146,26 +151,25 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.blocks_tagged_stream_to_pdu_0, 'pdus'), (self.blocks_message_debug_0, 'print'))
-        self.connect((self.blocks_file_source_0, 0), (self.blocks_head_0, 0))
-        self.connect((self.blocks_head_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_repack_bits_bb_0_0_0, 0), (self.blocks_tagged_stream_to_pdu_0, 0))
-        self.connect((self.blocks_repack_bits_bb_0_0_0_0, 0), (self.digital_scrambler_bb_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0_0_0_0, 0), (self.fec_extended_tagged_encoder_0, 0))
         self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.blocks_tagged_stream_mux_0, 1))
         self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.digital_protocol_formatter_bb_0, 0))
+        self.connect((self.blocks_stream_mux_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0_0_0_0, 0))
         self.connect((self.blocks_tagged_stream_mux_0, 0), (self.digital_constellation_modulator_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_mux_0, 1))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_stream_mux_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))
         self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.digital_correlate_access_code_xx_ts_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_0, 0), (self.fec_extended_tagged_decoder_0, 0))
         self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
-        self.connect((self.digital_descrambler_bb_0, 0), (self.blocks_repack_bits_bb_0_0_0, 0))
         self.connect((self.digital_pfb_clock_sync_xxx_0_0, 0), (self.digital_costas_loop_cc_0, 0))
         self.connect((self.digital_protocol_formatter_bb_0, 0), (self.blocks_tagged_stream_mux_0, 0))
-        self.connect((self.digital_scrambler_bb_0, 0), (self.fec_extended_tagged_encoder_0, 0))
-        self.connect((self.fec_extended_tagged_decoder_0, 0), (self.digital_descrambler_bb_0, 0))
+        self.connect((self.fec_extended_tagged_decoder_0, 0), (self.blocks_repack_bits_bb_0_0_0, 0))
         self.connect((self.fec_extended_tagged_encoder_0, 0), (self.blocks_repack_bits_bb_0_0_0_0_0_0, 0))
 
     def closeEvent(self, event):
@@ -206,6 +210,19 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_nfilts(self, nfilts):
         self.nfilts = nfilts
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts, 1.0/float(self.sps), 0.35, 45*self.nfilts))
+
+    def get_test(self):
+        return self.test
+
+    def set_test(self, test):
+        self.test = test
+
+    def get_snr(self):
+        return self.snr
+
+    def set_snr(self, snr):
+        self.snr = snr
+        self.channels_channel_model_0.set_noise_voltage(self.snr)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -267,10 +284,10 @@ class top_block(gr.top_block, Qt.QWidget):
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
-        "", "--frameLength", dest="frameLength", type="intx", default=34,
+        "", "--frameLength", dest="frameLength", type="intx", default=35,
         help="Set frameLength [default=%default]")
     parser.add_option(
-        "", "--payloadLength", dest="payloadLength", type="intx", default=22,
+        "", "--payloadLength", dest="payloadLength", type="intx", default=23,
         help="Set payloadLength [default=%default]")
     return parser
 
