@@ -34,10 +34,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         for i in range(0 ,len(input_items[0])):
         	if self.controller < self.window_size:
         		#if input_items[0][aux] - input_items[0][i] > 1:
-        		if i > 0:
+        		if i > 0: # First sample is lost
 	        		if input_items[0][i] - input_items[0][i-1] > 1:
 	        			self.errors +=1 # future packet number jumps one so it means one packet is lost.
-        		self.controller += 1
+        			self.controller += 1
         		output_items[0][i] = 0
         	else:
         		if self.errors > 0:

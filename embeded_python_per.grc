@@ -278,10 +278,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         for i in range(0 ,len(input_items[0])):
         	if self.controller &lt; self.window_size:
         		#if input_items[0][aux] - input_items[0][i] &gt; 1:
-        		if i &gt; 0:
+        		if i &gt; 0: # First sample is lost
 	        		if input_items[0][i] - input_items[0][i-1] &gt; 1:
 	        			self.errors +=1 # future packet number jumps one so it means one packet is lost.
-        		self.controller += 1
+        			self.controller += 1
         		output_items[0][i] = 0
         	else:
         		if self.errors &gt; 0:
@@ -303,7 +303,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 132)</value>
+      <value>(560, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -315,7 +315,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>window_size</key>
-      <value>10.0</value>
+      <value>3.0</value>
     </param>
   </block>
   <block>
