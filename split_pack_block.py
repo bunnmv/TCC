@@ -40,13 +40,20 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     	print('offset run ->{}' .format(self.offset_position))
     	print('Input -> {}' .format(input_len))
         for i in range(0,input_len):
-        	if (i+1+self.offset_position) % self.data_period == 0:
-        		output_items[0][i] = input_items[0][i]
-        		output_items[1][i] = 43 # prints + on the data stream
-        		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
-        		print('Packet Counter -> {}' .format(input_items[0][i]))
-        	else:
+        	if i < self.data_period and self.last_run_position == 0: #first run
         		output_items[0][i] = 43 # prints + on the counter stream
         		output_items[1][i] = input_items[0][i]
+        		if i == 0:
+        			output_items[0][i] = input_items[0][i]
+        			output_items[1][i] = 43 # prints + on the data stream
+        	else:
+	        	if (i+1+self.offset_position) % self.data_period == 0:
+	        		output_items[0][i] = input_items[0][i]
+	        		output_items[1][i] = 43 # prints + on the data stream
+	        		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
+	        		print('Packet Counter -> {}' .format(input_items[0][i]))
+	        	else:
+	        		output_items[0][i] = 43 # prints + on the counter stream
+	        		output_items[1][i] = input_items[0][i]
 
         return len(output_items[0])
