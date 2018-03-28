@@ -117,6 +117,61 @@
     </param>
   </block>
   <block>
+    <key>blocks_keep_m_in_n</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(456, 132)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_keep_m_in_n_0</value>
+    </param>
+    <param>
+      <key>m</key>
+      <value>18</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>n</key>
+      <value>20</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_throttle</key>
     <param>
       <key>alias</key>
@@ -136,7 +191,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(376, 220)</value>
+      <value>(328, 228)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -164,7 +219,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
     <param>
       <key>vlen</key>
@@ -191,7 +246,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(208, 124)</value>
+      <value>(176, 124)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -211,7 +266,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
     <param>
       <key>repeat</key>
@@ -227,7 +282,38 @@
     </param>
     <param>
       <key>vector</key>
-      <value>(1,2,3,4,6)</value>
+      <value>np.arange(0,256)</value>
+    </param>
+  </block>
+  <block>
+    <key>import</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(128, 8)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>import_0</value>
+    </param>
+    <param>
+      <key>import</key>
+      <value>import numpy as np</value>
     </param>
   </block>
   <block>
@@ -238,7 +324,7 @@
     </param>
     <param>
       <key>_io_cache</key>
-      <value>('PER Calculator', 'blk', [('window_size', '1.0')], [('0', 'float', 1)], [('0', 'float', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['window_size'])</value>
+      <value>('PER Calculator', 'blk', [('window_size', '1'), ('modulus', '1')], [('0', 'byte', 1)], [('0', 'float', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['modulus', 'window_size'])</value>
     </param>
     <param>
       <key>_source_code</key>
@@ -259,37 +345,32 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
        As for today, it only works for window sizes multiples of the length of the data.
     """
 
-    def __init__(self, window_size=1.0):  # only default arguments here
+    def __init__(self, window_size=1, modulus=1):  # only default arguments here
         """arguments to this function show up as parameters in GRC"""
         gr.sync_block.__init__(
             self,
             name='PER Calculator',   # will show up in GRC
-            in_sig=[np.float32],
+            in_sig=[np.int8],
             out_sig=[np.float32]
         )
         # if an attribute with the same name as a parameter is found,
         # a callback is registered (properties work, too).
         self.window_size = window_size
-        self.controller = 0 # This is the index for the window size
-        self.errors = 0 # the nunber of lost packets in the window size
+        self.modulus = modulus
 
     def work(self, input_items, output_items):
         """example: multiply with constant"""
-        for i in range(0 ,len(input_items[0])):
-        	if self.controller &lt; self.window_size:
-        		#if input_items[0][aux] - input_items[0][i] &gt; 1:
-        		if i &gt; 0: # First sample is lost
-	        		if input_items[0][i] - input_items[0][i-1] &gt; 1:
-	        			self.errors +=1 # future packet number jumps one so it means one packet is lost.
-        			self.controller += 1
-        		output_items[0][i] = 0
-        	else:
-        		if self.errors &gt; 0:
-        			output_items[0][i] = float((self.errors)/(self.window_size)) #Relative error to the observed window
-        		else:
-        			output_items[0][i] = 0
-        		self.controller = 0 #resets the control
-        		self.errors = 0 #resets the errors
+        print("input size -&gt; {}".format(len(input_items[0])))
+        consumed = (len(input_items[0]-self.window_size+1))
+        if len(input_items[0]) &lt; self.window_size:
+            return 0    
+            # per = erros + window_size
+        for i in range(0 ,consumed):
+            observed = input_items[0][i:self.window_size+i]
+            errors = sum((np.diff(observed) % self.modulus)-1)
+            output_items[0][i]= float(errors)/(self.window_size+errors)
+            print("Erros -&gt;{}" .format(output_items[0][i]))
+        self.consume(0,consumed)
         return len(output_items[0])
 </value>
     </param>
@@ -303,7 +384,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(560, 132)</value>
+      <value>(608, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -311,11 +392,15 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>id</key>
-      <value>per_calc</value>
+      <value>per_calc_0</value>
+    </param>
+    <param>
+      <key>modulus</key>
+      <value>256</value>
     </param>
     <param>
       <key>window_size</key>
-      <value>3.0</value>
+      <value>10</value>
     </param>
   </block>
   <block>
@@ -346,7 +431,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(752, 148)</value>
+      <value>(760, 132)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -550,8 +635,14 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
   </block>
   <connection>
+    <source_block_id>blocks_keep_m_in_n_0</source_block_id>
+    <sink_block_id>per_calc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>per_calc</sink_block_id>
+    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -562,7 +653,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>per_calc</source_block_id>
+    <source_block_id>per_calc_0</source_block_id>
     <sink_block_id>qtgui_number_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
