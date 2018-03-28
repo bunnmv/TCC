@@ -167,7 +167,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>32000</value>
+      <value>1000</value>
     </param>
   </block>
   <block>
@@ -423,7 +423,7 @@
     </param>
     <param>
       <key>num_items</key>
-      <value>110000</value>
+      <value>50000</value>
     </param>
     <param>
       <key>type</key>
@@ -964,6 +964,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.last_run_position = 0
         self.offset_position = 0
         self.data_period = (self.payload_length+self.counter_length)
+        self.runs = 0 #flag that controls how many times the work function has been called
 
     def work(self, input_items, output_items): 
     	# """example: multiply with constant"""  
@@ -971,25 +972,29 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 		#when loop counter resets work funtion is called again
     	input_len = len(input_items[0]);
     	self.offset_position = self.last_run_position # offset of the samples from last run
+
+    	
     	print('offset run -&gt;{}' .format(self.offset_position))
     	print('Input -&gt; {}' .format(input_len))
+    	print('Work function calls -&gt; {}' .format(self.runs))
         for i in range(0,input_len):
-        	if i &lt; self.data_period and self.last_run_position == 0: #first run
-        		output_items[0][i] = 43 # prints + on the counter stream
-        		output_items[1][i] = input_items[0][i]
-        		if i == 0:
-        			output_items[0][i] = input_items[0][i]
-        			output_items[1][i] = 43 # prints + on the data stream
+        	if i == 0 and self.runs == 0: #first run
+        		output_items[0][i] = input_items[0][i] # copy payload
+        		output_items[1][i] = 95 # prints _ on the data stream
+        		print('Packet Counter first Run-&gt; {}' .format(input_items[0][i]))
+        		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
         	else:
 	        	if (i+1+self.offset_position) % self.data_period == 0:
 	        		output_items[0][i] = input_items[0][i]
-	        		output_items[1][i] = 43 # prints + on the data stream
+	        		output_items[1][i] = 95 # prints _ on the data stream
 	        		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
 	        		print('Packet Counter -&gt; {}' .format(input_items[0][i]))
+	        		print('Loop index -&gt; {}' .format(i))
 	        	else:
-	        		output_items[0][i] = 43 # prints + on the counter stream
+	        		output_items[0][i] = 95 # prints _ on the counter stream
 	        		output_items[1][i] = input_items[0][i]
 
+	self.runs += 1
         return len(output_items[0])
 </value>
     </param>
