@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Thu Mar 15 23:49:04 2018</timestamp>
+  <timestamp>Thu Apr  5 21:59:25 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -125,7 +125,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 656)</value>
+      <value>(0, 648)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -502,7 +502,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 132)</value>
+      <value>(8, 160)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -623,7 +623,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -682,7 +682,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 396)</value>
+      <value>(1128, 372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -733,7 +733,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1168, 292)</value>
+      <value>(1128, 252)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -883,11 +883,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1016, 292)</value>
+      <value>(968, 252)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -911,7 +911,7 @@
     </param>
     <param>
       <key>n</key>
-      <value>infoLength</value>
+      <value>payloadLength</value>
     </param>
     <param>
       <key>type</key>
@@ -942,7 +942,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1016, 420)</value>
+      <value>(984, 372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -993,11 +993,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1176, 540)</value>
+      <value>(1160, 540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1374,11 +1374,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 476)</value>
+      <value>(1120, 468)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1395,6 +1395,159 @@ MSB -&gt; For FEC</value>
     <param>
       <key>tag</key>
       <value>len_key2</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_threshold_ff</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(976, 892)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>high</key>
+      <value>1.0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_threshold_ff_0</value>
+    </param>
+    <param>
+      <key>init</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>low</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_threshold_ff</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(976, 804)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>high</key>
+      <value>0.499</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_threshold_ff_0_0</value>
+    </param>
+    <param>
+      <key>init</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>low</key>
+      <value>0.3</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_threshold_ff</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(976, 580)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>high</key>
+      <value>0.299</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_threshold_ff_0_0_0</value>
+    </param>
+    <param>
+      <key>init</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>low</key>
+      <value>0.1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1516,7 +1669,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>vector</key>
-      <value>numpy.arange(0,256)</value>
+      <value>numpy.arange(0,255)</value>
     </param>
   </block>
   <block>
@@ -1539,7 +1692,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>epsilon</key>
@@ -1615,7 +1768,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1016, 132)</value>
+      <value>(976, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1666,7 +1819,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1940,7 +2093,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2003,7 +2156,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 160)</value>
+      <value>(392, 152)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2097,7 +2250,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 8)</value>
+      <value>(240, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2176,11 +2329,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 692)</value>
+      <value>(808, 588)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2223,11 +2376,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1104, 4)</value>
+      <value>(1168, 148)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2574,7 +2727,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(680, 808)</value>
+      <value>(680, 804)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2925,11 +3078,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 684)</value>
+      <value>(1128, 780)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2961,7 +3114,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>label1</key>
-      <value></value>
+      <value>8PSK - PER Bom</value>
     </param>
     <param>
       <key>marker1</key>
@@ -3009,7 +3162,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>label2</key>
-      <value></value>
+      <value>QPSk - PER Ok</value>
     </param>
     <param>
       <key>marker2</key>
@@ -3033,7 +3186,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>label3</key>
-      <value></value>
+      <value>BPSK - PER Baixo</value>
     </param>
     <param>
       <key>marker3</key>
@@ -3197,7 +3350,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>nconnections</key>
-      <value>1</value>
+      <value>3</value>
     </param>
     <param>
       <key>size</key>
@@ -3292,11 +3445,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(616, 652)</value>
+      <value>(656, 652)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -3716,11 +3869,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(832, 348)</value>
+      <value>(792, 396)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3770,7 +3923,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -3826,12 +3979,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>blocks_tagged_stream_to_pdu_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
     <sink_block_id>split_pack_block</sink_block_id>
     <source_key>0</source_key>
@@ -3880,6 +4027,24 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>print</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_threshold_ff_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>2</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_threshold_ff_0_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_threshold_ff_0_0_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
     <sink_block_id>blocks_stream_mux_0</sink_block_id>
     <source_key>0</source_key>
@@ -3918,6 +4083,12 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   <connection>
     <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
     <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3965,7 +4136,19 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>per_calc_0</source_block_id>
-    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <sink_block_id>blocks_threshold_ff_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>per_calc_0</source_block_id>
+    <sink_block_id>blocks_threshold_ff_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>per_calc_0</source_block_id>
+    <sink_block_id>blocks_threshold_ff_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

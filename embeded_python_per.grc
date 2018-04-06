@@ -369,8 +369,9 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            print("Erros -&gt;{}" .format(output_items[0][i]))
-        self.consume(0,consumed)
+            if output_items[0][i] &lt;= 1 and output_items[0][i] &gt;= 0:
+            	print("Erros -&gt;{}" .format(output_items[0][i]))
+        # self.consume(0,consumed)
         return len(output_items[0])
 </value>
     </param>
@@ -384,7 +385,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(608, 140)</value>
+      <value>(592, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -431,7 +432,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(760, 132)</value>
+      <value>(736, 132)</value>
     </param>
     <param>
       <key>gui_hint</key>
