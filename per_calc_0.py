@@ -30,7 +30,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 
     def work(self, input_items, output_items):
         """example: multiply with constant"""
-        print("input size -> {}".format(len(input_items[0])))
+        # print("input size -> {}".format(len(input_items[0])))
         consumed = (len(input_items[0]-self.window_size+1))
         if len(input_items[0]) < self.window_size:
             return 0    
@@ -39,7 +39,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            if output_items[0][i] <= 1 and output_items[0][i] >= 0:
-            	print("Erros ->{}" .format(output_items[0][i]))
+            # if output_items[0][i] <= 1 and output_items[0][i] >= 0:
+            	# print("Erros ->{}" .format(output_items[0][i]))
         # self.consume(0,consumed)
         return len(output_items[0])

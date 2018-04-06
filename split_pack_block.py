@@ -40,14 +40,14 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     	self.offset_position = self.last_run_position # offset of the samples from last run
 
     	
-    	print('offset run ->{}' .format(self.offset_position))
-    	print('Input -> {}' .format(input_len))
-    	print('Work function calls -> {}' .format(self.runs))
+    	# print('offset run ->{}' .format(self.offset_position))
+    	# print('Input -> {}' .format(input_len))
+    	# print('Work function calls -> {}' .format(self.runs))
         for i in range(0,input_len):
         	if i == 0 and self.runs == 0: #first run
         		output_items[0][i] = input_items[0][i] # copy payload
         		output_items[1][i] = 95 # prints _ on the data stream
-        		print('Packet Counter first Run-> {}' .format(input_items[0][i]))
+        		# print('Packet Counter first Run-> {}' .format(input_items[0][i]))
         		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
         		self.offset_position = self.last_run_position # offset of the samples from last run
         	else:
@@ -55,8 +55,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 	        		output_items[0][i] = input_items[0][i]
 	        		output_items[1][i] = 95 # prints _ on the data stream
 	        		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
-	        		print('Packet Counter -> {}' .format(input_items[0][i]))
-	        		print('Loop index -> {}' .format(i))
+	        		# print('Packet Counter -> {}' .format(input_items[0][i]))
+	        		# print('Loop index -> {}' .format(i))
 	        	else:
 	        		output_items[0][i] = 95 # prints _ on the counter stream
 	        		output_items[1][i] = input_items[0][i]

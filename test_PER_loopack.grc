@@ -487,7 +487,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), 0.35, 45*nfilts)</value>
+      <value>firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), excess_bw, 45*nfilts)</value>
     </param>
   </block>
   <block>
@@ -623,7 +623,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -832,7 +832,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>2</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -911,7 +911,7 @@
     </param>
     <param>
       <key>n</key>
-      <value>infoLength</value>
+      <value>payloadLength</value>
     </param>
     <param>
       <key>type</key>
@@ -1611,7 +1611,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>excess_bw</key>
-      <value>0.35</value>
+      <value>excess_bw</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2156,7 +2156,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 
     def work(self, input_items, output_items):
         """example: multiply with constant"""
-        print("input size -&gt; {}".format(len(input_items[0])))
+        # print("input size -&gt; {}".format(len(input_items[0])))
         consumed = (len(input_items[0]-self.window_size+1))
         if len(input_items[0]) &lt; self.window_size:
             return 0    
@@ -2165,8 +2165,9 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            print("Erros -&gt;{}" .format(output_items[0][i]))
-        self.consume(0,consumed)
+            # if output_items[0][i] &lt;= 1 and output_items[0][i] &gt;= 0:
+            	# print("Erros -&gt;{}" .format(output_items[0][i]))
+        # self.consume(0,consumed)
         return len(output_items[0])
 </value>
     </param>
@@ -2180,7 +2181,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 692)</value>
+      <value>(848, 692)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2570,7 +2571,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2921,15 +2922,15 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>entags</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 684)</value>
+      <value>(1016, 684)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -3292,7 +3293,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -3681,14 +3682,14 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     	self.offset_position = self.last_run_position # offset of the samples from last run
 
     	
-    	print('offset run -&gt;{}' .format(self.offset_position))
-    	print('Input -&gt; {}' .format(input_len))
-    	print('Work function calls -&gt; {}' .format(self.runs))
+    	# print('offset run -&gt;{}' .format(self.offset_position))
+    	# print('Input -&gt; {}' .format(input_len))
+    	# print('Work function calls -&gt; {}' .format(self.runs))
         for i in range(0,input_len):
         	if i == 0 and self.runs == 0: #first run
         		output_items[0][i] = input_items[0][i] # copy payload
         		output_items[1][i] = 95 # prints _ on the data stream
-        		print('Packet Counter first Run-&gt; {}' .format(input_items[0][i]))
+        		# print('Packet Counter first Run-&gt; {}' .format(input_items[0][i]))
         		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
         		self.offset_position = self.last_run_position # offset of the samples from last run
         	else:
@@ -3696,8 +3697,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 	        		output_items[0][i] = input_items[0][i]
 	        		output_items[1][i] = 95 # prints _ on the data stream
 	        		self.last_run_position = input_len-(i+1)# stores last correct relative index before counter reset
-	        		print('Packet Counter -&gt; {}' .format(input_items[0][i]))
-	        		print('Loop index -&gt; {}' .format(i))
+	        		# print('Packet Counter -&gt; {}' .format(input_items[0][i]))
+	        		# print('Loop index -&gt; {}' .format(i))
 	        	else:
 	        		output_items[0][i] = 95 # prints _ on the counter stream
 	        		output_items[1][i] = input_items[0][i]
