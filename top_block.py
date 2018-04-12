@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Apr 11 15:24:55 2018
+# Generated: Thu Apr 12 12:54:49 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -73,22 +73,18 @@ class top_block(gr.top_block, Qt.QWidget):
         self.packetCounterLength = packetCounterLength = 1
         self.infoLength = infoLength = 22*10
         self.payloadLength = payloadLength = (infoLength+packetCounterLength)
-        self.sps = sps = 5
+        self.sps = sps = 4
         self.nfilts = nfilts = 32
         self.frameLength = frameLength = payloadLength+12
         self.excess_bw = excess_bw = 0.35
         self.snr = snr = 0
         self.samp_rate = samp_rate = 32000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
-        self.order_costas = order_costas = 4
+        self.order_costas = order_costas = 8
 
-        self.MO = MO = digital.constellation_qpsk().base()
+        self.MO = MO = digital.constellation_8psk().base()
 
         self.MO.gen_soft_dec_lut(8)
-
-        self.MBPSK = MBPSK = digital.constellation_bpsk().base()
-
-        self.MBPSK.gen_soft_dec_lut(8)
 
 
         self.CE = CE = fec.cc_encoder_make(frameLength*8, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)
@@ -201,15 +197,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.digital_correlate_access_code_xx_ts_0 = digital.correlate_access_code_ff_ts(digital.packet_utils.default_access_code,
           0, 'len_key2')
         self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(MO)
-        self.digital_constellation_modulator_0_0 = digital.generic_mod(
-          constellation=MBPSK,
-          differential=False,
-          samples_per_symbol=sps,
-          pre_diff_code=True,
-          excess_bw=excess_bw,
-          verbose=True,
-          log=False,
-          )
         self.digital_constellation_modulator_0 = digital.generic_mod(
           constellation=MO,
           differential=False,
@@ -227,12 +214,10 @@ class top_block(gr.top_block, Qt.QWidget):
         	noise_seed=0,
         	block_tags=True
         )
-        self.blocks_vector_source_x_1 = blocks.vector_source_b((0,1), True, 1, [])
         self.blocks_vector_source_x_0 = blocks.vector_source_b(numpy.arange(0,256), True, 1, [])
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
         self.blocks_tagged_stream_mux_0 = blocks.tagged_stream_mux(gr.sizeof_char*1, 'len_key', 0)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, payloadLength, "len_key")
-        self.blocks_stream_mux_1 = blocks.stream_mux(gr.sizeof_gr_complex*1, (2*sps,((payloadLength*2)+12)*sps/3))
         self.blocks_stream_mux_0 = blocks.stream_mux(gr.sizeof_char*1, (packetCounterLength, infoLength))
         self.blocks_repack_bits_bb_0_0_0_0_0_0 = blocks.repack_bits_bb(1, 8, 'len_key', False, gr.GR_MSB_FIRST)
         self.blocks_repack_bits_bb_0_0_0_0 = blocks.repack_bits_bb(8, 1, 'len_key', False, gr.GR_MSB_FIRST)
@@ -264,15 +249,12 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.blocks_tagged_stream_mux_0, 1))
         self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.digital_protocol_formatter_bb_0, 0))
         self.connect((self.blocks_stream_mux_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
-        self.connect((self.blocks_stream_mux_1, 0), (self.channels_channel_model_0, 0))
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0_0_0_0, 0))
         self.connect((self.blocks_tagged_stream_mux_0, 0), (self.digital_constellation_modulator_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_mux_0, 1))
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_stream_mux_0, 0))
-        self.connect((self.blocks_vector_source_x_1, 0), (self.digital_constellation_modulator_0_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.digital_pfb_clock_sync_xxx_0_0, 0))
-        self.connect((self.digital_constellation_modulator_0, 0), (self.blocks_stream_mux_1, 1))
-        self.connect((self.digital_constellation_modulator_0_0, 0), (self.blocks_stream_mux_1, 0))
+        self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.digital_correlate_access_code_xx_ts_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_0, 0), (self.fec_extended_tagged_decoder_0, 0))
         self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
@@ -382,12 +364,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_MO(self, MO):
         self.MO = MO
-
-    def get_MBPSK(self):
-        return self.MBPSK
-
-    def set_MBPSK(self, MBPSK):
-        self.MBPSK = MBPSK
 
     def get_CE(self):
         return self.CE
