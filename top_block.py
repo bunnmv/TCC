@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Apr 23 18:06:58 2018
+# Generated: Tue Apr 24 16:21:50 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -82,10 +82,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self.snr = snr = 0
         self.samp_rate = samp_rate = 32000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
-        self.order_costas = order_costas = 2
+        self.order_costas = order_costas = 8
         self.dataLength = dataLength = (infoLength+packetCounterLength)
 
-        self.MO = MO = digital.constellation_bpsk().base()
+        self.MO = MO = digital.constellation_8psk().base()
 
         self.MO.gen_soft_dec_lut(8)
 
@@ -192,50 +192,9 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_1_win = sip.wrapinstance(self.qtgui_const_sink_x_1.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_const_sink_x_1_win)
-        self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
-        	1024, #size
-        	"", #name
-        	1 #number of inputs
-        )
-        self.qtgui_const_sink_x_0.set_update_time(0.10)
-        self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
-        self.qtgui_const_sink_x_0.enable_autoscale(False)
-        self.qtgui_const_sink_x_0.enable_grid(False)
-        self.qtgui_const_sink_x_0.enable_axis_labels(True)
-
-        if not True:
-          self.qtgui_const_sink_x_0.disable_legend()
-
-        labels = ['TX const', '', '', '', '',
-                  '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "red", "red", "red",
-                  "red", "red", "red", "red", "red"]
-        styles = [0, 0, 0, 0, 0,
-                  0, 0, 0, 0, 0]
-        markers = [0, 0, 0, 0, 0,
-                   0, 0, 0, 0, 0]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(1):
-            if len(labels[i]) == 0:
-                self.qtgui_const_sink_x_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_const_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_const_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_const_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_const_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_const_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
         self.fec_extended_tagged_encoder_0 = fec.extended_tagged_encoder(encoder_obj_list=CE, puncpat='11', lentagname='len_key', mtu=packetLength)
         self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='11', integration_period=10000, lentagname='len_key2', mtu=packetLength)
-        self.digital_symbol_sync_xx_0_0 = digital.symbol_sync_cc(digital.TED_SIGNAL_TIMES_SLOPE_ML, sps, 6.82/100, 1.0/math.sqrt(2.0), 1.0, 1.5, 1, digital.constellation_8psk().base(), digital.IR_PFB_MF, nfilts, (rrc_taps))
+        self.digital_symbol_sync_xx_0_0 = digital.symbol_sync_cc(digital.TED_SIGNAL_TIMES_SLOPE_ML, sps, 6.82/100, 1.0/math.sqrt(2.0), 1.0, 0.5, 1, digital.constellation_8psk().base(), digital.IR_PFB_MF, nfilts, (rrc_taps))
         self.digital_protocol_formatter_bb_0 = digital.protocol_formatter_bb(hdr_format, 'len_key')
         self.digital_crc32_bb_0_0 = digital.crc32_bb(True, "len_key2", True)
         self.digital_crc32_bb_0 = digital.crc32_bb(False, "len_key", True)
@@ -300,7 +259,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_stream_mux_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.digital_symbol_sync_xx_0_0, 0))
         self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
-        self.connect((self.digital_constellation_modulator_0, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.digital_correlate_access_code_xx_ts_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_0, 0), (self.fec_extended_tagged_decoder_0, 0))
         self.connect((self.digital_costas_loop_cc_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
