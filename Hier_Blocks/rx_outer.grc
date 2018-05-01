@@ -382,7 +382,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>lengthtagname</key>
-      <value>"len_key_rx"</value>
+      <value>"len_key2"</value>
     </param>
     <param>
       <key>maxoutbuf</key>

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Apr 30 21:35:28 2018
+# Generated: Tue May  1 17:07:29 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -27,6 +27,7 @@ from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import fec
 from gnuradio import gr
+from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
@@ -37,6 +38,7 @@ from tx_inner import tx_inner  # grc-generated hier_block
 from tx_outer import tx_outer  # grc-generated hier_block
 import numpy as np
 import pmt
+import sip
 from gnuradio import qtgui
 
 
@@ -109,18 +111,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self._theta_range = Range(0, 2*np.pi, np.pi/4, 0, 200)
         self._theta_win = RangeWidget(self._theta_range, self.set_theta, "theta", "counter_slider", float)
         self.top_grid_layout.addWidget(self._theta_win, 0,1,1,1)
-        self._channel_rotation_range = Range(0, 2*np.pi, 0.1, 0, 200)
-        self._channel_rotation_win = RangeWidget(self._channel_rotation_range, self.set_channel_rotation, "channel_rotation", "counter_slider", float)
-        self.top_grid_layout.addWidget(self._channel_rotation_win, 0,2,1,1)
-        self._channel_noise_range = Range(0, 2, 0.01, 0, 200)
-        self._channel_noise_win = RangeWidget(self._channel_noise_range, self.set_channel_noise, "channel_noise", "counter_slider", float)
-        self.top_grid_layout.addWidget(self._channel_noise_win, 0,3,1,1)
-        self.tx_outer_0 = tx_outer()
-        self.tx_inner_0 = tx_inner(
-            dataLength=dataLength,
-            infoLength=infoLength,
-            packetCounterLength=packetCounterLength,
-        )
         self.tab = Qt.QTabWidget()
         self.tab_widget_0 = Qt.QWidget()
         self.tab_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tab_widget_0)
@@ -133,23 +123,156 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tab_layout_1.addLayout(self.tab_grid_layout_1)
         self.tab.addTab(self.tab_widget_1, 'PER Rate')
         self.top_layout.addWidget(self.tab)
+        self._channel_rotation_range = Range(0, 2*np.pi, 0.1, 0, 200)
+        self._channel_rotation_win = RangeWidget(self._channel_rotation_range, self.set_channel_rotation, "channel_rotation", "counter_slider", float)
+        self.top_grid_layout.addWidget(self._channel_rotation_win, 0,2,1,1)
+        self._channel_noise_range = Range(0, 2, 0.01, 0, 200)
+        self._channel_noise_win = RangeWidget(self._channel_noise_range, self.set_channel_noise, "channel_noise", "counter_slider", float)
+        self.top_grid_layout.addWidget(self._channel_noise_win, 0,3,1,1)
+        self.tx_outer_0 = tx_outer()
+        self.tx_inner_0 = tx_inner(
+            dataLength=dataLength,
+            infoLength=infoLength,
+            packetCounterLength=packetCounterLength,
+        )
         self.rx_outer_0 = rx_outer(
             dataLength=dataLength,
             infoLength=infoLength,
             packetCounterLength=packetCounterLength,
         )
         self.rx_inner_0 = rx_inner(
+            excess_bw=excess_bw,
+            mod_init_point=mod.points()[0],
             nfilts=nfilts,
-            rrc_taps=firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts),
+            order_costas=mod.arity(),
+            rrc_taps=rrc_taps,
             sps=sps,
             theta=theta,
-            order_costas=mod.arity(),
-            mod_init_point=mod.points()[0],
         )
+        self.qtgui_time_sink_x_0_0 = qtgui.time_sink_f(
+        	1024, #size
+        	samp_rate, #samp_rate
+        	"", #name
+        	1 #number of inputs
+        )
+        self.qtgui_time_sink_x_0_0.set_update_time(0.10)
+        self.qtgui_time_sink_x_0_0.set_y_axis(-1, 1)
+
+        self.qtgui_time_sink_x_0_0.set_y_label('Amplitude', "")
+
+        self.qtgui_time_sink_x_0_0.enable_tags(-1, True)
+        self.qtgui_time_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "len_key2")
+        self.qtgui_time_sink_x_0_0.enable_autoscale(False)
+        self.qtgui_time_sink_x_0_0.enable_grid(False)
+        self.qtgui_time_sink_x_0_0.enable_axis_labels(True)
+        self.qtgui_time_sink_x_0_0.enable_control_panel(False)
+        self.qtgui_time_sink_x_0_0.enable_stem_plot(False)
+
+        if not True:
+          self.qtgui_time_sink_x_0_0.disable_legend()
+
+        labels = ['After Decoding', '', '', '', '',
+                  '', '', '', '', '']
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "blue"]
+        styles = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        markers = [0, -1, -1, -1, -1,
+                   -1, -1, -1, -1, -1]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_time_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_time_sink_x_0_0.set_line_label(i, labels[i])
+            self.qtgui_time_sink_x_0_0.set_line_width(i, widths[i])
+            self.qtgui_time_sink_x_0_0.set_line_color(i, colors[i])
+            self.qtgui_time_sink_x_0_0.set_line_style(i, styles[i])
+            self.qtgui_time_sink_x_0_0.set_line_marker(i, markers[i])
+            self.qtgui_time_sink_x_0_0.set_line_alpha(i, alphas[i])
+
+        self._qtgui_time_sink_x_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0.pyqwidget(), Qt.QWidget)
+        self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_0_win, 1,0,1,4)
+        self.qtgui_number_sink_0 = qtgui.number_sink(
+            gr.sizeof_float,
+            0,
+            qtgui.NUM_GRAPH_NONE,
+            1
+        )
+        self.qtgui_number_sink_0.set_update_time(0.10)
+        self.qtgui_number_sink_0.set_title("SPS")
+
+        labels = ['SPS', '', '', '', '',
+                  '', '', '', '', '']
+        units = ['', '', '', '', '',
+                 '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        for i in xrange(1):
+            self.qtgui_number_sink_0.set_min(i, -1)
+            self.qtgui_number_sink_0.set_max(i, 1)
+            self.qtgui_number_sink_0.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0.set_label(i, labels[i])
+            self.qtgui_number_sink_0.set_unit(i, units[i])
+            self.qtgui_number_sink_0.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0.enable_autoscale(False)
+        self._qtgui_number_sink_0_win = sip.wrapinstance(self.qtgui_number_sink_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_number_sink_0_win)
+        self.qtgui_const_sink_x_1 = qtgui.const_sink_c(
+        	1024, #size
+        	"", #name
+        	1 #number of inputs
+        )
+        self.qtgui_const_sink_x_1.set_update_time(0.10)
+        self.qtgui_const_sink_x_1.set_y_axis(-2, 2)
+        self.qtgui_const_sink_x_1.set_x_axis(-2, 2)
+        self.qtgui_const_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
+        self.qtgui_const_sink_x_1.enable_autoscale(False)
+        self.qtgui_const_sink_x_1.enable_grid(False)
+        self.qtgui_const_sink_x_1.enable_axis_labels(True)
+
+        if not True:
+          self.qtgui_const_sink_x_1.disable_legend()
+
+        labels = ['Costas', '', '', '', '',
+                  '', '', '', '', '']
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "red", "red", "red",
+                  "red", "red", "red", "red", "red"]
+        styles = [0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0]
+        markers = [0, 0, 0, 0, 0,
+                   0, 0, 0, 0, 0]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_const_sink_x_1.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_const_sink_x_1.set_line_label(i, labels[i])
+            self.qtgui_const_sink_x_1.set_line_width(i, widths[i])
+            self.qtgui_const_sink_x_1.set_line_color(i, colors[i])
+            self.qtgui_const_sink_x_1.set_line_style(i, styles[i])
+            self.qtgui_const_sink_x_1.set_line_marker(i, markers[i])
+            self.qtgui_const_sink_x_1.set_line_alpha(i, alphas[i])
+
+        self._qtgui_const_sink_x_1_win = sip.wrapinstance(self.qtgui_const_sink_x_1.pyqwidget(), Qt.QWidget)
+        self.tab_layout_0.addWidget(self._qtgui_const_sink_x_1_win)
         self.fec_extended_tagged_encoder_0 = fec.extended_tagged_encoder(encoder_obj_list=CE, puncpat='11', lentagname='len_key', mtu=packetLength)
-        self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='11', integration_period=10000, lentagname='len_key_rx', mtu=packetLength)
+        self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='11', integration_period=10000, lentagname='len_key2', mtu=packetLength)
         self.digital_correlate_access_code_xx_ts_0 = digital.correlate_access_code_ff_ts(digital.packet_utils.default_access_code,
-          0, 'len_key_rx')
+          0, 'len_key2')
         self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(mod)
         self.digital_constellation_modulator_0 = digital.generic_mod(
           constellation=mod,
@@ -175,21 +298,26 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0_0.set_unbuffered(True)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
+        self.blocks_char_to_float_1_1_0 = blocks.char_to_float(1, 1)
 
 
 
         ##################################################
         # Connections
         ##################################################
+        self.connect((self.blocks_char_to_float_1_1_0, 0), (self.qtgui_time_sink_x_0_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.tx_inner_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.rx_inner_0, 0))
         self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.digital_correlate_access_code_xx_ts_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_0, 0), (self.fec_extended_tagged_decoder_0, 0))
+        self.connect((self.fec_extended_tagged_decoder_0, 0), (self.blocks_char_to_float_1_1_0, 0))
         self.connect((self.fec_extended_tagged_decoder_0, 0), (self.rx_outer_0, 0))
         self.connect((self.fec_extended_tagged_encoder_0, 0), (self.tx_outer_0, 0))
-        self.connect((self.rx_inner_0, 0), (self.digital_constellation_soft_decoder_cf_0, 0))
+        self.connect((self.rx_inner_0, 1), (self.digital_constellation_soft_decoder_cf_0, 0))
+        self.connect((self.rx_inner_0, 1), (self.qtgui_const_sink_x_1, 0))
+        self.connect((self.rx_inner_0, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.rx_outer_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.rx_outer_0, 1), (self.blocks_file_sink_0_0_0, 0))
         self.connect((self.tx_inner_0, 0), (self.fec_extended_tagged_encoder_0, 0))
@@ -246,7 +374,6 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_sps(self, sps):
         self.sps = sps
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.rx_inner_0.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
         self.rx_inner_0.set_sps(self.sps)
 
     def get_psk(self):
@@ -262,7 +389,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.nfilts = nfilts
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
         self.rx_inner_0.set_nfilts(self.nfilts)
-        self.rx_inner_0.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
 
     def get_frameLength(self):
         return self.frameLength
@@ -276,7 +402,7 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_excess_bw(self, excess_bw):
         self.excess_bw = excess_bw
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.rx_inner_0.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
+        self.rx_inner_0.set_excess_bw(self.excess_bw)
 
     def get_theta(self):
         return self.theta
@@ -290,6 +416,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
     def get_rrc_taps(self):
@@ -297,6 +424,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_rrc_taps(self, rrc_taps):
         self.rrc_taps = rrc_taps
+        self.rx_inner_0.set_rrc_taps(self.rrc_taps)
 
     def get_mod(self):
         return self.mod
