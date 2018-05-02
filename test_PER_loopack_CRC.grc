@@ -619,7 +619,7 @@
     </param>
     <param>
       <key>rot_sym</key>
-      <value>psk.arity()</value>
+      <value>psk.rotational_symmetry()</value>
     </param>
     <param>
       <key>soft_dec_lut</key>
@@ -631,7 +631,7 @@
     </param>
     <param>
       <key>sym_map</key>
-      <value>np.arange(0,psk.arity())</value>
+      <value>digital.gray_code(psk.arity())</value>
     </param>
   </block>
   <block>
