@@ -224,6 +224,105 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_chooser</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(200, 132)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>0,4,1,1</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>M_PSK</value>
+    </param>
+    <param>
+      <key>label0</key>
+      <value>DBPSK</value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value>DQPSK</value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value>D8PSK</value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>labels</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>num_opts</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option0</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option1</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>option2</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>option3</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option4</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>options</key>
+      <value>[0, 1, 2]</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.QVBoxLayout</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>int</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>radio_buttons</value>
+    </param>
+  </block>
+  <block>
     <key>variable</key>
     <param>
       <key>comment</key>
@@ -231,7 +330,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>

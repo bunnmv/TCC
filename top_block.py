@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed May  2 15:18:37 2018
+# Generated: Thu May  3 09:47:48 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -21,6 +21,7 @@ import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from PyQt4 import Qt
+from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import blocks
 from gnuradio import channels
 from gnuradio import digital
@@ -33,6 +34,7 @@ from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
 from rx_inner import rx_inner  # grc-generated hier_block
+from rx_outer import rx_outer  # grc-generated hier_block
 from tx_inner import tx_inner  # grc-generated hier_block
 from tx_outer import tx_outer  # grc-generated hier_block
 import numpy as np
@@ -83,7 +85,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.nfilts = nfilts = 32
         self.frameLength = frameLength = packetLength+12
         self.excess_bw = excess_bw = 0.35
-        self.M_PSK = M_PSK = 8
+        self.M_PSK = M_PSK = 2
         self.theta = theta = 0
         self.samp_rate = samp_rate = 3200000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
@@ -130,6 +132,11 @@ class top_block(gr.top_block, Qt.QWidget):
             infoLength=infoLength,
             packetCounterLength=packetCounterLength,
         )
+        self.rx_outer_0 = rx_outer(
+            dataLength=dataLength,
+            infoLength=infoLength,
+            packetCounterLength=packetCounterLength,
+        )
         self.rx_inner_0 = rx_inner(
             excess_bw=excess_bw,
             mod_init_point=psk.points()[0],
@@ -141,7 +148,7 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.qtgui_time_sink_x_0_0 = qtgui.time_sink_f(
         	1024, #size
-        	1, #samp_rate
+        	samp_rate, #samp_rate
         	"", #name
         	1 #number of inputs
         )
@@ -151,7 +158,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0_0.set_y_label('Amplitude', "")
 
         self.qtgui_time_sink_x_0_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "len_key2")
+        self.qtgui_time_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "len_key2")
         self.qtgui_time_sink_x_0_0.enable_autoscale(False)
         self.qtgui_time_sink_x_0_0.enable_grid(False)
         self.qtgui_time_sink_x_0_0.enable_axis_labels(True)
@@ -187,54 +194,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_0_win, 1,0,1,4)
-        self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
-        	1024, #size
-        	1, #samp_rate
-        	"", #name
-        	1 #number of inputs
-        )
-        self.qtgui_time_sink_x_0.set_update_time(0.10)
-        self.qtgui_time_sink_x_0.set_y_axis(-1, 1)
-
-        self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
-
-        self.qtgui_time_sink_x_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "len_key")
-        self.qtgui_time_sink_x_0.enable_autoscale(False)
-        self.qtgui_time_sink_x_0.enable_grid(False)
-        self.qtgui_time_sink_x_0.enable_axis_labels(True)
-        self.qtgui_time_sink_x_0.enable_control_panel(False)
-        self.qtgui_time_sink_x_0.enable_stem_plot(False)
-
-        if not True:
-          self.qtgui_time_sink_x_0.disable_legend()
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-                   -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in xrange(1):
-            if len(labels[i]) == 0:
-                self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
         self.qtgui_number_sink_0 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -307,11 +266,20 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_1_win = sip.wrapinstance(self.qtgui_const_sink_x_1.pyqwidget(), Qt.QWidget)
         self.tab_layout_0.addWidget(self._qtgui_const_sink_x_1_win)
-        self.fec_extended_tagged_encoder_0 = fec.extended_tagged_encoder(encoder_obj_list=CE, puncpat='1101', lentagname='len_key', mtu=packetLength)
-        self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='1101', integration_period=10000, lentagname='len_key2', mtu=packetLength)
+        self.fec_extended_tagged_encoder_0 = fec.extended_tagged_encoder(encoder_obj_list=CE, puncpat='11', lentagname='len_key', mtu=packetLength)
+        self.fec_extended_tagged_decoder_0 = self.fec_extended_tagged_decoder_0 = fec_extended_tagged_decoder_0 = fec.extended_tagged_decoder(decoder_obj_list=CD, ann=None, puncpat='11', integration_period=10000, lentagname='len_key2', mtu=packetLength)
         self.digital_correlate_access_code_xx_ts_0 = digital.correlate_access_code_ff_ts(digital.packet_utils.default_access_code,
           0, 'len_key2')
         self.digital_constellation_soft_decoder_cf_0 = digital.constellation_soft_decoder_cf(psk.base())
+        self.digital_constellation_modulator_0 = digital.generic_mod(
+          constellation=psk.base(),
+          differential=True,
+          samples_per_symbol=sps,
+          pre_diff_code=True,
+          excess_bw=excess_bw,
+          verbose=True,
+          log=False,
+          )
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=channel_noise,
         	frequency_offset=1e-4,
@@ -321,12 +289,34 @@ class top_block(gr.top_block, Qt.QWidget):
         	block_tags=True
         )
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
-        self.blocks_tagged_stream_multiply_length_0 = blocks.tagged_stream_multiply_length(gr.sizeof_char*1, 'len_key', 0.75)
-        self.blocks_null_source_0 = blocks.null_source(gr.sizeof_gr_complex*1)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_char_to_float_1_1_0_0 = blocks.char_to_float(1, 1)
+        self.blocks_file_sink_0_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/header_counter.txt', False)
+        self.blocks_file_sink_0_0_0.set_unbuffered(True)
+        self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
+        self.blocks_file_sink_0_0.set_unbuffered(True)
         self.blocks_char_to_float_1_1_0 = blocks.char_to_float(1, 1)
+        self._M_PSK_options = (2, 4, 8, )
+        self._M_PSK_labels = ('DBPSK', 'DQPSK', 'D8PSK', )
+        self._M_PSK_group_box = Qt.QGroupBox("M_PSK")
+        self._M_PSK_box = Qt.QVBoxLayout()
+        class variable_chooser_button_group(Qt.QButtonGroup):
+            def __init__(self, parent=None):
+                Qt.QButtonGroup.__init__(self, parent)
+            @pyqtSlot(int)
+            def updateButtonChecked(self, button_id):
+                self.button(button_id).setChecked(True)
+        self._M_PSK_button_group = variable_chooser_button_group()
+        self._M_PSK_group_box.setLayout(self._M_PSK_box)
+        for i, label in enumerate(self._M_PSK_labels):
+        	radio_button = Qt.QRadioButton(label)
+        	self._M_PSK_box.addWidget(radio_button)
+        	self._M_PSK_button_group.addButton(radio_button, i)
+        self._M_PSK_callback = lambda i: Qt.QMetaObject.invokeMethod(self._M_PSK_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._M_PSK_options.index(i)))
+        self._M_PSK_callback(self.M_PSK)
+        self._M_PSK_button_group.buttonClicked[int].connect(
+        	lambda i: self.set_M_PSK(self._M_PSK_options[i]))
+        self.top_grid_layout.addWidget(self._M_PSK_group_box, 0,4,1,1)
 
 
 
@@ -334,21 +324,22 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.blocks_char_to_float_1_1_0, 0), (self.qtgui_time_sink_x_0_0, 0))
-        self.connect((self.blocks_char_to_float_1_1_0_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_null_source_0, 0), (self.channels_channel_model_0, 0))
-        self.connect((self.blocks_tagged_stream_multiply_length_0, 0), (self.tx_outer_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.tx_inner_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.rx_inner_0, 0))
+        self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.digital_constellation_soft_decoder_cf_0, 0), (self.digital_correlate_access_code_xx_ts_0, 0))
         self.connect((self.digital_correlate_access_code_xx_ts_0, 0), (self.fec_extended_tagged_decoder_0, 0))
         self.connect((self.fec_extended_tagged_decoder_0, 0), (self.blocks_char_to_float_1_1_0, 0))
-        self.connect((self.fec_extended_tagged_encoder_0, 0), (self.blocks_tagged_stream_multiply_length_0, 0))
+        self.connect((self.fec_extended_tagged_decoder_0, 0), (self.rx_outer_0, 0))
+        self.connect((self.fec_extended_tagged_encoder_0, 0), (self.tx_outer_0, 0))
         self.connect((self.rx_inner_0, 1), (self.digital_constellation_soft_decoder_cf_0, 0))
         self.connect((self.rx_inner_0, 1), (self.qtgui_const_sink_x_1, 0))
         self.connect((self.rx_inner_0, 0), (self.qtgui_number_sink_0, 0))
+        self.connect((self.rx_outer_0, 0), (self.blocks_file_sink_0_0, 0))
+        self.connect((self.rx_outer_0, 1), (self.blocks_file_sink_0_0_0, 0))
         self.connect((self.tx_inner_0, 0), (self.fec_extended_tagged_encoder_0, 0))
-        self.connect((self.tx_outer_0, 0), (self.blocks_char_to_float_1_1_0_0, 0))
+        self.connect((self.tx_outer_0, 0), (self.digital_constellation_modulator_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -369,6 +360,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.set_packetLength((self.infoLength+self.packetCounterLength+4))
         self.set_dataLength((self.infoLength+self.packetCounterLength))
         self.tx_inner_0.set_packetCounterLength(self.packetCounterLength)
+        self.rx_outer_0.set_packetCounterLength(self.packetCounterLength)
 
     def get_infoLength(self):
         return self.infoLength
@@ -378,6 +370,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.set_packetLength((self.infoLength+self.packetCounterLength+4))
         self.set_dataLength((self.infoLength+self.packetCounterLength))
         self.tx_inner_0.set_infoLength(self.infoLength)
+        self.rx_outer_0.set_infoLength(self.infoLength)
 
     def get_packetLength(self):
         return self.packetLength
@@ -422,6 +415,7 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_M_PSK(self, M_PSK):
         self.M_PSK = M_PSK
         self.set_psk(digital.psk_constellation(self.M_PSK,digital.mod_codes.NO_CODE, True))
+        self._M_PSK_callback(self.M_PSK)
 
     def get_theta(self):
         return self.theta
@@ -435,6 +429,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
     def get_rrc_taps(self):
@@ -456,6 +451,7 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_dataLength(self, dataLength):
         self.dataLength = dataLength
         self.tx_inner_0.set_dataLength(self.dataLength)
+        self.rx_outer_0.set_dataLength(self.dataLength)
 
     def get_channel_rotation(self):
         return self.channel_rotation
