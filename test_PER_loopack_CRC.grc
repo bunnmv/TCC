@@ -929,7 +929,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -5552,6 +5552,12 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   <connection>
     <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
     <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
