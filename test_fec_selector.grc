@@ -188,11 +188,11 @@
     </param>
     <param>
       <key>framebits</key>
-      <value>2048</value>
+      <value>frameLength*8</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 380)</value>
+      <value>(0, 476)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -224,6 +224,49 @@
     </param>
   </block>
   <block>
+    <key>variable_dummy_decoder_def</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>dim1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>dim2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>framebits</key>
+      <value>frameLength*8</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 396)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>DD</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"ok"</value>
+    </param>
+    <param>
+      <key>ndim</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>variable_dummy_encoder_def</key>
     <param>
       <key>comment</key>
@@ -243,11 +286,11 @@
     </param>
     <param>
       <key>framebits</key>
-      <value>2048</value>
+      <value>frameLength*8</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 540)</value>
+      <value>(0, 316)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -255,7 +298,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>DU</value>
+      <value>DE</value>
     </param>
     <param>
       <key>ndim</key>
@@ -439,7 +482,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>packetLength+12</value>
+      <value>packetLength</value>
     </param>
   </block>
   <block>
@@ -632,6 +675,53 @@
     </param>
   </block>
   <block>
+    <key>blocks_and_const_xx</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(912, 500)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_and_const_xx_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_char_to_float</key>
     <param>
       <key>alias</key>
@@ -651,7 +741,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(232, 756)</value>
+      <value>(624, 324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -698,7 +788,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 404)</value>
+      <value>(600, 500)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -706,7 +796,54 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_char_to_float_1</value>
+      <value>blocks_char_to_float_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>scale</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_char_to_float</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(704, 868)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_char_to_float_0_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -753,7 +890,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1120, 812)</value>
+      <value>(1176, 788)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -828,7 +965,7 @@
     </param>
     <param>
       <key>repeat</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>vlen</key>
@@ -907,62 +1044,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 636)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_keep_m_in_n_0</value>
-    </param>
-    <param>
-      <key>m</key>
-      <value>packetLength*8*(2-FEC)</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>packetLength*8*3</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>packetLength*8*2*FEC</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_keep_m_in_n</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1120, 564)</value>
+      <value>(1120, 532)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -974,7 +1056,7 @@
     </param>
     <param>
       <key>m</key>
-      <value>224*8</value>
+      <value>packetLength*8</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1031,7 +1113,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1096, 684)</value>
+      <value>(824, 796)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1092,7 +1174,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(152, 252)</value>
+      <value>(152, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1120,65 +1202,6 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <block>
-    <key>blocks_repack_bits_bb</key>
-    <param>
-      <key>k</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>l</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>needs packed</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>endianness</key>
-      <value>gr.GR_MSB_FIRST</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(496, 484)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_repack_bits_bb_0_0_0_0_0_0</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>len_key</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>align_output</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_stream_mux</key>
     <param>
       <key>alias</key>
@@ -1198,62 +1221,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 628)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_mux_0</value>
-    </param>
-    <param>
-      <key>lengths</key>
-      <value>packetLength*8*2,packetLength*8</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_mux</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1088, 420)</value>
+      <value>(1088, 404)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1265,7 +1233,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>lengths</key>
-      <value>224*8, 224*8</value>
+      <value>packetLength*8, packetLength*8</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1308,7 +1276,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 188)</value>
+      <value>(136, 196)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1316,7 +1284,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0</value>
+      <value>blocks_stream_to_tagged_stream_0_0</value>
     </param>
     <param>
       <key>len_tag_key</key>
@@ -1333,116 +1301,6 @@ MSB -&gt; For FEC</value>
     <param>
       <key>packet_len</key>
       <value>dataLength</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_tagged_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(520, 644)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0_1</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>"len_key"</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>packetLength*8*(2-FEC)</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_tagged_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(888, 684)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0_1_0</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>"len_key"</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>packetLength*8*(2-FEC)</value>
     </param>
     <param>
       <key>type</key>
@@ -1528,7 +1386,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 180)</value>
+      <value>(488, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1560,6 +1418,57 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <block>
+    <key>digital_crc32_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(976, 788)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_crc32_bb_1</value>
+    </param>
+    <param>
+      <key>lengthtagname</key>
+      <value>"len_key"</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>check</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>packed</key>
+      <value>True</value>
+    </param>
+  </block>
+  <block>
     <key>digital_map_bb</key>
     <param>
       <key>alias</key>
@@ -1579,7 +1488,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 404)</value>
+      <value>(520, 324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1591,7 +1500,50 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>map</key>
-      <value>1,-1</value>
+      <value>-1,1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_map_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(504, 500)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_map_bb_0_0</value>
+    </param>
+    <param>
+      <key>map</key>
+      <value>-1,1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1630,7 +1582,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(864, 332)</value>
+      <value>(752, 308)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1685,7 +1637,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>decoder_list</key>
-      <value>CD</value>
+      <value>DD</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1693,7 +1645,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(864, 492)</value>
+      <value>(728, 484)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1752,11 +1704,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 408)</value>
+      <value>(312, 312)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>270</value>
+      <value>0</value>
     </param>
     <param>
       <key>id</key>
@@ -1803,15 +1755,15 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>encoder_list</key>
-      <value>DU</value>
+      <value>DE</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(160, 408)</value>
+      <value>(312, 488)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>270</value>
+      <value>0</value>
     </param>
     <param>
       <key>id</key>
@@ -1889,7 +1841,7 @@ MSB -&gt; For FEC</value>
     <key>qtgui_time_sink_x</key>
     <param>
       <key>autoscale</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>axislabels</key>
@@ -1921,7 +1873,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 748)</value>
+      <value>(464, 812)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2253,20 +2205,26 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <connection>
-    <source_block_id>blocks_char_to_float_0</source_block_id>
-    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <source_block_id>blocks_and_const_xx_0</source_block_id>
+    <sink_block_id>blocks_stream_mux_1</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <sink_key>1</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_char_to_float_1</source_block_id>
+    <source_block_id>blocks_char_to_float_0</source_block_id>
     <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_char_to_float_1</source_block_id>
+    <source_block_id>blocks_char_to_float_0_0</source_block_id>
     <sink_block_id>fec_extended_tagged_decoder_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_char_to_float_0_0_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2278,25 +2236,19 @@ MSB -&gt; For FEC</value>
   </connection>
   <connection>
     <source_block_id>blocks_head_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_keep_m_in_n_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0_1</sink_block_id>
+    <sink_block_id>blocks_stream_to_tagged_stream_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0_1_0</sink_block_id>
+    <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
-    <sink_block_id>blocks_file_sink_0_0_0</sink_block_id>
+    <sink_block_id>digital_crc32_bb_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2313,44 +2265,14 @@ MSB -&gt; For FEC</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_0_0_0_0_0_0</source_block_id>
-    <sink_block_id>digital_map_bb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_mux_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_stream_mux_1</source_block_id>
     <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
+    <source_block_id>blocks_stream_to_tagged_stream_0_0</source_block_id>
     <sink_block_id>digital_crc32_bb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_1</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_1</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_1_0</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2367,8 +2289,26 @@ MSB -&gt; For FEC</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>digital_crc32_bb_1</source_block_id>
+    <sink_block_id>blocks_char_to_float_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_crc32_bb_1</source_block_id>
+    <sink_block_id>blocks_file_sink_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>digital_map_bb_0</source_block_id>
-    <sink_block_id>blocks_char_to_float_1</sink_block_id>
+    <sink_block_id>blocks_char_to_float_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_map_bb_0_0</source_block_id>
+    <sink_block_id>blocks_char_to_float_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -2380,20 +2320,20 @@ MSB -&gt; For FEC</value>
   </connection>
   <connection>
     <source_block_id>fec_extended_tagged_decoder_0_0</source_block_id>
-    <sink_block_id>blocks_stream_mux_1</sink_block_id>
+    <sink_block_id>blocks_and_const_xx_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>1</sink_key>
+    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>fec_extended_tagged_encoder_0</source_block_id>
-    <sink_block_id>blocks_stream_mux_0</sink_block_id>
+    <sink_block_id>digital_map_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>fec_extended_tagged_encoder_0_0</source_block_id>
-    <sink_block_id>blocks_stream_mux_0</sink_block_id>
+    <sink_block_id>digital_map_bb_0_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>1</sink_key>
+    <sink_key>0</sink_key>
   </connection>
 </flow_graph>
