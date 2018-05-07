@@ -10,12 +10,12 @@ import numpy as np
 from gnuradio import gr
 
 
-class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
+class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
     """Embedded Python Block example - a simple multiply const"""
 
     def __init__(self, select_port=0.0):  # only default arguments here
         """arguments to this function show up as parameters in GRC"""
-        gr.basic_block.__init__(
+        gr.sync_block.__init__(
             self,
             name='Modulation Selector',   # will show up in GRC
             in_sig=[np.complex64,np.complex64,np.complex64],
@@ -25,22 +25,12 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
         # a callback is registered (properties work, too).
         self.select_port = select_port
 
-    def general_work(self, input_items, output_items):
+    def work(self, input_items, output_items):
         """example: multiply with constant"""
-        arrived_items = len(input_items[self.select_port])
-        # print(arrived_items)
-        # print(len(output_items[0]))
-        # if len(output_items[0]) < arrived_items:
-        #     return 0
-
         if self.select_port == 0:
-        	output_items[0][:]= input_items[0][:len(output_items[0])]
+        	output_items[0][:] = input_items[0][:]
         elif self.select_port == 1:
-        	output_items[0][:] = input_items[1][:len(output_items[0])]
+        	output_items[0][:] = input_items[1][:]
         else:
-        	output_items[0][:] = input_items[2][:len(output_items[0])]
-        	
-        self.consume(0,len(input_items[0]))
-        self.consume(1,len(input_items[1]))
-        self.consume(2,len(input_items[2]))
-        return arrived_items
+        	output_items[0][:] = input_items[2][:]
+        return len(output_items[0])
