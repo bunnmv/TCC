@@ -43,4 +43,5 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
         self.consume(0,len(input_items[0]))
         self.consume(1,len(input_items[1]))
         self.consume(2,len(input_items[2]))
-        return arrived_items
+
+        return len(output_items[0])

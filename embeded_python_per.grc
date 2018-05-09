@@ -148,7 +148,7 @@
     </param>
     <param>
       <key>m</key>
-      <value>18</value>
+      <value>5</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -191,7 +191,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(328, 228)</value>
+      <value>(312, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -246,7 +246,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(176, 124)</value>
+      <value>(144, 124)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -360,7 +360,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 
     def work(self, input_items, output_items):
         """example: multiply with constant"""
-        print("input size -&gt; {}".format(len(input_items[0])))
+        # self.set_history(self.window_size)
+        # print("input size -&gt; {}".format(len(input_items[0])))
         consumed = (len(input_items[0]-self.window_size+1))
         if len(input_items[0]) &lt; self.window_size:
             return 0    
@@ -369,9 +370,18 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            if output_items[0][i] &lt;= 1 and output_items[0][i] &gt;= 0:
-            	print("Erros -&gt;{}" .format(output_items[0][i]))
+            if output_items[0][i] &lt;= 1 and output_items[0][i] &gt;= 0 and i%self.window_size==0: #printa uma vez apenas valores entre 0 e 1
+                # print(i) 
+                if output_items[0][i] &lt; 0.25:
+            	    print("Erros -&gt;{} - Sugerido 8PSK SEM FEC" .format(output_items[0][i]))
+                if output_items[0][i] &lt; 0.50 and output_items[0][i] &gt;= 0.25:
+                    print("Erros -&gt;{} - Sugerido QPSK SEM FEC" .format(output_items[0][i]))
+                if output_items[0][i] &lt;= 0.75 and output_items[0][i] &gt;= 0.50:
+                    print("Erros -&gt;{} - Sugerido QPSK COM FEC" .format(output_items[0][i]))
+                if output_items[0][i] &lt;= 1 and output_items[0][i] &gt;= 0.75:
+                    print("Erros -&gt;{} - Sugerido BPSK COM FEC" .format(output_items[0][i]))
         # self.consume(0,consumed)
+        
         return len(output_items[0])
 </value>
     </param>
