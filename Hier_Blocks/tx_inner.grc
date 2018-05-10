@@ -90,6 +90,33 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(136, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>psk</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>digital.psk_constellation(2,digital.mod_codes.NO_CODE, True)</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_repack_bits_bb</key>
     <param>
       <key>k</key>
@@ -121,7 +148,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(232, 156)</value>
+      <value>(176, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -168,7 +195,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(648, 124)</value>
+      <value>(504, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -208,6 +235,70 @@
     </param>
   </block>
   <block>
+    <key>digital_constellation_modulator</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>The modulator block requires packed bits as the input stream 
+(that is, all 8 bits of the stream contain information).</value>
+    </param>
+    <param>
+      <key>constellation</key>
+      <value>psk.base()</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>differential</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>roll_off</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(680, 212)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_constellation_modulator_0</value>
+    </param>
+    <param>
+      <key>log</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>samples_per_symbol</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>verbose</key>
+      <value>True</value>
+    </param>
+  </block>
+  <block>
     <key>digital_protocol_formatter_bb</key>
     <param>
       <key>alias</key>
@@ -233,7 +324,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(416, 60)</value>
+      <value>(320, 164)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -268,7 +359,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(72, 156)</value>
+      <value>(40, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -307,15 +398,15 @@
     </param>
     <param>
       <key>comment</key>
-      <value>adds 12 bytes</value>
+      <value></value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 12)</value>
+      <value>(352, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -323,11 +414,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>hdr_format</value>
+      <value>roll_off</value>
     </param>
     <param>
       <key>label</key>
-      <value>Header Formatter</value>
+      <value></value>
     </param>
     <param>
       <key>short_id</key>
@@ -339,11 +430,58 @@
     </param>
     <param>
       <key>type</key>
-      <value></value>
+      <value>eng_float</value>
     </param>
     <param>
       <key>value</key>
-      <value>digital.header_format_default(digital.packet_utils.default_access_code, 0)</value>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(272, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -358,7 +496,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(864, 140)</value>
+      <value>(848, 228)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -370,11 +508,11 @@
     </param>
     <param>
       <key>type</key>
-      <value>byte</value>
+      <value>complex</value>
     </param>
     <param>
       <key>label</key>
-      <value>toMod</value>
+      <value>toTX</value>
     </param>
     <param>
       <key>num_streams</key>
@@ -403,6 +541,12 @@
   </connection>
   <connection>
     <source_block_id>blocks_tagged_stream_mux_0</source_block_id>
+    <sink_block_id>digital_constellation_modulator_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_constellation_modulator_0</source_block_id>
     <sink_block_id>toMod</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>

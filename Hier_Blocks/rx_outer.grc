@@ -90,6 +90,77 @@
     </param>
   </block>
   <block>
+    <key>variable_cc_decoder_def</key>
+    <param>
+      <key>padding</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>7</value>
+    </param>
+    <param>
+      <key>dim1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>dim2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>state_end</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>framebits</key>
+      <value>frameLength*8</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(0, 296)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>CD</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"ok"</value>
+    </param>
+    <param>
+      <key>ndim</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>polys</key>
+      <value>[79,109]</value>
+    </param>
+    <param>
+      <key>rate</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>state_start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>mode</key>
+      <value>fec.CC_STREAMING</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_keep_m_in_n</key>
     <param>
       <key>alias</key>
@@ -109,7 +180,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(624, 220)</value>
+      <value>(992, 220)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -164,7 +235,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(624, 92)</value>
+      <value>(992, 92)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -233,7 +304,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 100)</value>
+      <value>(624, 100)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -319,7 +390,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(776, 100)</value>
+      <value>(1144, 100)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -351,6 +422,61 @@ MSB -&gt; Because of FEC</value>
     </param>
   </block>
   <block>
+    <key>digital_correlate_access_code_xx_ts</key>
+    <param>
+      <key>access_code</key>
+      <value>digital.packet_utils.default_access_code</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(224, 92)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_correlate_access_code_xx_ts_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>tagname</key>
+      <value>len_key2</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>digital_crc32_bb</key>
     <param>
       <key>alias</key>
@@ -370,7 +496,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(416, 92)</value>
+      <value>(784, 92)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -399,6 +525,116 @@ MSB -&gt; Because of FEC</value>
     <param>
       <key>packed</key>
       <value>True</value>
+    </param>
+  </block>
+  <block>
+    <key>fec_extended_tagged_decoder</key>
+    <param>
+      <key>ann</key>
+      <value>None</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>110110 puncture for 3/4 rate</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>decoder_list</key>
+      <value>CD</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(168, 204)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>fec_extended_tagged_decoder_0</value>
+    </param>
+    <param>
+      <key>lentagname</key>
+      <value>len_key2</value>
+    </param>
+    <param>
+      <key>mtu</key>
+      <value>packetLength</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>puncpat</key>
+      <value>'11'</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>fec_extended_decoder</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(488, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>frameLength</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>frameLength</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -437,7 +673,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>type</key>
-      <value>byte</value>
+      <value>float</value>
     </param>
     <param>
       <key>vlen</key>
@@ -550,7 +786,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(776, 228)</value>
+      <value>(1144, 228)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -581,6 +817,53 @@ MSB -&gt; Because of FEC</value>
       <value>1</value>
     </param>
   </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(584, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>packetLength</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>packetLength</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>blocks_keep_m_in_n_0</source_block_id>
     <sink_block_id>packetCounter_out</sink_block_id>
@@ -600,6 +883,12 @@ MSB -&gt; Because of FEC</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
+    <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>digital_crc32_bb_0_0</source_block_id>
     <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
     <source_key>0</source_key>
@@ -612,8 +901,14 @@ MSB -&gt; Because of FEC</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fromFEC_RX</source_block_id>
+    <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
     <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>fromFEC_RX</source_block_id>
+    <sink_block_id>digital_correlate_access_code_xx_ts_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

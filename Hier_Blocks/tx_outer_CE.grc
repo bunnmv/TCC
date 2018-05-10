@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>tx_outer</value>
+      <value>tx_outer_CE</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -121,7 +121,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(664, 4)</value>
+      <value>(696, 4)</value>
     </param>
     <param>
       <key>_rotation</key>

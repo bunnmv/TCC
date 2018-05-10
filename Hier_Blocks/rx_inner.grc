@@ -90,6 +90,33 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(400, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>psk</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>digital.psk_constellation(2,digital.mod_codes.NO_CODE, True)</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_multiply_const_vxx</key>
     <param>
       <key>alias</key>
@@ -239,6 +266,49 @@
     </param>
   </block>
   <block>
+    <key>digital_constellation_soft_decoder_cf</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Inner vai ate aqui</value>
+    </param>
+    <param>
+      <key>constellation</key>
+      <value>psk.base()</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(640, 292)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_constellation_soft_decoder_cf_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>digital_costas_loop_cc</key>
     <param>
       <key>alias</key>
@@ -282,7 +352,7 @@
     </param>
     <param>
       <key>order</key>
-      <value>order_costas</value>
+      <value>psk.arity()</value>
     </param>
     <param>
       <key>use_snr</key>
@@ -714,53 +784,6 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(440, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>order_costas</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>order_costas</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
       <value>1</value>
     </param>
     <param>
@@ -992,7 +1015,7 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(672, 292)</value>
+      <value>(832, 284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1004,11 +1027,11 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
     </param>
     <param>
       <key>type</key>
-      <value>complex</value>
+      <value>float</value>
     </param>
     <param>
       <key>label</key>
-      <value>toDemod</value>
+      <value>toSync</value>
     </param>
     <param>
       <key>num_streams</key>
@@ -1031,6 +1054,12 @@ QPSK &amp; 8-PSK -&gt; SPS =4</value>
   </connection>
   <connection>
     <source_block_id>blocks_multiply_const_vxx_1</source_block_id>
+    <sink_block_id>digital_constellation_soft_decoder_cf_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_constellation_soft_decoder_cf_0</source_block_id>
     <sink_block_id>toDemod</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>

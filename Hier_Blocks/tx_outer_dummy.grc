@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>tx_outer</value>
+      <value>tx_outer_dummy</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -90,18 +90,10 @@
     </param>
   </block>
   <block>
-    <key>variable_cc_encoder_def</key>
-    <param>
-      <key>padding</key>
-      <value>False</value>
-    </param>
+    <key>variable_dummy_encoder_def</key>
     <param>
       <key>comment</key>
       <value></value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>7</value>
     </param>
     <param>
       <key>dim1</key>
@@ -129,27 +121,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>CE</value>
+      <value>DE</value>
     </param>
     <param>
       <key>ndim</key>
       <value>0</value>
-    </param>
-    <param>
-      <key>polys</key>
-      <value>[79,109]</value>
-    </param>
-    <param>
-      <key>rate</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>state_start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>mode</key>
-      <value>fec.CC_STREAMING</value>
     </param>
   </block>
   <block>
@@ -502,7 +478,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>encoder_list</key>
-      <value>CE</value>
+      <value>DE</value>
     </param>
     <param>
       <key>_coordinate</key>
