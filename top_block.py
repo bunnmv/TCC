@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed May  9 14:52:29 2018
+# Generated: Thu May 10 11:30:42 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -17,7 +17,6 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
-from PyQt4.QtCore import QObject, pyqtSlot
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
@@ -64,53 +63,25 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.variable_function_probe_0 = variable_function_probe_0 = 0
-        self.value = value = 0
         self.samp_rate = samp_rate = 32000
         self.port = port = 0
 
         ##################################################
         # Blocks
         ##################################################
-        self._port_options = (0, 1, 2, )
-        self._port_labels = (str(self._port_options[0]), str(self._port_options[1]), str(self._port_options[2]), )
-        self._port_tool_bar = Qt.QToolBar(self)
-        self._port_tool_bar.addWidget(Qt.QLabel("port"+": "))
-        self._port_combo_box = Qt.QComboBox()
-        self._port_tool_bar.addWidget(self._port_combo_box)
-        for label in self._port_labels: self._port_combo_box.addItem(label)
-        self._port_callback = lambda i: Qt.QMetaObject.invokeMethod(self._port_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._port_options.index(i)))
-        self._port_callback(self.port)
-        self._port_combo_box.currentIndexChanged.connect(
-        	lambda i: self.set_port(self._port_options[i]))
-        self.top_layout.addWidget(self._port_tool_bar)
-        self.blocks_probe_signal_x_0 = blocks.probe_signal_b()
+        self.probe = blocks.probe_signal_b()
 
-        def _value_probe():
+        def _port_probe():
             while True:
-                val = self.blocks_probe_signal_x_0.level()
+                val = self.probe.level()
                 try:
-                    self.set_value(val)
+                    self.set_port(val)
                 except AttributeError:
                     pass
-                time.sleep(1.0 / (10))
-        _value_thread = threading.Thread(target=_value_probe)
-        _value_thread.daemon = True
-        _value_thread.start()
-
-        self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(port, True)
-
-        def _variable_function_probe_0_probe():
-            while True:
-                val = self.RWN_selector_3_1_bb_0.set_selected(value)
-                try:
-                    self.set_variable_function_probe_0(val)
-                except AttributeError:
-                    pass
-                time.sleep(1.0 / (20))
-        _variable_function_probe_0_thread = threading.Thread(target=_variable_function_probe_0_probe)
-        _variable_function_probe_0_thread.daemon = True
-        _variable_function_probe_0_thread.start()
+                time.sleep(1.0 / (0.5))
+        _port_thread = threading.Thread(target=_port_probe)
+        _port_thread.daemon = True
+        _port_thread.start()
 
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
         	1024, #size
@@ -160,15 +131,46 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
+        self.qtgui_number_sink_0 = qtgui.number_sink(
+            gr.sizeof_char,
+            0,
+            qtgui.NUM_GRAPH_HORIZ,
+            1
+        )
+        self.qtgui_number_sink_0.set_update_time(0.10)
+        self.qtgui_number_sink_0.set_title("")
+
+        labels = ['', '', '', '', '',
+                  '', '', '', '', '']
+        units = ['', '', '', '', '',
+                 '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        for i in xrange(1):
+            self.qtgui_number_sink_0.set_min(i, -1)
+            self.qtgui_number_sink_0.set_max(i, 1)
+            self.qtgui_number_sink_0.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0.set_label(i, labels[i])
+            self.qtgui_number_sink_0.set_unit(i, units[i])
+            self.qtgui_number_sink_0.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0.enable_autoscale(False)
+        self._qtgui_number_sink_0_win = sip.wrapinstance(self.qtgui_number_sink_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_number_sink_0_win)
         self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 1), True, 1, [])
         self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_char*1, samp_rate*100,True)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate*100,True)
-        self.blocks_null_source_0 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_float_to_char_0_0 = blocks.float_to_char(1, 1)
         self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
         self.analog_const_source_x_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 0)
         self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 1)
+        self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(port, True)
 
 
 
@@ -180,28 +182,17 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.analog_const_source_x_0_0, 0), (self.blocks_float_to_char_0_0, 0))
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blocks_float_to_char_0, 0), (self.RWN_selector_3_1_bb_0, 1))
+        self.connect((self.blocks_float_to_char_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_float_to_char_0_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_throttle_0, 0), (self.RWN_selector_3_1_bb_0, 0))
-        self.connect((self.blocks_throttle_0_0, 0), (self.blocks_probe_signal_x_0, 0))
+        self.connect((self.blocks_throttle_0_0, 0), (self.probe, 0))
+        self.connect((self.blocks_throttle_0_0, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_throttle_0_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
-
-    def get_variable_function_probe_0(self):
-        return self.variable_function_probe_0
-
-    def set_variable_function_probe_0(self, variable_function_probe_0):
-        self.variable_function_probe_0 = variable_function_probe_0
-
-    def get_value(self):
-        return self.value
-
-    def set_value(self, value):
-        self.value = value
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -217,7 +208,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_port(self, port):
         self.port = port
-        self._port_callback(self.port)
         self.RWN_selector_3_1_bb_0.set_selected(self.port)
 
 
