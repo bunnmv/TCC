@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Fri May 11 14:14:56 2018
+# Generated: Sat May 12 11:34:53 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -25,6 +25,7 @@ from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import epy_block_0
+import pmt
 import sip
 import sys
 from gnuradio import qtgui
@@ -60,70 +61,101 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self.tag = tag = gr.tag_utils.python_to_tag((0, pmt.intern("key"), pmt.intern("value"), pmt.intern("src")))
         self.samp_rate = samp_rate = 32000
         self.access_code = access_code = '101010'
 
         ##################################################
         # Blocks
         ##################################################
-        self.qtgui_number_sink_0 = qtgui.number_sink(
-            gr.sizeof_char,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1
+        self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
+        	1024, #size
+        	samp_rate, #samp_rate
+        	"", #name
+        	1 #number of inputs
         )
-        self.qtgui_number_sink_0.set_update_time(0.10)
-        self.qtgui_number_sink_0.set_title("")
+        self.qtgui_time_sink_x_0.set_update_time(0.10)
+        self.qtgui_time_sink_x_0.set_y_axis(-1, 1)
+
+        self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
+
+        self.qtgui_time_sink_x_0.enable_tags(-1, True)
+        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_0.enable_autoscale(False)
+        self.qtgui_time_sink_x_0.enable_grid(False)
+        self.qtgui_time_sink_x_0.enable_axis_labels(True)
+        self.qtgui_time_sink_x_0.enable_control_panel(False)
+        self.qtgui_time_sink_x_0.enable_stem_plot(False)
+
+        if not True:
+          self.qtgui_time_sink_x_0.disable_legend()
 
         labels = ['', '', '', '', '',
                   '', '', '', '', '']
-        units = ['', '', '', '', '',
-                 '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
+        widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
-        for i in xrange(1):
-            self.qtgui_number_sink_0.set_min(i, -1)
-            self.qtgui_number_sink_0.set_max(i, 1)
-            self.qtgui_number_sink_0.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_0.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_0.set_label(i, labels[i])
-            self.qtgui_number_sink_0.set_unit(i, units[i])
-            self.qtgui_number_sink_0.set_factor(i, factor[i])
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "blue"]
+        styles = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        markers = [-1, -1, -1, -1, -1,
+                   -1, -1, -1, -1, -1]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
 
-        self.qtgui_number_sink_0.enable_autoscale(False)
-        self._qtgui_number_sink_0_win = sip.wrapinstance(self.qtgui_number_sink_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_win)
-        self.epy_block_0 = epy_block_0.blk(access_code=None, payload_length=1)
-        self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0), True, 1, [])
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
+            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
+            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
+
+        self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
+        self.epy_block_0 = epy_block_0.blk(access_code=access_code, payload_length=1)
+        self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0), True, 1, [tag])
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
 
 
         ##################################################
         # Connections
         ##################################################
+        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.blocks_vector_source_x_0, 0), (self.epy_block_0, 0))
-        self.connect((self.epy_block_0, 0), (self.qtgui_number_sink_0, 0))
+        self.connect((self.epy_block_0, 0), (self.blocks_null_sink_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
+    def get_tag(self):
+        return self.tag
+
+    def set_tag(self, tag):
+        self.tag = tag
+        self.blocks_vector_source_x_0.set_data((0, 0, 0), [self.tag])
+
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
 
     def get_access_code(self):
         return self.access_code
 
     def set_access_code(self, access_code):
         self.access_code = access_code
+        self.epy_block_0.access_code = self.access_code
 
 
 def main(top_block_cls=top_block, options=None):
