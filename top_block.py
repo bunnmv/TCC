@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Sat May 12 11:34:53 2018
+# Generated: Sat May 12 23:08:43 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -24,7 +24,7 @@ from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
-import epy_block_0
+import epy_block_framer_test
 import pmt
 import sip
 import sys
@@ -63,14 +63,14 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.tag = tag = gr.tag_utils.python_to_tag((0, pmt.intern("key"), pmt.intern("value"), pmt.intern("src")))
         self.samp_rate = samp_rate = 32000
-        self.access_code = access_code = '101010'
+        self.access_code = access_code = '111'
 
         ##################################################
         # Blocks
         ##################################################
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
         	1024, #size
-        	samp_rate, #samp_rate
+        	1, #samp_rate
         	"", #name
         	1 #number of inputs
         )
@@ -80,7 +80,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
 
         self.qtgui_time_sink_x_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, 'packet_len')
         self.qtgui_time_sink_x_0.enable_autoscale(False)
         self.qtgui_time_sink_x_0.enable_grid(False)
         self.qtgui_time_sink_x_0.enable_axis_labels(True)
@@ -116,9 +116,12 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.epy_block_0 = epy_block_0.blk(access_code=access_code, payload_length=1)
-        self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0), True, 1, [tag])
-        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
+        self.epy_block_framer_test = epy_block_framer_test.blk(access_code=access_code, payload_length=3, tag_name='packet_len')
+        self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0), True, 1, [])
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 3, "packet_len")
+        self.blocks_repack_bits_bb_1 = blocks.repack_bits_bb(1, 8, 'packet_len', False, gr.GR_LSB_FIRST)
+        self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, 1, "packet_len", False, gr.GR_LSB_FIRST)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
 
@@ -127,9 +130,12 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_char_to_float_0, 0))
-        self.connect((self.blocks_vector_source_x_0, 0), (self.epy_block_0, 0))
-        self.connect((self.epy_block_0, 0), (self.blocks_null_sink_0, 0))
+        self.connect((self.blocks_repack_bits_bb_0, 0), (self.epy_block_framer_test, 0))
+        self.connect((self.blocks_repack_bits_bb_1, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.epy_block_framer_test, 0), (self.blocks_repack_bits_bb_1, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -141,21 +147,20 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_tag(self, tag):
         self.tag = tag
-        self.blocks_vector_source_x_0.set_data((0, 0, 0), [self.tag])
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
     def get_access_code(self):
         return self.access_code
 
     def set_access_code(self, access_code):
         self.access_code = access_code
-        self.epy_block_0.access_code = self.access_code
+        self.epy_block_framer_test.access_code = self.access_code
 
 
 def main(top_block_cls=top_block, options=None):
