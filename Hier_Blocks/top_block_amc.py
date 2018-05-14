@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Sat May 12 23:08:20 2018
+# Generated: Mon May 14 09:30:17 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -136,26 +136,29 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             payloadLength=dataLength,
             roll_off=excess_bw,
             sps=sps,
+            len_tag_name='len_key',
         )
         self.tx_inner_bpsk_0 = tx_inner_bpsk(
             access_code=access_code,
             payloadLength=dataLength,
             roll_off=excess_bw,
             sps=sps,
+            len_tag_name='len_key',
         )
         self.tx_inner_8psk_0 = tx_inner_8psk(
             access_code=access_code,
+            len_tag_name='len_key',
             payloadLength=dataLength,
             roll_off=excess_bw,
             sps=sps,
         )
         self.rx_outer_dummy_0 = rx_outer_dummy(
+            access_code='101010',
             dataLength=dataLength,
             frameLength=frameLength,
             infoLength=infoLength,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
-            access_code='101010',
         )
         self.rx_outer_convolutional_0 = rx_outer_convolutional(
             access_code='101010',

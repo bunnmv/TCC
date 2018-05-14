@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Sun May 13 23:26:48 2018
+# Generated: Mon May 14 09:26:51 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -17,22 +17,18 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
-from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
-import RWN
-import numpy as np
-import per_calc_test_probe
+import epy_block_framer_test
+import my_correlator_test_block
+import pmt
 import sip
 import sys
-import threading
-import time
 from gnuradio import qtgui
 
 
@@ -66,34 +62,16 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.port = port = 0
+        self.tag = tag = gr.tag_utils.python_to_tag((0, pmt.intern("key"), pmt.intern("value"), pmt.intern("src")))
         self.samp_rate = samp_rate = 32000
-        self.new_port = new_port = int(np.floor((port+0.7)))
-        self.keep = keep = 20
+        self.access_code = access_code = '111'
 
         ##################################################
         # Blocks
         ##################################################
-        self.probe = blocks.probe_signal_f()
-
-        def _port_probe():
-            while True:
-                val = self.probe.level()
-                try:
-                    self.set_port(val)
-                except AttributeError:
-                    pass
-                time.sleep(1.0 / (100000))
-        _port_thread = threading.Thread(target=_port_probe)
-        _port_thread.daemon = True
-        _port_thread.start()
-
-        self._keep_range = Range(5, 20, 1, 20, 200)
-        self._keep_win = RangeWidget(self._keep_range, self.set_keep, "keep", "counter_slider", int)
-        self.top_layout.addWidget(self._keep_win)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
         	1024, #size
-        	samp_rate, #samp_rate
+        	1, #samp_rate
         	"", #name
         	1 #number of inputs
         )
@@ -103,8 +81,8 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
 
         self.qtgui_time_sink_x_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_0.enable_autoscale(True)
+        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, 'len_key2')
+        self.qtgui_time_sink_x_0.enable_autoscale(False)
         self.qtgui_time_sink_x_0.enable_grid(False)
         self.qtgui_time_sink_x_0.enable_axis_labels(True)
         self.qtgui_time_sink_x_0.enable_control_panel(False)
@@ -139,164 +117,52 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.qtgui_number_sink_0_1_0 = qtgui.number_sink(
-            gr.sizeof_float,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1
-        )
-        self.qtgui_number_sink_0_1_0.set_update_time(0.04)
-        self.qtgui_number_sink_0_1_0.set_title("New Port")
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        units = ['', '', '', '', '',
-                 '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        for i in xrange(1):
-            self.qtgui_number_sink_0_1_0.set_min(i, -1)
-            self.qtgui_number_sink_0_1_0.set_max(i, 1)
-            self.qtgui_number_sink_0_1_0.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_0_1_0.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_0_1_0.set_label(i, labels[i])
-            self.qtgui_number_sink_0_1_0.set_unit(i, units[i])
-            self.qtgui_number_sink_0_1_0.set_factor(i, factor[i])
-
-        self.qtgui_number_sink_0_1_0.enable_autoscale(False)
-        self._qtgui_number_sink_0_1_0_win = sip.wrapinstance(self.qtgui_number_sink_0_1_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_1_0_win)
-        self.qtgui_number_sink_0_1 = qtgui.number_sink(
-            gr.sizeof_float,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1
-        )
-        self.qtgui_number_sink_0_1.set_update_time(0.04)
-        self.qtgui_number_sink_0_1.set_title("Port")
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        units = ['', '', '', '', '',
-                 '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        for i in xrange(1):
-            self.qtgui_number_sink_0_1.set_min(i, -1)
-            self.qtgui_number_sink_0_1.set_max(i, 1)
-            self.qtgui_number_sink_0_1.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_0_1.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_0_1.set_label(i, labels[i])
-            self.qtgui_number_sink_0_1.set_unit(i, units[i])
-            self.qtgui_number_sink_0_1.set_factor(i, factor[i])
-
-        self.qtgui_number_sink_0_1.enable_autoscale(False)
-        self._qtgui_number_sink_0_1_win = sip.wrapinstance(self.qtgui_number_sink_0_1.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_1_win)
-        self.qtgui_number_sink_0_0 = qtgui.number_sink(
-            gr.sizeof_float,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1
-        )
-        self.qtgui_number_sink_0_0.set_update_time(0.10)
-        self.qtgui_number_sink_0_0.set_title("PER")
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        units = ['', '', '', '', '',
-                 '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        for i in xrange(1):
-            self.qtgui_number_sink_0_0.set_min(i, -1)
-            self.qtgui_number_sink_0_0.set_max(i, 1)
-            self.qtgui_number_sink_0_0.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_0_0.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_0_0.set_label(i, labels[i])
-            self.qtgui_number_sink_0_0.set_unit(i, units[i])
-            self.qtgui_number_sink_0_0.set_factor(i, factor[i])
-
-        self.qtgui_number_sink_0_0.enable_autoscale(False)
-        self._qtgui_number_sink_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_0_win)
-        self.per_calc_test_probe = per_calc_test_probe.blk(window_size=10, modulus=256)
-        self.blocks_vector_source_x_0 = blocks.vector_source_b(np.arange(256), True, 1, [])
-        self.blocks_uchar_to_float_0 = blocks.uchar_to_float()
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate*100,True)
-        self.blocks_keep_m_in_n_0 = blocks.keep_m_in_n(gr.sizeof_char, keep, 20, 0)
-        self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
-        self.analog_const_source_x_1_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, new_port)
-        self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
-        self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 10)
-        self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(new_port, True)
+        self.my_correlator_test_block = my_correlator_test_block.blk(access_code=access_code, payload_length=3, threshold=0, tag_name='len_key2')
+        self.epy_block_framer_test = epy_block_framer_test.blk(access_code=access_code, payload_length=3, tag_name='packet_len')
+        self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0), True, 1, [])
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 3, "packet_len")
+        self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, 1, "packet_len", False, gr.GR_LSB_FIRST)
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.blocks_uchar_to_float_0, 0))
-        self.connect((self.analog_const_source_x_0, 0), (self.blocks_float_to_char_0, 0))
-        self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
-        self.connect((self.analog_const_source_x_1_0, 0), (self.qtgui_number_sink_0_1_0, 0))
-        self.connect((self.blocks_float_to_char_0, 0), (self.RWN_selector_3_1_bb_0, 0))
-        self.connect((self.blocks_float_to_char_0, 0), (self.RWN_selector_3_1_bb_0, 2))
-        self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_test_probe, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.RWN_selector_3_1_bb_0, 1))
-        self.connect((self.blocks_throttle_0, 0), (self.blocks_keep_m_in_n_0, 0))
-        self.connect((self.blocks_uchar_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.blocks_char_to_float_0, 0), (self.my_correlator_test_block, 0))
+        self.connect((self.blocks_repack_bits_bb_0, 0), (self.epy_block_framer_test, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.per_calc_test_probe, 0), (self.probe, 0))
-        self.connect((self.per_calc_test_probe, 0), (self.qtgui_number_sink_0_0, 0))
+        self.connect((self.epy_block_framer_test, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.my_correlator_test_block, 0), (self.qtgui_time_sink_x_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
-    def get_port(self):
-        return self.port
+    def get_tag(self):
+        return self.tag
 
-    def set_port(self, port):
-        self.port = port
-        self.set_new_port(int(np.floor((self.port+0.7))))
-        self.analog_const_source_x_1.set_offset(self.port)
+    def set_tag(self, tag):
+        self.tag = tag
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate*100)
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
-    def get_new_port(self):
-        return self.new_port
+    def get_access_code(self):
+        return self.access_code
 
-    def set_new_port(self, new_port):
-        self.new_port = new_port
-        self.analog_const_source_x_1_0.set_offset(self.new_port)
-        self.RWN_selector_3_1_bb_0.set_selected(self.new_port)
-
-    def get_keep(self):
-        return self.keep
-
-    def set_keep(self, keep):
-        self.keep = keep
-        self.blocks_keep_m_in_n_0.set_m(self.keep)
+    def set_access_code(self, access_code):
+        self.access_code = access_code
+        self.my_correlator_test_block.access_code = self.access_code
+        self.epy_block_framer_test.access_code = self.access_code
 
 
 def main(top_block_cls=top_block, options=None):

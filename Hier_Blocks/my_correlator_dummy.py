@@ -8,10 +8,11 @@ be the parameters. All of them are required to have default values!
 
 import numpy as np
 from gnuradio import gr
+import pmt
 
 
 class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
-    def __init__(self, access_code=None, payload_length=100, threshold=0):  # only default arguments here
+    def __init__(self, access_code=None, payload_length=100, threshold=0,tag_name="len_key2"):  # only default arguments here
         """arguments to this function show up as parameters in GRC"""
         gr.basic_block.__init__(
             self,
@@ -24,10 +25,13 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
         self.access_code = access_code
         self.payload_length = payload_length
         self.threshold = threshold
+        self.tag_name = tag_name
 
         self.mode = 'find'
 
         self.set_min_output_buffer(2**16)
+
+        self.set_tag_propagation_policy(0)
 
 
     def general_work(self, input_items, output_items):
@@ -44,6 +48,12 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
         if L_in < L_payload or L_out < L_payload:
             return 0
 
+
+        self.add_item_tag(0, # Port number
+            self.nitems_written(0), # Offset
+            pmt.intern(self.tag_name), # Key
+            pmt.to_pmt(L_payload) # Value
+        )
         output_items[0][:L_payload] = input_items[0][:L_payload]
         self.consume(0, L_payload)
 

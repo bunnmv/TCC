@@ -1030,7 +1030,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1120, 372)</value>
+      <value>(1136, 396)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3351,6 +3351,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
       <value>access_code</value>
     </param>
     <param>
+      <key>len_tag_name</key>
+      <value>'len_key'</value>
+    </param>
+    <param>
       <key>payloadLength</key>
       <value>dataLength</value>
     </param>
@@ -3406,6 +3410,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
       <value>access_code</value>
     </param>
     <param>
+      <key>len_tag_name</key>
+      <value>'len_key'</value>
+    </param>
+    <param>
       <key>payloadLength</key>
       <value>dataLength</value>
     </param>
@@ -3438,7 +3446,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(912, 128)</value>
+      <value>(912, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3459,6 +3467,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>access_code</key>
       <value>access_code</value>
+    </param>
+    <param>
+      <key>len_tag_name</key>
+      <value>'len_key'</value>
     </param>
     <param>
       <key>payloadLength</key>
