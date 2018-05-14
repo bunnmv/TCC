@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon May 14 09:26:51 2018
+# Generated: Mon May 14 14:31:30 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -119,10 +119,11 @@ class top_block(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
         self.my_correlator_test_block = my_correlator_test_block.blk(access_code=access_code, payload_length=3, threshold=0, tag_name='len_key2')
         self.epy_block_framer_test = epy_block_framer_test.blk(access_code=access_code, payload_length=3, tag_name='packet_len')
-        self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0), True, 1, [])
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 3, "packet_len")
         self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, 1, "packet_len", False, gr.GR_LSB_FIRST)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', True)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
 
@@ -131,10 +132,10 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.blocks_char_to_float_0, 0), (self.my_correlator_test_block, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_repack_bits_bb_0, 0), (self.epy_block_framer_test, 0))
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.blocks_repack_bits_bb_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))
-        self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.epy_block_framer_test, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.my_correlator_test_block, 0), (self.qtgui_time_sink_x_0, 0))
 

@@ -221,11 +221,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_repack_bits_bb_0_0_0</value>
+      <value>blocks_repack_bits_bb_dummy</value>
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_key2</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -358,11 +358,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>digital_crc32_bb_0_0</value>
+      <value>digital_crc32_bb_dummy</value>
     </param>
     <param>
       <key>lengthtagname</key>
-      <value>"len_key2"</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -417,11 +417,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>fec_extended_tagged_decoder_0</value>
+      <value>fec_extended_tagged_decoder_dummy</value>
     </param>
     <param>
       <key>lentagname</key>
-      <value>len_key2</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>mtu</key>
@@ -582,6 +582,53 @@ MSB -&gt; Because of FEC</value>
     </param>
   </block>
   <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(936, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>len_tag_name_rx</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>'len_key2'</value>
+    </param>
+  </block>
+  <block>
     <key>epy_block</key>
     <param>
       <key>access_code</key>
@@ -708,7 +755,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>tag_name</key>
-      <value>'len_key2'</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>threshold</key>
@@ -853,25 +900,25 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
   </block>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
-    <sink_block_id>digital_crc32_bb_0_0</sink_block_id>
+    <source_block_id>blocks_repack_bits_bb_dummy</source_block_id>
+    <sink_block_id>digital_crc32_bb_dummy</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_crc32_bb_0_0</source_block_id>
+    <source_block_id>digital_crc32_bb_dummy</source_block_id>
     <sink_block_id>crc_out</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
+    <source_block_id>fec_extended_tagged_decoder_dummy</source_block_id>
+    <sink_block_id>blocks_repack_bits_bb_dummy</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
+    <source_block_id>fec_extended_tagged_decoder_dummy</source_block_id>
     <sink_block_id>pad_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -884,7 +931,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
   </connection>
   <connection>
     <source_block_id>my_correlator_dummy</source_block_id>
-    <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
+    <sink_block_id>fec_extended_tagged_decoder_dummy</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
