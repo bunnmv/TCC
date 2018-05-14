@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Mon May 14 12:14:13 2018
+# Generated: Mon May 14 18:36:22 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -85,16 +85,16 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.packetLength = packetLength = (infoLength+packetCounterLength+4)
         self.nfilts = nfilts = 32
         self.excess_bw = excess_bw = 0.35
+        self.access_code = access_code = '0101110111101101' * 3
         self.theta = theta = 0
         self.samp_rate = samp_rate = 3200000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
         self.len_tag_name_rx = len_tag_name_rx = "len_key2"
         self.len_tag_name = len_tag_name = "len_key"
-        self.frameLength = frameLength = packetLength+12
+        self.frameLength = frameLength = packetLength+len(access_code)
         self.dataLength = dataLength = (infoLength+packetCounterLength)
         self.channel_rotation = channel_rotation = 0
         self.channel_noise = channel_noise = 0
-        self.access_code = access_code = '0101110111101101' * 3
         self.FEC = FEC = 1
 
         ##################################################
@@ -140,45 +140,41 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.top_layout.addWidget(self._FEC_tool_bar)
         self.tx_outer_dummy_0 = tx_outer_dummy(
             dataLength=dataLength,
-            frameLength=frameLength,
             infoLength=infoLength,
+            len_tag_name=len_tag_name,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
-            len_tag_name=len_tag_name,
         )
         self.tx_outer_CE_0 = tx_outer_CE(
             dataLength=dataLength,
-            frameLength=frameLength,
             infoLength=infoLength,
+            len_tag_name=len_tag_name,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
-            len_tag_name=len_tag_name,
         )
         self.tx_inner_qpsk_0 = tx_inner_qpsk(
             access_code=access_code,
+            excess_bw=0,
             len_tag_name=len_tag_name,
             payloadLength=dataLength,
-            roll_off=excess_bw,
             sps=sps,
         )
         self.tx_inner_bpsk_0 = tx_inner_bpsk(
             access_code=access_code,
+            excess_bw=0,
             len_tag_name=len_tag_name,
             payloadLength=dataLength,
-            roll_off=excess_bw,
             sps=sps,
         )
         self.tx_inner_8psk_0 = tx_inner_8psk(
             access_code=access_code,
+            excess_bw=0,
             len_tag_name=len_tag_name,
             payloadLength=dataLength,
-            roll_off=excess_bw,
             sps=sps,
         )
         self.rx_outer_dummy_0 = rx_outer_dummy(
             access_code=access_code,
-            dataLength=dataLength,
-            frameLength=frameLength,
             infoLength=infoLength,
             len_tag_name_rx=len_tag_name_rx,
             packetCounterLength=packetCounterLength,
@@ -186,12 +182,10 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         )
         self.rx_outer_convolutional_0 = rx_outer_convolutional(
             access_code=access_code,
-            dataLength=dataLength,
-            frameLength=frameLength,
             infoLength=infoLength,
+            len_tag_name_rx=len_tag_name_rx,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
-            len_tag_name_rx=len_tag_name_rx,
         )
         self.rx_inner_qpsk_0 = rx_inner_qpsk(
             excess_bw=excess_bw,
@@ -446,7 +440,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
+        self.tab_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
         self.per_calc_0 = per_calc_0.blk(window_size=10, modulus=256)
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=channel_noise,
@@ -464,7 +458,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_keep_m_in_n_0_0 = blocks.keep_m_in_n(gr.sizeof_char, infoLength, dataLength, packetCounterLength)
         self.blocks_keep_m_in_n_0 = blocks.keep_m_in_n(gr.sizeof_char, packetCounterLength, dataLength, 0)
-        self.blocks_head_0 = blocks.head(gr.sizeof_char*1, 110000)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_sink_0_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/header_counter.txt', False)
@@ -500,8 +493,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_char_to_float_1_1_0, 0), (self.qtgui_time_sink_x_0_0, 0))
         self.connect((self.blocks_char_to_float_1_1_0_0, 0), (self.qtgui_time_sink_x_0_0_0, 0))
         self.connect((self.blocks_char_to_float_1_1_0_0_0, 0), (self.qtgui_time_sink_x_0_0_0_0, 0))
-        self.connect((self.blocks_file_source_0, 0), (self.blocks_head_0, 0))
-        self.connect((self.blocks_head_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_keep_m_in_n_0, 0), (self.blocks_file_sink_0_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0, 0))
@@ -579,11 +571,11 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_packetLength(self, packetLength):
         self.packetLength = packetLength
-        self.set_frameLength(self.packetLength+12)
         self.tx_outer_dummy_0.set_packetLength(self.packetLength)
         self.tx_outer_CE_0.set_packetLength(self.packetLength)
         self.rx_outer_dummy_0.set_packetLength(self.packetLength)
         self.rx_outer_convolutional_0.set_packetLength(self.packetLength)
+        self.set_frameLength(self.packetLength+len(self.access_code))
 
     def get_nfilts(self):
         return self.nfilts
@@ -601,12 +593,21 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_excess_bw(self, excess_bw):
         self.excess_bw = excess_bw
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.tx_inner_qpsk_0.set_roll_off(self.excess_bw)
-        self.tx_inner_bpsk_0.set_roll_off(self.excess_bw)
-        self.tx_inner_8psk_0.set_roll_off(self.excess_bw)
         self.rx_inner_qpsk_0.set_excess_bw(self.excess_bw)
         self.rx_inner_bpsk_0.set_excess_bw(self.excess_bw)
         self.rx_inner_8psk_0.set_excess_bw(self.excess_bw)
+
+    def get_access_code(self):
+        return self.access_code
+
+    def set_access_code(self, access_code):
+        self.access_code = access_code
+        self.tx_inner_qpsk_0.set_access_code(self.access_code)
+        self.tx_inner_bpsk_0.set_access_code(self.access_code)
+        self.tx_inner_8psk_0.set_access_code(self.access_code)
+        self.rx_outer_dummy_0.set_access_code(self.access_code)
+        self.rx_outer_convolutional_0.set_access_code(self.access_code)
+        self.set_frameLength(self.packetLength+len(self.access_code))
 
     def get_theta(self):
         return self.theta
@@ -661,10 +662,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_frameLength(self, frameLength):
         self.frameLength = frameLength
-        self.tx_outer_dummy_0.set_frameLength(self.frameLength)
-        self.tx_outer_CE_0.set_frameLength(self.frameLength)
-        self.rx_outer_dummy_0.set_frameLength(self.frameLength)
-        self.rx_outer_convolutional_0.set_frameLength(self.frameLength)
 
     def get_dataLength(self):
         return self.dataLength
@@ -676,8 +673,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.tx_inner_qpsk_0.set_payloadLength(self.dataLength)
         self.tx_inner_bpsk_0.set_payloadLength(self.dataLength)
         self.tx_inner_8psk_0.set_payloadLength(self.dataLength)
-        self.rx_outer_dummy_0.set_dataLength(self.dataLength)
-        self.rx_outer_convolutional_0.set_dataLength(self.dataLength)
         self.blocks_keep_m_in_n_0_0.set_n(self.dataLength)
         self.blocks_keep_m_in_n_0.set_n(self.dataLength)
 
@@ -694,17 +689,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_channel_noise(self, channel_noise):
         self.channel_noise = channel_noise
         self.channels_channel_model_0.set_noise_voltage(self.channel_noise)
-
-    def get_access_code(self):
-        return self.access_code
-
-    def set_access_code(self, access_code):
-        self.access_code = access_code
-        self.tx_inner_qpsk_0.set_access_code(self.access_code)
-        self.tx_inner_bpsk_0.set_access_code(self.access_code)
-        self.tx_inner_8psk_0.set_access_code(self.access_code)
-        self.rx_outer_dummy_0.set_access_code(self.access_code)
-        self.rx_outer_convolutional_0.set_access_code(self.access_code)
 
     def get_FEC(self):
         return self.FEC

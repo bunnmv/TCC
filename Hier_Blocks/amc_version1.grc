@@ -3927,7 +3927,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(536, 564)</value>
+      <value>(536, 540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3948,14 +3948,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>access_code</key>
       <value>access_code</value>
-    </param>
-    <param>
-      <key>dataLength</key>
-      <value>dataLength</value>
-    </param>
-    <param>
-      <key>frameLength</key>
-      <value>frameLength</value>
     </param>
     <param>
       <key>infoLength</key>
@@ -3994,7 +3986,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(536, 396)</value>
+      <value>(536, 420)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4015,14 +4007,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>access_code</key>
       <value>access_code</value>
-    </param>
-    <param>
-      <key>dataLength</key>
-      <value>dataLength</value>
-    </param>
-    <param>
-      <key>frameLength</key>
-      <value>frameLength</value>
     </param>
     <param>
       <key>infoLength</key>
@@ -4376,10 +4360,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
       <value>dataLength</value>
     </param>
     <param>
-      <key>frameLength</key>
-      <value>frameLength</value>
-    </param>
-    <param>
       <key>infoLength</key>
       <value>infoLength</value>
     </param>
@@ -4437,10 +4417,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>dataLength</key>
       <value>dataLength</value>
-    </param>
-    <param>
-      <key>frameLength</key>
-      <value>frameLength</value>
     </param>
     <param>
       <key>infoLength</key>

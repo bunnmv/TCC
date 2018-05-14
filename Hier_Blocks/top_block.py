@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon May 14 15:19:31 2018
+# Generated: Mon May 14 18:40:02 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -23,17 +23,16 @@ sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnura
 from PyQt4 import Qt
 from gnuradio import blocks
 from gnuradio import channels
-from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+from tx_inner_bpsk import tx_inner_bpsk  # grc-generated hier_block
 from tx_outer_CE import tx_outer_CE  # grc-generated hier_block
 from tx_outer_dummy import tx_outer_dummy  # grc-generated hier_block
 import RWN
-import my_framer_bpsk
 import numpy as np
 import pmt
 import sip
@@ -42,7 +41,7 @@ from gnuradio import qtgui
 
 class top_block(gr.top_block, Qt.QWidget):
 
-    def __init__(self, hdr_format=digital.header_format_default(digital.packet_utils.default_access_code, 0)):
+    def __init__(self):
         gr.top_block.__init__(self, "Top Block")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Top Block")
@@ -68,43 +67,41 @@ class top_block(gr.top_block, Qt.QWidget):
 
 
         ##################################################
-        # Parameters
-        ##################################################
-        self.hdr_format = hdr_format
-
-        ##################################################
         # Variables
         ##################################################
         self.packetCounterLength = packetCounterLength = 1
         self.infoLength = infoLength = 22*10
-        self.packetLength = packetLength = (infoLength+packetCounterLength+4)
-        self.access_code = access_code = '0101110111101101' * 3
         self.sps = sps = 4
         self.samp_rate = samp_rate = 32000
-        self.psk = psk = digital.psk_constellation(2,digital.mod_codes.NO_CODE, True)
+        self.packetLength = packetLength = (infoLength+packetCounterLength+4)
         self.len_tag_name = len_tag_name = "len_key"
-        self.frameLength = frameLength = packetLength+len(access_code)
         self.excess_bw = excess_bw = 0.35
         self.dataLength = dataLength = (infoLength+packetCounterLength)
+        self.access_code = access_code = '0101110111101101' * 3
 
         ##################################################
         # Blocks
         ##################################################
         self.tx_outer_dummy_0 = tx_outer_dummy(
             dataLength=dataLength,
-            frameLength=frameLength,
             infoLength=infoLength,
+            len_tag_name=len_tag_name,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
-            len_tag_name=len_tag_name,
         )
         self.tx_outer_CE_0 = tx_outer_CE(
             dataLength=dataLength,
-            frameLength=frameLength,
             infoLength=infoLength,
+            len_tag_name=len_tag_name,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
+        )
+        self.tx_inner_bpsk_0 = tx_inner_bpsk(
+            access_code=access_code,
+            excess_bw=excess_bw,
             len_tag_name=len_tag_name,
+            payloadLength=packetLength,
+            sps=sps,
         )
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
         	1024, #size
@@ -195,16 +192,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
-        self.my_framer_bpsk = my_framer_bpsk.blk(access_code=access_code, payload_length=dataLength, tag_name=len_tag_name)
-        self.digital_constellation_modulator_0 = digital.generic_mod(
-          constellation=psk.base(),
-          differential=True,
-          samples_per_symbol=sps,
-          pre_diff_code=True,
-          excess_bw=excess_bw,
-          verbose=True,
-          log=False,
-          )
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=0.2,
         	frequency_offset=0.0,
@@ -214,8 +201,6 @@ class top_block(gr.top_block, Qt.QWidget):
         	block_tags=False
         )
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate*100,True)
-        self.blocks_tagged_stream_mux_0 = blocks.tagged_stream_mux(gr.sizeof_char*1, len_tag_name, 0)
-        self.blocks_repack_bits_bb_0_0_0_0_0_0 = blocks.repack_bits_bb(1, 8, len_tag_name, False, gr.GR_MSB_FIRST)
         self.blocks_null_source_0 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
@@ -228,18 +213,14 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.RWN_selector_3_1_bb_0, 0), (self.blocks_char_to_float_1_1_0_0_0, 0))
-        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.blocks_tagged_stream_mux_0, 1))
-        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.my_framer_bpsk, 0))
+        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.tx_inner_bpsk_0, 0))
         self.connect((self.blocks_char_to_float_1_1_0_0_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
-        self.connect((self.blocks_repack_bits_bb_0_0_0_0_0_0, 0), (self.digital_constellation_modulator_0, 0))
-        self.connect((self.blocks_tagged_stream_mux_0, 0), (self.blocks_repack_bits_bb_0_0_0_0_0_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.tx_outer_CE_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.tx_outer_dummy_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.qtgui_const_sink_x_0, 0))
-        self.connect((self.digital_constellation_modulator_0, 0), (self.channels_channel_model_0, 0))
-        self.connect((self.my_framer_bpsk, 0), (self.blocks_tagged_stream_mux_0, 0))
+        self.connect((self.tx_inner_bpsk_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.tx_outer_CE_0, 0), (self.RWN_selector_3_1_bb_0, 1))
         self.connect((self.tx_outer_dummy_0, 0), (self.RWN_selector_3_1_bb_0, 0))
 
@@ -247,12 +228,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
-
-    def get_hdr_format(self):
-        return self.hdr_format
-
-    def set_hdr_format(self, hdr_format):
-        self.hdr_format = hdr_format
 
     def get_packetCounterLength(self):
         return self.packetCounterLength
@@ -274,28 +249,12 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tx_outer_dummy_0.set_infoLength(self.infoLength)
         self.tx_outer_CE_0.set_infoLength(self.infoLength)
 
-    def get_packetLength(self):
-        return self.packetLength
-
-    def set_packetLength(self, packetLength):
-        self.packetLength = packetLength
-        self.set_frameLength(self.packetLength+len(self.access_code))
-        self.tx_outer_dummy_0.set_packetLength(self.packetLength)
-        self.tx_outer_CE_0.set_packetLength(self.packetLength)
-
-    def get_access_code(self):
-        return self.access_code
-
-    def set_access_code(self, access_code):
-        self.access_code = access_code
-        self.set_frameLength(self.packetLength+len(self.access_code))
-        self.my_framer_bpsk.access_code = self.access_code
-
     def get_sps(self):
         return self.sps
 
     def set_sps(self, sps):
         self.sps = sps
+        self.tx_inner_bpsk_0.set_sps(self.sps)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -305,11 +264,14 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate*100)
 
-    def get_psk(self):
-        return self.psk
+    def get_packetLength(self):
+        return self.packetLength
 
-    def set_psk(self, psk):
-        self.psk = psk
+    def set_packetLength(self, packetLength):
+        self.packetLength = packetLength
+        self.tx_outer_dummy_0.set_packetLength(self.packetLength)
+        self.tx_outer_CE_0.set_packetLength(self.packetLength)
+        self.tx_inner_bpsk_0.set_payloadLength(self.packetLength)
 
     def get_len_tag_name(self):
         return self.len_tag_name
@@ -318,21 +280,14 @@ class top_block(gr.top_block, Qt.QWidget):
         self.len_tag_name = len_tag_name
         self.tx_outer_dummy_0.set_len_tag_name(self.len_tag_name)
         self.tx_outer_CE_0.set_len_tag_name(self.len_tag_name)
-        self.my_framer_bpsk.tag_name = self.len_tag_name
-
-    def get_frameLength(self):
-        return self.frameLength
-
-    def set_frameLength(self, frameLength):
-        self.frameLength = frameLength
-        self.tx_outer_dummy_0.set_frameLength(self.frameLength)
-        self.tx_outer_CE_0.set_frameLength(self.frameLength)
+        self.tx_inner_bpsk_0.set_len_tag_name(self.len_tag_name)
 
     def get_excess_bw(self):
         return self.excess_bw
 
     def set_excess_bw(self, excess_bw):
         self.excess_bw = excess_bw
+        self.tx_inner_bpsk_0.set_excess_bw(self.excess_bw)
 
     def get_dataLength(self):
         return self.dataLength
@@ -341,17 +296,16 @@ class top_block(gr.top_block, Qt.QWidget):
         self.dataLength = dataLength
         self.tx_outer_dummy_0.set_dataLength(self.dataLength)
         self.tx_outer_CE_0.set_dataLength(self.dataLength)
-        self.my_framer_bpsk.payload_length = self.dataLength
 
+    def get_access_code(self):
+        return self.access_code
 
-def argument_parser():
-    parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
-    return parser
+    def set_access_code(self, access_code):
+        self.access_code = access_code
+        self.tx_inner_bpsk_0.set_access_code(self.access_code)
 
 
 def main(top_block_cls=top_block, options=None):
-    if options is None:
-        options, _ = argument_parser().parse_args()
 
     from distutils.version import StrictVersion
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):
