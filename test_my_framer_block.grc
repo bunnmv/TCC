@@ -202,7 +202,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 252)</value>
+      <value>(144, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -348,65 +348,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_repack_bits_bb</key>
-    <param>
-      <key>k</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>l</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>endianness</key>
-      <value>gr.GR_LSB_FIRST</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(616, 188)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_repack_bits_bb_1</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>align_output</key>
-      <value>False</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_stream_to_tagged_stream</key>
     <param>
       <key>alias</key>
@@ -426,7 +367,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 100)</value>
+      <value>(416, 92)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -481,7 +422,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 100)</value>
+      <value>(224, 92)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1144,12 +1085,6 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_1</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
     <sink_block_id>blocks_repack_bits_bb_0</sink_block_id>
     <source_key>0</source_key>
@@ -1163,7 +1098,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
   </connection>
   <connection>
     <source_block_id>epy_block_framer_test</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_1</sink_block_id>
+    <sink_block_id>blocks_char_to_float_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
