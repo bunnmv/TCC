@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon May 14 23:48:59 2018
+# Generated: Tue May 15 09:02:28 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -62,9 +62,9 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.tag = tag = gr.tag_utils.python_to_tag((0, pmt.intern("key"), pmt.intern("value"), pmt.intern("src")))
+        self.size = size = 50
         self.samp_rate = samp_rate = 32000
-        self.access_code = access_code = '111'
+        self.access_code = access_code = '0101110111101101' * 3
 
         ##################################################
         # Blocks
@@ -81,7 +81,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
 
         self.qtgui_time_sink_x_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, 'len_key2')
+        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, 'len_key2')
         self.qtgui_time_sink_x_0.enable_autoscale(False)
         self.qtgui_time_sink_x_0.enable_grid(False)
         self.qtgui_time_sink_x_0.enable_axis_labels(True)
@@ -117,10 +117,10 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.my_correlator_test_block = my_correlator_test_block.blk(access_code=access_code, payload_length=3, threshold=0, tag_name='len_key2')
+        self.my_correlator_test_block = my_correlator_test_block.blk(access_code=access_code, payload_length=size, threshold=0, tag_name='len_key2')
         self.epy_block_framer_test = epy_block_framer_test.blk(access_code=access_code, payload_length=3, tag_name='packet_len')
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
-        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 3, "packet_len")
+        self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, size, "packet_len")
         self.blocks_repack_bits_bb_0 = blocks.repack_bits_bb(8, 1, "packet_len", False, gr.GR_LSB_FIRST)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
@@ -144,11 +144,14 @@ class top_block(gr.top_block, Qt.QWidget):
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
-    def get_tag(self):
-        return self.tag
+    def get_size(self):
+        return self.size
 
-    def set_tag(self, tag):
-        self.tag = tag
+    def set_size(self, size):
+        self.size = size
+        self.my_correlator_test_block.payload_length = self.size
+        self.blocks_stream_to_tagged_stream_0.set_packet_len(self.size)
+        self.blocks_stream_to_tagged_stream_0.set_packet_len_pmt(self.size)
 
     def get_samp_rate(self):
         return self.samp_rate

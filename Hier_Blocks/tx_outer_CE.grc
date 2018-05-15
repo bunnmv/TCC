@@ -149,7 +149,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_STREAMING</value>
+      <value>fec.CC_TAILBITING</value>
     </param>
   </block>
   <block>

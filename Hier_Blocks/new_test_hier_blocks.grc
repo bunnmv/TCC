@@ -105,7 +105,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 104)</value>
+      <value>(0, 56)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -551,7 +551,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 160)</value>
+      <value>(112, 60)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -613,7 +613,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(728, 692)</value>
+      <value>(1216, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -668,7 +668,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(856, 636)</value>
+      <value>(1056, 84)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -758,8 +758,7 @@
     </param>
     <param>
       <key>comment</key>
-      <value>Finish the flowgraph after reading 110k bytes from the file, orn other words
-500 times.</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -771,7 +770,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(152, 180)</value>
+      <value>(120, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -822,7 +821,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(928, 484)</value>
+      <value>(1200, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -858,6 +857,61 @@
     </param>
   </block>
   <block>
+    <key>blocks_tag_debug</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>display</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(880, 340)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_tag_debug_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>filter</key>
+      <value>"len_key2"</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value></value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_throttle</key>
     <param>
       <key>alias</key>
@@ -877,7 +931,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(152, 260)</value>
+      <value>(128, 236)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -944,7 +998,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 524)</value>
+      <value>(648, 204)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1034,7 +1088,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(272, 756)</value>
+      <value>(656, 324)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1389,7 +1443,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 764)</value>
+      <value>(1176, 316)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1740,7 +1794,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 532)</value>
+      <value>(832, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1799,7 +1853,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(664, 452)</value>
+      <value>(992, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1854,7 +1908,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(664, 532)</value>
+      <value>(760, 52)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1909,7 +1963,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 532)</value>
+      <value>(456, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1968,7 +2022,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(296, 332)</value>
+      <value>(288, 220)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2027,7 +2081,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(304, 244)</value>
+      <value>(632, 52)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2097,12 +2151,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>tx_outer_dummy_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>channels_channel_model_0</source_block_id>
     <sink_block_id>qtgui_const_sink_x_0</sink_block_id>
     <source_key>0</source_key>
@@ -2121,12 +2169,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>rx_inner_bpsk_0</source_block_id>
-    <sink_block_id>rx_outer_dummy_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>rx_outer_convolutional_0</source_block_id>
     <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -2134,18 +2176,6 @@
   </connection>
   <connection>
     <source_block_id>rx_outer_convolutional_0</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_outer_dummy_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_outer_dummy_0</source_block_id>
     <sink_block_id>blocks_char_to_float_0</sink_block_id>
     <source_key>1</source_key>
     <sink_key>0</sink_key>
@@ -2158,12 +2188,6 @@
   </connection>
   <connection>
     <source_block_id>tx_outer_CE_0</source_block_id>
-    <sink_block_id>tx_inner_bpsk_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>tx_outer_dummy_0</source_block_id>
     <sink_block_id>tx_inner_bpsk_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
