@@ -393,6 +393,53 @@
     </param>
   </block>
   <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(712, 24)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>frame_bits</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Frame Bits</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>pad_source</key>
     <param>
       <key>comment</key>
@@ -535,12 +582,12 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
 
     def general_work(self, input_items, output_items):
 
-        if len(input_items[0]) &lt; 8*self.payload_length:
+        if len(input_items[0]) &lt; self.payload_length:
             return 0
 
         access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.uint8)
 
-        payload = input_items[0][: 8*self.payload_length]
+        payload = input_items[0][: self.payload_length]
         packet = np.concatenate([access_code_binary, payload])
 
         if len(output_items[0]) &lt; len(packet):
@@ -553,7 +600,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
         )
         output_items[0][: len(packet)] = packet
 
-        self.consume(0, 8*self.payload_length)
+        self.consume(0, self.payload_length)
 
         return len(packet)
 </value>
@@ -580,58 +627,11 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>payload_length</key>
-      <value>payloadLength</value>
+      <value>frame_bits</value>
     </param>
     <param>
       <key>tag_name</key>
       <value>len_tag_name</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(512, 20)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>payloadLength</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
     </param>
   </block>
   <block>

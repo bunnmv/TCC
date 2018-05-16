@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Tue May 15 14:16:56 2018
+# Generated: Wed May 16 13:30:45 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -77,21 +77,21 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.sps = sps = 4
         self.packetCounterLength = packetCounterLength = 1
-        self.nfilts = nfilts = 32
         self.infoLength = infoLength = 22*10
+        self.sps = sps = 4
+        self.packetLength = packetLength = (infoLength+packetCounterLength+4)
+        self.nfilts = nfilts = 32
         self.excess_bw = excess_bw = 0.35
+        self.FEC = FEC = 0
         self.samp_rate = samp_rate = 32000
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
-        self.packetLength = packetLength = (infoLength+packetCounterLength+4)
         self.mod_select = mod_select = 2
         self.len_tag_name_rx = len_tag_name_rx = "len_key2"
         self.len_tag_name = len_tag_name = "len_key"
-        self.excess_bw_0 = excess_bw_0 = 0.35
+        self.frame_bits = frame_bits = packetLength*8 + packetLength*8*FEC
         self.dataLength = dataLength = (infoLength+packetCounterLength)
         self.access_code = access_code = '0101110111101101' * 3
-        self.FEC = FEC = 1
 
         ##################################################
         # Blocks
@@ -155,32 +155,34 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tx_inner_qpsk_0 = tx_inner_qpsk(
             access_code=access_code,
             excess_bw=excess_bw,
+            frame_bits=frame_bits,
             len_tag_name=len_tag_name,
-            payloadLength=packetLength +(packetLength*FEC),
             sps=sps,
         )
         self.tx_inner_bpsk_0 = tx_inner_bpsk(
             access_code=access_code,
             excess_bw=excess_bw,
+            frame_bits=frame_bits,
             len_tag_name=len_tag_name,
-            payloadLength=packetLength +(packetLength*FEC),
             sps=sps,
         )
         self.tx_inner_8psk_0 = tx_inner_8psk(
             access_code=access_code,
             excess_bw=excess_bw,
+            frame_bits=frame_bits,
             len_tag_name=len_tag_name,
-            payloadLength=packetLength +(packetLength*FEC),
             sps=sps,
         )
         self.rx_outer_dummy_0 = rx_outer_dummy(
             access_code=access_code,
+            frame_bits=frame_bits,
             len_tag_name_rx=len_tag_name_rx,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
         )
         self.rx_outer_convolutional_0 = rx_outer_convolutional(
             access_code=access_code,
+            frame_bits=frame_bits,
             len_tag_name_rx=len_tag_name_rx,
             packetCounterLength=packetCounterLength,
             packetLength=packetLength,
@@ -263,7 +265,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
         self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
         self.qtgui_const_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
-        self.qtgui_const_sink_x_0.enable_autoscale(False)
+        self.qtgui_const_sink_x_0.enable_autoscale(True)
         self.qtgui_const_sink_x_0.enable_grid(False)
         self.qtgui_const_sink_x_0.enable_axis_labels(True)
 
@@ -304,36 +306,48 @@ class top_block(gr.top_block, Qt.QWidget):
         	block_tags=True
         )
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate*1000,True)
+        self.blocks_tag_gate_0_0_1 = blocks.tag_gate(gr.sizeof_char * 1, False)
+        self.blocks_tag_gate_0_0_1.set_single_key("")
+        self.blocks_tag_gate_0_0_0 = blocks.tag_gate(gr.sizeof_char * 1, False)
+        self.blocks_tag_gate_0_0_0.set_single_key("")
+        self.blocks_tag_gate_0_0 = blocks.tag_gate(gr.sizeof_char * 1, False)
+        self.blocks_tag_gate_0_0.set_single_key("")
+        self.blocks_stream_to_tagged_stream_0_0_1 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, frame_bits, len_tag_name)
+        self.blocks_stream_to_tagged_stream_0_0_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, frame_bits, len_tag_name)
+        self.blocks_stream_to_tagged_stream_0_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, frame_bits, len_tag_name)
+        self.blocks_probe_rate_0 = blocks.probe_rate(gr.sizeof_char*1, 10, 0.15)
         self.blocks_null_source_1_0 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_null_source_1 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_null_source_0 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_null_sink_1 = blocks.null_sink(gr.sizeof_float*1)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
+        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_keep_m_in_n_0_0 = blocks.keep_m_in_n(gr.sizeof_char, infoLength, dataLength, packetCounterLength)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/marcusbunn/Documents/engtelecom/TCC/programming/SDR/2600-0.txt', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
-        self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_select, False)
-        self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_select, False)
-        self.RWN_selector_3_1_cc_0 = RWN.selector_3_1_cc(mod_select, False)
-        self.RWN_selector_3_1_bb_1_0 = RWN.selector_3_1_bb(FEC, False)
-        self.RWN_selector_3_1_bb_1 = RWN.selector_3_1_bb(FEC, False)
+        self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_select, True)
+        self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_select, True)
+        self.RWN_selector_3_1_cc_0 = RWN.selector_3_1_cc(mod_select, True)
+        self.RWN_selector_3_1_bb_1_0 = RWN.selector_3_1_bb(FEC, True)
+        self.RWN_selector_3_1_bb_1 = RWN.selector_3_1_bb(FEC, True)
         self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(FEC, True)
-        self.RWN_selector_1_3_ff_0 = RWN.selector_1_3_ff(FEC, False)
-        self.RWN_selector_1_3_cc_0 = RWN.selector_1_3_cc(mod_select, False)
-        self.RWN_selector_1_3_bb_1 = RWN.selector_1_3_bb(FEC, False)
-        self.RWN_selector_1_3_bb_0 = RWN.selector_1_3_bb(mod_select, False)
+        self.RWN_selector_1_3_ff_0 = RWN.selector_1_3_ff(FEC, True)
+        self.RWN_selector_1_3_cc_0 = RWN.selector_1_3_cc(mod_select, True)
+        self.RWN_selector_1_3_bb_1 = RWN.selector_1_3_bb(FEC, True)
+        self.RWN_selector_1_3_bb_0 = RWN.selector_1_3_bb(mod_select, True)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.RWN_selector_1_3_bb_0, 0), (self.tx_inner_8psk_0, 0))
-        self.connect((self.RWN_selector_1_3_bb_0, 2), (self.tx_inner_bpsk_0, 0))
-        self.connect((self.RWN_selector_1_3_bb_0, 1), (self.tx_inner_qpsk_0, 0))
+        self.msg_connect((self.blocks_probe_rate_0, 'rate'), (self.blocks_message_debug_0, 'print'))
+        self.connect((self.RWN_selector_1_3_bb_0, 1), (self.blocks_tag_gate_0_0, 0))
+        self.connect((self.RWN_selector_1_3_bb_0, 2), (self.blocks_tag_gate_0_0_0, 0))
+        self.connect((self.RWN_selector_1_3_bb_0, 0), (self.blocks_tag_gate_0_0_1, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 2), (self.blocks_null_sink_0, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 1), (self.tx_outer_CE_0, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 0), (self.tx_outer_dummy_0, 0))
@@ -352,9 +366,16 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0, 0))
+        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_probe_rate_0, 0))
         self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_null_source_1, 0), (self.RWN_selector_3_1_bb_1_0, 2))
         self.connect((self.blocks_null_source_1_0, 0), (self.RWN_selector_3_1_bb_1, 2))
+        self.connect((self.blocks_stream_to_tagged_stream_0_0, 0), (self.tx_inner_qpsk_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0_0_0, 0), (self.tx_inner_bpsk_0, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0_0_1, 0), (self.tx_inner_8psk_0, 0))
+        self.connect((self.blocks_tag_gate_0_0, 0), (self.blocks_stream_to_tagged_stream_0_0, 0))
+        self.connect((self.blocks_tag_gate_0_0_0, 0), (self.blocks_stream_to_tagged_stream_0_0_0, 0))
+        self.connect((self.blocks_tag_gate_0_0_1, 0), (self.blocks_stream_to_tagged_stream_0_0_1, 0))
         self.connect((self.blocks_throttle_0, 0), (self.RWN_selector_1_3_bb_1, 0))
         self.connect((self.channels_channel_model_0, 0), (self.RWN_selector_1_3_cc_0, 0))
         self.connect((self.rx_inner_8psk_0, 0), (self.RWN_selector_3_1_cc_1, 0))
@@ -378,19 +399,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
-    def get_sps(self):
-        return self.sps
-
-    def set_sps(self, sps):
-        self.sps = sps
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.tx_inner_qpsk_0.set_sps(self.sps)
-        self.tx_inner_bpsk_0.set_sps(self.sps)
-        self.tx_inner_8psk_0.set_sps(self.sps)
-        self.rx_inner_qpsk_0.set_sps(self.sps)
-        self.rx_inner_bpsk_0.set_sps(self.sps)
-        self.rx_inner_8psk_0.set_sps(self.sps)
-
     def get_packetCounterLength(self):
         return self.packetCounterLength
 
@@ -404,16 +412,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.rx_outer_convolutional_0.set_packetCounterLength(self.packetCounterLength)
         self.blocks_keep_m_in_n_0_0.set_offset(self.packetCounterLength)
 
-    def get_nfilts(self):
-        return self.nfilts
-
-    def set_nfilts(self, nfilts):
-        self.nfilts = nfilts
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.rx_inner_qpsk_0.set_nfilts(self.nfilts)
-        self.rx_inner_bpsk_0.set_nfilts(self.nfilts)
-        self.rx_inner_8psk_0.set_nfilts(self.nfilts)
-
     def get_infoLength(self):
         return self.infoLength
 
@@ -424,6 +422,40 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tx_outer_dummy_0.set_infoLength(self.infoLength)
         self.tx_outer_CE_0.set_infoLength(self.infoLength)
         self.blocks_keep_m_in_n_0_0.set_m(self.infoLength)
+
+    def get_sps(self):
+        return self.sps
+
+    def set_sps(self, sps):
+        self.sps = sps
+        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
+        self.tx_inner_qpsk_0.set_sps(self.sps)
+        self.tx_inner_bpsk_0.set_sps(self.sps)
+        self.tx_inner_8psk_0.set_sps(self.sps)
+        self.rx_inner_qpsk_0.set_sps(self.sps)
+        self.rx_inner_bpsk_0.set_sps(self.sps)
+        self.rx_inner_8psk_0.set_sps(self.sps)
+
+    def get_packetLength(self):
+        return self.packetLength
+
+    def set_packetLength(self, packetLength):
+        self.packetLength = packetLength
+        self.set_frame_bits(self.packetLength*8 + self.packetLength*8*self.FEC)
+        self.tx_outer_dummy_0.set_packetLength(self.packetLength)
+        self.tx_outer_CE_0.set_packetLength(self.packetLength)
+        self.rx_outer_dummy_0.set_packetLength(self.packetLength)
+        self.rx_outer_convolutional_0.set_packetLength(self.packetLength)
+
+    def get_nfilts(self):
+        return self.nfilts
+
+    def set_nfilts(self, nfilts):
+        self.nfilts = nfilts
+        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
+        self.rx_inner_qpsk_0.set_nfilts(self.nfilts)
+        self.rx_inner_bpsk_0.set_nfilts(self.nfilts)
+        self.rx_inner_8psk_0.set_nfilts(self.nfilts)
 
     def get_excess_bw(self):
         return self.excess_bw
@@ -437,6 +469,19 @@ class top_block(gr.top_block, Qt.QWidget):
         self.rx_inner_qpsk_0.set_excess_bw(self.excess_bw)
         self.rx_inner_bpsk_0.set_excess_bw(self.excess_bw)
         self.rx_inner_8psk_0.set_excess_bw(self.excess_bw)
+
+    def get_FEC(self):
+        return self.FEC
+
+    def set_FEC(self, FEC):
+        self.FEC = FEC
+        self.set_frame_bits(self.packetLength*8 + self.packetLength*8*self.FEC)
+        self._FEC_callback(self.FEC)
+        self.RWN_selector_3_1_bb_1_0.set_selected(self.FEC)
+        self.RWN_selector_3_1_bb_1.set_selected(self.FEC)
+        self.RWN_selector_3_1_bb_0.set_selected(self.FEC)
+        self.RWN_selector_1_3_ff_0.set_selected(self.FEC)
+        self.RWN_selector_1_3_bb_1.set_selected(self.FEC)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -453,19 +498,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.rx_inner_qpsk_0.set_rrc_taps(self.rrc_taps)
         self.rx_inner_bpsk_0.set_rrc_taps(self.rrc_taps)
         self.rx_inner_8psk_0.set_rrc_taps(self.rrc_taps)
-
-    def get_packetLength(self):
-        return self.packetLength
-
-    def set_packetLength(self, packetLength):
-        self.packetLength = packetLength
-        self.tx_outer_dummy_0.set_packetLength(self.packetLength)
-        self.tx_outer_CE_0.set_packetLength(self.packetLength)
-        self.tx_inner_qpsk_0.set_payloadLength(self.packetLength +(self.packetLength*self.FEC))
-        self.tx_inner_bpsk_0.set_payloadLength(self.packetLength +(self.packetLength*self.FEC))
-        self.tx_inner_8psk_0.set_payloadLength(self.packetLength +(self.packetLength*self.FEC))
-        self.rx_outer_dummy_0.set_packetLength(self.packetLength)
-        self.rx_outer_convolutional_0.set_packetLength(self.packetLength)
 
     def get_mod_select(self):
         return self.mod_select
@@ -498,11 +530,22 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tx_inner_bpsk_0.set_len_tag_name(self.len_tag_name)
         self.tx_inner_8psk_0.set_len_tag_name(self.len_tag_name)
 
-    def get_excess_bw_0(self):
-        return self.excess_bw_0
+    def get_frame_bits(self):
+        return self.frame_bits
 
-    def set_excess_bw_0(self, excess_bw_0):
-        self.excess_bw_0 = excess_bw_0
+    def set_frame_bits(self, frame_bits):
+        self.frame_bits = frame_bits
+        self.tx_inner_qpsk_0.set_frame_bits(self.frame_bits)
+        self.tx_inner_bpsk_0.set_frame_bits(self.frame_bits)
+        self.tx_inner_8psk_0.set_frame_bits(self.frame_bits)
+        self.rx_outer_dummy_0.set_frame_bits(self.frame_bits)
+        self.rx_outer_convolutional_0.set_frame_bits(self.frame_bits)
+        self.blocks_stream_to_tagged_stream_0_0_1.set_packet_len(self.frame_bits)
+        self.blocks_stream_to_tagged_stream_0_0_1.set_packet_len_pmt(self.frame_bits)
+        self.blocks_stream_to_tagged_stream_0_0_0.set_packet_len(self.frame_bits)
+        self.blocks_stream_to_tagged_stream_0_0_0.set_packet_len_pmt(self.frame_bits)
+        self.blocks_stream_to_tagged_stream_0_0.set_packet_len(self.frame_bits)
+        self.blocks_stream_to_tagged_stream_0_0.set_packet_len_pmt(self.frame_bits)
 
     def get_dataLength(self):
         return self.dataLength
@@ -523,21 +566,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tx_inner_8psk_0.set_access_code(self.access_code)
         self.rx_outer_dummy_0.set_access_code(self.access_code)
         self.rx_outer_convolutional_0.set_access_code(self.access_code)
-
-    def get_FEC(self):
-        return self.FEC
-
-    def set_FEC(self, FEC):
-        self.FEC = FEC
-        self._FEC_callback(self.FEC)
-        self.tx_inner_qpsk_0.set_payloadLength(self.packetLength +(self.packetLength*self.FEC))
-        self.tx_inner_bpsk_0.set_payloadLength(self.packetLength +(self.packetLength*self.FEC))
-        self.tx_inner_8psk_0.set_payloadLength(self.packetLength +(self.packetLength*self.FEC))
-        self.RWN_selector_3_1_bb_1_0.set_selected(self.FEC)
-        self.RWN_selector_3_1_bb_1.set_selected(self.FEC)
-        self.RWN_selector_3_1_bb_0.set_selected(self.FEC)
-        self.RWN_selector_1_3_ff_0.set_selected(self.FEC)
-        self.RWN_selector_1_3_bb_1.set_selected(self.FEC)
 
 
 def main(top_block_cls=top_block, options=None):

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Mon May 14 12:15:13 2018</timestamp>
+  <timestamp>Tue May 15 23:04:51 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -90,6 +90,77 @@
     </param>
   </block>
   <block>
+    <key>variable_cc_decoder_def</key>
+    <param>
+      <key>padding</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>7</value>
+    </param>
+    <param>
+      <key>dim1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>dim2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>state_end</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>framebits</key>
+      <value>packetLength*8</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(24, 832)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>CD</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"ok"</value>
+    </param>
+    <param>
+      <key>ndim</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>polys</key>
+      <value>[79,109]</value>
+    </param>
+    <param>
+      <key>rate</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>state_start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>mode</key>
+      <value>fec.CC_TAILBITING</value>
+    </param>
+  </block>
+  <block>
     <key>variable_qtgui_chooser</key>
     <param>
       <key>comment</key>
@@ -97,7 +168,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -105,7 +176,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1104, 0)</value>
+      <value>(904, 0)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -200,7 +271,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(888, 12)</value>
+      <value>(1032, 8)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -227,7 +298,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(336, 12)</value>
+      <value>(560, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -254,7 +325,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(752, 12)</value>
+      <value>(1184, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -277,65 +348,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(256, 12)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>frameLength</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>packetLength+len(access_code)</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(256, 60)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>frameLength</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>packetLength+12</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
       <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 116)</value>
+      <value>(472, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -362,7 +379,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(528, 12)</value>
+      <value>(744, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -389,7 +406,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(672, 12)</value>
+      <value>(136, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -416,7 +433,34 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(888, 60)</value>
+      <value>(384, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>len_tag_name_2</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"len_key2"</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1080, 52)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -432,105 +476,6 @@
     </param>
   </block>
   <block>
-    <key>variable_qtgui_chooser</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1200, 4)</value>
-    </param>
-    <param>
-      <key>gui_hint</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>mod_select</value>
-    </param>
-    <param>
-      <key>label0</key>
-      <value>D8PSK</value>
-    </param>
-    <param>
-      <key>label1</key>
-      <value>DQPSK</value>
-    </param>
-    <param>
-      <key>label2</key>
-      <value>DBPSK</value>
-    </param>
-    <param>
-      <key>label3</key>
-      <value></value>
-    </param>
-    <param>
-      <key>label4</key>
-      <value></value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>labels</key>
-      <value>[]</value>
-    </param>
-    <param>
-      <key>num_opts</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>option0</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>option1</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>option2</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>option3</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>option4</key>
-      <value>4</value>
-    </param>
-    <param>
-      <key>options</key>
-      <value>[0, 1, 2]</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.QVBoxLayout</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>int</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>radio_buttons</value>
-    </param>
-  </block>
-  <block>
     <key>variable</key>
     <param>
       <key>comment</key>
@@ -542,7 +487,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 60)</value>
+      <value>(856, 60)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -569,7 +514,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(416, 12)</value>
+      <value>(640, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -596,7 +541,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 12)</value>
+      <value>(296, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -623,7 +568,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 60)</value>
+      <value>(744, 60)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -650,7 +595,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 60)</value>
+      <value>(224, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -677,7 +622,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(832, 12)</value>
+      <value>(1024, 52)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -700,53 +645,6 @@
     </param>
     <param>
       <key>comment</key>
-      <value>Tag gate + Stream to tagged Stream</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(560, 316)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_1_3_bb_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>produce_on_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>mod_select</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_1_3_bb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
       <value></value>
     </param>
     <param>
@@ -759,7 +657,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 324)</value>
+      <value>(24, 264)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -779,11 +677,60 @@
     </param>
     <param>
       <key>produce_on_nonselected</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>selected</key>
       <value>FEC</value>
+    </param>
+  </block>
+  <block>
+    <key>RWN_selector_1_3_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Elimina Tags
+
+Produce = FALSE</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(560, 296)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>RWN_selector_1_3_bb_1_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>produce_on_nonselected</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>selected</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -806,7 +753,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 604)</value>
+      <value>(960, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -826,11 +773,11 @@
     </param>
     <param>
       <key>produce_on_nonselected</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>selected</key>
-      <value>mod_select</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -853,7 +800,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 836)</value>
+      <value>(272, 588)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -873,7 +820,7 @@
     </param>
     <param>
       <key>produce_on_nonselected</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>selected</key>
@@ -888,7 +835,9 @@
     </param>
     <param>
       <key>comment</key>
-      <value></value>
+      <value>Propaga Tags Errado
+
+Consume = TRUE</value>
     </param>
     <param>
       <key>consume_nonselected</key>
@@ -904,7 +853,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(424, 316)</value>
+      <value>(432, 296)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -951,7 +900,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(716, 728)</value>
+      <value>(756, 472)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -998,7 +947,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(856, 868)</value>
+      <value>(888, 652)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1019,100 +968,6 @@
     <param>
       <key>selected</key>
       <value>FEC</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_3_1_cc</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>consume_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1200, 292)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_3_1_cc_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>mod_select</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_3_1_cc</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>consume_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(640, 508)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_3_1_cc_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>mod_select</value>
     </param>
   </block>
   <block>
@@ -1139,7 +994,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(640, 620)</value>
+      <value>(144, 588)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1159,7 +1014,7 @@
     </param>
     <param>
       <key>selected</key>
-      <value>mod_select</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -1182,7 +1037,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1152, 956)</value>
+      <value>(1184, 732)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1190,7 +1045,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_char_to_float_0</value>
+      <value>blocks_char_to_float_0_1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1237,7 +1092,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 772)</value>
+      <value>(1120, 500)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1288,7 +1143,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(32, 108)</value>
+      <value>(160, 56)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1339,7 +1194,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 180)</value>
+      <value>(184, 120)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1390,7 +1245,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(952, 764)</value>
+      <value>(984, 540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1426,37 +1281,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_message_debug</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1176, 540)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_message_debug_0</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_null_sink</key>
     <param>
       <key>alias</key>
@@ -1480,7 +1304,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(64, 452)</value>
+      <value>(192, 488)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1527,7 +1351,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(72, 980)</value>
+      <value>(680, 332)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1536,6 +1360,100 @@
     <param>
       <key>id</key>
       <value>blocks_null_sink_1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_null_sink</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>bus_conns</key>
+      <value>[[0,],]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1096, 348)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_null_sink_1_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_null_sink</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>bus_conns</key>
+      <value>[[0,],]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(296, 700)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_null_sink_2</value>
     </param>
     <param>
       <key>type</key>
@@ -1574,7 +1492,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 452)</value>
+      <value>(456, 468)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1629,7 +1547,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 972)</value>
+      <value>(0, 620)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1638,6 +1556,61 @@
     <param>
       <key>id</key>
       <value>blocks_null_source_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_outputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_null_source</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>bus_conns</key>
+      <value>[[0,],]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(884, 528)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>90</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_null_source_1_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1684,15 +1657,15 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(844, 752)</value>
+      <value>(744, 748)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>90</value>
+      <value>0</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_null_source_1_0</value>
+      <value>blocks_null_source_1_1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1716,14 +1689,24 @@
     </param>
   </block>
   <block>
-    <key>blocks_probe_rate</key>
+    <key>blocks_repack_bits_bb</key>
+    <param>
+      <key>k</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>l</key>
+      <value>8</value>
+    </param>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
-      <value></value>
+      <value>Tagged Stream to PDU block up ahead needs packed bytes
+
+MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>affinity</key>
@@ -1731,11 +1714,15 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
+    </param>
+    <param>
+      <key>endianness</key>
+      <value>gr.GR_MSB_FIRST</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1000, 532)</value>
+      <value>(672, 916)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1743,11 +1730,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_probe_rate_0</value>
+      <value>blocks_repack_bits_bb_convolutional</value>
     </param>
     <param>
-      <key>type</key>
-      <value>byte</value>
+      <key>len_tag_key</key>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1758,16 +1745,8 @@
       <value>0</value>
     </param>
     <param>
-      <key>mintime</key>
-      <value>10</value>
-    </param>
-    <param>
-      <key>alpha</key>
-      <value>0.15</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
+      <key>align_output</key>
+      <value>False</value>
     </param>
   </block>
   <block>
@@ -1790,7 +1769,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 300)</value>
+      <value>(600, 220)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1826,7 +1805,7 @@
     </param>
   </block>
   <block>
-    <key>blocks_stream_to_tagged_stream</key>
+    <key>blocks_tag_debug</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1840,12 +1819,16 @@
       <value></value>
     </param>
     <param>
+      <key>display</key>
+      <value>True</value>
+    </param>
+    <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(832, 436)</value>
+      <value>(248, 940)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1853,82 +1836,23 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0_0_0</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>len_tag_name</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>frame_bits</value>
+      <value>blocks_tag_debug_0</value>
     </param>
     <param>
       <key>type</key>
-      <value>byte</value>
+      <value>float</value>
     </param>
     <param>
-      <key>vlen</key>
+      <key>filter</key>
+      <value>"len_key2"</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value></value>
+    </param>
+    <param>
+      <key>num_inputs</key>
       <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_tagged_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(816, 196)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0_0_1</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>len_tag_name</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>frame_bits</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
     </param>
     <param>
       <key>vlen</key>
@@ -1955,7 +1879,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 300)</value>
+      <value>(432, 220)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1964,116 +1888,6 @@
     <param>
       <key>id</key>
       <value>blocks_tag_gate_0_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>propagate_tags</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>single_key</key>
-      <value>""</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_tag_gate</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(720, 436)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_tag_gate_0_0_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>propagate_tags</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>single_key</key>
-      <value>""</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_tag_gate</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(704, 196)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_tag_gate_0_0_1</value>
     </param>
     <param>
       <key>type</key>
@@ -2120,7 +1934,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 236)</value>
+      <value>(184, 168)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2187,7 +2001,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 612)</value>
+      <value>(792, 196)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2219,6 +2033,120 @@
     </param>
   </block>
   <block>
+    <key>digital_crc32_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(456, 756)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>digital_crc32_bb_convolutional</value>
+    </param>
+    <param>
+      <key>lengthtagname</key>
+      <value>len_tag_name_rx</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>check</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>packed</key>
+      <value>True</value>
+    </param>
+  </block>
+  <block>
+    <key>fec_extended_tagged_decoder</key>
+    <param>
+      <key>ann</key>
+      <value>None</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>110110 puncture for 3/4 rate</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>decoder_list</key>
+      <value>CD</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(416, 900)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>fec_extended_tagged_decoder_convolutional</value>
+    </param>
+    <param>
+      <key>lentagname</key>
+      <value>len_tag_name_rx</value>
+    </param>
+    <param>
+      <key>mtu</key>
+      <value>packetLength</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>puncpat</key>
+      <value>'11'</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>fec_extended_decoder</value>
+    </param>
+  </block>
+  <block>
     <key>import</key>
     <param>
       <key>alias</key>
@@ -2234,7 +2162,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(608, 16)</value>
+      <value>(832, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2247,6 +2175,144 @@
     <param>
       <key>import</key>
       <value>import numpy as np</value>
+    </param>
+  </block>
+  <block>
+    <key>epy_block</key>
+    <param>
+      <key>access_code</key>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_io_cache</key>
+      <value>('My Correlator Block', 'blk', [('access_code', 'None'), ('payload_length', '100'), ('threshold', '0'), ('tag_name', "'len_key2'")], [('0', 'float', 1)], [('0', 'float', 1)], 'arguments to this function show up as parameters in GRC', ['access_code', 'payload_length', 'tag_name', 'threshold'])</value>
+    </param>
+    <param>
+      <key>_source_code</key>
+      <value>"""
+Embedded Python Blocks:
+
+Each time this file is saved, GRC will instantiate the first class it finds
+to get ports and parameters of your block. The arguments to __init__  will
+be the parameters. All of them are required to have default values!
+"""
+
+import numpy as np
+from gnuradio import gr
+import pmt
+
+
+class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
+    def __init__(self, access_code=None, payload_length=100, threshold=0,tag_name="len_key2"):  # only default arguments here
+        """arguments to this function show up as parameters in GRC"""
+        gr.basic_block.__init__(
+            self,
+            name='My Correlator Block',   # will show up in GRC
+            in_sig=[np.float32],
+            out_sig=[np.float32]
+        )
+        # if an attribute with the same name as a parameter is found,
+        # a callback is registered (properties work, too).
+        self.access_code = access_code
+        self.payload_length = payload_length
+        self.threshold = threshold
+        self.tag_name = tag_name
+
+        self.mode = 'find'
+
+        self.set_min_output_buffer(2**16)
+
+        self.set_tag_propagation_policy(0)
+
+
+    def general_work(self, input_items, output_items):
+        if self.mode == 'output':
+            return self.general_work_output(input_items, output_items)
+        elif self.mode == 'find':
+            return self.general_work_find(input_items, output_items)
+
+    def general_work_output(self, input_items, output_items):
+        L_in = len(input_items[0])
+        # print(L_in) #input is never 10K for the CC 1/2 rate case.
+        L_out = len(output_items[0])
+        L_payload = self.payload_length # in bits
+
+        if L_in &lt; L_payload or L_out &lt; L_payload:
+            # print(L_in) #input is never 10K for the CC 1/2 rate case.
+            # print(L_out)
+            # print(L_payload)
+            return 0
+
+
+        self.add_item_tag(0, # Port number
+            self.nitems_written(0), # Offset
+            pmt.intern(self.tag_name), # Key
+            pmt.to_pmt(L_payload) # Value
+        )
+        output_items[0][:L_payload] = input_items[0][:L_payload]
+        self.consume(0, L_payload)
+
+        # ~print('Outputted {} items.'.format(L_payload))
+
+        self.mode = 'find'
+
+        return L_payload
+
+    def general_work_find(self, input_items, output_items):
+        L_in = len(input_items[0])
+
+        if L_in &lt; len(self.access_code) :
+            return 0
+
+        access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.int)
+        input_decoded = np.array(input_items[0] &gt; 0, dtype=np.int)
+
+        corr = np.correlate(2*input_decoded-1, 2*access_code_binary-1)
+        matches = np.flatnonzero(corr &gt;= len(self.access_code) - self.threshold)
+        if len(matches) == 0:
+            self.consume(0, L_in - len(self.access_code))
+        else:
+            self.consume(0, matches[0] + len(self.access_code))
+            self.mode = 'output'
+
+        return 0
+</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(200, 808)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>my_correlator_convolutional</value>
+    </param>
+    <param>
+      <key>payload_length</key>
+      <value>frame_bits</value>
+    </param>
+    <param>
+      <key>tag_name</key>
+      <value>len_tag_name_rx</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -2277,7 +2343,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(800, 540)</value>
+      <value>(1072, 108)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2632,7 +2698,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1128, 880)</value>
+      <value>(1096, 640)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2964,65 +3030,6 @@
     </param>
   </block>
   <block>
-    <key>rx_inner_8psk</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(408, 524)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>rx_inner_8psk_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>excess_bw</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>nfilts</key>
-      <value>nfilts</value>
-    </param>
-    <param>
-      <key>rrc_taps</key>
-      <value>rrc_taps</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-    <param>
-      <key>theta</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>rx_inner_bpsk</key>
     <param>
       <key>alias</key>
@@ -3042,7 +3049,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(408, 708)</value>
+      <value>(1136, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3082,65 +3089,6 @@
     </param>
   </block>
   <block>
-    <key>rx_inner_qpsk</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(408, 620)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>rx_inner_qpsk_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>excess_bw</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>nfilts</key>
-      <value>nfilts</value>
-    </param>
-    <param>
-      <key>rrc_taps</key>
-      <value>rrc_taps</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-    <param>
-      <key>theta</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>rx_outer_convolutional</key>
     <param>
       <key>alias</key>
@@ -3148,7 +3096,7 @@
     </param>
     <param>
       <key>comment</key>
-      <value></value>
+      <value>My correlator problem with 2*packetLength*8</value>
     </param>
     <param>
       <key>affinity</key>
@@ -3156,7 +3104,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>frame_bits</key>
@@ -3164,7 +3112,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 916)</value>
+      <value>(512, 652)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3215,7 +3163,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>True</value>
     </param>
     <param>
       <key>frame_bits</key>
@@ -3223,7 +3171,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 820)</value>
+      <value>(512, 572)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3259,65 +3207,6 @@
     </param>
   </block>
   <block>
-    <key>tx_inner_8psk</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>frame_bits</key>
-      <value>frame_bits</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1000, 220)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>tx_inner_8psk_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>access_code</key>
-      <value>access_code</value>
-    </param>
-    <param>
-      <key>excess_bw</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>len_tag_name</key>
-      <value>len_tag_name</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
     <key>tx_inner_bpsk</key>
     <param>
       <key>alias</key>
@@ -3341,7 +3230,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1048, 412)</value>
+      <value>(800, 324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3349,66 +3238,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>tx_inner_bpsk_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>access_code</key>
-      <value>access_code</value>
-    </param>
-    <param>
-      <key>excess_bw</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>len_tag_name</key>
-      <value>len_tag_name</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
-    <key>tx_inner_qpsk</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>frame_bits</key>
-      <value>frame_bits</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1000, 308)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>tx_inner_qpsk_0</value>
+      <value>tx_inner_bpsk_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -3455,7 +3285,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 388)</value>
+      <value>(232, 352)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3514,7 +3344,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 284)</value>
+      <value>(232, 248)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3565,7 +3395,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 684)</value>
+      <value>(1192, 300)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3577,7 +3407,7 @@
     </param>
     <param>
       <key>stream_id</key>
-      <value>fec_select</value>
+      <value>sync</value>
     </param>
   </block>
   <block>
@@ -3592,7 +3422,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(64, 756)</value>
+      <value>(0, 572)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3604,27 +3434,9 @@
     </param>
     <param>
       <key>stream_id</key>
-      <value>fec_select</value>
+      <value>sync</value>
     </param>
   </block>
-  <connection>
-    <source_block_id>RWN_selector_1_3_bb_0</source_block_id>
-    <sink_block_id>blocks_tag_gate_0_0_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_bb_0</source_block_id>
-    <sink_block_id>blocks_tag_gate_0_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_bb_0</source_block_id>
-    <sink_block_id>blocks_tag_gate_0_0_0</sink_block_id>
-    <source_key>2</source_key>
-    <sink_key>0</sink_key>
-  </connection>
   <connection>
     <source_block_id>RWN_selector_1_3_bb_1</source_block_id>
     <sink_block_id>tx_outer_dummy_0</sink_block_id>
@@ -3644,27 +3456,51 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>RWN_selector_1_3_bb_1_0</source_block_id>
+    <sink_block_id>blocks_tag_gate_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>RWN_selector_1_3_bb_1_0</source_block_id>
+    <sink_block_id>blocks_null_sink_1</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>RWN_selector_1_3_bb_1_0</source_block_id>
+    <sink_block_id>blocks_null_sink_1</sink_block_id>
+    <source_key>2</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
     <source_block_id>RWN_selector_1_3_cc_0</source_block_id>
-    <sink_block_id>rx_inner_8psk_0</sink_block_id>
+    <sink_block_id>rx_inner_bpsk_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>RWN_selector_1_3_cc_0</source_block_id>
-    <sink_block_id>rx_inner_qpsk_0</sink_block_id>
+    <sink_block_id>blocks_null_sink_1_0</sink_block_id>
     <source_key>1</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>RWN_selector_1_3_cc_0</source_block_id>
-    <sink_block_id>rx_inner_bpsk_0</sink_block_id>
+    <sink_block_id>blocks_null_sink_1_0</sink_block_id>
     <source_key>2</source_key>
-    <sink_key>0</sink_key>
+    <sink_key>1</sink_key>
   </connection>
   <connection>
     <source_block_id>RWN_selector_1_3_ff_0</source_block_id>
     <sink_block_id>rx_outer_dummy_0</sink_block_id>
     <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>RWN_selector_1_3_ff_0</source_block_id>
+    <sink_block_id>my_correlator_convolutional</sink_block_id>
+    <source_key>1</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
@@ -3675,13 +3511,13 @@
   </connection>
   <connection>
     <source_block_id>RWN_selector_1_3_ff_0</source_block_id>
-    <sink_block_id>blocks_null_sink_1</sink_block_id>
+    <sink_block_id>blocks_null_sink_2</sink_block_id>
     <source_key>2</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>RWN_selector_3_1_bb_0</source_block_id>
-    <sink_block_id>RWN_selector_1_3_bb_0</sink_block_id>
+    <sink_block_id>RWN_selector_1_3_bb_1_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3693,30 +3529,18 @@
   </connection>
   <connection>
     <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>blocks_char_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_cc_0</source_block_id>
-    <sink_block_id>channels_channel_model_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_cc_1</source_block_id>
-    <sink_block_id>qtgui_const_sink_x_0</sink_block_id>
+    <sink_block_id>blocks_char_to_float_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>RWN_selector_3_1_ff_0</source_block_id>
-    <sink_block_id>virtual_sink_0</sink_block_id>
+    <sink_block_id>RWN_selector_1_3_ff_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_char_to_float_0</source_block_id>
+    <source_block_id>blocks_char_to_float_0_1</source_block_id>
     <sink_block_id>qtgui_time_sink_x_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -3740,12 +3564,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>blocks_probe_rate_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_null_source_0</source_block_id>
     <sink_block_id>RWN_selector_3_1_bb_0</sink_block_id>
     <source_key>0</source_key>
@@ -3753,8 +3571,14 @@
   </connection>
   <connection>
     <source_block_id>blocks_null_source_1</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_1_0</sink_block_id>
+    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
     <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_null_source_1</source_block_id>
+    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
+    <source_key>1</source_key>
     <sink_key>2</sink_key>
   </connection>
   <connection>
@@ -3764,44 +3588,26 @@
     <sink_key>2</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_probe_rate_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>rate</source_key>
-    <sink_key>print</sink_key>
+    <source_block_id>blocks_null_source_1_1</source_block_id>
+    <sink_block_id>RWN_selector_3_1_bb_1_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>2</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_repack_bits_bb_convolutional</source_block_id>
+    <sink_block_id>digital_crc32_bb_convolutional</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_stream_to_tagged_stream_0_0</source_block_id>
-    <sink_block_id>tx_inner_qpsk_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_0_0</source_block_id>
-    <sink_block_id>tx_inner_bpsk_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_0_1</source_block_id>
-    <sink_block_id>tx_inner_8psk_0</sink_block_id>
+    <sink_block_id>tx_inner_bpsk_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_tag_gate_0_0</source_block_id>
     <sink_block_id>blocks_stream_to_tagged_stream_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_tag_gate_0_0_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_tag_gate_0_0_1</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3818,46 +3624,46 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>rx_inner_8psk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_inner_8psk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_inner_bpsk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_inner_bpsk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_inner_qpsk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_inner_qpsk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rx_outer_convolutional_0</source_block_id>
+    <source_block_id>digital_crc32_bb_convolutional</source_block_id>
     <sink_block_id>RWN_selector_3_1_bb_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>fec_extended_tagged_decoder_convolutional</source_block_id>
+    <sink_block_id>RWN_selector_3_1_bb_1_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>fec_extended_tagged_decoder_convolutional</source_block_id>
+    <sink_block_id>blocks_repack_bits_bb_convolutional</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>my_correlator_convolutional</source_block_id>
+    <sink_block_id>blocks_tag_debug_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>my_correlator_convolutional</source_block_id>
+    <sink_block_id>fec_extended_tagged_decoder_convolutional</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_bpsk_0</source_block_id>
+    <sink_block_id>qtgui_const_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_bpsk_0</source_block_id>
+    <sink_block_id>virtual_sink_0</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>rx_outer_convolutional_0</source_block_id>
@@ -3878,22 +3684,10 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>tx_inner_8psk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
+    <source_block_id>tx_inner_bpsk_0_0</source_block_id>
+    <sink_block_id>channels_channel_model_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>tx_inner_bpsk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>tx_inner_qpsk_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
   </connection>
   <connection>
     <source_block_id>tx_outer_CE_0</source_block_id>
@@ -3909,7 +3703,7 @@
   </connection>
   <connection>
     <source_block_id>virtual_source_0</source_block_id>
-    <sink_block_id>RWN_selector_1_3_ff_0</sink_block_id>
+    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

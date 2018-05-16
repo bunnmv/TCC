@@ -35,12 +35,12 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
 
     def general_work(self, input_items, output_items):
 
-        if len(input_items[0]) < 8*self.payload_length:
+        if len(input_items[0]) < self.payload_length:
             return 0
 
         access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.uint8)
 
-        payload = input_items[0][: 8*self.payload_length]
+        payload = input_items[0][: self.payload_length]
         packet = np.concatenate([access_code_binary, payload])
 
         if len(output_items[0]) < len(packet):
@@ -53,6 +53,6 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
         )
         output_items[0][: len(packet)] = packet
 
-        self.consume(0, 8*self.payload_length)
+        self.consume(0, self.payload_length)
 
         return len(packet)
