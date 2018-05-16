@@ -90,69 +90,6 @@
     </param>
   </block>
   <block>
-    <key>variable_cc_encoder_def</key>
-    <param>
-      <key>padding</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>k</key>
-      <value>7</value>
-    </param>
-    <param>
-      <key>dim1</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>dim2</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>framebits</key>
-      <value>frameLength*8</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(664, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>CE</value>
-    </param>
-    <param>
-      <key>ndim</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>polys</key>
-      <value>[79,109]</value>
-    </param>
-    <param>
-      <key>rate</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>state_start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>mode</key>
-      <value>fec.CC_STREAMING</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_repack_bits_bb</key>
     <param>
       <key>k</key>
@@ -194,11 +131,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_repack_bits_bb_0_0_0_0</value>
+      <value>blocks_repack_bits_bb_tx_convolutional</value>
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_key</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -233,7 +170,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(280, 140)</value>
+      <value>(240, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -245,7 +182,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>lengths</key>
-      <value>packetCounterLength, infoLength</value>
+      <value>packet_counter, info_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -296,11 +233,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0</value>
+      <value>blocks_stream_to_tagged_stream_tx_convolutional</value>
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>"len_key"</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -312,7 +249,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>packet_len</key>
-      <value>dataLength</value>
+      <value>packet_counter+info_length</value>
     </param>
     <param>
       <key>type</key>
@@ -343,7 +280,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 132)</value>
+      <value>(40, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -383,53 +320,6 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(392, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>dataLength</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>digital_crc32_bb</key>
     <param>
       <key>alias</key>
@@ -457,11 +347,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>digital_crc32_bb_0</value>
+      <value>digital_crc32_bb_tx_convolutional</value>
     </param>
     <param>
       <key>lengthtagname</key>
-      <value>"len_key"</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -478,6 +368,53 @@ MSB -&gt; For FEC</value>
     <param>
       <key>packed</key>
       <value>True</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(544, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>encoder</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Encoder Object</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -502,7 +439,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>encoder_list</key>
-      <value>CE</value>
+      <value>encoder</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -514,15 +451,15 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>fec_extended_tagged_encoder_0</value>
+      <value>fec_extended_tagged_encoder_tx_convolutional</value>
     </param>
     <param>
       <key>lentagname</key>
-      <value>len_key</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>mtu</key>
-      <value>packetLength</value>
+      <value>packet_counter+info_length+4</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -535,53 +472,6 @@ Inner vai ate aqui + o header formatter</value>
     <param>
       <key>puncpat</key>
       <value>'11'</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(560, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>frameLength</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value></value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
     </param>
   </block>
   <block>
@@ -627,7 +517,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(64, 212)</value>
+      <value>(32, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -674,7 +564,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 4)</value>
+      <value>(344, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -682,11 +572,11 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>infoLength</value>
+      <value>info_length</value>
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>Info Length</value>
     </param>
     <param>
       <key>short_id</key>
@@ -721,7 +611,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(200, 4)</value>
+      <value>(440, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -729,7 +619,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>packetCounterLength</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>label</key>
@@ -745,11 +635,11 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>type</key>
-      <value>intx</value>
+      <value>string</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>'len_key'</value>
     </param>
   </block>
   <block>
@@ -768,7 +658,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(472, 4)</value>
+      <value>(216, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -776,11 +666,11 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>packetLength</value>
+      <value>packet_counter</value>
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>Packet Counter Bytes</value>
     </param>
     <param>
       <key>short_id</key>
@@ -843,20 +733,20 @@ Inner vai ate aqui + o header formatter</value>
     </param>
   </block>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_0_0_0_0</source_block_id>
-    <sink_block_id>fec_extended_tagged_encoder_0</sink_block_id>
+    <source_block_id>blocks_repack_bits_bb_tx_convolutional</source_block_id>
+    <sink_block_id>fec_extended_tagged_encoder_tx_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_stream_mux_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0</sink_block_id>
+    <sink_block_id>blocks_stream_to_tagged_stream_tx_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0</source_block_id>
-    <sink_block_id>digital_crc32_bb_0</sink_block_id>
+    <source_block_id>blocks_stream_to_tagged_stream_tx_convolutional</source_block_id>
+    <sink_block_id>digital_crc32_bb_tx_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -867,13 +757,13 @@ Inner vai ate aqui + o header formatter</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_crc32_bb_0</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0_0</sink_block_id>
+    <source_block_id>digital_crc32_bb_tx_convolutional</source_block_id>
+    <sink_block_id>blocks_repack_bits_bb_tx_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fec_extended_tagged_encoder_0</source_block_id>
+    <source_block_id>fec_extended_tagged_encoder_tx_convolutional</source_block_id>
     <sink_block_id>toFEC</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>

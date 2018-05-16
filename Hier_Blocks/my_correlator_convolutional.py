@@ -42,14 +42,10 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
 
     def general_work_output(self, input_items, output_items):
         L_in = len(input_items[0])
-        # print(L_in) #input is never 10K for the CC 1/2 rate case.
         L_out = len(output_items[0])
         L_payload = self.payload_length # in bits
 
         if L_in < L_payload or L_out < L_payload:
-            # print(L_in) #input is never 10K for the CC 1/2 rate case.
-            # print(L_out)
-            # print(L_payload)
             return 0
 
 

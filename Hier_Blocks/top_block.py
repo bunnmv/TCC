@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed May 16 13:30:45 2018
+# Generated: Wed May 16 14:16:33 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -91,7 +91,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.len_tag_name = len_tag_name = "len_key"
         self.frame_bits = frame_bits = packetLength*8 + packetLength*8*FEC
         self.dataLength = dataLength = (infoLength+packetCounterLength)
-        self.access_code = access_code = '0101110111101101' * 3
+        self.access_code = access_code = '0101110111101101'
 
         ##################################################
         # Blocks
@@ -306,16 +306,7 @@ class top_block(gr.top_block, Qt.QWidget):
         	block_tags=True
         )
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate*1000,True)
-        self.blocks_tag_gate_0_0_1 = blocks.tag_gate(gr.sizeof_char * 1, False)
-        self.blocks_tag_gate_0_0_1.set_single_key("")
-        self.blocks_tag_gate_0_0_0 = blocks.tag_gate(gr.sizeof_char * 1, False)
-        self.blocks_tag_gate_0_0_0.set_single_key("")
-        self.blocks_tag_gate_0_0 = blocks.tag_gate(gr.sizeof_char * 1, False)
-        self.blocks_tag_gate_0_0.set_single_key("")
-        self.blocks_stream_to_tagged_stream_0_0_1 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, frame_bits, len_tag_name)
-        self.blocks_stream_to_tagged_stream_0_0_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, frame_bits, len_tag_name)
-        self.blocks_stream_to_tagged_stream_0_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, frame_bits, len_tag_name)
-        self.blocks_probe_rate_0 = blocks.probe_rate(gr.sizeof_char*1, 10, 0.15)
+        self.blocks_probe_rate_0 = blocks.probe_rate(gr.sizeof_char*1, 500, 0.15)
         self.blocks_null_source_1_0 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_null_source_1 = blocks.null_source(gr.sizeof_char*1)
         self.blocks_null_source_0 = blocks.null_source(gr.sizeof_char*1)
@@ -335,9 +326,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.RWN_selector_3_1_bb_1 = RWN.selector_3_1_bb(FEC, True)
         self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(FEC, True)
         self.RWN_selector_1_3_ff_0 = RWN.selector_1_3_ff(FEC, True)
-        self.RWN_selector_1_3_cc_0 = RWN.selector_1_3_cc(mod_select, True)
         self.RWN_selector_1_3_bb_1 = RWN.selector_1_3_bb(FEC, True)
-        self.RWN_selector_1_3_bb_0 = RWN.selector_1_3_bb(mod_select, True)
 
 
 
@@ -345,19 +334,15 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.blocks_probe_rate_0, 'rate'), (self.blocks_message_debug_0, 'print'))
-        self.connect((self.RWN_selector_1_3_bb_0, 1), (self.blocks_tag_gate_0_0, 0))
-        self.connect((self.RWN_selector_1_3_bb_0, 2), (self.blocks_tag_gate_0_0_0, 0))
-        self.connect((self.RWN_selector_1_3_bb_0, 0), (self.blocks_tag_gate_0_0_1, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 2), (self.blocks_null_sink_0, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 1), (self.tx_outer_CE_0, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 0), (self.tx_outer_dummy_0, 0))
-        self.connect((self.RWN_selector_1_3_cc_0, 0), (self.rx_inner_8psk_0, 0))
-        self.connect((self.RWN_selector_1_3_cc_0, 2), (self.rx_inner_bpsk_0, 0))
-        self.connect((self.RWN_selector_1_3_cc_0, 1), (self.rx_inner_qpsk_0, 0))
         self.connect((self.RWN_selector_1_3_ff_0, 2), (self.blocks_null_sink_1, 0))
         self.connect((self.RWN_selector_1_3_ff_0, 1), (self.rx_outer_convolutional_0, 0))
         self.connect((self.RWN_selector_1_3_ff_0, 0), (self.rx_outer_dummy_0, 0))
-        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.RWN_selector_1_3_bb_0, 0))
+        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.tx_inner_8psk_0, 0))
+        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.tx_inner_bpsk_0, 0))
+        self.connect((self.RWN_selector_3_1_bb_0, 0), (self.tx_inner_qpsk_0, 0))
         self.connect((self.RWN_selector_3_1_bb_1, 0), (self.blocks_keep_m_in_n_0_0, 0))
         self.connect((self.RWN_selector_3_1_bb_1_0, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.RWN_selector_3_1_cc_0, 0), (self.channels_channel_model_0, 0))
@@ -370,14 +355,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_null_source_1, 0), (self.RWN_selector_3_1_bb_1_0, 2))
         self.connect((self.blocks_null_source_1_0, 0), (self.RWN_selector_3_1_bb_1, 2))
-        self.connect((self.blocks_stream_to_tagged_stream_0_0, 0), (self.tx_inner_qpsk_0, 0))
-        self.connect((self.blocks_stream_to_tagged_stream_0_0_0, 0), (self.tx_inner_bpsk_0, 0))
-        self.connect((self.blocks_stream_to_tagged_stream_0_0_1, 0), (self.tx_inner_8psk_0, 0))
-        self.connect((self.blocks_tag_gate_0_0, 0), (self.blocks_stream_to_tagged_stream_0_0, 0))
-        self.connect((self.blocks_tag_gate_0_0_0, 0), (self.blocks_stream_to_tagged_stream_0_0_0, 0))
-        self.connect((self.blocks_tag_gate_0_0_1, 0), (self.blocks_stream_to_tagged_stream_0_0_1, 0))
         self.connect((self.blocks_throttle_0, 0), (self.RWN_selector_1_3_bb_1, 0))
-        self.connect((self.channels_channel_model_0, 0), (self.RWN_selector_1_3_cc_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.rx_inner_8psk_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.rx_inner_bpsk_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.rx_inner_qpsk_0, 0))
         self.connect((self.rx_inner_8psk_0, 0), (self.RWN_selector_3_1_cc_1, 0))
         self.connect((self.rx_inner_8psk_0, 1), (self.RWN_selector_3_1_ff_0, 0))
         self.connect((self.rx_inner_bpsk_0, 0), (self.RWN_selector_3_1_cc_1, 2))
@@ -508,8 +489,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.RWN_selector_3_1_ff_0.set_selected(self.mod_select)
         self.RWN_selector_3_1_cc_1.set_selected(self.mod_select)
         self.RWN_selector_3_1_cc_0.set_selected(self.mod_select)
-        self.RWN_selector_1_3_cc_0.set_selected(self.mod_select)
-        self.RWN_selector_1_3_bb_0.set_selected(self.mod_select)
 
     def get_len_tag_name_rx(self):
         return self.len_tag_name_rx
@@ -540,12 +519,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.tx_inner_8psk_0.set_frame_bits(self.frame_bits)
         self.rx_outer_dummy_0.set_frame_bits(self.frame_bits)
         self.rx_outer_convolutional_0.set_frame_bits(self.frame_bits)
-        self.blocks_stream_to_tagged_stream_0_0_1.set_packet_len(self.frame_bits)
-        self.blocks_stream_to_tagged_stream_0_0_1.set_packet_len_pmt(self.frame_bits)
-        self.blocks_stream_to_tagged_stream_0_0_0.set_packet_len(self.frame_bits)
-        self.blocks_stream_to_tagged_stream_0_0_0.set_packet_len_pmt(self.frame_bits)
-        self.blocks_stream_to_tagged_stream_0_0.set_packet_len(self.frame_bits)
-        self.blocks_stream_to_tagged_stream_0_0.set_packet_len_pmt(self.frame_bits)
 
     def get_dataLength(self):
         return self.dataLength

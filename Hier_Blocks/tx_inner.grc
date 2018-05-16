@@ -113,7 +113,101 @@
     </param>
     <param>
       <key>value</key>
-      <value>digital.psk_constellation(2,digital.mod_codes.NO_CODE, True)</value>
+      <value>digital.psk_constellation(M,digital.mod_codes.NO_CODE, True)</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(696, 0)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>M</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Const Order</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(432, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>'101010'</value>
     </param>
   </block>
   <block>
@@ -148,7 +242,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(176, 244)</value>
+      <value>(448, 228)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -160,7 +254,7 @@
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_key</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -195,7 +289,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(504, 212)</value>
+      <value>(280, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -211,7 +305,7 @@
     </param>
     <param>
       <key>lengthtagname</key>
-      <value>len_key</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -263,11 +357,11 @@
     </param>
     <param>
       <key>excess_bw</key>
-      <value>roll_off</value>
+      <value>excess_bw</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(680, 212)</value>
+      <value>(600, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -295,36 +389,26 @@
     </param>
     <param>
       <key>verbose</key>
-      <value>True</value>
+      <value>False</value>
     </param>
   </block>
   <block>
-    <key>digital_protocol_formatter_bb</key>
+    <key>parameter</key>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>comment</key>
-      <value>12 Bytes -&gt; Header
-22 Bytes -&gt; Payload
-34 -&gt; Frame</value>
-    </param>
-    <param>
-      <key>affinity</key>
       <value></value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>format</key>
-      <value>digital.header_format_default(digital.packet_utils.default_access_code, 0)</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 164)</value>
+      <value>(352, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -332,18 +416,73 @@
     </param>
     <param>
       <key>id</key>
-      <value>digital_protocol_formatter_bb_0</value>
+      <value>excess_bw</value>
     </param>
     <param>
-      <key>len_tag_key</key>
-      <value>len_key</value>
+      <key>label</key>
+      <value></value>
     </param>
     <param>
-      <key>maxoutbuf</key>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>eng_float</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(608, 0)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
       <value>0</value>
     </param>
     <param>
-      <key>minoutbuf</key>
+      <key>id</key>
+      <value>frame_bits</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Frame Bits</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
       <value>0</value>
     </param>
   </block>
@@ -406,7 +545,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(352, 12)</value>
+      <value>(520, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -414,7 +553,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>roll_off</value>
+      <value>len_tag_name</value>
     </param>
     <param>
       <key>label</key>
@@ -430,11 +569,116 @@
     </param>
     <param>
       <key>type</key>
-      <value>eng_float</value>
+      <value>string</value>
     </param>
     <param>
       <key>value</key>
+      <value>'len_key'</value>
+    </param>
+  </block>
+  <block>
+    <key>epy_block</key>
+    <param>
+      <key>access_code</key>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_io_cache</key>
+      <value>('My Frammer', 'blk', [('access_code', "'101010'"), ('payload_length', '100'), ('tag_name', "'length'")], [('0', 'byte', 1)], [('0', 'byte', 1)], '\n    ATTENTION!\n\n    This blocks works with unpacked bits in the input and in the output.\n    ', ['access_code', 'payload_length', 'tag_name'])</value>
+    </param>
+    <param>
+      <key>_source_code</key>
+      <value>"""
+Embedded Python Blocks:
+
+Each time this file is saved, GRC will instantiate the first class it finds
+to get ports and parameters of your block. The arguments to __init__  will
+be the parameters. All of them are required to have default values!
+"""
+
+import numpy as np
+from gnuradio import gr
+import pmt
+
+
+class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
+    """
+    ATTENTION!
+
+    This blocks works with unpacked bits in the input and in the output.
+    """
+    def __init__(self, access_code="101010", payload_length=100, tag_name = "length"):  # only default arguments here
+        """arguments to this function show up as parameters in GRC"""
+        gr.basic_block.__init__(
+            self,
+            name='My Frammer',   # will show up in GRC
+            in_sig=[np.uint8],
+            out_sig=[np.uint8]
+        )
+        # if an attribute with the same name as a parameter is found,
+        # a callback is registered (properties work, too).
+        self.access_code = access_code
+        self.payload_length = payload_length
+        self.tag_name = tag_name
+        # enum  	tag_propagation_policy_t { TPP_DONT = 0, TPP_ALL_TO_ALL = 1, TPP_ONE_TO_ONE = 2 }
+        self.set_tag_propagation_policy(0)        
+
+    def general_work(self, input_items, output_items):
+
+        if len(input_items[0]) &lt; self.payload_length:
+            return 0
+
+        access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.uint8)
+
+        payload = input_items[0][: self.payload_length]
+        packet = np.concatenate([access_code_binary, payload])
+
+        if len(output_items[0]) &lt; len(packet):
+            return 0
+
+        self.add_item_tag(0, # Port number
+                 self.nitems_written(0), # Offset
+                 pmt.intern(self.tag_name), # Key
+                 pmt.to_pmt(len(packet)) # Value
+        )
+        output_items[0][: len(packet)] = packet
+
+        self.consume(0, self.payload_length)
+
+        return len(packet)
+</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(152, 116)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>my_framer</value>
+    </param>
+    <param>
+      <key>payload_length</key>
+      <value>frame_bits</value>
+    </param>
+    <param>
+      <key>tag_name</key>
+      <value>len_tag_name</value>
     </param>
   </block>
   <block>
@@ -453,7 +697,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(272, 12)</value>
+      <value>(272, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -496,7 +740,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 228)</value>
+      <value>(784, 228)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -529,19 +773,13 @@
   </block>
   <connection>
     <source_block_id>blocks_repack_bits_bb_0_0_0_0_0_0</source_block_id>
-    <sink_block_id>blocks_tagged_stream_mux_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_repack_bits_bb_0_0_0_0_0_0</source_block_id>
-    <sink_block_id>digital_protocol_formatter_bb_0</sink_block_id>
+    <sink_block_id>digital_constellation_modulator_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_tagged_stream_mux_0</source_block_id>
-    <sink_block_id>digital_constellation_modulator_0</sink_block_id>
+    <sink_block_id>blocks_repack_bits_bb_0_0_0_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -552,14 +790,20 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_protocol_formatter_bb_0</source_block_id>
+    <source_block_id>fromFEC</source_block_id>
     <sink_block_id>blocks_tagged_stream_mux_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>fromFEC</source_block_id>
+    <sink_block_id>my_framer</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fromFEC</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0_0_0_0</sink_block_id>
+    <source_block_id>my_framer</source_block_id>
+    <sink_block_id>blocks_tagged_stream_mux_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

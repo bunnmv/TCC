@@ -10,7 +10,7 @@
     </param>
     <param>
       <key>window_size</key>
-      <value>3000,3000</value>
+      <value>2500,2000</value>
     </param>
     <param>
       <key>category</key>
@@ -125,7 +125,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1768, 0)</value>
+      <value>(1752, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -157,7 +157,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_TAILBITING</value>
+      <value>fec.CC_STREAMING</value>
     </param>
   </block>
   <block>
@@ -192,7 +192,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1632, 4)</value>
+      <value>(1616, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -220,7 +220,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_TAILBITING</value>
+      <value>fec.CC_STREAMING</value>
     </param>
   </block>
   <block>
@@ -520,7 +520,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -528,7 +528,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1536, 0)</value>
+      <value>(1512, 0)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -608,7 +608,7 @@
     </param>
     <param>
       <key>widget</key>
-      <value>combo_box</value>
+      <value>radio_buttons</value>
     </param>
   </block>
   <block>
@@ -623,7 +623,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(344, 60)</value>
+      <value>(344, 52)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -727,7 +727,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>2</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -815,7 +815,7 @@
     </param>
     <param>
       <key>widget</key>
-      <value>combo_box</value>
+      <value>radio_buttons</value>
     </param>
   </block>
   <block>
@@ -1204,7 +1204,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1451,7 +1451,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 1420)</value>
+      <value>(1136, 1420)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1502,7 +1502,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(112, 196)</value>
+      <value>(104, 292)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1527,58 +1527,6 @@
     <param>
       <key>repeat</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_head</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>Finish the flowgraph after reading 110k bytes from the file, orn other words
-500 times.</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(56, 300)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_head_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>110000</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
     </param>
     <param>
       <key>vlen</key>
@@ -1711,7 +1659,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1895,7 +1843,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2103,7 +2051,7 @@
     </param>
     <param>
       <key>comment</key>
-      <value>Slow things down :)</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -2115,7 +2063,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 300)</value>
+      <value>(312, 924)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2143,7 +2091,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>byte</value>
+      <value>complex</value>
     </param>
     <param>
       <key>vlen</key>
@@ -2166,11 +2114,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(968, 1596)</value>
+      <value>(976, 1596)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3089,7 +3037,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <key>qtgui_time_sink_x</key>
     <param>
       <key>autoscale</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>axislabels</key>
@@ -3499,10 +3447,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
       <value>excess_bw</value>
     </param>
     <param>
-      <key>nfilts</key>
-      <value>nfilts</value>
-    </param>
-    <param>
       <key>rrc_taps</key>
       <value>rrc_taps</value>
     </param>
@@ -3527,7 +3471,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>M</key>
-      <value>2</value>
+      <value>4</value>
     </param>
     <param>
       <key>affinity</key>
@@ -3562,10 +3506,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
       <value>excess_bw</value>
     </param>
     <param>
-      <key>nfilts</key>
-      <value>nfilts</value>
-    </param>
-    <param>
       <key>rrc_taps</key>
       <value>rrc_taps</value>
     </param>
@@ -3590,7 +3530,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>M</key>
-      <value>2</value>
+      <value>8</value>
     </param>
     <param>
       <key>affinity</key>
@@ -3625,10 +3565,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
       <value>excess_bw</value>
     </param>
     <param>
-      <key>nfilts</key>
-      <value>nfilts</value>
-    </param>
-    <param>
       <key>rrc_taps</key>
       <value>rrc_taps</value>
     </param>
@@ -3661,11 +3597,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>frame_bits</key>
-      <value>frame_bits</value>
+      <value>packet_length*8</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -3697,7 +3633,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>len_tag_name_rx</key>
-      <value>len_tag_name</value>
+      <value>len_tag_name_rx</value>
     </param>
   </block>
   <block>
@@ -3716,11 +3652,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>decoder</key>
-      <value>DD</value>
+      <value>CD</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>frame_bits</key>
@@ -3756,7 +3692,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>len_tag_name_rx</key>
-      <value>len_tag_name</value>
+      <value>len_tag_name_rx</value>
     </param>
   </block>
   <block>
@@ -4134,7 +4070,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>encoder</key>
@@ -4293,7 +4229,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 924)</value>
+      <value>(136, 924)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4475,13 +4411,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>blocks_file_source_0</source_block_id>
-    <sink_block_id>blocks_head_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_head_0</source_block_id>
-    <sink_block_id>blocks_throttle_0</sink_block_id>
+    <sink_block_id>RWN_selector_1_3_bb_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -4547,7 +4477,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>RWN_selector_1_3_bb_1</sink_block_id>
+    <sink_block_id>channels_channel_model_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -4649,7 +4579,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>virtual_source_0</source_block_id>
-    <sink_block_id>channels_channel_model_0</sink_block_id>
+    <sink_block_id>blocks_throttle_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

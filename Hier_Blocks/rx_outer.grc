@@ -90,42 +90,22 @@
     </param>
   </block>
   <block>
-    <key>variable_cc_decoder_def</key>
+    <key>parameter</key>
     <param>
-      <key>padding</key>
-      <value>False</value>
+      <key>alias</key>
+      <value></value>
     </param>
     <param>
       <key>comment</key>
       <value></value>
     </param>
     <param>
-      <key>k</key>
-      <value>7</value>
-    </param>
-    <param>
-      <key>dim1</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>dim2</key>
-      <value>1</value>
-    </param>
-    <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>state_end</key>
-      <value>-1</value>
-    </param>
-    <param>
-      <key>framebits</key>
-      <value>frameLength*8</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(0, 296)</value>
+      <value>(488, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -133,141 +113,27 @@
     </param>
     <param>
       <key>id</key>
-      <value>CD</value>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
     </param>
     <param>
       <key>value</key>
-      <value>"ok"</value>
-    </param>
-    <param>
-      <key>ndim</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>polys</key>
-      <value>[79,109]</value>
-    </param>
-    <param>
-      <key>rate</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>state_start</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>mode</key>
-      <value>fec.CC_STREAMING</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_keep_m_in_n</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>Keeps Packet Counter</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(992, 220)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_keep_m_in_n_0</value>
-    </param>
-    <param>
-      <key>m</key>
-      <value>packetCounterLength</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>dataLength</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_keep_m_in_n</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>Keeps Payload</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(992, 92)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_keep_m_in_n_0_0</value>
-    </param>
-    <param>
-      <key>m</key>
-      <value>infoLength</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>n</key>
-      <value>dataLength</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>packetCounterLength</value>
+      <value>'101010'</value>
     </param>
   </block>
   <block>
@@ -312,11 +178,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_repack_bits_bb_0_0_0</value>
+      <value>blocks_repack_bits_bb_convolutional</value>
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_key2</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -329,6 +195,49 @@ MSB -&gt; Because of FEC</value>
     <param>
       <key>align_output</key>
       <value>False</value>
+    </param>
+  </block>
+  <block>
+    <key>pad_sink</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(960, 100)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>crc_out</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>crc_out</value>
+    </param>
+    <param>
+      <key>num_streams</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>optional</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
     </param>
   </block>
   <block>
@@ -347,7 +256,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(376, 12)</value>
+      <value>(264, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -355,11 +264,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>dataLength</value>
+      <value>decoder</value>
     </param>
     <param>
       <key>label</key>
-      <value>dataLength</value>
+      <value>Decoder Object</value>
     </param>
     <param>
       <key>short_id</key>
@@ -375,104 +284,6 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>value</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>pad_sink</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1144, 100)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>data_out</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>data_out</value>
-    </param>
-    <param>
-      <key>num_streams</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>optional</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>digital_correlate_access_code_xx_ts</key>
-    <param>
-      <key>access_code</key>
-      <value>digital.packet_utils.default_access_code</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(224, 92)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>digital_correlate_access_code_xx_ts_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>tagname</key>
-      <value>len_key2</value>
-    </param>
-    <param>
-      <key>threshold</key>
       <value>0</value>
     </param>
   </block>
@@ -504,11 +315,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>digital_crc32_bb_0_0</value>
+      <value>digital_crc32_bb_convolutional</value>
     </param>
     <param>
       <key>lengthtagname</key>
-      <value>"len_key2"</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -547,7 +358,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>decoder_list</key>
-      <value>CD</value>
+      <value>decoder</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -555,7 +366,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 204)</value>
+      <value>(392, 364)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -563,15 +374,15 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>fec_extended_tagged_decoder_0</value>
+      <value>fec_extended_tagged_decoder_convolutional</value>
     </param>
     <param>
       <key>lentagname</key>
-      <value>len_key2</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>mtu</key>
-      <value>packetLength</value>
+      <value>packet_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -602,11 +413,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(488, 12)</value>
+      <value>(168, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -614,11 +425,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>frameLength</value>
+      <value>frame_bits</value>
     </param>
     <param>
       <key>label</key>
-      <value>frameLength</value>
+      <value>Frame Bits</value>
     </param>
     <param>
       <key>short_id</key>
@@ -630,7 +441,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>type</key>
-      <value></value>
+      <value>intx</value>
     </param>
     <param>
       <key>value</key>
@@ -649,7 +460,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(96, 100)</value>
+      <value>(160, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -696,7 +507,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(272, 12)</value>
+      <value>(576, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -704,11 +515,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>infoLength</value>
+      <value>len_tag_name_rx</value>
     </param>
     <param>
       <key>label</key>
-      <value>infoLength</value>
+      <value></value>
     </param>
     <param>
       <key>short_id</key>
@@ -720,11 +531,145 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>type</key>
-      <value></value>
+      <value>string</value>
     </param>
     <param>
       <key>value</key>
+      <value>'len_key2'</value>
+    </param>
+  </block>
+  <block>
+    <key>epy_block</key>
+    <param>
+      <key>access_code</key>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_io_cache</key>
+      <value>('My Correlator Block', 'blk', [('access_code', 'None'), ('payload_length', '100'), ('threshold', '0'), ('tag_name', "'len_key2'")], [('0', 'float', 1)], [('0', 'float', 1)], 'arguments to this function show up as parameters in GRC', ['access_code', 'payload_length', 'tag_name', 'threshold'])</value>
+    </param>
+    <param>
+      <key>_source_code</key>
+      <value>"""
+Embedded Python Blocks:
+
+Each time this file is saved, GRC will instantiate the first class it finds
+to get ports and parameters of your block. The arguments to __init__  will
+be the parameters. All of them are required to have default values!
+"""
+
+import numpy as np
+from gnuradio import gr
+import pmt
+
+
+class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
+    def __init__(self, access_code=None, payload_length=100, threshold=0,tag_name="len_key2"):  # only default arguments here
+        """arguments to this function show up as parameters in GRC"""
+        gr.basic_block.__init__(
+            self,
+            name='My Correlator Block',   # will show up in GRC
+            in_sig=[np.float32],
+            out_sig=[np.float32]
+        )
+        # if an attribute with the same name as a parameter is found,
+        # a callback is registered (properties work, too).
+        self.access_code = access_code
+        self.payload_length = payload_length
+        self.threshold = threshold
+        self.tag_name = tag_name
+
+        self.mode = 'find'
+
+        self.set_min_output_buffer(2**16)
+
+        self.set_tag_propagation_policy(0)
+
+
+    def general_work(self, input_items, output_items):
+        if self.mode == 'output':
+            return self.general_work_output(input_items, output_items)
+        elif self.mode == 'find':
+            return self.general_work_find(input_items, output_items)
+
+    def general_work_output(self, input_items, output_items):
+        L_in = len(input_items[0])
+        L_out = len(output_items[0])
+        L_payload = self.payload_length # in bits
+
+        if L_in &lt; L_payload or L_out &lt; L_payload:
+            return 0
+
+
+        self.add_item_tag(0, # Port number
+            self.nitems_written(0), # Offset
+            pmt.intern(self.tag_name), # Key
+            pmt.to_pmt(L_payload) # Value
+        )
+        output_items[0][:L_payload] = input_items[0][:L_payload]
+        self.consume(0, L_payload)
+
+        # ~print('Outputted {} items.'.format(L_payload))
+
+        self.mode = 'find'
+
+        return L_payload
+
+    def general_work_find(self, input_items, output_items):
+        L_in = len(input_items[0])
+
+        if L_in &lt; len(self.access_code) :
+            return 0
+
+        access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.int)
+        input_decoded = np.array(input_items[0] &gt; 0, dtype=np.int)
+
+        corr = np.correlate(2*input_decoded-1, 2*access_code_binary-1)
+        matches = np.flatnonzero(corr &gt;= len(self.access_code) - self.threshold)
+        if len(matches) == 0:
+            self.consume(0, L_in - len(self.access_code))
+        else:
+            self.consume(0, matches[0] + len(self.access_code))
+            self.mode = 'output'
+
+        return 0
+</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(224, 368)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>my_correlator</value>
+    </param>
+    <param>
+      <key>payload_length</key>
+      <value>frame_bits</value>
+    </param>
+    <param>
+      <key>tag_name</key>
+      <value>len_tag_name_rx</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -739,11 +684,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 12)</value>
+      <value>(376, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -751,11 +696,11 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>packetCounterLength</value>
+      <value>packet_length</value>
     </param>
     <param>
       <key>label</key>
-      <value>packetCounterLength</value>
+      <value>Packet Length</value>
     </param>
     <param>
       <key>short_id</key>
@@ -771,7 +716,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>value</key>
-      <value>1</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -786,7 +731,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 228)</value>
+      <value>(400, 124)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -794,7 +739,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>packetCounter_out</value>
+      <value>pad_sink_0</value>
     </param>
     <param>
       <key>type</key>
@@ -802,7 +747,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>label</key>
-      <value>packetCounter_out</value>
+      <value>fromFec</value>
     </param>
     <param>
       <key>num_streams</key>
@@ -810,105 +755,46 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>optional</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>vlen</key>
       <value>1</value>
     </param>
   </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(584, 12)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>packetLength</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>packetLength</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-  </block>
   <connection>
-    <source_block_id>blocks_keep_m_in_n_0</source_block_id>
-    <sink_block_id>packetCounter_out</sink_block_id>
+    <source_block_id>blocks_repack_bits_bb_convolutional</source_block_id>
+    <sink_block_id>digital_crc32_bb_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>data_out</sink_block_id>
+    <source_block_id>digital_crc32_bb_convolutional</source_block_id>
+    <sink_block_id>crc_out</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_0_0_0</source_block_id>
-    <sink_block_id>digital_crc32_bb_0_0</sink_block_id>
+    <source_block_id>fec_extended_tagged_decoder_convolutional</source_block_id>
+    <sink_block_id>blocks_repack_bits_bb_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_correlate_access_code_xx_ts_0</source_block_id>
-    <sink_block_id>fec_extended_tagged_decoder_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_crc32_bb_0_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_crc32_bb_0_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>fec_extended_tagged_decoder_0</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_0_0_0</sink_block_id>
+    <source_block_id>fec_extended_tagged_decoder_convolutional</source_block_id>
+    <sink_block_id>pad_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>fromFEC_RX</source_block_id>
-    <sink_block_id>digital_correlate_access_code_xx_ts_0</sink_block_id>
+    <sink_block_id>my_correlator</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>my_correlator</source_block_id>
+    <sink_block_id>fec_extended_tagged_decoder_convolutional</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

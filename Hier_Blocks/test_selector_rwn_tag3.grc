@@ -283,7 +283,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>'0101110111101101' * 3</value>
+      <value>'0101110111101101' </value>
     </param>
   </block>
   <block>
@@ -3131,16 +3131,16 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
       <value>0</value>
     </param>
     <param>
+      <key>packetCounterLength</key>
+      <value>packetCounterLength</value>
+    </param>
+    <param>
       <key>access_code</key>
       <value>access_code</value>
     </param>
     <param>
       <key>len_tag_name_rx</key>
       <value>len_tag_name_rx</value>
-    </param>
-    <param>
-      <key>packetCounterLength</key>
-      <value>packetCounterLength</value>
     </param>
     <param>
       <key>packetLength</key>
