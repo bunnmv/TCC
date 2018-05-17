@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Wed May 16 23:59:26 2018
+# Generated: Thu May 17 00:51:22 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -34,10 +34,10 @@ from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
-from my_rx_inner import my_rx_inner  # grc-generated hier_block
-from my_tx_inner import my_tx_inner  # grc-generated hier_block
 from optparse import OptionParser
+from rx_inner import rx_inner  # grc-generated hier_block
 from rx_outer import rx_outer  # grc-generated hier_block
+from tx_inner import tx_inner  # grc-generated hier_block
 from tx_outer import tx_outer  # grc-generated hier_block
 import RWN
 import numpy as np
@@ -87,6 +87,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.nfilts = nfilts = 32
         self.fec_choice = fec_choice = 1
         self.excess_bw = excess_bw = 0.8
+        self.constellation_8psk = constellation_8psk = digital.psk_constellation(8,digital.mod_codes.NO_CODE,True)
         self.theta = theta = 0
         self.sdr_rate = sdr_rate = 8*288e3
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
@@ -95,17 +96,13 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.len_tag_name = len_tag_name = "len_key"
         self.frame_bits = frame_bits = packet_length*8 + packet_length*8*fec_choice
         self.data_length = data_length = (info_length+packet_counter)
+        self.constellation_qpsk = constellation_qpsk = digital.psk_constellation(4,digital.mod_codes.NO_CODE,True)
+        self.constellation_bpsk = constellation_bpsk = digital.psk_constellation(2,digital.mod_codes.NO_CODE,True)
 
-        self.constellation_qpsk = constellation_qpsk = digital.constellation_qpsk().base()
-
-
-        self.constellation_bpsk = constellation_bpsk = digital.constellation_bpsk().base()
-
-
-        self.constellation_8psk = constellation_8psk = digital.constellation_8psk().base()
+        self.constellation_8psk2 = constellation_8psk2 = digital.constellation_8psk().base()
 
         self.channel_rotation = channel_rotation = 0
-        self.channel_noise = channel_noise = 0
+        self.channel_noise = channel_noise = 0.2
         self.access_code = access_code = '0101110111101101'
 
 
@@ -141,6 +138,11 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.tab_grid_layout_1 = Qt.QGridLayout()
         self.tab_layout_1.addLayout(self.tab_grid_layout_1)
         self.tab.addTab(self.tab_widget_1, 'PER Rate')
+        self.tab_widget_2 = Qt.QWidget()
+        self.tab_layout_2 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tab_widget_2)
+        self.tab_grid_layout_2 = Qt.QGridLayout()
+        self.tab_layout_2.addLayout(self.tab_grid_layout_2)
+        self.tab.addTab(self.tab_widget_2, 'CRC OUT')
         self.top_layout.addWidget(self.tab)
         self._mod_choice_options = (0, 1, 2, )
         self._mod_choice_labels = ('DBPSK', 'DQPSK', 'D8PSK', )
@@ -187,7 +189,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self._channel_rotation_range = Range(0, 2*np.pi, 0.1, 0, 200)
         self._channel_rotation_win = RangeWidget(self._channel_rotation_range, self.set_channel_rotation, "channel_rotation", "counter_slider", float)
         self.top_grid_layout.addWidget(self._channel_rotation_win, 0,2,1,1)
-        self._channel_noise_range = Range(0, 2, 0.01, 0, 200)
+        self._channel_noise_range = Range(0, 2, 0.01, 0.2, 200)
         self._channel_noise_win = RangeWidget(self._channel_noise_range, self.set_channel_noise, "channel_noise", "counter_slider", float)
         self.top_grid_layout.addWidget(self._channel_noise_win, 0,3,1,1)
         self.tx_outer_0_0 = tx_outer(
@@ -204,6 +206,24 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             len_tag_name=len_tag_name,
             packet_counter=packet_counter,
         )
+        self.tx_inner_1_1 = tx_inner(
+            excess_bw=excess_bw,
+            len_tag_name=len_tag_name,
+            psk=digital.psk_constellation(8,digital.mod_codes.NO_CODE,True) ,
+            sps=sps,
+        )
+        self.tx_inner_1_0 = tx_inner(
+            excess_bw=excess_bw,
+            len_tag_name=len_tag_name,
+            psk=digital.psk_constellation(4,digital.mod_codes.NO_CODE,True) ,
+            sps=sps,
+        )
+        self.tx_inner_1 = tx_inner(
+            excess_bw=excess_bw,
+            len_tag_name=len_tag_name,
+            psk=constellation_bpsk,
+            sps=sps,
+        )
         self.rx_outer_0_0 = rx_outer(
             access_code=access_code,
             decoder=CD,
@@ -215,6 +235,24 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             decoder=DD,
             len_tag_name_rx=len_tag_name_rx,
             packet_length=packet_length,
+        )
+        self.rx_inner_0_1 = rx_inner(
+            excess_bw=excess_bw,
+            psk=digital.psk_constellation(8,digital.mod_codes.NO_CODE,True) ,
+            sps=sps,
+            theta=theta,
+        )
+        self.rx_inner_0_0 = rx_inner(
+            excess_bw=excess_bw,
+            psk=digital.psk_constellation(4,digital.mod_codes.NO_CODE,True) ,
+            sps=sps,
+            theta=theta,
+        )
+        self.rx_inner_0 = rx_inner(
+            excess_bw=excess_bw,
+            psk=digital.psk_constellation(2,digital.mod_codes.NO_CODE,False) ,
+            sps=sps,
+            theta=theta,
         )
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
                 interpolation=int(samp_rate),
@@ -231,7 +269,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0_0_0_0 = qtgui.time_sink_f(
         	1024, #size
         	samp_rate, #samp_rate
-        	"After CRC", #name
+        	"After FEC", #name
         	1 #number of inputs
         )
         self.qtgui_time_sink_x_0_0_0_0.set_update_time(0.10)
@@ -366,39 +404,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.tab_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
         self.per_calc_0 = per_calc_0.blk(window_size=10, modulus=256)
-        self.my_tx_inner_0_1 = my_tx_inner(
-            constellation=constellation_8psk,
-            rolloff=excess_bw,
-            sps=sps,
-        )
-        self.my_tx_inner_0_0 = my_tx_inner(
-            constellation=constellation_qpsk,
-            rolloff=excess_bw,
-            sps=sps,
-        )
-        self.my_tx_inner_0 = my_tx_inner(
-            constellation=constellation_bpsk,
-            rolloff=excess_bw,
-            sps=sps,
-        )
-        self.my_rx_inner_0_1 = my_rx_inner(
-            constellation=constellation_8psk,
-            phase_rot_after_costas_loop=theta,
-            rolloff=excess_bw,
-            sps=sps,
-        )
-        self.my_rx_inner_0_0 = my_rx_inner(
-            constellation=constellation_qpsk,
-            phase_rot_after_costas_loop=theta,
-            rolloff=excess_bw,
-            sps=sps,
-        )
-        self.my_rx_inner_0 = my_rx_inner(
-            constellation=constellation_bpsk,
-            phase_rot_after_costas_loop=theta,
-            rolloff=excess_bw,
-            sps=sps,
-        )
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	1, samp_rate, symbol_rate, 5e3, firdes.WIN_HAMMING, 6.76))
         self.channels_channel_model_0 = channels.channel_model(
@@ -437,6 +442,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(fec_choice, True)
         self.RWN_selector_1_3_ff_0 = RWN.selector_1_3_ff(fec_choice, True)
         self.RWN_selector_1_3_bb_1 = RWN.selector_1_3_bb(fec_choice, True)
+        self.RWN_selector_1_3_bb_0 = RWN.selector_1_3_bb(mod_choice, False)
 
 
 
@@ -444,6 +450,9 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.msg_connect((self.blocks_probe_rate_0, 'rate'), (self.blocks_message_debug_0, 'print'))
+        self.connect((self.RWN_selector_1_3_bb_0, 0), (self.tx_inner_1, 0))
+        self.connect((self.RWN_selector_1_3_bb_0, 1), (self.tx_inner_1_0, 0))
+        self.connect((self.RWN_selector_1_3_bb_0, 2), (self.tx_inner_1_1, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 2), (self.blocks_null_sink_0, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 0), (self.tx_outer_0, 0))
         self.connect((self.RWN_selector_1_3_bb_1, 1), (self.tx_outer_0_0, 0))
@@ -458,37 +467,35 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.RWN_selector_3_1_cc_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.RWN_selector_3_1_cc_1, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.RWN_selector_1_3_ff_0, 0))
-        self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0, 0))
-        self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_0, 0))
-        self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_1, 0))
+        self.connect((self.analog_agc_xx_0, 0), (self.rx_inner_0, 0))
+        self.connect((self.analog_agc_xx_0, 0), (self.rx_inner_0_0, 0))
+        self.connect((self.analog_agc_xx_0, 0), (self.rx_inner_0_1, 0))
         self.connect((self.blocks_file_source_0, 0), (self.RWN_selector_1_3_bb_1, 0))
         self.connect((self.blocks_keep_m_in_n_0, 0), (self.blocks_file_sink_0_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_null_source_1_0, 0), (self.RWN_selector_3_1_bb_1_0, 2))
-        self.connect((self.blocks_stream_to_tagged_stream_0_0, 0), (self.my_tx_inner_0, 0))
-        self.connect((self.blocks_stream_to_tagged_stream_0_0, 0), (self.my_tx_inner_0_0, 0))
-        self.connect((self.blocks_stream_to_tagged_stream_0_0, 0), (self.my_tx_inner_0_1, 0))
+        self.connect((self.blocks_stream_to_tagged_stream_0_0, 0), (self.RWN_selector_1_3_bb_0, 0))
         self.connect((self.blocks_tag_gate_0_0, 0), (self.blocks_stream_to_tagged_stream_0_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.blocks_uchar_to_float_0, 0), (self.qtgui_time_sink_x_0_0_0_0, 0))
         self.connect((self.channels_channel_model_0, 0), (self.rational_resampler_xxx_0_0, 0))
         self.connect((self.low_pass_filter_0, 0), (self.analog_agc_xx_0, 0))
-        self.connect((self.my_rx_inner_0, 1), (self.RWN_selector_3_1_cc_1, 0))
-        self.connect((self.my_rx_inner_0, 0), (self.RWN_selector_3_1_ff_0, 0))
-        self.connect((self.my_rx_inner_0_0, 1), (self.RWN_selector_3_1_cc_1, 1))
-        self.connect((self.my_rx_inner_0_0, 0), (self.RWN_selector_3_1_ff_0, 1))
-        self.connect((self.my_rx_inner_0_1, 1), (self.RWN_selector_3_1_cc_1, 2))
-        self.connect((self.my_rx_inner_0_1, 0), (self.RWN_selector_3_1_ff_0, 2))
-        self.connect((self.my_tx_inner_0, 0), (self.RWN_selector_3_1_cc_0, 0))
-        self.connect((self.my_tx_inner_0_0, 0), (self.RWN_selector_3_1_cc_0, 1))
-        self.connect((self.my_tx_inner_0_1, 0), (self.RWN_selector_3_1_cc_0, 2))
         self.connect((self.per_calc_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.low_pass_filter_0, 0))
+        self.connect((self.rx_inner_0, 1), (self.RWN_selector_3_1_cc_1, 0))
+        self.connect((self.rx_inner_0, 0), (self.RWN_selector_3_1_ff_0, 0))
+        self.connect((self.rx_inner_0_0, 1), (self.RWN_selector_3_1_cc_1, 1))
+        self.connect((self.rx_inner_0_0, 0), (self.RWN_selector_3_1_ff_0, 1))
+        self.connect((self.rx_inner_0_1, 1), (self.RWN_selector_3_1_cc_1, 2))
+        self.connect((self.rx_inner_0_1, 0), (self.RWN_selector_3_1_ff_0, 2))
         self.connect((self.rx_outer_0, 0), (self.RWN_selector_3_1_bb_1_0, 0))
         self.connect((self.rx_outer_0_0, 0), (self.RWN_selector_3_1_bb_1_0, 1))
+        self.connect((self.tx_inner_1, 0), (self.RWN_selector_3_1_cc_0, 0))
+        self.connect((self.tx_inner_1_0, 0), (self.RWN_selector_3_1_cc_0, 1))
+        self.connect((self.tx_inner_1_1, 0), (self.RWN_selector_3_1_cc_0, 2))
         self.connect((self.tx_outer_0, 0), (self.RWN_selector_3_1_bb_0, 0))
         self.connect((self.tx_outer_0_0, 0), (self.RWN_selector_3_1_bb_0, 1))
 
@@ -551,13 +558,13 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_sps(self, sps):
         self.sps = sps
+        self.tx_inner_1_1.set_sps(self.sps)
+        self.tx_inner_1_0.set_sps(self.sps)
+        self.tx_inner_1.set_sps(self.sps)
+        self.rx_inner_0_1.set_sps(self.sps)
+        self.rx_inner_0_0.set_sps(self.sps)
+        self.rx_inner_0.set_sps(self.sps)
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.my_tx_inner_0_1.set_sps(self.sps)
-        self.my_tx_inner_0_0.set_sps(self.sps)
-        self.my_tx_inner_0.set_sps(self.sps)
-        self.my_rx_inner_0_1.set_sps(self.sps)
-        self.my_rx_inner_0_0.set_sps(self.sps)
-        self.my_rx_inner_0.set_sps(self.sps)
 
     def get_packet_length(self):
         return self.packet_length
@@ -592,22 +599,28 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_excess_bw(self, excess_bw):
         self.excess_bw = excess_bw
+        self.tx_inner_1_1.set_excess_bw(self.excess_bw)
+        self.tx_inner_1_0.set_excess_bw(self.excess_bw)
+        self.tx_inner_1.set_excess_bw(self.excess_bw)
+        self.rx_inner_0_1.set_excess_bw(self.excess_bw)
+        self.rx_inner_0_0.set_excess_bw(self.excess_bw)
+        self.rx_inner_0.set_excess_bw(self.excess_bw)
         self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.my_tx_inner_0_1.set_rolloff(self.excess_bw)
-        self.my_tx_inner_0_0.set_rolloff(self.excess_bw)
-        self.my_tx_inner_0.set_rolloff(self.excess_bw)
-        self.my_rx_inner_0_1.set_rolloff(self.excess_bw)
-        self.my_rx_inner_0_0.set_rolloff(self.excess_bw)
-        self.my_rx_inner_0.set_rolloff(self.excess_bw)
+
+    def get_constellation_8psk(self):
+        return self.constellation_8psk
+
+    def set_constellation_8psk(self, constellation_8psk):
+        self.constellation_8psk = constellation_8psk
 
     def get_theta(self):
         return self.theta
 
     def set_theta(self, theta):
         self.theta = theta
-        self.my_rx_inner_0_1.set_phase_rot_after_costas_loop(self.theta)
-        self.my_rx_inner_0_0.set_phase_rot_after_costas_loop(self.theta)
-        self.my_rx_inner_0.set_phase_rot_after_costas_loop(self.theta)
+        self.rx_inner_0_1.set_theta(self.theta)
+        self.rx_inner_0_0.set_theta(self.theta)
+        self.rx_inner_0.set_theta(self.theta)
 
     def get_sdr_rate(self):
         return self.sdr_rate
@@ -630,6 +643,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.RWN_selector_3_1_ff_0.set_selected(self.mod_choice)
         self.RWN_selector_3_1_cc_1.set_selected(self.mod_choice)
         self.RWN_selector_3_1_cc_0.set_selected(self.mod_choice)
+        self.RWN_selector_1_3_bb_0.set_selected(self.mod_choice)
 
     def get_len_tag_name_rx(self):
         return self.len_tag_name_rx
@@ -646,6 +660,9 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.len_tag_name = len_tag_name
         self.tx_outer_0_0.set_len_tag_name(self.len_tag_name)
         self.tx_outer_0.set_len_tag_name(self.len_tag_name)
+        self.tx_inner_1_1.set_len_tag_name(self.len_tag_name)
+        self.tx_inner_1_0.set_len_tag_name(self.len_tag_name)
+        self.tx_inner_1.set_len_tag_name(self.len_tag_name)
 
     def get_frame_bits(self):
         return self.frame_bits
@@ -668,24 +685,19 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_constellation_qpsk(self, constellation_qpsk):
         self.constellation_qpsk = constellation_qpsk
-        self.my_tx_inner_0_0.set_constellation(self.constellation_qpsk)
-        self.my_rx_inner_0_0.set_constellation(self.constellation_qpsk)
 
     def get_constellation_bpsk(self):
         return self.constellation_bpsk
 
     def set_constellation_bpsk(self, constellation_bpsk):
         self.constellation_bpsk = constellation_bpsk
-        self.my_tx_inner_0.set_constellation(self.constellation_bpsk)
-        self.my_rx_inner_0.set_constellation(self.constellation_bpsk)
+        self.tx_inner_1.set_psk(self.constellation_bpsk)
 
-    def get_constellation_8psk(self):
-        return self.constellation_8psk
+    def get_constellation_8psk2(self):
+        return self.constellation_8psk2
 
-    def set_constellation_8psk(self, constellation_8psk):
-        self.constellation_8psk = constellation_8psk
-        self.my_tx_inner_0_1.set_constellation(self.constellation_8psk)
-        self.my_rx_inner_0_1.set_constellation(self.constellation_8psk)
+    def set_constellation_8psk2(self, constellation_8psk2):
+        self.constellation_8psk2 = constellation_8psk2
 
     def get_channel_rotation(self):
         return self.channel_rotation
