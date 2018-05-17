@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Thu May 17 18:13:08 2018
+# Generated: Thu May 17 19:10:50 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -41,7 +41,7 @@ from rx_outer import rx_outer  # grc-generated hier_block
 from tx_outer import tx_outer  # grc-generated hier_block
 import RWN
 import numpy as np
-import per_calc_port_select
+import per_calc_port_select_2
 import pmt
 import sip
 import threading
@@ -132,6 +132,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
+        self.probe = blocks.probe_signal_b()
         self._theta_range = Range(0, 2*np.pi, np.pi/4, 0, 200)
         self._theta_win = RangeWidget(self._theta_range, self.set_theta, "theta", "counter_slider", float)
         self.top_grid_layout.addWidget(self._theta_win, 0,1,1,1)
@@ -148,7 +149,19 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.tab.addTab(self.tab_widget_1, 'PER Rate')
         self.top_layout.addWidget(self.tab)
         self.probe2 = blocks.probe_signal_b()
-        self.probe = blocks.probe_signal_b()
+
+        def _port_probe():
+            while True:
+                val = self.probe.level()
+                try:
+                    self.set_port(val)
+                except AttributeError:
+                    pass
+                time.sleep(1.0 / (1))
+        _port_thread = threading.Thread(target=_port_probe)
+        _port_thread.daemon = True
+        _port_thread.start()
+
         self._mod_choice_options = (0, 1, 2, )
         self._mod_choice_labels = ('DBPSK', 'DQPSK', 'D8PSK', )
         self._mod_choice_group_box = Qt.QGroupBox('Modulation')
@@ -344,6 +357,37 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.tab_layout_1.addWidget(self._qtgui_time_sink_x_0_win)
+        self.qtgui_number_sink_0_1 = qtgui.number_sink(
+            gr.sizeof_float,
+            0,
+            qtgui.NUM_GRAPH_HORIZ,
+            1
+        )
+        self.qtgui_number_sink_0_1.set_update_time(0.04)
+        self.qtgui_number_sink_0_1.set_title("Port")
+
+        labels = ['', '', '', '', '',
+                  '', '', '', '', '']
+        units = ['', '', '', '', '',
+                 '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        for i in xrange(1):
+            self.qtgui_number_sink_0_1.set_min(i, -1)
+            self.qtgui_number_sink_0_1.set_max(i, 1)
+            self.qtgui_number_sink_0_1.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0_1.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0_1.set_label(i, labels[i])
+            self.qtgui_number_sink_0_1.set_unit(i, units[i])
+            self.qtgui_number_sink_0_1.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0_1.enable_autoscale(False)
+        self._qtgui_number_sink_0_1_win = sip.wrapinstance(self.qtgui_number_sink_0_1.pyqwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_number_sink_0_1_win)
         self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
         	1024, #size
         	"", #name
@@ -385,20 +429,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.tab_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
-
-        def _port_probe():
-            while True:
-                val = self.probe.level()
-                try:
-                    self.set_port(val)
-                except AttributeError:
-                    pass
-                time.sleep(1.0 / (1))
-        _port_thread = threading.Thread(target=_port_probe)
-        _port_thread.daemon = True
-        _port_thread.start()
-
-        self.per_calc_port_select = per_calc_port_select.blk(window_size=20, modulus=256)
+        self.per_calc_port_select_2 = per_calc_port_select_2.blk(window_size=20, modulus=256)
         self.my_tx_inner_0_1 = my_tx_inner(
             constellation=constellation_8psk,
             rolloff=excess_bw,
@@ -459,6 +490,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0_0.set_unbuffered(True)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
+        self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
         self.analog_agc_xx_0 = analog.agc_cc(1e-4, 1.0, 1.0)
         self.analog_agc_xx_0.set_max_gain(65536)
         self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_choice*restart_call, True)
@@ -491,9 +523,10 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0, 0))
         self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_0, 0))
         self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_1, 0))
+        self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
         self.connect((self.blocks_file_source_0, 0), (self.RWN_selector_1_3_bb_1, 0))
         self.connect((self.blocks_keep_m_in_n_0, 0), (self.blocks_file_sink_0_0_0, 0))
-        self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_port_select, 0))
+        self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_port_select_2, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_null_source_1_0, 0), (self.RWN_selector_3_1_bb_1_0, 2))
@@ -514,8 +547,8 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.my_tx_inner_0, 0), (self.RWN_selector_3_1_cc_0, 0))
         self.connect((self.my_tx_inner_0_0, 0), (self.RWN_selector_3_1_cc_0, 1))
         self.connect((self.my_tx_inner_0_1, 0), (self.RWN_selector_3_1_cc_0, 2))
-        self.connect((self.per_calc_port_select, 1), (self.probe, 0))
-        self.connect((self.per_calc_port_select, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.per_calc_port_select_2, 1), (self.probe, 0))
+        self.connect((self.per_calc_port_select_2, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.low_pass_filter_0, 0))
         self.connect((self.rx_outer_0, 0), (self.RWN_selector_3_1_bb_1_0, 0))
@@ -618,6 +651,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_port(self, port):
         self.port = port
         self.set_mod_choice(self.port*self.restart_call)
+        self.analog_const_source_x_1.set_offset(self.port)
 
     def get_packet_length(self):
         return self.packet_length
@@ -801,8 +835,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
 
 def main(top_block_cls=top_block_amc, options=None):
-    if gr.enable_realtime_scheduling() != gr.RT_OK:
-        print "Error: failed to enable real-time scheduling."
 
     from distutils.version import StrictVersion
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):
