@@ -33,10 +33,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     def work(self, input_items, output_items):
         """example: multiply with constant"""
         # self.set_history(self.window_size)
-        print("input size -> {}".format(len(input_items[0])))
         consumed = (len(input_items[0])-self.window_size+1)
-        if consumed < self.window_size:
-            print("Return input size -> {}".format(len(input_items[0])))
+        if  consumed < self.window_size:
             return 0    
             # per = erros + window_size
         for i in range(0 , consumed):
@@ -44,23 +42,5 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            # else:
-            # 	print("loop input size -> {}".format(len(input_items[0])))
-            # 	print("consumed -> {}".format(consumed))
-            # 	print("i -> {}".format(i))
-            # 	observed = input_items[0][i:]
-            #     errors = sum((np.diff(observed) % self.modulus)-1)
-            #     output_items[0][i]= float(errors)/(self.window_size+errors)
-            # if output_items[0][i] <= 1 and output_items[0][i] >= 0 and i%self.window_size==0: #printa uma vez apenas valores entre 0 e 1
-            #     # print(i) 
-            #     if output_items[0][i] < 0.25:
-            # 	    print("Erros ->{} - Sugerido 8PSK SEM FEC" .format(output_items[0][i]))
-            #     if output_items[0][i] < 0.50 and output_items[0][i] >= 0.25:
-            #         print("Erros ->{} - Sugerido QPSK SEM FEC" .format(output_items[0][i]))
-            #     if output_items[0][i] <= 0.75 and output_items[0][i] >= 0.50:
-            #         print("Erros ->{} - Sugerido QPSK COM FEC" .format(output_items[0][i]))
-            #     if output_items[0][i] <= 1 and output_items[0][i] >= 0.75:
-            #         print("Erros ->{} - Sugerido BPSK COM FEC" .format(output_items[0][i]))
-        # self.consume(0,consumed)
-        
+            # print("input {} i {}; consumed {}".format(len(input_items[0]),i,consumed))
         return len(output_items[0])
