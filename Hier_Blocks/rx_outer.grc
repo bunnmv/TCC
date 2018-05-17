@@ -90,6 +90,33 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(672, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>data_encoded_length</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>int((packet_length) * 1/decoder.rate())</value>
+    </param>
+  </block>
+  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -170,7 +197,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(624, 100)</value>
+      <value>(608, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -209,7 +236,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(960, 100)</value>
+      <value>(944, 204)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -284,7 +311,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>fec.cc_decoder.make(4000, 7, 2, ([79,109]), 0, -1, fec.CC_STREAMING, False)</value>
     </param>
   </block>
   <block>
@@ -307,7 +334,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(784, 92)</value>
+      <value>(760, 260)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -366,7 +393,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 364)</value>
+      <value>(392, 252)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -413,7 +440,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -445,7 +472,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>1800</value>
     </param>
   </block>
   <block>
@@ -460,7 +487,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(160, 140)</value>
+      <value>(56, 220)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -599,11 +626,10 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     def general_work_output(self, input_items, output_items):
         L_in = len(input_items[0])
         L_out = len(output_items[0])
-        L_payload = self.payload_length # in bits
+        L_payload = self.payload_length * 8  # in bits
 
         if L_in &lt; L_payload or L_out &lt; L_payload:
             return 0
-
 
         self.add_item_tag(0, # Port number
             self.nitems_written(0), # Offset
@@ -649,7 +675,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 368)</value>
+      <value>(208, 256)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -661,7 +687,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>payload_length</key>
-      <value>frame_bits</value>
+      <value>data_encoded_length</value>
     </param>
     <param>
       <key>tag_name</key>
@@ -669,7 +695,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>threshold</key>
-      <value>0</value>
+      <value>2</value>
     </param>
   </block>
   <block>
@@ -688,7 +714,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(376, 4)</value>
+      <value>(392, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -716,7 +742,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>500</value>
     </param>
   </block>
   <block>
@@ -731,7 +757,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 124)</value>
+      <value>(560, 380)</value>
     </param>
     <param>
       <key>_rotation</key>

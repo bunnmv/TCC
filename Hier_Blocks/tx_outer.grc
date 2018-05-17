@@ -90,6 +90,108 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(872, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>crc_length</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>4</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value>Somehow, on the encoder fec.rate() returns 1/the_actual_rate. 
+So a 1/2 returns  2</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(944, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>data_encoded_length</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>int((packet_counter+info_length+crc_length) *encoder.rate())</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(672, 0)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Access Code</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>'0101110111101101' </value>
+    </param>
+  </block>
+  <block>
     <key>blocks_repack_bits_bb</key>
     <param>
       <key>k</key>
@@ -123,7 +225,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 156)</value>
+      <value>(672, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -166,7 +268,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -225,7 +327,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(408, 156)</value>
+      <value>(368, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -339,7 +441,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(576, 148)</value>
+      <value>(520, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -414,7 +516,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>fec.cc_encoder_make(4000, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)</value>
     </param>
   </block>
   <block>
@@ -443,7 +545,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(888, 144)</value>
+      <value>(824, 144)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -459,7 +561,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>mtu</key>
-      <value>packet_counter+info_length+4</value>
+      <value>packet_counter+info_length+crc_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -472,6 +574,53 @@ Inner vai ate aqui + o header formatter</value>
     <param>
       <key>puncpat</key>
       <value>'11'</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(792, 0)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>frame_bits</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Frame Bits</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -592,7 +741,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>500</value>
     </param>
   </block>
   <block>
@@ -643,6 +792,112 @@ Inner vai ate aqui + o header formatter</value>
     </param>
   </block>
   <block>
+    <key>epy_block</key>
+    <param>
+      <key>access_code</key>
+      <value>access_code</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_io_cache</key>
+      <value>('My Frammer', 'blk', [('access_code', 'None'), ('payload_length', '100'), ('tag_name', "'length'")], [('0', 'byte', 1)], [('0', 'byte', 1)], '\n    ATTENTION!\n\n    This blocks works with unpacked bits in the input and in the output.\n    ', ['access_code', 'payload_length', 'tag_name'])</value>
+    </param>
+    <param>
+      <key>_source_code</key>
+      <value>"""
+Embedded Python Blocks:
+
+Each time this file is saved, GRC will instantiate the first class it finds
+to get ports and parameters of your block. The arguments to __init__  will
+be the parameters. All of them are required to have default values!
+"""
+
+import numpy as np
+from gnuradio import gr
+import pmt
+
+
+class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
+    """
+    ATTENTION!
+
+    This blocks works with unpacked bits in the input and in the output.
+    """
+    def __init__(self, access_code=None, payload_length=100, tag_name = "length"):  # only default arguments here
+        """arguments to this function show up as parameters in GRC"""
+        gr.basic_block.__init__(
+            self,
+            name='My Frammer',   # will show up in GRC
+            in_sig=[np.uint8],
+            out_sig=[np.uint8]
+        )
+        # if an attribute with the same name as a parameter is found,
+        # a callback is registered (properties work, too).
+        self.access_code = access_code
+        self.payload_length = payload_length
+        self.tag_name = tag_name
+        # enum      tag_propagation_policy_t { TPP_DONT = 0, TPP_ALL_TO_ALL = 1, TPP_ONE_TO_ONE = 2 }
+        self.set_tag_propagation_policy(0)
+
+
+    def general_work(self, input_items, output_items):
+
+        if len(input_items[0]) &lt; 8*self.payload_length:
+            return 0
+
+        access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.uint8)
+
+        payload = input_items[0][: 8*self.payload_length]
+        packet = np.concatenate([access_code_binary, payload])
+
+        if len(output_items[0]) &lt; len(packet):
+            return 0
+
+        self.add_item_tag(0, # Port number
+                 self.nitems_written(0), # Offset
+                 pmt.intern(self.tag_name), # Key
+                 pmt.to_pmt(len(packet)) # Value
+        )
+        output_items[0][: len(packet)] = packet
+
+        self.consume(0, 8*self.payload_length)
+
+        return len(packet)
+</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1024, 140)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>my_framer</value>
+    </param>
+    <param>
+      <key>payload_length</key>
+      <value>data_encoded_length</value>
+    </param>
+    <param>
+      <key>tag_name</key>
+      <value>len_tag_name</value>
+    </param>
+  </block>
+  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -686,7 +941,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
+      <value>1</value>
     </param>
   </block>
   <block>
@@ -701,7 +956,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 156)</value>
+      <value>(1216, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -709,7 +964,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>toFEC</value>
+      <value>toMod</value>
     </param>
     <param>
       <key>type</key>
@@ -717,7 +972,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>label</key>
-      <value>toSync</value>
+      <value>toMod</value>
     </param>
     <param>
       <key>num_streams</key>
@@ -764,7 +1019,7 @@ Inner vai ate aqui + o header formatter</value>
   </connection>
   <connection>
     <source_block_id>fec_extended_tagged_encoder_tx_convolutional</source_block_id>
-    <sink_block_id>toFEC</sink_block_id>
+    <sink_block_id>my_framer</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -773,5 +1028,11 @@ Inner vai ate aqui + o header formatter</value>
     <sink_block_id>blocks_stream_mux_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>my_framer</source_block_id>
+    <sink_block_id>toMod</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
   </connection>
 </flow_graph>

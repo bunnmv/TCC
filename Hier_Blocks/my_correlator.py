@@ -43,11 +43,10 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     def general_work_output(self, input_items, output_items):
         L_in = len(input_items[0])
         L_out = len(output_items[0])
-        L_payload = self.payload_length # in bits
+        L_payload = self.payload_length * 8  # in bits
 
         if L_in < L_payload or L_out < L_payload:
             return 0
-
 
         self.add_item_tag(0, # Port number
             self.nitems_written(0), # Offset
