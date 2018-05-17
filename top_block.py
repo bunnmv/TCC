@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu May 17 14:41:20 2018
+# Generated: Thu May 17 17:53:05 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -16,6 +16,7 @@ if __name__ == '__main__':
         except:
             print "Warning: failed to XInitThreads()"
 
+def struct(data): return type('Struct', (object,), data)()
 from PyQt4 import Qt
 from gnuradio import analog
 from gnuradio import blocks
@@ -68,16 +69,17 @@ class top_block(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.restart = restart = 0
-        self.port = port = 0
         self.samp_rate = samp_rate = 32000
-        self.restart_call = restart_call = restart>0
-        self.new_port = new_port = int(np.round((port*2.4)))
+        self.restart_call = restart_call = restart!=0
+        self.port = port = 0
         self.keep = keep = 20
+        self.Mod = Mod = struct({'DBPSK': 0, 'DQPSK': 1, 'D8PSK': 2, })
+        self.FEC = FEC = struct({'convolutional': 0, 'dummy': 1, })
 
         ##################################################
         # Blocks
         ##################################################
-        self.probe = blocks.probe_signal_f()
+        self.probe = blocks.probe_signal_b()
         self.probe2 = blocks.probe_signal_b()
 
         def _port_probe():
@@ -153,37 +155,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.qtgui_number_sink_0_1_0 = qtgui.number_sink(
-            gr.sizeof_float,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1
-        )
-        self.qtgui_number_sink_0_1_0.set_update_time(0.04)
-        self.qtgui_number_sink_0_1_0.set_title("New Port")
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        units = ['', '', '', '', '',
-                 '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-                  ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        for i in xrange(1):
-            self.qtgui_number_sink_0_1_0.set_min(i, -1)
-            self.qtgui_number_sink_0_1_0.set_max(i, 1)
-            self.qtgui_number_sink_0_1_0.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_0_1_0.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_0_1_0.set_label(i, labels[i])
-            self.qtgui_number_sink_0_1_0.set_unit(i, units[i])
-            self.qtgui_number_sink_0_1_0.set_factor(i, factor[i])
-
-        self.qtgui_number_sink_0_1_0.enable_autoscale(False)
-        self._qtgui_number_sink_0_1_0_win = sip.wrapinstance(self.qtgui_number_sink_0_1_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_1_0_win)
         self.qtgui_number_sink_0_1 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -260,12 +231,11 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_float_to_char_0_1 = blocks.float_to_char(1, 1)
         self.blocks_float_to_char_0_0 = blocks.float_to_char(1, 1)
         self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
-        self.analog_const_source_x_1_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, restart_call*new_port)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
         self.analog_const_source_x_0_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 0)
         self.analog_const_source_x_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 5)
         self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 10)
-        self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(new_port*restart_call, True)
+        self.RWN_selector_3_1_bb_0 = RWN.selector_3_1_bb(port*restart_call, True)
 
 
 
@@ -277,7 +247,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.analog_const_source_x_0_0, 0), (self.blocks_float_to_char_0_0, 0))
         self.connect((self.analog_const_source_x_0_1, 0), (self.blocks_float_to_char_0_1, 0))
         self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
-        self.connect((self.analog_const_source_x_1_0, 0), (self.qtgui_number_sink_0_1_0, 0))
         self.connect((self.blocks_float_to_char_0, 0), (self.RWN_selector_3_1_bb_0, 1))
         self.connect((self.blocks_float_to_char_0_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_float_to_char_0_1, 0), (self.blocks_throttle_0, 0))
@@ -289,7 +258,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.digital_crc32_bb_0, 0), (self.probe2, 0))
         self.connect((self.digital_crc32_bb_0_0, 0), (self.digital_map_bb_0, 0))
         self.connect((self.digital_map_bb_0, 0), (self.digital_crc32_bb_0, 0))
-        self.connect((self.per_calc_test_probe, 0), (self.probe, 0))
+        self.connect((self.per_calc_test_probe, 1), (self.probe, 0))
         self.connect((self.per_calc_test_probe, 0), (self.qtgui_number_sink_0_0, 0))
 
     def closeEvent(self, event):
@@ -302,15 +271,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_restart(self, restart):
         self.restart = restart
-        self.set_restart_call(self.restart>0)
-
-    def get_port(self):
-        return self.port
-
-    def set_port(self, port):
-        self.port = port
-        self.set_new_port(int(np.round((self.port*2.4))))
-        self.analog_const_source_x_1.set_offset(self.port)
+        self.set_restart_call(self.restart!=0)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -325,22 +286,33 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_restart_call(self, restart_call):
         self.restart_call = restart_call
-        self.analog_const_source_x_1_0.set_offset(self.restart_call*self.new_port)
-        self.RWN_selector_3_1_bb_0.set_selected(self.new_port*self.restart_call)
+        self.RWN_selector_3_1_bb_0.set_selected(self.port*self.restart_call)
 
-    def get_new_port(self):
-        return self.new_port
+    def get_port(self):
+        return self.port
 
-    def set_new_port(self, new_port):
-        self.new_port = new_port
-        self.analog_const_source_x_1_0.set_offset(self.restart_call*self.new_port)
-        self.RWN_selector_3_1_bb_0.set_selected(self.new_port*self.restart_call)
+    def set_port(self, port):
+        self.port = port
+        self.analog_const_source_x_1.set_offset(self.port)
+        self.RWN_selector_3_1_bb_0.set_selected(self.port*self.restart_call)
 
     def get_keep(self):
         return self.keep
 
     def set_keep(self, keep):
         self.keep = keep
+
+    def get_Mod(self):
+        return self.Mod
+
+    def set_Mod(self, Mod):
+        self.Mod = Mod
+
+    def get_FEC(self):
+        return self.FEC
+
+    def set_FEC(self, FEC):
+        self.FEC = FEC
 
 
 def main(top_block_cls=top_block, options=None):

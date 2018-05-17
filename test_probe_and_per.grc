@@ -90,6 +90,372 @@
     </param>
   </block>
   <block>
+    <key>variable_struct</key>
+    <param>
+      <key>value10</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value11</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value12</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value13</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value14</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value15</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value16</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value17</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value18</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value19</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>value3</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value4</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value5</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value6</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value7</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value8</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value9</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>field0</key>
+      <value>convolutional</value>
+    </param>
+    <param>
+      <key>field1</key>
+      <value>dummy</value>
+    </param>
+    <param>
+      <key>field10</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field11</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field12</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field13</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field14</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field15</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field16</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field17</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field18</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field19</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field5</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field6</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field7</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field8</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field9</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(920, 84)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>FEC</value>
+    </param>
+    <param>
+      <key>value0</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value1</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_struct</key>
+    <param>
+      <key>value10</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value11</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value12</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value13</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value14</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value15</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value16</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value17</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value18</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value19</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value3</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value4</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value5</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value6</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value7</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value8</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value9</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>value0</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>value1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>field0</key>
+      <value>DBPSK</value>
+    </param>
+    <param>
+      <key>field1</key>
+      <value>DQPSK</value>
+    </param>
+    <param>
+      <key>field10</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field11</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field12</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field13</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field14</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field15</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field16</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field17</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field18</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field19</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field2</key>
+      <value>D8PSK</value>
+    </param>
+    <param>
+      <key>field3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field5</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field6</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field7</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field8</key>
+      <value></value>
+    </param>
+    <param>
+      <key>field9</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(840, 80)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>Mod</value>
+    </param>
+  </block>
+  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>comment</key>
@@ -160,11 +526,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(192, 52)</value>
+      <value>(176, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -176,7 +542,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>int(np.floor((port+0.19)*2))</value>
+      <value>int(np.floor((per_level+0.19)*2))</value>
     </param>
   </block>
   <block>
@@ -277,7 +643,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(856, 4)</value>
+      <value>(840, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -289,7 +655,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>restart&gt;0</value>
+      <value>restart!=0</value>
     </param>
   </block>
   <block>
@@ -363,7 +729,7 @@
     </param>
     <param>
       <key>selected</key>
-      <value>new_port*restart_call</value>
+      <value>port*restart_call</value>
     </param>
   </block>
   <block>
@@ -574,7 +940,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1134,7 +1500,7 @@
     </param>
     <param>
       <key>_io_cache</key>
-      <value>('PER Calculator', 'blk', [('window_size', '1'), ('modulus', '1')], [('0', 'byte', 1)], [('0', 'float', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['modulus', 'window_size'])</value>
+      <value>('PER Calculator', 'blk', [('window_size', '1'), ('modulus', '1')], [('0', 'byte', 1)], [('0', 'float', 1), ('1', 'byte', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['modulus', 'window_size'])</value>
     </param>
     <param>
       <key>_source_code</key>
@@ -1161,7 +1527,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             self,
             name='PER Calculator',   # will show up in GRC
             in_sig=[np.int8],
-            out_sig=[np.float32]
+            out_sig=[np.float32,np.int8]
         )
         # if an attribute with the same name as a parameter is found,
         # a callback is registered (properties work, too).
@@ -1183,6 +1549,12 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
             # print("input {} i {}; consumed {}".format(len(input_items[0]),i,consumed))
+            if 0 &lt; output_items[0][i] &lt;= 0.35:
+                output_items[1][i] = 2
+            elif 0.35 &lt; output_items[0][i] &lt;= 0.65:
+                output_items[1][i] = 1
+            else:
+                output_items[1][i] = 0
         return len(output_items[0])
 </value>
     </param>
@@ -1235,7 +1607,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(776, 340)</value>
+      <value>(560, 548)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1247,7 +1619,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
   </block>
   <block>
@@ -1771,7 +2143,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2381,7 +2753,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 560)</value>
+      <value>(784, 536)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2816,14 +3188,14 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>per_calc_test_probe</source_block_id>
-    <sink_block_id>probe</sink_block_id>
+    <sink_block_id>qtgui_number_sink_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>per_calc_test_probe</source_block_id>
-    <sink_block_id>qtgui_number_sink_0_0</sink_block_id>
-    <source_key>0</source_key>
+    <sink_block_id>probe</sink_block_id>
+    <source_key>1</source_key>
     <sink_key>0</sink_key>
   </connection>
 </flow_graph>
