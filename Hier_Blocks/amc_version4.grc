@@ -1779,6 +1779,53 @@
     </param>
   </block>
   <block>
+    <key>analog_const_source_x</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1008, 1164)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>analog_const_source_x_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_file_sink</key>
     <param>
       <key>append</key>
@@ -3033,12 +3080,16 @@
   <block>
     <key>epy_block</key>
     <param>
+      <key>average_length</key>
+      <value>10</value>
+    </param>
+    <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
       <key>_io_cache</key>
-      <value>('PER Calculator', 'blk', [('window_size', '1'), ('modulus', '1')], [('0', 'byte', 1)], [('0', 'float', 1), ('1', 'byte', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['modulus', 'window_size'])</value>
+      <value>('PER Calculator', 'blk', [('window_size', '1'), ('modulus', '1'), ('average_length', '10')], [('0', 'byte', 1)], [('0', 'float', 1), ('1', 'byte', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['average_length', 'modulus', 'window_size'])</value>
     </param>
     <param>
       <key>_source_code</key>
@@ -3059,7 +3110,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
        As for today, it only works for window sizes multiples of the length of the data.
     """
 
-    def __init__(self, window_size=1, modulus=1):  # only default arguments here
+    def __init__(self, window_size=1, modulus=1,average_length=10):  # only default arguments here
         """arguments to this function show up as parameters in GRC"""
         gr.sync_block.__init__(
             self,
@@ -3070,29 +3121,48 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         # if an attribute with the same name as a parameter is found,
         # a callback is registered (properties work, too).
         self.window_size = window_size
+        self.average_length = average_length
         self.modulus = modulus
+        self.work_calls = 0
+        self.average_per = 0
         self.set_history(window_size)
+
+    def calc_average_per(self,new_per):
+
+        selected_port = 0
+        aux_per = 0
+        self.average_per += new_per
+
+        if self.work_calls == self.average_length:
+            self.work_calls = 0
+            aux_per = self.average_per/self.average_length
+            self.average_per = 0
+        else:
+            aux_per = new_per
+
+    	if  0 &lt;= aux_per&lt;= 0.35:
+            selected_port = 2
+        elif 0.35 &lt; aux_per &lt;= 0.65:
+            selected_port = 1
+        else:
+            selected_port = 0
+
+        print(selected_port)
+        return selected_port
 
 
     def work(self, input_items, output_items):
-        """example: multiply with constant"""
-        # self.set_history(self.window_size)
         consumed = (len(input_items[0])-self.window_size+1)
         if  consumed &lt; self.window_size:
             return 0    
-            # per = erros + window_size
+
+        self.work_calls += 1
         for i in range(0 , consumed):
             # if self.window_size+i &lt; len(input_items[0]):
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            # print("input {} i {}; consumed {}".format(len(input_items[0]),i,consumed))
-            if 0 &lt; output_items[0][i] &lt;= 0.35:
-                output_items[1][i] = 2
-            elif 0.35 &lt; output_items[0][i] &lt;= 0.65:
-                output_items[1][i] = 1
-            else:
-                output_items[1][i] = 0
+            output_items[1][i] = calc_average_per(output_items[0][i])
         return len(output_items[0])
 </value>
     </param>
@@ -3106,7 +3176,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 1292)</value>
+      <value>(976, 1284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3145,7 +3215,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1024, 1396)</value>
+      <value>(1048, 1396)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3545,6 +3615,237 @@ If system is frozen restart it
     </param>
   </block>
   <block>
+    <key>qtgui_number_sink</key>
+    <param>
+      <key>autoscale</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>avg</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1152, 1152)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>graph_type</key>
+      <value>qtgui.NUM_GRAPH_HORIZ</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>qtgui_number_sink_0_1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>color1</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit1</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color10</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor10</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label10</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit10</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color2</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor2</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color3</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor3</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color4</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor4</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color5</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor5</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label5</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit5</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color6</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor6</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label6</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit6</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color7</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor7</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label7</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit7</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color8</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor8</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label8</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit8</key>
+      <value></value>
+    </param>
+    <param>
+      <key>color9</key>
+      <value>("black", "black")</value>
+    </param>
+    <param>
+      <key>factor9</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>label9</key>
+      <value></value>
+    </param>
+    <param>
+      <key>unit9</key>
+      <value></value>
+    </param>
+    <param>
+      <key>max</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>name</key>
+      <value>"Port"</value>
+    </param>
+    <param>
+      <key>nconnections</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>update_time</key>
+      <value>0.04</value>
+    </param>
+  </block>
+  <block>
     <key>qtgui_time_sink_x</key>
     <param>
       <key>autoscale</key>
@@ -3580,7 +3881,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1136, 1284)</value>
+      <value>(1136, 1276)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -5048,6 +5349,12 @@ If system is frozen restart it
   <connection>
     <source_block_id>analog_agc_xx_0</source_block_id>
     <sink_block_id>virtual_sink_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>analog_const_source_x_1</source_block_id>
+    <sink_block_id>qtgui_number_sink_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

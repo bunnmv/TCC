@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Thu May 17 19:10:50 2018
+# Generated: Thu May 17 19:46:28 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -41,7 +41,7 @@ from rx_outer import rx_outer  # grc-generated hier_block
 from tx_outer import tx_outer  # grc-generated hier_block
 import RWN
 import numpy as np
-import per_calc_port_select_2
+import per_calc_port_select
 import pmt
 import sip
 import threading
@@ -429,7 +429,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.tab_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
-        self.per_calc_port_select_2 = per_calc_port_select_2.blk(window_size=20, modulus=256)
+        self.per_calc_port_select = per_calc_port_select.blk(window_size=20, modulus=256, average_length=10)
         self.my_tx_inner_0_1 = my_tx_inner(
             constellation=constellation_8psk,
             rolloff=excess_bw,
@@ -526,7 +526,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
         self.connect((self.blocks_file_source_0, 0), (self.RWN_selector_1_3_bb_1, 0))
         self.connect((self.blocks_keep_m_in_n_0, 0), (self.blocks_file_sink_0_0_0, 0))
-        self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_port_select_2, 0))
+        self.connect((self.blocks_keep_m_in_n_0, 0), (self.per_calc_port_select, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_null_source_0, 0), (self.RWN_selector_3_1_bb_0, 2))
         self.connect((self.blocks_null_source_1_0, 0), (self.RWN_selector_3_1_bb_1_0, 2))
@@ -547,8 +547,8 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.my_tx_inner_0, 0), (self.RWN_selector_3_1_cc_0, 0))
         self.connect((self.my_tx_inner_0_0, 0), (self.RWN_selector_3_1_cc_0, 1))
         self.connect((self.my_tx_inner_0_1, 0), (self.RWN_selector_3_1_cc_0, 2))
-        self.connect((self.per_calc_port_select_2, 1), (self.probe, 0))
-        self.connect((self.per_calc_port_select_2, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.per_calc_port_select, 1), (self.probe, 0))
+        self.connect((self.per_calc_port_select, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.rational_resampler_xxx_0_0, 0), (self.low_pass_filter_0, 0))
         self.connect((self.rx_outer_0, 0), (self.RWN_selector_3_1_bb_1_0, 0))
@@ -835,6 +835,8 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
 
 def main(top_block_cls=top_block_amc, options=None):
+    if gr.enable_realtime_scheduling() != gr.RT_OK:
+        print "Error: failed to enable real-time scheduling."
 
     from distutils.version import StrictVersion
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):
