@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu May 17 14:34:18 2018
+# Generated: Thu May 17 14:41:20 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -100,7 +100,7 @@ class top_block(gr.top_block, Qt.QWidget):
                     self.set_restart(val)
                 except AttributeError:
                     pass
-                time.sleep(1.0 / (1000000))
+                time.sleep(1.0 / (0.5))
         _restart_thread = threading.Thread(target=_restart_probe)
         _restart_thread.daemon = True
         _restart_thread.start()

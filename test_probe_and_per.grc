@@ -176,7 +176,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>int(np.round((port*2.4)))</value>
+      <value>int(np.floor((port+0.19)*2))</value>
     </param>
   </block>
   <block>
@@ -262,7 +262,7 @@
     </param>
     <param>
       <key>poll_rate</key>
-      <value>1000000</value>
+      <value>0.5</value>
     </param>
   </block>
   <block>
