@@ -35,24 +35,30 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     def calc_average_per(self,new_per):
 
         selected_port = 0
-        aux_per = 0
-        self.average_per += new_per
+        
 
-        if self.work_calls == self.average_length:
+        if self.work_calls == 2**16:
             self.work_calls = 0
-            aux_per = self.average_per/self.average_length
-            self.average_per = 0
+            self.average_per = new_per
         else:
-            aux_per = new_per
+            self.average_per += new_per
+            self.average_per = self.average_per/self.work_calls
 
-    	if  0 <= aux_per<= 0.35:
+            
+        #     self.work_calls = 0
+        #     aux_per = self.average_per/self.average_length
+        #     self.average_per = 0
+        # else:
+        #     aux_per = new_per
+
+    	if  0 <= self.average_per<= 0.35:
             selected_port = 2
-        elif 0.35 < aux_per <= 0.65:
+        elif 0.35 < self.average_per <= 0.65:
             selected_port = 1
         else:
             selected_port = 0
 
-        print(selected_port)
+        # print(selected_port)
         return selected_port
 
 
@@ -67,5 +73,5 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i]
             errors = sum((np.diff(observed) % self.modulus)-1)
             output_items[0][i]= float(errors)/(self.window_size+errors)
-            output_items[1][i] = calc_average_per(output_items[0][i])
+            output_items[1][i] = self.calc_average_per(output_items[0][i])
         return len(output_items[0])
