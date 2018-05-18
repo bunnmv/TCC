@@ -673,7 +673,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>fec_options[fec_position]*restart_call</value>
+      <value>1</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -762,6 +762,34 @@
     <param>
       <key>widget</key>
       <value>radio_buttons</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value>0 = Conv
+1= dummy</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(640, 124)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>fec_len_menu</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>[full_frame_bits_conv,full_frame_bits_dummy]</value>
     </param>
   </block>
   <block>
@@ -875,6 +903,60 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(376, 132)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>full_frame_bits_conv</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>(packet_length*2+len(access_code))*8</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(376, 92)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>full_frame_bits_dummy</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>(packet_length+len(access_code))*8</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(1016, 4)</value>
     </param>
     <param>
@@ -888,6 +970,33 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>value</key>
       <value>500</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(808, 124)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>is_conv</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>fec_choice == 0</value>
     </param>
   </block>
   <block>
@@ -1136,7 +1245,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>function_args</key>
@@ -1165,6 +1274,33 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>poll_rate</key>
       <value>0.5</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(744, 124)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -1506,194 +1642,6 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
   </block>
   <block>
-    <key>RWN_selector_1_3_bb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(384, 268)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_1_3_bb_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>produce_on_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>fec_choice</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_1_3_ff</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(216, 1580)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_1_3_ff_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>produce_on_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>fec_choice</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_3_1_bb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>consume_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(832, 268)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_3_1_bb_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>fec_choice</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_3_1_bb</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>consume_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(672, 1564)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_3_1_bb_1_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>fec_choice</value>
-    </param>
-  </block>
-  <block>
     <key>RWN_selector_3_1_cc</key>
     <param>
       <key>alias</key>
@@ -1968,7 +1916,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1136, 1516)</value>
+      <value>(1136, 1500)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2070,7 +2018,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(16, 308)</value>
+      <value>(48, 308)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2212,6 +2160,61 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
   </block>
   <block>
+    <key>blocks_keep_m_in_n</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(848, 356)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_keep_m_in_n_1_0</value>
+    </param>
+    <param>
+      <key>m</key>
+      <value>fec_len_menu[fec_choice]</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>n</key>
+      <value>sum(fec_len_menu)</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>full_frame_bits_conv*fec_choice</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_message_debug</key>
     <param>
       <key>alias</key>
@@ -2240,210 +2243,6 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>id</key>
       <value>blocks_message_debug_0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_null_sink</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>bus_conns</key>
-      <value>[[0,],]</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(408, 380)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_null_sink_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_null_sink</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>bus_conns</key>
-      <value>[[0,],]</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(216, 1692)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_null_sink_1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_null_source</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>bus_conns</key>
-      <value>[[0,],]</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(856, 388)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_null_source_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_outputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_null_source</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>bus_conns</key>
-      <value>[[0,],]</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(696, 1684)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_null_source_1_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_outputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
     </param>
   </block>
   <block>
@@ -2557,7 +2356,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
   </block>
   <block>
-    <key>blocks_stream_to_tagged_stream</key>
+    <key>blocks_stream_mux</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -2572,11 +2371,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>2</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(288, 636)</value>
+      <value>(704, 244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2584,11 +2383,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_tagged_stream_0_0</value>
+      <value>blocks_stream_mux_1</value>
     </param>
     <param>
-      <key>len_tag_key</key>
-      <value>len_tag_name</value>
+      <key>lengths</key>
+      <value>full_frame_bits_conv*is_conv, full_frame_bits_dummy*fec_choice</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2599,8 +2398,118 @@ mod_choice = 2 Fec_choice =1</value>
       <value>0</value>
     </param>
     <param>
-      <key>packet_len</key>
-      <value>frame_bits</value>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_stream_mux</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(672, 348)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_stream_mux_1_0</value>
+    </param>
+    <param>
+      <key>lengths</key>
+      <value>full_frame_bits_conv, full_frame_bits_dummy</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_stream_mux</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(448, 1564)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_stream_mux_2</value>
+    </param>
+    <param>
+      <key>lengths</key>
+      <value>data_length*is_conv, data_length*fec_choice</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>2</value>
     </param>
     <param>
       <key>type</key>
@@ -2627,11 +2536,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>2</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 636)</value>
+      <value>(280, 636)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2741,7 +2650,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(976, 1596)</value>
+      <value>(976, 1580)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2816,7 +2725,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>vector</key>
-      <value>np.arange(256)</value>
+      <value>np.arange(0,256)</value>
     </param>
   </block>
   <block>
@@ -3484,7 +3393,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 1404)</value>
+      <value>(472, 1412)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3950,7 +3859,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>gui_hint</key>
-      <value></value>
+      <value>6,1,1,2</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4138,7 +4047,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>name</key>
-      <value>""</value>
+      <value>"PER"</value>
     </param>
     <param>
       <key>nconnections</key>
@@ -4181,7 +4090,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>gui_hint</key>
-      <value></value>
+      <value>6,3,1,5</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4416,11 +4325,11 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1136, 1584)</value>
+      <value>(1136, 1568)</value>
     </param>
     <param>
       <key>gui_hint</key>
-      <value>tab@0</value>
+      <value>1,1,5,5</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4889,7 +4798,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 1500)</value>
+      <value>(240, 1500)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4944,7 +4853,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 1596)</value>
+      <value>(240, 1596)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5118,7 +5027,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 176)</value>
+      <value>(416, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5177,7 +5086,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 284)</value>
+      <value>(416, 284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5247,7 +5156,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1000, 300)</value>
+      <value>(912, 260)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5355,7 +5264,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 636)</value>
+      <value>(136, 636)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5409,7 +5318,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 1612)</value>
+      <value>(56, 1556)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5424,84 +5333,6 @@ If system is frozen restart it
       <value>demoduled</value>
     </param>
   </block>
-  <connection>
-    <source_block_id>RWN_selector_1_3_bb_1</source_block_id>
-    <sink_block_id>tx_outer_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_bb_1</source_block_id>
-    <sink_block_id>tx_outer_0_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_bb_1</source_block_id>
-    <sink_block_id>blocks_null_sink_0</sink_block_id>
-    <source_key>2</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_ff_0</source_block_id>
-    <sink_block_id>rx_outer_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_ff_0</source_block_id>
-    <sink_block_id>rx_outer_0_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_1_3_ff_0</source_block_id>
-    <sink_block_id>blocks_null_sink_1</sink_block_id>
-    <source_key>2</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_0</source_block_id>
-    <sink_block_id>virtual_sink_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>blocks_probe_rate_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>blocks_uchar_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>probe2</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>RWN_selector_3_1_bb_1_0</source_block_id>
-    <sink_block_id>probe3</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
   <connection>
     <source_block_id>RWN_selector_3_1_cc_0</source_block_id>
     <sink_block_id>virtual_sink_0</sink_block_id>
@@ -5557,16 +5388,10 @@ If system is frozen restart it
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_null_source_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_0</sink_block_id>
+    <source_block_id>blocks_keep_m_in_n_1_0</source_block_id>
+    <sink_block_id>virtual_sink_0_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_null_source_1_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_1_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>2</sink_key>
+    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_probe_rate_0</source_block_id>
@@ -5576,31 +5401,73 @@ If system is frozen restart it
   </connection>
   <connection>
     <source_block_id>blocks_stream_mux_0</source_block_id>
-    <sink_block_id>RWN_selector_1_3_bb_1</sink_block_id>
+    <sink_block_id>tx_outer_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_0</source_block_id>
-    <sink_block_id>my_tx_inner_0</sink_block_id>
+    <source_block_id>blocks_stream_mux_0</source_block_id>
+    <sink_block_id>tx_outer_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_0</source_block_id>
-    <sink_block_id>my_tx_inner_0_0</sink_block_id>
+    <source_block_id>blocks_stream_mux_1</source_block_id>
+    <sink_block_id>virtual_sink_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_0_0</source_block_id>
-    <sink_block_id>my_tx_inner_0_1</sink_block_id>
+    <source_block_id>blocks_stream_mux_1_0</source_block_id>
+    <sink_block_id>blocks_keep_m_in_n_1_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_stream_mux_2</source_block_id>
+    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_stream_mux_2</source_block_id>
+    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_stream_mux_2</source_block_id>
+    <sink_block_id>blocks_uchar_to_float_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_stream_mux_2</source_block_id>
+    <sink_block_id>probe2</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_stream_mux_2</source_block_id>
+    <sink_block_id>probe3</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_tag_gate_0_0</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_0_0</sink_block_id>
+    <sink_block_id>my_tx_inner_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_tag_gate_0_0</source_block_id>
+    <sink_block_id>my_tx_inner_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_tag_gate_0_0</source_block_id>
+    <sink_block_id>my_tx_inner_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -5720,25 +5587,37 @@ If system is frozen restart it
   </connection>
   <connection>
     <source_block_id>rx_outer_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_1_0</sink_block_id>
+    <sink_block_id>blocks_stream_mux_2</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>rx_outer_0_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_1_0</sink_block_id>
+    <sink_block_id>blocks_stream_mux_2</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
   </connection>
   <connection>
     <source_block_id>tx_outer_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_0</sink_block_id>
+    <sink_block_id>blocks_stream_mux_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tx_outer_0</source_block_id>
+    <sink_block_id>blocks_stream_mux_1_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>tx_outer_0_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_bb_0</sink_block_id>
+    <sink_block_id>blocks_stream_mux_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tx_outer_0_0</source_block_id>
+    <sink_block_id>blocks_stream_mux_1_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
   </connection>
@@ -5774,7 +5653,13 @@ If system is frozen restart it
   </connection>
   <connection>
     <source_block_id>virtual_source_3</source_block_id>
-    <sink_block_id>RWN_selector_1_3_ff_0</sink_block_id>
+    <sink_block_id>rx_outer_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_3</source_block_id>
+    <sink_block_id>rx_outer_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

@@ -67,8 +67,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             errors = sum((np.diff(observed) % self.modulus)-1)
 
             per = max((float(errors)/(self.window_size+errors)),0)
-            print("Observed {}".format(observed))
-            print("PER {}".format(per))
+            # print("Observed {}".format(observed))
+            # print("PER {}".format(per))
             output_items[0][i],output_items[1][i] = self.calc_average_per(per)
 
         return len(output_items[0])
