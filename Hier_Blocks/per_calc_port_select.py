@@ -28,50 +28,47 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.window_size = window_size
         self.average_length = average_length
         self.modulus = modulus
-        self.work_calls = 0
-        self.average_per = 0
+        self.history = np.zeros(self.average_length)
         self.set_history(window_size)
 
     def calc_average_per(self,new_per):
-
-        selected_port = 0
         
+        self.history = np.roll(self.history,1)
+        
+        self.history[0] = new_per
 
-        if self.work_calls == 2**16:
-            self.work_calls = 0
-            self.average_per = new_per
-        else:
-            self.average_per += new_per
-            self.average_per = self.average_per/self.work_calls
+        average_per = np.mean(self.history)
 
-            
-        #     self.work_calls = 0
-        #     aux_per = self.average_per/self.average_length
-        #     self.average_per = 0
-        # else:
-        #     aux_per = new_per
+    	if  0 <= average_per <= 0.35:
 
-    	if  0 <= self.average_per<= 0.35:
             selected_port = 2
-        elif 0.35 < self.average_per <= 0.65:
+
+        elif 0.35 < average_per <= 0.65:
+
             selected_port = 1
+
         else:
+
             selected_port = 0
 
-        # print(selected_port)
-        return selected_port
+        # print("History {} , Average {}".format(self.history,average_per))
+        return average_per,selected_port
 
 
     def work(self, input_items, output_items):
+
         consumed = (len(input_items[0])-self.window_size+1)
         if  consumed < self.window_size:
             return 0    
-
-        self.work_calls += 1
         for i in range(0 , consumed):
             # if self.window_size+i < len(input_items[0]):
-            observed = input_items[0][i:self.window_size+i]
+            observed = input_items[0][i:self.window_size+i] %256
+
             errors = sum((np.diff(observed) % self.modulus)-1)
-            output_items[0][i]= float(errors)/(self.window_size+errors)
-            output_items[1][i] = self.calc_average_per(output_items[0][i])
+
+            per = max((float(errors)/(self.window_size+errors)),0)
+            print("Observed {}".format(observed))
+            print("PER {}".format(per))
+            output_items[0][i],output_items[1][i] = self.calc_average_per(per)
+
         return len(output_items[0])
