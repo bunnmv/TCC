@@ -129,7 +129,7 @@ So a 1/2 returns  2</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(944, 4)</value>
+      <value>(312, 20)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -141,7 +141,7 @@ So a 1/2 returns  2</value>
     </param>
     <param>
       <key>value</key>
-      <value>int((packet_counter+info_length+crc_length) *encoder.rate())</value>
+      <value>int((data_length+crc_length) *encoder.rate())</value>
     </param>
   </block>
   <block>
@@ -296,7 +296,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>packet_len</key>
-      <value>packet_counter+info_length</value>
+      <value>data_length</value>
     </param>
     <param>
       <key>type</key>
@@ -305,6 +305,53 @@ MSB -&gt; For FEC</value>
     <param>
       <key>vlen</key>
       <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(216, 0)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>data_length</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Data Length</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>501</value>
     </param>
   </block>
   <block>
@@ -447,7 +494,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>mtu</key>
-      <value>packet_counter+info_length+crc_length</value>
+      <value>data_length+crc_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -581,53 +628,6 @@ Inner vai ate aqui + o header formatter</value>
     <param>
       <key>vlen</key>
       <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(344, 0)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>info_length</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Info Length</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>500</value>
     </param>
   </block>
   <block>
@@ -781,53 +781,6 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     <param>
       <key>tag_name</key>
       <value>len_tag_name</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(216, 0)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>packet_counter</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Packet Counter Bytes</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1</value>
     </param>
   </block>
   <block>
