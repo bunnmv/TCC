@@ -1739,11 +1739,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(496, 1636)</value>
+      <value>(456, 1524)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2351,7 +2351,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 1804)</value>
+      <value>(688, 1740)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2633,11 +2633,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(432, 1788)</value>
+      <value>(408, 1652)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2959,11 +2959,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 1524)</value>
+      <value>(632, 1676)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5331,7 +5331,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(200, 1476)</value>
+      <value>(200, 1484)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5386,7 +5386,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(200, 1628)</value>
+      <value>(200, 1588)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5762,7 +5762,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(600, 1540)</value>
+      <value>(600, 1556)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5925,6 +5925,12 @@ If system is frozen restart it
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>RWN_selector_3_1_bb_0</source_block_id>
+    <sink_block_id>virtual_sink_3</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>RWN_selector_3_1_cc_0</source_block_id>
     <sink_block_id>virtual_sink_0</sink_block_id>
     <source_key>0</source_key>
@@ -6017,12 +6023,6 @@ If system is frozen restart it
   <connection>
     <source_block_id>blocks_stream_mux_1_0</source_block_id>
     <sink_block_id>blocks_keep_m_in_n_1_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_mux_2</source_block_id>
-    <sink_block_id>virtual_sink_3</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -6160,13 +6160,13 @@ If system is frozen restart it
   </connection>
   <connection>
     <source_block_id>rx_outer_0</source_block_id>
-    <sink_block_id>blocks_stream_mux_2</sink_block_id>
+    <sink_block_id>RWN_selector_3_1_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>rx_outer_0_0</source_block_id>
-    <sink_block_id>blocks_stream_mux_2</sink_block_id>
+    <sink_block_id>RWN_selector_3_1_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
   </connection>
