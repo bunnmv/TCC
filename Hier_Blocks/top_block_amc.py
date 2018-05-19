@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Fri May 18 19:10:07 2018
+# Generated: Sat May 19 00:39:18 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -79,8 +79,8 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.symbol_rate = symbol_rate = 384000/2
-        self.samp_rate = samp_rate = 2*288e3
+        self.symbol_rate = symbol_rate = 384000
+        self.samp_rate = samp_rate = 4*288e3
         self.packet_counter = packet_counter = 1
         self.info_length = info_length = 500
         self.sps_float = sps_float = samp_rate / symbol_rate
@@ -90,9 +90,9 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.restart_call = restart_call = True
         self.port = port = 0
         self.nfilts = nfilts = 32
-        self.full_frame_bits_dummy = full_frame_bits_dummy = (packet_length+len(access_code))*8
+        self.full_frame_bits_dummy = full_frame_bits_dummy = (packet_length+len(access_code)*2)*8
         self.full_frame_bits_conv = full_frame_bits_conv = (packet_length*2+len(access_code))*8
-        self.fec_choice = fec_choice = 1
+        self.fec_choice = fec_choice = 0
         self.excess_bw = excess_bw = 0.8
         self.theta = theta = 0
         self.sdr_rate = sdr_rate = 8*288e3
@@ -206,7 +206,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self._channel_noise_win = RangeWidget(self._channel_noise_range, self.set_channel_noise, "channel_noise", "counter_slider", float)
         self.top_grid_layout.addWidget(self._channel_noise_win, 0,3,1,1)
         self.tx_outer_0_0 = tx_outer(
-            access_code=access_code,
+            access_code=access_code*2,
             encoder=DE,
             info_length=info_length,
             len_tag_name=len_tag_name,
@@ -220,7 +220,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             packet_counter=packet_counter,
         )
         self.rx_outer_0_0 = rx_outer(
-            access_code=access_code,
+            access_code=access_code*2,
             decoder=DD,
             len_tag_name_rx=len_tag_name_rx,
             packet_length=packet_length,
@@ -591,7 +591,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_packet_length(self, packet_length):
         self.packet_length = packet_length
-        self.set_full_frame_bits_dummy((self.packet_length+len(self.access_code))*8)
+        self.set_full_frame_bits_dummy((self.packet_length+len(self.access_code)*2)*8)
         self.set_full_frame_bits_conv((self.packet_length*2+len(self.access_code))*8)
         self.rx_outer_0_0.set_packet_length(self.packet_length)
         self.rx_outer_0.set_packet_length(self.packet_length)
@@ -602,11 +602,11 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_access_code(self, access_code):
         self.access_code = access_code
-        self.set_full_frame_bits_dummy((self.packet_length+len(self.access_code))*8)
+        self.set_full_frame_bits_dummy((self.packet_length+len(self.access_code)*2)*8)
         self.set_full_frame_bits_conv((self.packet_length*2+len(self.access_code))*8)
-        self.tx_outer_0_0.set_access_code(self.access_code)
+        self.tx_outer_0_0.set_access_code(self.access_code*2)
         self.tx_outer_0.set_access_code(self.access_code)
-        self.rx_outer_0_0.set_access_code(self.access_code)
+        self.rx_outer_0_0.set_access_code(self.access_code*2)
         self.rx_outer_0.set_access_code(self.access_code)
 
     def get_sps(self):

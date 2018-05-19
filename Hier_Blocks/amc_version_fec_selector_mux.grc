@@ -673,7 +673,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -942,7 +942,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>(packet_length+len(access_code))*8</value>
+      <value>(packet_length+len(access_code)*2)*8</value>
     </param>
   </block>
   <block>
@@ -1467,7 +1467,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>2*288e3</value>
+      <value>4*288e3</value>
     </param>
   </block>
   <block>
@@ -1575,7 +1575,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>384000/2</value>
+      <value>384000</value>
     </param>
   </block>
   <block>
@@ -2246,6 +2246,108 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
   </block>
   <block>
+    <key>blocks_null_sink</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>bus_conns</key>
+      <value>[[0,],]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(552, 1708)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_null_sink_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>num_inputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_null_source</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>bus_conns</key>
+      <value>[[0,],]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(448, 1636)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_null_source_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_outputs</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_probe_rate</key>
     <param>
       <key>alias</key>
@@ -2485,7 +2587,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(448, 1564)</value>
+      <value>(416, 1500)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3393,7 +3495,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(472, 1412)</value>
+      <value>(464, 1396)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4798,7 +4900,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 1500)</value>
+      <value>(184, 1500)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4853,7 +4955,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 1596)</value>
+      <value>(184, 1596)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4877,7 +4979,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>access_code</key>
-      <value>access_code</value>
+      <value>access_code*2</value>
     </param>
     <param>
       <key>len_tag_name_rx</key>
@@ -5062,7 +5164,7 @@ If system is frozen restart it
     <key>tx_outer</key>
     <param>
       <key>access_code</key>
-      <value>access_code</value>
+      <value>access_code*2</value>
     </param>
     <param>
       <key>alias</key>
@@ -5226,6 +5328,33 @@ If system is frozen restart it
     </param>
   </block>
   <block>
+    <key>virtual_sink</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(560, 1516)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>virtual_sink_3</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>test</value>
+    </param>
+  </block>
+  <block>
     <key>virtual_source</key>
     <param>
       <key>comment</key>
@@ -5318,7 +5447,7 @@ If system is frozen restart it
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 1556)</value>
+      <value>(0, 1556)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5331,6 +5460,33 @@ If system is frozen restart it
     <param>
       <key>stream_id</key>
       <value>demoduled</value>
+    </param>
+  </block>
+  <block>
+    <key>virtual_source</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(648, 1540)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>virtual_source_4</value>
+    </param>
+    <param>
+      <key>stream_id</key>
+      <value>test</value>
     </param>
   </block>
   <connection>
@@ -5425,31 +5581,7 @@ If system is frozen restart it
   </connection>
   <connection>
     <source_block_id>blocks_stream_mux_2</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_mux_2</source_block_id>
-    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_mux_2</source_block_id>
-    <sink_block_id>blocks_uchar_to_float_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_mux_2</source_block_id>
-    <sink_block_id>probe2</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_mux_2</source_block_id>
-    <sink_block_id>probe3</sink_block_id>
+    <sink_block_id>virtual_sink_3</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -5660,6 +5792,36 @@ If system is frozen restart it
   <connection>
     <source_block_id>virtual_source_3</source_block_id>
     <sink_block_id>rx_outer_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_4</source_block_id>
+    <sink_block_id>blocks_keep_m_in_n_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_4</source_block_id>
+    <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_4</source_block_id>
+    <sink_block_id>blocks_uchar_to_float_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_4</source_block_id>
+    <sink_block_id>probe2</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>virtual_source_4</source_block_id>
+    <sink_block_id>probe3</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
