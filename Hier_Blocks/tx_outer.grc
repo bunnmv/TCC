@@ -225,7 +225,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(672, 156)</value>
+      <value>(568, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -272,7 +272,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(328, 156)</value>
+      <value>(224, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -374,7 +374,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 148)</value>
+      <value>(392, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -478,7 +478,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 144)</value>
+      <value>(712, 144)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -599,7 +599,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 156)</value>
+      <value>(112, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -760,11 +760,11 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1024, 140)</value>
+      <value>(912, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -795,7 +795,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1216, 156)</value>
+      <value>(1112, 156)</value>
     </param>
     <param>
       <key>_rotation</key>
