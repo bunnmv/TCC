@@ -125,7 +125,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1752, 0)</value>
+      <value>(1816, 0)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -192,7 +192,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1616, 4)</value>
+      <value>(1688, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -247,7 +247,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1896, 68)</value>
+      <value>(1944, 68)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -290,7 +290,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1896, 4)</value>
+      <value>(1944, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -639,6 +639,204 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_chooser</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1592, 4)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>tab@1:0,2,1,1</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>control</value>
+    </param>
+    <param>
+      <key>label0</key>
+      <value>Manual</value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value>Automatic</value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Control</value>
+    </param>
+    <param>
+      <key>labels</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>num_opts</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option0</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>option1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>option2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option3</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option4</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>options</key>
+      <value>[0, 1, 2]</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.QVBoxLayout</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>int</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>radio_buttons</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_chooser</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1488, 120)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>tab@1:0,1,1,1</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>controller</value>
+    </param>
+    <param>
+      <key>label0</key>
+      <value>DBPSK</value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value>DQPSK</value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value>D8PSK</value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Manual Control</value>
+    </param>
+    <param>
+      <key>labels</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>num_opts</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option0</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>option1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>option2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option3</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option4</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>options</key>
+      <value>[0, 1, 2]</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.QVBoxLayout</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>int</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>radio_buttons</value>
+    </param>
+  </block>
+  <block>
     <key>variable</key>
     <param>
       <key>comment</key>
@@ -700,7 +898,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>fec_options[fec_position]</value>
+      <value>fec_options[mod_choice]</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -708,7 +906,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1504, 4)</value>
+      <value>(1488, 4)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -846,49 +1044,6 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>value</key>
       <value>[0,0,1]</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_function_probe</key>
-    <param>
-      <key>block_id</key>
-      <value>probe4</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>function_args</key>
-      <value></value>
-    </param>
-    <param>
-      <key>function_name</key>
-      <value>level</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(832, 56)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>fec_position</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>poll_rate</key>
-      <value>0.3</value>
     </param>
   </block>
   <block>
@@ -1088,7 +1243,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>port</value>
+      <value>port*control + controller</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1096,7 +1251,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1408, 0)</value>
+      <value>(1400, 0)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1284,7 +1439,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(944, 56)</value>
+      <value>(832, 56)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1300,7 +1455,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>poll_rate</key>
-      <value>0.5</value>
+      <value>0.25</value>
     </param>
   </block>
   <block>
@@ -1334,7 +1489,7 @@ mod_choice = 2 Fec_choice =1</value>
     <key>variable</key>
     <param>
       <key>comment</key>
-      <value>IF false, restarts FEC and MOD</value>
+      <value>IF True, restarts FEC and MOD</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1342,7 +1497,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(888, 132)</value>
+      <value>(872, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1350,11 +1505,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>id</key>
-      <value>restart_call</value>
+      <value>reset_call</value>
     </param>
     <param>
       <key>value</key>
-      <value>not(restart_check_faster==restart_check)</value>
+      <value>(reset_check_faster==reset_check) and control</value>
     </param>
   </block>
   <block>
@@ -1389,7 +1544,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>id</key>
-      <value>restart_check</value>
+      <value>reset_check</value>
     </param>
     <param>
       <key>value</key>
@@ -1432,7 +1587,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>id</key>
-      <value>restart_check_faster</value>
+      <value>reset_check_faster</value>
     </param>
     <param>
       <key>value</key>
@@ -1867,23 +2022,25 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.history[0] = new_per
 
         average_per = np.mean(self.history)
-
-        if self.state == 0:
+        # Desired per is max 0.35
+        if self.state == 0: #BPSK
             if average_per &lt;=0.35:
                 self.state = 1
-        elif self.state == 1:
+        elif self.state == 1: #QPSK
             if self.reset_call:
                 self.state = 0
+                print("RESET")
             else:
-                if average_per &lt;=0.35:
+                if average_per &lt;=0.30:
                     self.state = 2
-                else:
+                elif average_per &gt;= 0.55:
                     self.state = 0
-        else:
+        else: #8PSK
             if self.reset_call:
                 self.state = 0
+                print("RESET")
             else:
-                if  average_per &gt;= 0.55:
+                if average_per &gt;= 0.35:
                     self.state = 1     
         # print("History {} , Average {}".format(self.history,average_per))
         return average_per
@@ -1905,7 +2062,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             # print("PER {}".format(per))
             output_items[0][i] = self.calc_average_per(per)
             output_items[1][i] = self.state
-
         return len(output_items[0])
 </value>
     </param>
@@ -1935,7 +2091,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>reset_call</key>
-      <value>False</value>
+      <value>reset_call</value>
     </param>
     <param>
       <key>window_size</key>
@@ -2390,7 +2546,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(952, 268)</value>
+      <value>(936, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3471,7 +3627,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1480, 1380)</value>
+      <value>(1480, 1476)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3498,7 +3654,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>comment</key>
-      <value>MOD</value>
+      <value>MOD e FEC</value>
     </param>
     <param>
       <key>affinity</key>
@@ -3510,7 +3666,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1304, 1468)</value>
+      <value>(1328, 1372)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3589,41 +3745,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>id</key>
       <value>probe3</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_probe_signal_x</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>FEC</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1304, 1396)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>probe4</value>
     </param>
     <param>
       <key>type</key>
@@ -5298,7 +5419,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1120, 276)</value>
+      <value>(1064, 276)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5502,12 +5623,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   <connection>
     <source_block_id>amc_controller</source_block_id>
     <sink_block_id>probe</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>amc_controller</source_block_id>
-    <sink_block_id>probe4</sink_block_id>
     <source_key>1</source_key>
     <sink_key>0</sink_key>
   </connection>

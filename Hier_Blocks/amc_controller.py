@@ -40,23 +40,25 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.history[0] = new_per
 
         average_per = np.mean(self.history)
-
-        if self.state == 0:
+        # Desired per is max 0.35
+        if self.state == 0: #BPSK
             if average_per <=0.35:
                 self.state = 1
-        elif self.state == 1:
+        elif self.state == 1: #QPSK
             if self.reset_call:
                 self.state = 0
+                print("RESET")
             else:
-                if average_per <=0.35:
+                if average_per <=0.30:
                     self.state = 2
-                else:
+                elif average_per >= 0.55:
                     self.state = 0
-        else:
+        else: #8PSK
             if self.reset_call:
                 self.state = 0
+                print("RESET")
             else:
-                if  average_per >= 0.55:
+                if average_per >= 0.35:
                     self.state = 1     
         # print("History {} , Average {}".format(self.history,average_per))
         return average_per
@@ -78,5 +80,4 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             # print("PER {}".format(per))
             output_items[0][i] = self.calc_average_per(per)
             output_items[1][i] = self.state
-
         return len(output_items[0])

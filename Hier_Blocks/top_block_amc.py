@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Mon May 21 15:17:15 2018
+# Generated: Mon May 21 18:40:57 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -82,27 +82,28 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         self.symbol_rate = symbol_rate = 384000
         self.samp_rate = samp_rate = 4*288e3
+        self.port = port = 0
         self.packet_counter = packet_counter = 1
         self.info_length = info_length = 500
+        self.controller = controller = 0
+        self.control = control = 1
         self.sps_float = sps_float = samp_rate / symbol_rate
         self.packet_length = packet_length = (info_length+packet_counter+4)
-        self.fec_position = fec_position = 0
+        self.mod_choice = mod_choice = port*control + controller
         self.fec_options = fec_options = [0,0,1]
         self.access_code_dummy = access_code_dummy = '1010001000010010'
         self.sps = sps = int(sps_float)
-        self.restart_check_faster = restart_check_faster = 0
-        self.restart_check = restart_check = 0
-        self.port = port = 0
+        self.reset_check_faster = reset_check_faster = 0
+        self.reset_check = reset_check = 0
         self.nfilts = nfilts = 32
         self.full_frame_bits_dummy = full_frame_bits_dummy = packet_length*8 + len(access_code_dummy)
         self.full_frame_bits_conv = full_frame_bits_conv = packet_length*2*8 + len(access_code_dummy)
-        self.fec_choice = fec_choice = fec_options[fec_position]
+        self.fec_choice = fec_choice = fec_options[mod_choice]
         self.excess_bw = excess_bw = 0.8
         self.theta = theta = 0
         self.sdr_rate = sdr_rate = 8*288e3
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
-        self.restart_call = restart_call = not(restart_check_faster==restart_check)
-        self.mod_choice = mod_choice = port
+        self.reset_call = reset_call = (reset_check_faster==reset_check) and control
         self.len_tag_name_rx = len_tag_name_rx = "len_key2"
         self.len_tag_name = len_tag_name = "len_key"
         self.is_conv = is_conv = fec_choice == 0
@@ -157,7 +158,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.tab_layout_1.addLayout(self.tab_grid_layout_1)
         self.tab.addTab(self.tab_widget_1, 'PER Rate')
         self.top_layout.addWidget(self.tab)
-        self.probe4 = blocks.probe_signal_b()
         self.probe3 = blocks.probe_signal_b()
         self.probe2 = blocks.probe_signal_b()
 
@@ -168,7 +168,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
                     self.set_port(val)
                 except AttributeError:
                     pass
-                time.sleep(1.0 / (0.5))
+                time.sleep(1.0 / (0.25))
         _port_thread = threading.Thread(target=_port_probe)
         _port_thread.daemon = True
         _port_thread.start()
@@ -246,30 +246,30 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             packet_length=packet_length,
         )
 
-        def _restart_check_faster_probe():
+        def _reset_check_faster_probe():
             while True:
                 val = self.probe3.level()
                 try:
-                    self.set_restart_check_faster(val)
+                    self.set_reset_check_faster(val)
                 except AttributeError:
                     pass
                 time.sleep(1.0 / (0.12))
-        _restart_check_faster_thread = threading.Thread(target=_restart_check_faster_probe)
-        _restart_check_faster_thread.daemon = True
-        _restart_check_faster_thread.start()
+        _reset_check_faster_thread = threading.Thread(target=_reset_check_faster_probe)
+        _reset_check_faster_thread.daemon = True
+        _reset_check_faster_thread.start()
 
 
-        def _restart_check_probe():
+        def _reset_check_probe():
             while True:
                 val = self.probe2.level()
                 try:
-                    self.set_restart_check(val)
+                    self.set_reset_check(val)
                 except AttributeError:
                     pass
                 time.sleep(1.0 / (0.1))
-        _restart_check_thread = threading.Thread(target=_restart_check_probe)
-        _restart_check_thread.daemon = True
-        _restart_check_thread.start()
+        _reset_check_thread = threading.Thread(target=_reset_check_probe)
+        _reset_check_thread.daemon = True
+        _reset_check_thread.start()
 
         self.qtgui_time_sink_x_0_0_0_0 = qtgui.time_sink_f(
         	1024, #size
@@ -456,19 +456,48 @@ class top_block_amc(gr.top_block, Qt.QWidget):
             sps=sps,
         )
         self.fec_selector = fec_selector.selector_3_1_bb(selected_port=fec_choice, data_length=data_length)
-
-        def _fec_position_probe():
-            while True:
-                val = self.probe4.level()
-                try:
-                    self.set_fec_position(val)
-                except AttributeError:
-                    pass
-                time.sleep(1.0 / (0.3))
-        _fec_position_thread = threading.Thread(target=_fec_position_probe)
-        _fec_position_thread.daemon = True
-        _fec_position_thread.start()
-
+        self._controller_options = (0, 1, 2, )
+        self._controller_labels = ('DBPSK', 'DQPSK', 'D8PSK', )
+        self._controller_group_box = Qt.QGroupBox('Manual Control')
+        self._controller_box = Qt.QVBoxLayout()
+        class variable_chooser_button_group(Qt.QButtonGroup):
+            def __init__(self, parent=None):
+                Qt.QButtonGroup.__init__(self, parent)
+            @pyqtSlot(int)
+            def updateButtonChecked(self, button_id):
+                self.button(button_id).setChecked(True)
+        self._controller_button_group = variable_chooser_button_group()
+        self._controller_group_box.setLayout(self._controller_box)
+        for i, label in enumerate(self._controller_labels):
+        	radio_button = Qt.QRadioButton(label)
+        	self._controller_box.addWidget(radio_button)
+        	self._controller_button_group.addButton(radio_button, i)
+        self._controller_callback = lambda i: Qt.QMetaObject.invokeMethod(self._controller_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._controller_options.index(i)))
+        self._controller_callback(self.controller)
+        self._controller_button_group.buttonClicked[int].connect(
+        	lambda i: self.set_controller(self._controller_options[i]))
+        self.tab_grid_layout_1.addWidget(self._controller_group_box, 0,1,1,1)
+        self._control_options = (0, 1, )
+        self._control_labels = ('Manual', 'Automatic', )
+        self._control_group_box = Qt.QGroupBox('Control')
+        self._control_box = Qt.QVBoxLayout()
+        class variable_chooser_button_group(Qt.QButtonGroup):
+            def __init__(self, parent=None):
+                Qt.QButtonGroup.__init__(self, parent)
+            @pyqtSlot(int)
+            def updateButtonChecked(self, button_id):
+                self.button(button_id).setChecked(True)
+        self._control_button_group = variable_chooser_button_group()
+        self._control_group_box.setLayout(self._control_box)
+        for i, label in enumerate(self._control_labels):
+        	radio_button = Qt.QRadioButton(label)
+        	self._control_box.addWidget(radio_button)
+        	self._control_button_group.addButton(radio_button, i)
+        self._control_callback = lambda i: Qt.QMetaObject.invokeMethod(self._control_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._control_options.index(i)))
+        self._control_callback(self.control)
+        self._control_button_group.buttonClicked[int].connect(
+        	lambda i: self.set_control(self._control_options[i]))
+        self.tab_grid_layout_1.addWidget(self._control_group_box, 0,2,1,1)
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=channel_noise,
         	frequency_offset=1e-4,
@@ -494,7 +523,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
-        self.amc_controller = amc_controller.blk(window_size=20, modulus=256, average_length=10, reset_call=False)
+        self.amc_controller = amc_controller.blk(window_size=20, modulus=256, average_length=10, reset_call=reset_call)
         self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_choice, True)
         self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_choice, True)
         self.RWN_selector_3_1_cc_0 = RWN.selector_3_1_cc(mod_choice, True)
@@ -509,7 +538,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_0, 0))
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_0_0, 0))
         self.connect((self.amc_controller, 1), (self.probe, 0))
-        self.connect((self.amc_controller, 1), (self.probe4, 0))
         self.connect((self.amc_controller, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0_0, 0))
@@ -569,6 +597,14 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0_0_0_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
 
+    def get_port(self):
+        return self.port
+
+    def set_port(self, port):
+        self.port = port
+        self.set_mod_choice(self.port*self.control + self.controller)
+        self.analog_const_source_x_1.set_offset(self.port)
+
     def get_packet_counter(self):
         return self.packet_counter
 
@@ -588,6 +624,23 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.set_data_length((self.info_length+self.packet_counter))
         self.blocks_keep_m_in_n_0_0_0.set_m(self.info_length)
 
+    def get_controller(self):
+        return self.controller
+
+    def set_controller(self, controller):
+        self.controller = controller
+        self.set_mod_choice(self.port*self.control + self.controller)
+        self._controller_callback(self.controller)
+
+    def get_control(self):
+        return self.control
+
+    def set_control(self, control):
+        self.control = control
+        self.set_reset_call((self.reset_check_faster==self.reset_check) and self.control)
+        self.set_mod_choice(self.port*self.control + self.controller)
+        self._control_callback(self.control)
+
     def get_sps_float(self):
         return self.sps_float
 
@@ -606,19 +659,23 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code_dummy))
         self.set_frame_bits(self.packet_length*8 + self.packet_length*8*self.fec_choice)
 
-    def get_fec_position(self):
-        return self.fec_position
+    def get_mod_choice(self):
+        return self.mod_choice
 
-    def set_fec_position(self, fec_position):
-        self.fec_position = fec_position
-        self.set_fec_choice(self.fec_options[self.fec_position])
+    def set_mod_choice(self, mod_choice):
+        self.mod_choice = mod_choice
+        self._mod_choice_callback(self.mod_choice)
+        self.set_fec_choice(self.fec_options[self.mod_choice])
+        self.RWN_selector_3_1_ff_0.set_selected(self.mod_choice)
+        self.RWN_selector_3_1_cc_1.set_selected(self.mod_choice)
+        self.RWN_selector_3_1_cc_0.set_selected(self.mod_choice)
 
     def get_fec_options(self):
         return self.fec_options
 
     def set_fec_options(self, fec_options):
         self.fec_options = fec_options
-        self.set_fec_choice(self.fec_options[self.fec_position])
+        self.set_fec_choice(self.fec_options[self.mod_choice])
 
     def get_access_code_dummy(self):
         return self.access_code_dummy
@@ -641,27 +698,19 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.my_rx_inner_0_0.set_sps(self.sps)
         self.my_rx_inner_0.set_sps(self.sps)
 
-    def get_restart_check_faster(self):
-        return self.restart_check_faster
+    def get_reset_check_faster(self):
+        return self.reset_check_faster
 
-    def set_restart_check_faster(self, restart_check_faster):
-        self.restart_check_faster = restart_check_faster
-        self.set_restart_call(not(self.restart_check_faster==self.restart_check))
+    def set_reset_check_faster(self, reset_check_faster):
+        self.reset_check_faster = reset_check_faster
+        self.set_reset_call((self.reset_check_faster==self.reset_check) and self.control)
 
-    def get_restart_check(self):
-        return self.restart_check
+    def get_reset_check(self):
+        return self.reset_check
 
-    def set_restart_check(self, restart_check):
-        self.restart_check = restart_check
-        self.set_restart_call(not(self.restart_check_faster==self.restart_check))
-
-    def get_port(self):
-        return self.port
-
-    def set_port(self, port):
-        self.port = port
-        self.set_mod_choice(self.port)
-        self.analog_const_source_x_1.set_offset(self.port)
+    def set_reset_check(self, reset_check):
+        self.reset_check = reset_check
+        self.set_reset_call((self.reset_check_faster==self.reset_check) and self.control)
 
     def get_nfilts(self):
         return self.nfilts
@@ -730,21 +779,12 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_rrc_taps(self, rrc_taps):
         self.rrc_taps = rrc_taps
 
-    def get_restart_call(self):
-        return self.restart_call
+    def get_reset_call(self):
+        return self.reset_call
 
-    def set_restart_call(self, restart_call):
-        self.restart_call = restart_call
-
-    def get_mod_choice(self):
-        return self.mod_choice
-
-    def set_mod_choice(self, mod_choice):
-        self.mod_choice = mod_choice
-        self._mod_choice_callback(self.mod_choice)
-        self.RWN_selector_3_1_ff_0.set_selected(self.mod_choice)
-        self.RWN_selector_3_1_cc_1.set_selected(self.mod_choice)
-        self.RWN_selector_3_1_cc_0.set_selected(self.mod_choice)
+    def set_reset_call(self, reset_call):
+        self.reset_call = reset_call
+        self.amc_controller.reset_call = self.reset_call
 
     def get_len_tag_name_rx(self):
         return self.len_tag_name_rx
