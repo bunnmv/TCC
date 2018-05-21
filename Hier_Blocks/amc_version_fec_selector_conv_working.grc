@@ -157,7 +157,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_TRUNCATED</value>
+      <value>fec.CC_TAILBITING</value>
     </param>
   </block>
   <block>
@@ -220,7 +220,7 @@
     </param>
     <param>
       <key>mode</key>
-      <value>fec.CC_TRUNCATED</value>
+      <value>fec.CC_TAILBITING</value>
     </param>
   </block>
   <block>
@@ -852,7 +852,7 @@ mod_choice = 2 Fec_choice =1</value>
     <key>variable_function_probe</key>
     <param>
       <key>block_id</key>
-      <value>probe</value>
+      <value>probe4</value>
     </param>
     <param>
       <key>comment</key>
@@ -860,7 +860,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>function_args</key>
@@ -1011,7 +1011,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(808, 124)</value>
+      <value>(808, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1261,6 +1261,49 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
   </block>
   <block>
+    <key>variable_function_probe</key>
+    <param>
+      <key>block_id</key>
+      <value>probe</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>function_args</key>
+      <value></value>
+    </param>
+    <param>
+      <key>function_name</key>
+      <value>level</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(944, 56)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>poll_rate</key>
+      <value>0.5</value>
+    </param>
+  </block>
+  <block>
     <key>variable</key>
     <param>
       <key>comment</key>
@@ -1268,11 +1311,11 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(744, 124)</value>
+      <value>(744, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1342,7 +1385,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(952, 60)</value>
+      <value>(888, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2678,25 +2721,13 @@ class selector_3_1_bb(gr.basic_block):
             else:
                 ninput_items_required[i] = 0
 
-    # def set_selected(self, selected_port):
-    #     self.selected_port = selected_port
-
     def general_work(self, input_items, output_items):
-        # lengths = [len(lst) for lst in input_items + output_items]
         L = min(len(input_items[self.selected_port]), len(output_items[0]))
-
-        # if len(input_items[self.selected_port]) &lt; self.data_length:
-        #     print("return 0")
-        #     return 0
 
         output_items[0][:L] = input_items[self.selected_port][:L]
 
-        # for i in range(2):
-        #     if i == self.selected_port:
-        #         self.consume(i,L)
-        #     else:
-        #         self.consume(i,len(input_items[i]))
         self.consume(self.selected_port,L)
+
         self.produce(0,L)
         return -2 #gr.WORK_CALLED_PRODUCE
 </value>
@@ -2723,7 +2754,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>id</key>
-      <value>epy_block_0</value>
+      <value>fec_selector</value>
     </param>
     <param>
       <key>selected_port</key>
@@ -5323,13 +5354,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>epy_block_0</source_block_id>
+    <source_block_id>fec_selector</source_block_id>
     <sink_block_id>blocks_keep_m_in_n_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>epy_block_0</source_block_id>
+    <source_block_id>fec_selector</source_block_id>
     <sink_block_id>blocks_keep_m_in_n_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -5426,13 +5457,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>rx_outer_0</source_block_id>
-    <sink_block_id>epy_block_0</sink_block_id>
+    <sink_block_id>fec_selector</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>rx_outer_0_0</source_block_id>
-    <sink_block_id>epy_block_0</sink_block_id>
+    <sink_block_id>fec_selector</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
   </connection>
