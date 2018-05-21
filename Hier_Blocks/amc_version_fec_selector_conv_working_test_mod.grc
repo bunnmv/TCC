@@ -860,7 +860,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>function_args</key>
@@ -2096,7 +2096,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(192, 388)</value>
+      <value>(216, 388)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2536,7 +2536,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(56, 388)</value>
+      <value>(64, 388)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2916,324 +2916,6 @@ class selector_3_1_bb(gr.basic_block):
     <param>
       <key>win</key>
       <value>firdes.WIN_HAMMING</value>
-    </param>
-  </block>
-  <block>
-    <key>my_rx_inner</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(400, 1028)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>my_rx_inner_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation</key>
-      <value>constellation_bpsk</value>
-    </param>
-    <param>
-      <key>phase_rot_after_costas_loop</key>
-      <value>theta</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
-    <key>my_rx_inner</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(400, 1124)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>my_rx_inner_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation</key>
-      <value>constellation_qpsk</value>
-    </param>
-    <param>
-      <key>phase_rot_after_costas_loop</key>
-      <value>theta</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
-    <key>my_rx_inner</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(400, 1236)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>my_rx_inner_0_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation</key>
-      <value>constellation_8psk</value>
-    </param>
-    <param>
-      <key>phase_rot_after_costas_loop</key>
-      <value>theta</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
-    <key>my_tx_inner</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(520, 556)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>my_tx_inner_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation</key>
-      <value>constellation_bpsk</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
-    <key>my_tx_inner</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(520, 628)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>my_tx_inner_0_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation</key>
-      <value>constellation_qpsk</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
-    </param>
-  </block>
-  <block>
-    <key>my_tx_inner</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(520, 708)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>my_tx_inner_0_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>constellation</key>
-      <value>constellation_8psk</value>
-    </param>
-    <param>
-      <key>rolloff</key>
-      <value>excess_bw</value>
-    </param>
-    <param>
-      <key>sps</key>
-      <value>sps</value>
     </param>
   </block>
   <block>
@@ -4722,6 +4404,171 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
   </block>
   <block>
+    <key>rx_inner</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>psk</key>
+      <value>digital.psk_constellation(2,digital.mod_codes.NO_CODE,True)</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(400, 1028)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rx_inner_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>excess_bw</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>theta</key>
+      <value>theta</value>
+    </param>
+  </block>
+  <block>
+    <key>rx_inner</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>psk</key>
+      <value>digital.psk_constellation(4,digital.mod_codes.NO_CODE,True)</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(400, 1124)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rx_inner_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>excess_bw</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>theta</key>
+      <value>theta</value>
+    </param>
+  </block>
+  <block>
+    <key>rx_inner</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>psk</key>
+      <value>digital.psk_constellation(8,digital.mod_codes.NO_CODE,True)</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(400, 1220)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rx_inner_0_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>excess_bw</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>theta</key>
+      <value>theta</value>
+    </param>
+  </block>
+  <block>
     <key>rx_outer</key>
     <param>
       <key>alias</key>
@@ -4944,6 +4791,159 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>num_tabs</key>
       <value>2</value>
+    </param>
+  </block>
+  <block>
+    <key>tx_inner</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>psk</key>
+      <value>digital.psk_constellation(2,digital.mod_codes.NO_CODE,True) </value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(520, 548)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>tx_inner_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>excess_bw</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps</value>
+    </param>
+  </block>
+  <block>
+    <key>tx_inner</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>psk</key>
+      <value>digital.psk_constellation(4,digital.mod_codes.NO_CODE,True) </value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(520, 628)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>tx_inner_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>excess_bw</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps</value>
+    </param>
+  </block>
+  <block>
+    <key>tx_inner</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>psk</key>
+      <value>digital.psk_constellation(8,digital.mod_codes.NO_CODE,True) </value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(520, 724)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>tx_inner_0_0_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>excess_bw</key>
+      <value>excess_bw</value>
+    </param>
+    <param>
+      <key>sps</key>
+      <value>sps</value>
     </param>
   </block>
   <block>
@@ -5358,19 +5358,19 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>blocks_tag_gate_0_0</source_block_id>
-    <sink_block_id>my_tx_inner_0</sink_block_id>
+    <sink_block_id>tx_inner_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_tag_gate_0_0</source_block_id>
-    <sink_block_id>my_tx_inner_0_0</sink_block_id>
+    <sink_block_id>tx_inner_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_tag_gate_0_0</source_block_id>
-    <sink_block_id>my_tx_inner_0_1</sink_block_id>
+    <sink_block_id>tx_inner_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -5429,60 +5429,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>my_rx_inner_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_rx_inner_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_rx_inner_0_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_rx_inner_0_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_rx_inner_0_1</source_block_id>
-    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_rx_inner_0_1</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_tx_inner_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_tx_inner_0_0</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>my_tx_inner_0_1</source_block_id>
-    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
     <source_block_id>per_calc_port_select</source_block_id>
     <sink_block_id>qtgui_number_sink_0</sink_block_id>
     <source_key>0</source_key>
@@ -5513,6 +5459,42 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>rx_inner_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_0_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_0_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_0_1</source_block_id>
+    <sink_block_id>RWN_selector_3_1_cc_1</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>2</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rx_inner_0_1</source_block_id>
+    <sink_block_id>RWN_selector_3_1_ff_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>2</sink_key>
+  </connection>
+  <connection>
     <source_block_id>rx_outer_0</source_block_id>
     <sink_block_id>fec_selector</sink_block_id>
     <source_key>0</source_key>
@@ -5523,6 +5505,24 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_block_id>fec_selector</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tx_inner_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tx_inner_0_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tx_inner_0_0_0</source_block_id>
+    <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>2</sink_key>
   </connection>
   <connection>
     <source_block_id>tx_outer_0</source_block_id>
@@ -5550,19 +5550,19 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>virtual_source_2</source_block_id>
-    <sink_block_id>my_rx_inner_0</sink_block_id>
+    <sink_block_id>rx_inner_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>virtual_source_2</source_block_id>
-    <sink_block_id>my_rx_inner_0_0</sink_block_id>
+    <sink_block_id>rx_inner_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>virtual_source_2</source_block_id>
-    <sink_block_id>my_rx_inner_0_1</sink_block_id>
+    <sink_block_id>rx_inner_0_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

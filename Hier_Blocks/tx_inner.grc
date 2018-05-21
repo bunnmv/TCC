@@ -160,7 +160,7 @@
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_tag_name</value>
+      <value></value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -330,7 +330,7 @@
     </param>
   </block>
   <block>
-    <key>parameter</key>
+    <key>import</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -342,6 +342,37 @@
     <param>
       <key>_enabled</key>
       <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(144, 16)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>import_1</value>
+    </param>
+    <param>
+      <key>import</key>
+      <value>import numpy as np</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -482,7 +513,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(728, 228)</value>
+      <value>(688, 228)</value>
     </param>
     <param>
       <key>_rotation</key>

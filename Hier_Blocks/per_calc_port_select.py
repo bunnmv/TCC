@@ -43,7 +43,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 
             selected_port = 2
 
-        elif 0.35 < average_per <= 0.65:
+        elif 0.35 < average_per <= 0.55:
 
             selected_port = 1
 

@@ -700,7 +700,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1</value>
+      <value>fec_options[fec_position]*restart_call</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -860,7 +860,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>function_args</key>
@@ -1272,7 +1272,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>function_args</key>
@@ -1311,7 +1311,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1327,50 +1327,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable_function_probe</key>
-    <param>
-      <key>block_id</key>
-      <value>probe2</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>function_args</key>
-      <value></value>
-    </param>
-    <param>
-      <key>function_name</key>
-      <value>level</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(632, 56)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>restart</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>poll_rate</key>
-      <value>0.5</value>
+      <value>2</value>
     </param>
   </block>
   <block>
@@ -1397,7 +1354,50 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>True</value>
+      <value>not(restart_check_faster==restart_check)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_function_probe</key>
+    <param>
+      <key>block_id</key>
+      <value>probe2</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>function_args</key>
+      <value></value>
+    </param>
+    <param>
+      <key>function_name</key>
+      <value>level</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(632, 56)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>restart_check</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>poll_rate</key>
+      <value>0.1</value>
     </param>
   </block>
   <block>
@@ -1412,7 +1412,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>function_args</key>
@@ -1432,7 +1432,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>id</key>
-      <value>restart_check</value>
+      <value>restart_check_faster</value>
     </param>
     <param>
       <key>value</key>
@@ -1440,7 +1440,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>poll_rate</key>
-      <value>0.5 + samp_rate/1e7</value>
+      <value>0.12</value>
     </param>
   </block>
   <block>
@@ -1692,7 +1692,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(784, 604)</value>
+      <value>(840, 604)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2092,7 +2092,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>2</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -3240,7 +3240,7 @@ class selector_3_1_bb(gr.basic_block):
     <key>epy_block</key>
     <param>
       <key>average_length</key>
-      <value>10</value>
+      <value>5</value>
     </param>
     <param>
       <key>alias</key>
@@ -3297,7 +3297,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
 
             selected_port = 2
 
-        elif 0.35 &lt; average_per &lt;= 0.65:
+        elif 0.35 &lt; average_per &lt;= 0.55:
 
             selected_port = 1
 
@@ -3386,6 +3386,76 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>id</key>
       <value>probe</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_probe_signal_x</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Restart</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1056, 1236)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>probe2</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_probe_signal_x</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Restart Check</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(936, 1236)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>probe3</value>
     </param>
     <param>
       <key>type</key>
@@ -4272,7 +4342,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1256, 1688)</value>
+      <value>(1192, 1688)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -5323,6 +5393,18 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   <connection>
     <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
     <sink_block_id>per_calc_port_select</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
+    <sink_block_id>probe2</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
+    <sink_block_id>probe3</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
