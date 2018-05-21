@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Mon May 21 14:33:39 2018
+# Generated: Mon May 21 15:17:15 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -40,9 +40,9 @@ from optparse import OptionParser
 from rx_outer import rx_outer  # grc-generated hier_block
 from tx_outer import tx_outer  # grc-generated hier_block
 import RWN
+import amc_controller
 import fec_selector
 import numpy as np
-import per_calc_port_select
 import pmt
 import sip
 import threading
@@ -82,27 +82,27 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         self.symbol_rate = symbol_rate = 384000
         self.samp_rate = samp_rate = 4*288e3
-        self.restart_check_faster = restart_check_faster = 0
-        self.restart_check = restart_check = 0
         self.packet_counter = packet_counter = 1
         self.info_length = info_length = 500
         self.sps_float = sps_float = samp_rate / symbol_rate
-        self.restart_call = restart_call = not(restart_check_faster==restart_check)
         self.packet_length = packet_length = (info_length+packet_counter+4)
         self.fec_position = fec_position = 0
         self.fec_options = fec_options = [0,0,1]
         self.access_code_dummy = access_code_dummy = '1010001000010010'
         self.sps = sps = int(sps_float)
+        self.restart_check_faster = restart_check_faster = 0
+        self.restart_check = restart_check = 0
         self.port = port = 0
         self.nfilts = nfilts = 32
         self.full_frame_bits_dummy = full_frame_bits_dummy = packet_length*8 + len(access_code_dummy)
         self.full_frame_bits_conv = full_frame_bits_conv = packet_length*2*8 + len(access_code_dummy)
-        self.fec_choice = fec_choice = fec_options[fec_position]*restart_call
+        self.fec_choice = fec_choice = fec_options[fec_position]
         self.excess_bw = excess_bw = 0.8
         self.theta = theta = 0
         self.sdr_rate = sdr_rate = 8*288e3
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
-        self.mod_choice = mod_choice = port*restart_call
+        self.restart_call = restart_call = not(restart_check_faster==restart_check)
+        self.mod_choice = mod_choice = port
         self.len_tag_name_rx = len_tag_name_rx = "len_key2"
         self.len_tag_name = len_tag_name = "len_key"
         self.is_conv = is_conv = fec_choice == 0
@@ -422,7 +422,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.tab_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
-        self.per_calc_port_select = per_calc_port_select.blk(window_size=20, modulus=256, average_length=5)
         self.my_tx_inner_0_1 = my_tx_inner(
             constellation=constellation_8psk,
             rolloff=excess_bw,
@@ -495,6 +494,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
+        self.amc_controller = amc_controller.blk(window_size=20, modulus=256, average_length=10, reset_call=False)
         self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_choice, True)
         self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_choice, True)
         self.RWN_selector_3_1_cc_0 = RWN.selector_3_1_cc(mod_choice, True)
@@ -508,10 +508,13 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.RWN_selector_3_1_cc_1, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_0, 0))
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_0_0, 0))
+        self.connect((self.amc_controller, 1), (self.probe, 0))
+        self.connect((self.amc_controller, 1), (self.probe4, 0))
+        self.connect((self.amc_controller, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0_0, 0))
+        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.amc_controller, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0_0, 0))
-        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.per_calc_port_select, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.probe2, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.probe3, 0))
         self.connect((self.blocks_keep_m_in_n_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
@@ -540,9 +543,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.my_tx_inner_0, 0), (self.RWN_selector_3_1_cc_0, 0))
         self.connect((self.my_tx_inner_0_0, 0), (self.RWN_selector_3_1_cc_0, 1))
         self.connect((self.my_tx_inner_0_1, 0), (self.RWN_selector_3_1_cc_0, 2))
-        self.connect((self.per_calc_port_select, 1), (self.probe, 0))
-        self.connect((self.per_calc_port_select, 1), (self.probe4, 0))
-        self.connect((self.per_calc_port_select, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.rx_outer_0, 0), (self.fec_selector, 0))
         self.connect((self.rx_outer_0_0, 0), (self.fec_selector, 1))
         self.connect((self.tx_outer_0, 0), (self.blocks_tagged_stream_mux_0, 0))
@@ -568,20 +568,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.set_sps_float(self.samp_rate / self.symbol_rate)
         self.qtgui_time_sink_x_0_0_0_0.set_samp_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
-
-    def get_restart_check_faster(self):
-        return self.restart_check_faster
-
-    def set_restart_check_faster(self, restart_check_faster):
-        self.restart_check_faster = restart_check_faster
-        self.set_restart_call(not(self.restart_check_faster==self.restart_check))
-
-    def get_restart_check(self):
-        return self.restart_check
-
-    def set_restart_check(self, restart_check):
-        self.restart_check = restart_check
-        self.set_restart_call(not(self.restart_check_faster==self.restart_check))
 
     def get_packet_counter(self):
         return self.packet_counter
@@ -609,14 +595,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.sps_float = sps_float
         self.set_sps(int(self.sps_float))
 
-    def get_restart_call(self):
-        return self.restart_call
-
-    def set_restart_call(self, restart_call):
-        self.restart_call = restart_call
-        self.set_mod_choice(self.port*self.restart_call)
-        self.set_fec_choice(self.fec_options[self.fec_position]*self.restart_call)
-
     def get_packet_length(self):
         return self.packet_length
 
@@ -633,14 +611,14 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_fec_position(self, fec_position):
         self.fec_position = fec_position
-        self.set_fec_choice(self.fec_options[self.fec_position]*self.restart_call)
+        self.set_fec_choice(self.fec_options[self.fec_position])
 
     def get_fec_options(self):
         return self.fec_options
 
     def set_fec_options(self, fec_options):
         self.fec_options = fec_options
-        self.set_fec_choice(self.fec_options[self.fec_position]*self.restart_call)
+        self.set_fec_choice(self.fec_options[self.fec_position])
 
     def get_access_code_dummy(self):
         return self.access_code_dummy
@@ -663,12 +641,26 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.my_rx_inner_0_0.set_sps(self.sps)
         self.my_rx_inner_0.set_sps(self.sps)
 
+    def get_restart_check_faster(self):
+        return self.restart_check_faster
+
+    def set_restart_check_faster(self, restart_check_faster):
+        self.restart_check_faster = restart_check_faster
+        self.set_restart_call(not(self.restart_check_faster==self.restart_check))
+
+    def get_restart_check(self):
+        return self.restart_check
+
+    def set_restart_check(self, restart_check):
+        self.restart_check = restart_check
+        self.set_restart_call(not(self.restart_check_faster==self.restart_check))
+
     def get_port(self):
         return self.port
 
     def set_port(self, port):
         self.port = port
-        self.set_mod_choice(self.port*self.restart_call)
+        self.set_mod_choice(self.port)
         self.analog_const_source_x_1.set_offset(self.port)
 
     def get_nfilts(self):
@@ -737,6 +729,12 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_rrc_taps(self, rrc_taps):
         self.rrc_taps = rrc_taps
+
+    def get_restart_call(self):
+        return self.restart_call
+
+    def set_restart_call(self, restart_call):
+        self.restart_call = restart_call
 
     def get_mod_choice(self):
         return self.mod_choice

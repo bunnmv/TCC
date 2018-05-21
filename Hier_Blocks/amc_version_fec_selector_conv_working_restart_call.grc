@@ -700,7 +700,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>fec_options[fec_position]*restart_call</value>
+      <value>fec_options[fec_position]</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1088,7 +1088,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>port*restart_call</value>
+      <value>port</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1807,6 +1807,139 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>selected</key>
       <value>mod_choice</value>
+    </param>
+  </block>
+  <block>
+    <key>epy_block</key>
+    <param>
+      <key>average_length</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_io_cache</key>
+      <value>('AMC Controller', 'blk', [('window_size', '1'), ('modulus', '1'), ('average_length', '10'), ('reset_call', 'False')], [('0', 'byte', 1)], [('0', 'float', 1), ('1', 'byte', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['average_length', 'modulus', 'reset_call', 'window_size'])</value>
+    </param>
+    <param>
+      <key>_source_code</key>
+      <value>"""
+Embedded Python Blocks:
+
+Each time this file is saved, GRC will instantiate the first class it finds
+to get ports and parameters of your block. The arguments to __init__  will
+be the parameters. All of them are required to have default values!
+"""
+
+import numpy as np
+from gnuradio import gr
+
+
+class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
+    """Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets
+       As for today, it only works for window sizes multiples of the length of the data.
+    """
+
+    def __init__(self, window_size=1, modulus=1,average_length=10, reset_call = False):  # only default arguments here
+        """arguments to this function show up as parameters in GRC"""
+        gr.sync_block.__init__(
+            self,
+            name='AMC Controller',   # will show up in GRC
+            in_sig=[np.int8],
+            out_sig=[np.float32,np.int8]
+        )
+        # if an attribute with the same name as a parameter is found,
+        # a callback is registered (properties work, too).
+        self.window_size = window_size
+        self.average_length = average_length
+        self.modulus = modulus
+        self.history = np.zeros(self.average_length)
+        self.reset_call = reset_call
+        self.state = 0 # 0 = BPSK 1 = QPSK 2 = 8PSK
+        self.set_history(window_size)
+
+    def calc_average_per(self,new_per):
+        
+        self.history = np.roll(self.history,1)
+        
+        self.history[0] = new_per
+
+        average_per = np.mean(self.history)
+
+        if self.state == 0:
+            if average_per &lt;=0.35:
+                self.state = 1
+        elif self.state == 1:
+            if self.reset_call:
+                self.state = 0
+            else:
+                if average_per &lt;=0.35:
+                    self.state = 2
+                else:
+                    self.state = 0
+        else:
+            if self.reset_call:
+                self.state = 0
+            else:
+                if  average_per &gt;= 0.55:
+                    self.state = 1     
+        # print("History {} , Average {}".format(self.history,average_per))
+        return average_per
+
+
+    def work(self, input_items, output_items):
+
+        consumed = (len(input_items[0])-self.window_size+1)
+        if  consumed &lt; self.window_size:
+            return 0    
+        for i in range(0 , consumed):
+            # if self.window_size+i &lt; len(input_items[0]):
+            observed = input_items[0][i:self.window_size+i] %256
+
+            errors = sum((np.diff(observed) % self.modulus)-1)
+
+            per = max((float(errors)/(self.window_size+errors)),0)
+            # print("Observed {}".format(observed))
+            # print("PER {}".format(per))
+            output_items[0][i] = self.calc_average_per(per)
+            output_items[1][i] = self.state
+
+        return len(output_items[0])
+</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1144, 1340)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>amc_controller</value>
+    </param>
+    <param>
+      <key>modulus</key>
+      <value>256</value>
+    </param>
+    <param>
+      <key>reset_call</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>window_size</key>
+      <value>20</value>
     </param>
   </block>
   <block>
@@ -3334,11 +3467,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 1332)</value>
+      <value>(1480, 1380)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5361,6 +5494,24 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>amc_controller</source_block_id>
+    <sink_block_id>qtgui_number_sink_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>amc_controller</source_block_id>
+    <sink_block_id>probe</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>amc_controller</source_block_id>
+    <sink_block_id>probe4</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>analog_agc_xx_0</source_block_id>
     <sink_block_id>virtual_sink_1</sink_block_id>
     <source_key>0</source_key>
@@ -5386,13 +5537,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>blocks_file_sink_0_0_0</sink_block_id>
+    <sink_block_id>amc_controller</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>per_calc_port_select</sink_block_id>
+    <sink_block_id>blocks_file_sink_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -5563,24 +5714,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_block_id>RWN_selector_3_1_cc_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>per_calc_port_select</source_block_id>
-    <sink_block_id>qtgui_number_sink_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>per_calc_port_select</source_block_id>
-    <sink_block_id>probe</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>per_calc_port_select</source_block_id>
-    <sink_block_id>probe4</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>rational_resampler_xxx_0</source_block_id>
