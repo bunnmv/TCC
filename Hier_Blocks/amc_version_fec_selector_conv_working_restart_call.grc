@@ -325,38 +325,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>access_code_conv</value>
+      <value>access_code</value>
     </param>
     <param>
       <key>value</key>
       <value>'0101110111101101' </value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(232, 156)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>access_code_dummy</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>'1010001000010010'</value>
     </param>
   </block>
   <block>
@@ -1097,7 +1070,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>packet_length*2*8 + len(access_code_dummy)</value>
+      <value>packet_length*2*8 + len(access_code)</value>
     </param>
   </block>
   <block>
@@ -1124,7 +1097,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>packet_length*8 + len(access_code_dummy)</value>
+      <value>packet_length*8 + len(access_code)</value>
     </param>
   </block>
   <block>
@@ -1489,7 +1462,11 @@ mod_choice = 2 Fec_choice =1</value>
     <key>variable</key>
     <param>
       <key>comment</key>
-      <value>IF True, restarts FEC and MOD</value>
+      <value>IF True two probes reads same value
+
+CRC is descarting packets.
+
+Restarts FEC and MOD</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1509,7 +1486,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>value</key>
-      <value>(reset_check_faster==reset_check) and control</value>
+      <value>(reset_check_faster==reset_check)</value>
     </param>
   </block>
   <block>
@@ -1595,7 +1572,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>poll_rate</key>
-      <value>0.12</value>
+      <value>0.11</value>
     </param>
   </block>
   <block>
@@ -1968,7 +1945,7 @@ mod_choice = 2 Fec_choice =1</value>
     <key>epy_block</key>
     <param>
       <key>average_length</key>
-      <value>10</value>
+      <value>100</value>
     </param>
     <param>
       <key>alias</key>
@@ -1976,7 +1953,7 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_io_cache</key>
-      <value>('AMC Controller', 'blk', [('window_size', '1'), ('modulus', '1'), ('average_length', '10'), ('reset_call', 'False')], [('0', 'byte', 1)], [('0', 'float', 1), ('1', 'byte', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['average_length', 'modulus', 'reset_call', 'window_size'])</value>
+      <value>('ACM Controller', 'blk', [('threshold', '0.35'), ('window_size', '1'), ('modulus', '1'), ('average_length', '10'), ('reset_call', 'False'), ('state_tries', '10')], [('0', 'byte', 1)], [('0', 'float', 1), ('1', 'byte', 1)], 'Embedded Python Block  - This block takes the packet numbers of the received window size packets and calculates the quantity of the lost packets\n       As for today, it only works for window sizes multiples of the length of the data.\n    ', ['average_length', 'modulus', 'reset_call', 'state_tries', 'threshold', 'window_size'])</value>
     </param>
     <param>
       <key>_source_code</key>
@@ -1990,6 +1967,7 @@ be the parameters. All of them are required to have default values!
 
 import numpy as np
 from gnuradio import gr
+import datetime
 
 
 class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
@@ -1997,26 +1975,33 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
        As for today, it only works for window sizes multiples of the length of the data.
     """
 
-    def __init__(self, window_size=1, modulus=1,average_length=10, reset_call = False):  # only default arguments here
+    def __init__(self, threshold=0.35,window_size=1, modulus=1,average_length=10, reset_call = False, state_tries = 10):  # only default arguments here
         """arguments to this function show up as parameters in GRC"""
         gr.sync_block.__init__(
             self,
-            name='AMC Controller',   # will show up in GRC
+            name='ACM Controller',   # will show up in GRC
             in_sig=[np.int8],
             out_sig=[np.float32,np.int8]
         )
         # if an attribute with the same name as a parameter is found,
         # a callback is registered (properties work, too).
         self.window_size = window_size
-        self.average_length = average_length
-        self.modulus = modulus
-        self.history = np.zeros(self.average_length)
-        self.reset_call = reset_call
+        self.threshold = threshold # PER threshold that controls the ACM state machine.
+        self.average_length = average_length # How many measurements are used to calculate the per.
+        self.modulus = modulus # modulus of the packet counter, how log it takes to return to zero.
+        self.history = np.zeros(self.average_length) #vector that stores the last average length pers
+        self.reset_call = reset_call # resets to BPSK e FEC
         self.state = 0 # 0 = BPSK 1 = QPSK 2 = 8PSK
+        self.state_tries = state_tries # how many work calls one state is kept before changing it.
+        self.work_calls = 0
+        self.reset_control = False #controls reset so it does not happen very often.
+
         self.set_history(window_size)
+    
 
     def calc_average_per(self,new_per):
         
+        #make a param for treshold and to controll permanency on states.
         self.history = np.roll(self.history,1)
         
         self.history[0] = new_per
@@ -2024,33 +2009,48 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         average_per = np.mean(self.history)
         # Desired per is max 0.35
         if self.state == 0: #BPSK
-            if average_per &lt;=0.35:
-                self.state = 1
+            if self.work_calls == self.state_tries:
+                self.reset_control = True
+                self.work_calls = 0
+                if average_per &lt;=self.threshold:
+                    self.state = 1
+                 
         elif self.state == 1: #QPSK
-            if self.reset_call:
-                self.state = 0
-                print("RESET")
-            else:
-                if average_per &lt;=0.30:
+            if self.work_calls == self.state_tries:
+                self.reset_control = True 
+                self.work_calls = 0
+                if average_per &lt;= self.threshold:
                     self.state = 2
-                elif average_per &gt;= 0.55:
-                    self.state = 0
+                else:
+                    self.state = 1
         else: #8PSK
-            if self.reset_call:
-                self.state = 0
-                print("RESET")
-            else:
-                if average_per &gt;= 0.35:
-                    self.state = 1     
+            if self.work_calls == self.state_tries:
+                self.reset_control = True 
+                self.work_calls = 0   
+                if average_per &gt; self.threshold:
+                    self.state = 1
+                   
+
         # print("History {} , Average {}".format(self.history,average_per))
         return average_per
 
 
     def work(self, input_items, output_items):
+    	# Restarts machine
+        if self.reset_call and self.reset_control:
+            self.reset_control = False
+            self.state = 0
+            self.work_calls = 0
+            output_items[1][:] = 0 # Must restart port because changing just the state would not work.
+            st = datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M:%S%p")
+            print("RESET at",st)
+            return len(output_items[1]) # Must return one so produce is calles. As this is a Sync Block.
 
         consumed = (len(input_items[0])-self.window_size+1)
         if  consumed &lt; self.window_size:
-            return 0    
+            return 0
+
+        self.work_calls += 1
         for i in range(0 , consumed):
             # if self.window_size+i &lt; len(input_items[0]):
             observed = input_items[0][i:self.window_size+i] %256
@@ -2075,7 +2075,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 1340)</value>
+      <value>(1144, 1348)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2092,6 +2092,14 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <param>
       <key>reset_call</key>
       <value>reset_call</value>
+    </param>
+    <param>
+      <key>state_tries</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>0.35</value>
     </param>
     <param>
       <key>window_size</key>
@@ -2205,6 +2213,61 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
   </block>
   <block>
+    <key>blocks_delay</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>delay</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(960, 1308)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_delay_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>num_ports</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_file_sink</key>
     <param>
       <key>append</key>
@@ -2283,7 +2346,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 1444)</value>
+      <value>(1136, 1476)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3666,7 +3729,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1328, 1372)</value>
+      <value>(1328, 1388)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3701,7 +3764,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1056, 1236)</value>
+      <value>(1104, 1244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3736,7 +3799,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(936, 1236)</value>
+      <value>(944, 1244)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4126,7 +4189,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1304, 1272)</value>
+      <value>(1312, 1272)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -5077,7 +5140,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>id</key>
-      <value>rx_outer_0</value>
+      <value>rx_outer_1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -5093,11 +5156,11 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>access_code</key>
-      <value>access_code_conv</value>
+      <value>access_code</value>
     </param>
     <param>
       <key>len_tag_name_rx</key>
-      <value>len_tag_name_rx</value>
+      <value>len_tag_name</value>
     </param>
   </block>
   <block>
@@ -5132,7 +5195,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>id</key>
-      <value>rx_outer_0_0</value>
+      <value>rx_outer_2</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -5148,7 +5211,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>access_code</key>
-      <value>access_code_conv</value>
+      <value>access_code</value>
     </param>
     <param>
       <key>len_tag_name_rx</key>
@@ -5171,7 +5234,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 84)</value>
+      <value>(1152, 84)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -5274,7 +5337,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <key>tx_outer</key>
     <param>
       <key>access_code</key>
-      <value>access_code_conv</value>
+      <value>access_code</value>
     </param>
     <param>
       <key>alias</key>
@@ -5329,7 +5392,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <key>tx_outer</key>
     <param>
       <key>access_code</key>
-      <value>access_code_conv</value>
+      <value>access_code</value>
     </param>
     <param>
       <key>alias</key>
@@ -5639,6 +5702,12 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_delay_0</source_block_id>
+    <sink_block_id>probe3</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_file_source_0</source_block_id>
     <sink_block_id>blocks_throttle_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -5658,6 +5727,12 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
+    <sink_block_id>blocks_delay_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
     <sink_block_id>blocks_file_sink_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -5665,12 +5740,6 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   <connection>
     <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
     <sink_block_id>probe2</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_keep_m_in_n_0_0</source_block_id>
-    <sink_block_id>probe3</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -5843,13 +5912,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>rx_outer_0</source_block_id>
+    <source_block_id>rx_outer_1</source_block_id>
     <sink_block_id>fec_selector</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>rx_outer_0_0</source_block_id>
+    <source_block_id>rx_outer_2</source_block_id>
     <sink_block_id>fec_selector</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
@@ -5898,13 +5967,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>virtual_source_3</source_block_id>
-    <sink_block_id>rx_outer_0</sink_block_id>
+    <sink_block_id>rx_outer_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>virtual_source_3</source_block_id>
-    <sink_block_id>rx_outer_0_0</sink_block_id>
+    <sink_block_id>rx_outer_2</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

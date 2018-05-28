@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Mon May 21 18:40:57 2018
+# Generated: Mon May 28 00:04:08 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -91,19 +91,19 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.packet_length = packet_length = (info_length+packet_counter+4)
         self.mod_choice = mod_choice = port*control + controller
         self.fec_options = fec_options = [0,0,1]
-        self.access_code_dummy = access_code_dummy = '1010001000010010'
+        self.access_code = access_code = '0101110111101101'
         self.sps = sps = int(sps_float)
         self.reset_check_faster = reset_check_faster = 0
         self.reset_check = reset_check = 0
         self.nfilts = nfilts = 32
-        self.full_frame_bits_dummy = full_frame_bits_dummy = packet_length*8 + len(access_code_dummy)
-        self.full_frame_bits_conv = full_frame_bits_conv = packet_length*2*8 + len(access_code_dummy)
+        self.full_frame_bits_dummy = full_frame_bits_dummy = packet_length*8 + len(access_code)
+        self.full_frame_bits_conv = full_frame_bits_conv = packet_length*2*8 + len(access_code)
         self.fec_choice = fec_choice = fec_options[mod_choice]
         self.excess_bw = excess_bw = 0.8
         self.theta = theta = 0
         self.sdr_rate = sdr_rate = 8*288e3
         self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
-        self.reset_call = reset_call = (reset_check_faster==reset_check) and control
+        self.reset_call = reset_call = (reset_check_faster==reset_check)
         self.len_tag_name_rx = len_tag_name_rx = "len_key2"
         self.len_tag_name = len_tag_name = "len_key"
         self.is_conv = is_conv = fec_choice == 0
@@ -121,7 +121,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self.channel_rotation = channel_rotation = 0
         self.channel_noise = channel_noise = 0
-        self.access_code_conv = access_code_conv = '0101110111101101'
 
 
         self.DE = DE = fec.dummy_encoder_make(packet_length*8)
@@ -222,27 +221,27 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self._channel_noise_win = RangeWidget(self._channel_noise_range, self.set_channel_noise, "channel_noise", "counter_slider", float)
         self.top_grid_layout.addWidget(self._channel_noise_win, 0,3,1,1)
         self.tx_outer_0_0 = tx_outer(
-            access_code=access_code_conv,
+            access_code=access_code,
             data_length=data_length,
             encoder=DE,
             len_tag_name=len_tag_name,
         )
         self.tx_outer_0 = tx_outer(
-            access_code=access_code_conv,
+            access_code=access_code,
             data_length=data_length,
             encoder=CE,
             len_tag_name=len_tag_name,
         )
-        self.rx_outer_0_0 = rx_outer(
-            access_code=access_code_conv,
+        self.rx_outer_2 = rx_outer(
+            access_code=access_code,
             decoder=DD,
             len_tag_name_rx=len_tag_name_rx,
             packet_length=packet_length,
         )
-        self.rx_outer_0 = rx_outer(
-            access_code=access_code_conv,
+        self.rx_outer_1 = rx_outer(
+            access_code=access_code,
             decoder=CD,
-            len_tag_name_rx=len_tag_name_rx,
+            len_tag_name_rx=len_tag_name,
             packet_length=packet_length,
         )
 
@@ -253,7 +252,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
                     self.set_reset_check_faster(val)
                 except AttributeError:
                     pass
-                time.sleep(1.0 / (0.12))
+                time.sleep(1.0 / (0.11))
         _reset_check_faster_thread = threading.Thread(target=_reset_check_faster_probe)
         _reset_check_faster_thread.daemon = True
         _reset_check_faster_thread.start()
@@ -522,8 +521,9 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0_0.set_unbuffered(True)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, '/Users/marcusbunn/Desktop/payload.txt', False)
         self.blocks_file_sink_0_0.set_unbuffered(True)
+        self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, 1)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
-        self.amc_controller = amc_controller.blk(window_size=20, modulus=256, average_length=10, reset_call=reset_call)
+        self.amc_controller = amc_controller.blk(threshold=0.35, window_size=20, modulus=256, average_length=100, reset_call=reset_call, state_tries=10)
         self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_choice, True)
         self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_choice, True)
         self.RWN_selector_3_1_cc_0 = RWN.selector_3_1_cc(mod_choice, True)
@@ -535,16 +535,17 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         self.connect((self.RWN_selector_3_1_cc_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.RWN_selector_3_1_cc_1, 0), (self.qtgui_const_sink_x_0, 0))
-        self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_0, 0))
-        self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_0_0, 0))
+        self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_1, 0))
+        self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_2, 0))
         self.connect((self.amc_controller, 1), (self.probe, 0))
         self.connect((self.amc_controller, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
+        self.connect((self.blocks_delay_0, 0), (self.probe3, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.amc_controller, 0))
+        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_delay_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.probe2, 0))
-        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.probe3, 0))
         self.connect((self.blocks_keep_m_in_n_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0_0, 0), (self.blocks_uchar_to_float_0, 0))
         self.connect((self.blocks_keep_m_in_n_1_0, 0), (self.blocks_tag_gate_0_0, 0))
@@ -571,8 +572,8 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.my_tx_inner_0, 0), (self.RWN_selector_3_1_cc_0, 0))
         self.connect((self.my_tx_inner_0_0, 0), (self.RWN_selector_3_1_cc_0, 1))
         self.connect((self.my_tx_inner_0_1, 0), (self.RWN_selector_3_1_cc_0, 2))
-        self.connect((self.rx_outer_0, 0), (self.fec_selector, 0))
-        self.connect((self.rx_outer_0_0, 0), (self.fec_selector, 1))
+        self.connect((self.rx_outer_1, 0), (self.fec_selector, 0))
+        self.connect((self.rx_outer_2, 0), (self.fec_selector, 1))
         self.connect((self.tx_outer_0, 0), (self.blocks_tagged_stream_mux_0, 0))
         self.connect((self.tx_outer_0_0, 0), (self.blocks_tagged_stream_mux_0, 1))
 
@@ -637,7 +638,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_control(self, control):
         self.control = control
-        self.set_reset_call((self.reset_check_faster==self.reset_check) and self.control)
         self.set_mod_choice(self.port*self.control + self.controller)
         self._control_callback(self.control)
 
@@ -653,10 +653,10 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_packet_length(self, packet_length):
         self.packet_length = packet_length
-        self.rx_outer_0_0.set_packet_length(self.packet_length)
-        self.rx_outer_0.set_packet_length(self.packet_length)
-        self.set_full_frame_bits_dummy(self.packet_length*8 + len(self.access_code_dummy))
-        self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code_dummy))
+        self.rx_outer_2.set_packet_length(self.packet_length)
+        self.rx_outer_1.set_packet_length(self.packet_length)
+        self.set_full_frame_bits_dummy(self.packet_length*8 + len(self.access_code))
+        self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code))
         self.set_frame_bits(self.packet_length*8 + self.packet_length*8*self.fec_choice)
 
     def get_mod_choice(self):
@@ -677,13 +677,17 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.fec_options = fec_options
         self.set_fec_choice(self.fec_options[self.mod_choice])
 
-    def get_access_code_dummy(self):
-        return self.access_code_dummy
+    def get_access_code(self):
+        return self.access_code
 
-    def set_access_code_dummy(self, access_code_dummy):
-        self.access_code_dummy = access_code_dummy
-        self.set_full_frame_bits_dummy(self.packet_length*8 + len(self.access_code_dummy))
-        self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code_dummy))
+    def set_access_code(self, access_code):
+        self.access_code = access_code
+        self.tx_outer_0_0.set_access_code(self.access_code)
+        self.tx_outer_0.set_access_code(self.access_code)
+        self.rx_outer_2.set_access_code(self.access_code)
+        self.rx_outer_1.set_access_code(self.access_code)
+        self.set_full_frame_bits_dummy(self.packet_length*8 + len(self.access_code))
+        self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code))
 
     def get_sps(self):
         return self.sps
@@ -703,14 +707,14 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_reset_check_faster(self, reset_check_faster):
         self.reset_check_faster = reset_check_faster
-        self.set_reset_call((self.reset_check_faster==self.reset_check) and self.control)
+        self.set_reset_call((self.reset_check_faster==self.reset_check))
 
     def get_reset_check(self):
         return self.reset_check
 
     def set_reset_check(self, reset_check):
         self.reset_check = reset_check
-        self.set_reset_call((self.reset_check_faster==self.reset_check) and self.control)
+        self.set_reset_call((self.reset_check_faster==self.reset_check))
 
     def get_nfilts(self):
         return self.nfilts
@@ -791,8 +795,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_len_tag_name_rx(self, len_tag_name_rx):
         self.len_tag_name_rx = len_tag_name_rx
-        self.rx_outer_0_0.set_len_tag_name_rx(self.len_tag_name_rx)
-        self.rx_outer_0.set_len_tag_name_rx(self.len_tag_name_rx)
+        self.rx_outer_2.set_len_tag_name_rx(self.len_tag_name_rx)
 
     def get_len_tag_name(self):
         return self.len_tag_name
@@ -801,6 +804,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.len_tag_name = len_tag_name
         self.tx_outer_0_0.set_len_tag_name(self.len_tag_name)
         self.tx_outer_0.set_len_tag_name(self.len_tag_name)
+        self.rx_outer_1.set_len_tag_name_rx(self.len_tag_name)
 
     def get_is_conv(self):
         return self.is_conv
@@ -872,16 +876,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.channel_noise = channel_noise
         self.channels_channel_model_0.set_noise_voltage(self.channel_noise)
 
-    def get_access_code_conv(self):
-        return self.access_code_conv
-
-    def set_access_code_conv(self, access_code_conv):
-        self.access_code_conv = access_code_conv
-        self.tx_outer_0_0.set_access_code(self.access_code_conv)
-        self.tx_outer_0.set_access_code(self.access_code_conv)
-        self.rx_outer_0_0.set_access_code(self.access_code_conv)
-        self.rx_outer_0.set_access_code(self.access_code_conv)
-
     def get_DE(self):
         return self.DE
 
@@ -894,7 +888,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_DD(self, DD):
         self.DD = DD
-        self.rx_outer_0_0.set_decoder(self.DD)
+        self.rx_outer_2.set_decoder(self.DD)
 
     def get_CE(self):
         return self.CE
@@ -908,7 +902,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_CD(self, CD):
         self.CD = CD
-        self.rx_outer_0.set_decoder(self.CD)
+        self.rx_outer_1.set_decoder(self.CD)
 
 
 def main(top_block_cls=top_block_amc, options=None):
