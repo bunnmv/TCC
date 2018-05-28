@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Mon May 28 11:07:30 2018
+# Generated: Mon May 28 14:03:23 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -523,7 +523,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0.set_unbuffered(True)
         self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, 10)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
-        self.amc_controller = amc_controller.blk(threshold=0.25, window_size=20, modulus=256, average_length=100, reset_call=reset_call, state_tries=10)
+        self.amc_controller = amc_controller.blk(threshold=0.1, window_size=20, modulus=256, average_length=100, reset_call=reset_call, state_tries=10)
         self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_choice, True)
         self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_choice, True)
         self.RWN_selector_3_1_cc_0 = RWN.selector_3_1_cc(mod_choice, True)

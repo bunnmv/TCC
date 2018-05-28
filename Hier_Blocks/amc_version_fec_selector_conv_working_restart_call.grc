@@ -2100,7 +2100,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>threshold</key>
-      <value>0.25</value>
+      <value>0.1</value>
     </param>
     <param>
       <key>window_size</key>
