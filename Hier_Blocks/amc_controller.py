@@ -34,7 +34,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.reset_call = reset_call # resets to BPSK e FEC
         self.state = 0 # 0 = BPSK 1 = QPSK 2 = 8PSK
         self.state_tries = state_tries # how many work calls one state is kept before changing it.
-        self.work_calls = 0
+        self.work_calls = 0 # How many times the work call hass been called
         self.reset_control = False #controls reset so it does not happen very often.
 
         self.set_history(window_size)
@@ -48,7 +48,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.history[0] = new_per
 
         average_per = np.mean(self.history)
-        # Desired per is max 0.35
+
+        # Desired per is less than self.threshold
         if self.state == 0: #BPSK
             if self.work_calls == self.state_tries:
                 self.reset_control = True
@@ -63,7 +64,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
                 if average_per <= self.threshold:
                     self.state = 2
                 else:
-                    self.state = 1
+                    self.state = 0
         else: #8PSK
             if self.work_calls == self.state_tries:
                 self.reset_control = True 
@@ -71,14 +72,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
                 if average_per > self.threshold:
                     self.state = 1
                    
-
         # print("History {} , Average {}".format(self.history,average_per))
         return average_per
 
 
     def work(self, input_items, output_items):
     	# Restarts machine
-        if self.reset_call and self.reset_control:
+        if self.reset_call and self.reset_control and self.state>0:
             self.reset_control = False
             self.state = 0
             self.work_calls = 0
@@ -92,6 +92,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             return 0
 
         self.work_calls += 1
+
         for i in range(0 , consumed):
             # if self.window_size+i < len(input_items[0]):
             observed = input_items[0][i:self.window_size+i] %256
