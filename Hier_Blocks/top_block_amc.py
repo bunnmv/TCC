@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Mon May 28 14:03:23 2018
+# Generated: Tue May 29 13:37:15 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -113,12 +113,15 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self.constellation_qpsk = constellation_qpsk = digital.constellation_qpsk().base()
 
+        self.constellation_qpsk.gen_soft_dec_lut(8)
 
         self.constellation_bpsk = constellation_bpsk = digital.constellation_bpsk().base()
 
+        self.constellation_bpsk.gen_soft_dec_lut(8)
 
         self.constellation_8psk = constellation_8psk = digital.constellation_8psk().base()
 
+        self.constellation_8psk.gen_soft_dec_lut(8)
         self.channel_rotation = channel_rotation = 0
         self.channel_noise = channel_noise = 0
 

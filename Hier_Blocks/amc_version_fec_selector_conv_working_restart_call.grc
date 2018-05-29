@@ -317,7 +317,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(112, 156)</value>
+      <value>(32, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -498,7 +498,7 @@
     </param>
     <param>
       <key>soft_dec_lut</key>
-      <value>None</value>
+      <value>'Auto'</value>
     </param>
     <param>
       <key>precision</key>
@@ -549,7 +549,7 @@
     </param>
     <param>
       <key>soft_dec_lut</key>
-      <value>None</value>
+      <value>'Auto'</value>
     </param>
     <param>
       <key>precision</key>
@@ -600,7 +600,7 @@
     </param>
     <param>
       <key>soft_dec_lut</key>
-      <value>None</value>
+      <value>'Auto'</value>
     </param>
     <param>
       <key>precision</key>
