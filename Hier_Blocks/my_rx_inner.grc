@@ -277,7 +277,7 @@
     </param>
     <param>
       <key>constellation</key>
-      <value>constellation</value>
+      <value>constellation.base()</value>
     </param>
     <param>
       <key>affinity</key>

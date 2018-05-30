@@ -510,33 +510,6 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(256, 172)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>constellation_8psk</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>digital.psk_constellation(8,digital.mod_codes.GRAY_CODE, False)</value>
-    </param>
-  </block>
-  <block>
     <key>variable_constellation</key>
     <param>
       <key>comment</key>
@@ -588,33 +561,6 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(0, 172)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>constellation_bpsk</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>digital.psk_constellation(2,digital.mod_codes.GRAY_CODE, False)</value>
-    </param>
-  </block>
-  <block>
     <key>variable_constellation</key>
     <param>
       <key>comment</key>
@@ -663,33 +609,6 @@
     <param>
       <key>sym_map</key>
       <value>[0, 1, 3, 2]</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(128, 172)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>constellation_qpsk</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>digital.psk_constellation(4,digital.mod_codes.GRAY_CODE, False)</value>
     </param>
   </block>
   <block>
@@ -1510,33 +1429,6 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>poll_rate</key>
       <value>0.25</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(744, 132)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>port</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2</value>
     </param>
   </block>
   <block>
