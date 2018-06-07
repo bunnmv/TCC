@@ -54,25 +54,21 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     def state_machine(self,average_per):
 
         # Desired per is less than self.threshold
-        if self.state == 0: #BPSK
-            if self.work_calls == self.state_tries:
-                self.reset_control = True
-                self.work_calls = 0
+        if self.work_calls == self.state_tries:
+            self.reset_control = True
+            self.work_calls = 0
+
+            if self.state == 0: #BPSK
                 if average_per <=self.threshold:
                     self.state = 1
-                 
-        elif self.state == 1: #QPSK
-            if self.work_calls == self.state_tries:
-                self.reset_control = True 
-                self.work_calls = 0
+
+            elif self.state == 1: #QPSK
                 if average_per <= self.threshold:
                     self.state = 2
                 else:
                     self.state = 0
-        else: #8PSK
-            if self.work_calls == self.state_tries:
-                self.reset_control = True 
-                self.work_calls = 0   
+
+            else: #8PSK
                 if average_per > self.threshold:
                     self.state = 1       
 
