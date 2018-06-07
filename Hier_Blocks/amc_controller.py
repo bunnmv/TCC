@@ -40,16 +40,15 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.set_history(window_size)
     
 
-    def calc_average_per(self,observed):
+    def calc_instant_per(self,observed):
 
         errors = sum((np.diff(observed) % self.modulus)-1)
+        return max((float(errors)/(self.window_size+errors)),0)
 
-        per = max((float(errors)/(self.window_size+errors)),0)
+    def calc_average_per(self,new_per):
 
     	self.history = np.roll(self.history,1)
-        
-        self.history[0] = per
-
+        self.history[0] = new_per
         return np.mean(self.history)
 
     def state_machine(self,average_per):
@@ -98,8 +97,8 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i] %256
             #errors = sum((np.diff(observed) % self.modulus)-1)
             #per = max((float(errors)/(self.window_size+errors)),0)
-            average_per = self.calc_average_per(observed)
-
+            new_per = self.calc_instant_per(observed)
+            average_per = self.calc_average_per(new_per)
             self.state_machine(average_per)
             output_items[0][i] = average_per
             output_items[1][i] = self.state
