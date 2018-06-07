@@ -40,6 +40,12 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.set_history(window_size)
     
 
+    def calc_instant_per(self,observed):
+
+    	 errors = sum((np.diff(observed) % self.modulus)-1)
+
+    	 return max((float(errors)/(self.window_size+errors)),0)
+
     def calc_average_per(self,new_per):
         
         #make a param for treshold and to controll permanency on states.
@@ -94,14 +100,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.work_calls += 1
 
         for i in range(0 , consumed):
-            # if self.window_size+i < len(input_items[0]):
             observed = input_items[0][i:self.window_size+i] %256
-
-            errors = sum((np.diff(observed) % self.modulus)-1)
-
-            per = max((float(errors)/(self.window_size+errors)),0)
-            # print("Observed {}".format(observed))
-            # print("PER {}".format(per))
+            #errors = sum((np.diff(observed) % self.modulus)-1)
+            #per = max((float(errors)/(self.window_size+errors)),0)
+            per = self.calc_instant_per(observed)
             output_items[0][i] = self.calc_average_per(per)
             output_items[1][i] = self.state
         return len(output_items[0])
