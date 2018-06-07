@@ -1972,20 +1972,19 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.set_history(window_size)
     
 
-    def calc_instant_per(self,observed):
+    def calc_average_per(self,observed):
 
-    	 errors = sum((np.diff(observed) % self.modulus)-1)
+        errors = sum((np.diff(observed) % self.modulus)-1)
 
-    	 return max((float(errors)/(self.window_size+errors)),0)
+        per = max((float(errors)/(self.window_size+errors)),0)
 
-    def calc_average_per(self,new_per):
+    	self.history = np.roll(self.history,1)
         
-        #make a param for treshold and to controll permanency on states.
-        self.history = np.roll(self.history,1)
-        
-        self.history[0] = new_per
+        self.history[0] = per
 
-        average_per = np.mean(self.history)
+        return np.mean(self.history)
+
+    def state_machine(self,average_per):
 
         # Desired per is less than self.threshold
         if self.state == 0: #BPSK
@@ -2008,11 +2007,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
                 self.reset_control = True 
                 self.work_calls = 0   
                 if average_per &gt; self.threshold:
-                    self.state = 1
-                   
-        # print("History {} , Average {}".format(self.history,average_per))
-        return average_per
-
+                    self.state = 1       
 
     def work(self, input_items, output_items):
     	# Restarts machine
@@ -2035,8 +2030,10 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
             observed = input_items[0][i:self.window_size+i] %256
             #errors = sum((np.diff(observed) % self.modulus)-1)
             #per = max((float(errors)/(self.window_size+errors)),0)
-            per = self.calc_instant_per(observed)
-            output_items[0][i] = self.calc_average_per(per)
+            average_per = self.calc_average_per(observed)
+
+            self.state_machine(average_per)
+            output_items[0][i] = average_per
             output_items[1][i] = self.state
         return len(output_items[0])
 </value>

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Thu Jun  7 00:36:41 2018
+# Generated: Thu Jun  7 00:49:22 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -333,54 +333,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_0_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0_0_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_0_0_0_win, 1,1,5,5)
-        self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
-        	100, #size
-        	samp_rate, #samp_rate
-        	"", #name
-        	1 #number of inputs
-        )
-        self.qtgui_time_sink_x_0.set_update_time(0.10)
-        self.qtgui_time_sink_x_0.set_y_axis(0, 1)
-
-        self.qtgui_time_sink_x_0.set_y_label('Amplitude', "")
-
-        self.qtgui_time_sink_x_0.enable_tags(-1, False)
-        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_0.enable_autoscale(False)
-        self.qtgui_time_sink_x_0.enable_grid(False)
-        self.qtgui_time_sink_x_0.enable_axis_labels(True)
-        self.qtgui_time_sink_x_0.enable_control_panel(False)
-        self.qtgui_time_sink_x_0.enable_stem_plot(True)
-
-        if not True:
-          self.qtgui_time_sink_x_0.disable_legend()
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        markers = [0, -1, -1, -1, -1,
-                   -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in xrange(1):
-            if len(labels[i]) == 0:
-                self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
         self.qtgui_number_sink_0_1 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -606,7 +558,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_2, 0))
         self.connect((self.amc_controller, 1), (self.probe, 0))
         self.connect((self.amc_controller, 0), (self.qtgui_number_sink_0, 0))
-        self.connect((self.amc_controller, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0, 0))
         self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_0, 0))
         self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_1, 0))
@@ -669,7 +620,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.set_sps_float(self.samp_rate / self.symbol_rate)
         self.qtgui_time_sink_x_0_0_0_0.set_samp_rate(self.samp_rate)
-        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, self.symbol_rate, 5e3, firdes.WIN_HAMMING, 6.76))
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
 
