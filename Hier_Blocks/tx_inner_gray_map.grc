@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.12'?>
 <flow_graph>
-  <timestamp>Mon Apr 30 19:55:04 2018</timestamp>
+  <timestamp>Sun Apr 22 22:03:15 2018</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -14,7 +14,7 @@
     </param>
     <param>
       <key>category</key>
-      <value>[AMC Hier Blocks]</value>
+      <value>[RWN]</value>
     </param>
     <param>
       <key>comment</key>
@@ -30,7 +30,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 8)</value>
+      <value>(16, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>tx_outer</value>
+      <value>my_tx_inner</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -90,62 +90,7 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(872, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>crc_length</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>4</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value>Somehow, on the encoder fec.rate() returns 1/the_actual_rate. 
-So a 1/2 returns  2</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(312, 20)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>data_encoded_length</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>int((data_length+crc_length) *encoder.rate())</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
+    <key>blocks_multiply_const_vxx</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -155,61 +100,8 @@ So a 1/2 returns  2</value>
       <value></value>
     </param>
     <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(672, 0)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>access_code</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Access Code</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>string</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>'0101110111101101' </value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_repack_bits_bb</key>
-    <param>
-      <key>k</key>
-      <value>8</value>
-    </param>
-    <param>
-      <key>l</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>FEC needs unpacked
-
-MSB -&gt; For FEC</value>
+      <key>const</key>
+      <value>np.conjugate(constellation.points()[0])</value>
     </param>
     <param>
       <key>affinity</key>
@@ -220,12 +112,8 @@ MSB -&gt; For FEC</value>
       <value>1</value>
     </param>
     <param>
-      <key>endianness</key>
-      <value>gr.GR_MSB_FIRST</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(568, 156)</value>
+      <value>(544, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -233,11 +121,70 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_repack_bits_bb_tx_convolutional</value>
+      <value>blocks_multiply_const_vxx_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_repack_bits_bb</key>
+    <param>
+      <key>k</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>l</key>
+      <value>constellation.bits_per_symbol()</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>endianness</key>
+      <value>gr.GR_MSB_FIRST</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(144, 188)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_repack_bits_bb_0</value>
     </param>
     <param>
       <key>len_tag_key</key>
-      <value>len_tag_name</value>
+      <value>""</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -253,7 +200,101 @@ MSB -&gt; For FEC</value>
     </param>
   </block>
   <block>
-    <key>blocks_stream_to_tagged_stream</key>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(488, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>constellation</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>digital.constellation_8psk().base()</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(656, 12)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>constellation</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>digital.psk_constellation(8,digital.mod_codes.GRAY_CODE, True)</value>
+    </param>
+  </block>
+  <block>
+    <key>digital_chunks_to_symbols_xx</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -267,12 +308,16 @@ MSB -&gt; For FEC</value>
       <value></value>
     </param>
     <param>
-      <key>_enabled</key>
+      <key>dimension</key>
       <value>1</value>
     </param>
     <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(224, 156)</value>
+      <value>(360, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -280,82 +325,35 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_stream_to_tagged_stream_tx_convolutional</value>
+      <value>digital_chunks_to_symbols_xx_0</value>
     </param>
     <param>
-      <key>len_tag_key</key>
-      <value>len_tag_name</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>packet_len</key>
-      <value>data_length</value>
-    </param>
-    <param>
-      <key>type</key>
+      <key>in_type</key>
       <value>byte</value>
     </param>
     <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(216, 0)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
+      <key>maxoutbuf</key>
       <value>0</value>
     </param>
     <param>
-      <key>id</key>
-      <value>data_length</value>
+      <key>minoutbuf</key>
+      <value>0</value>
     </param>
     <param>
-      <key>label</key>
-      <value>Data Length</value>
+      <key>num_ports</key>
+      <value>1</value>
     </param>
     <param>
-      <key>short_id</key>
-      <value></value>
+      <key>out_type</key>
+      <value>complex</value>
     </param>
     <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>501</value>
+      <key>symbol_table</key>
+      <value>constellation.points()</value>
     </param>
   </block>
   <block>
-    <key>digital_crc32_bb</key>
+    <key>digital_map_bb</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -374,7 +372,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 148)</value>
+      <value>(256, 268)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -382,11 +380,11 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>id</key>
-      <value>digital_crc32_bb_tx_convolutional</value>
+      <value>digital_map_bb_0</value>
     </param>
     <param>
-      <key>lengthtagname</key>
-      <value>len_tag_name</value>
+      <key>map</key>
+      <value>constellation.pre_diff_code()</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -396,124 +394,51 @@ MSB -&gt; For FEC</value>
       <key>minoutbuf</key>
       <value>0</value>
     </param>
-    <param>
-      <key>check</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>packed</key>
-      <value>True</value>
-    </param>
   </block>
   <block>
-    <key>parameter</key>
+    <key>epy_block</key>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
-      <key>comment</key>
-      <value></value>
+      <key>_io_cache</key>
+      <value>('My Cummulative Phasor', 'blk', [], [('0', 'complex', 1)], [('0', 'complex', 1)], '', [])</value>
     </param>
     <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(544, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>encoder</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Encoder Object</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>fec.cc_encoder_make(4000, 7, 2, ([79,109]), 0, fec.CC_STREAMING, False)</value>
-    </param>
-  </block>
-  <block>
-    <key>fec_extended_tagged_encoder</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>110110 puncture for 3/4 rate
+      <key>_source_code</key>
+      <value>"""
+Embedded Python Blocks:
 
-Inner vai ate aqui + o header formatter</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>encoder_list</key>
-      <value>encoder</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(712, 144)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>fec_extended_tagged_encoder_tx_convolutional</value>
-    </param>
-    <param>
-      <key>lentagname</key>
-      <value>len_tag_name</value>
-    </param>
-    <param>
-      <key>mtu</key>
-      <value>data_length+crc_length</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>puncpat</key>
-      <value>'11'</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
+Each time this file is saved, GRC will instantiate the first class it finds
+to get ports and parameters of your block. The arguments to __init__  will
+be the parameters. All of them are required to have default values!
+"""
+
+import numpy as np
+from gnuradio import gr
+from gnuradio import digital
+
+
+class blk(gr.sync_block):  # other base classes are basic_block, decim_block, interp_block
+
+    def __init__(self):  # only default arguments here
+        gr.sync_block.__init__(
+            self,
+            name='My Cummulative Phasor',   # will show up in GRC
+            in_sig=[np.complex64],
+            out_sig=[np.complex64]
+        )
+        # if an attribute with the same name as a parameter is found,
+        # a callback is registered (properties work, too).
+        self.last = 1.0
+
+    def work(self, input_items, output_items):
+        cum_product = np.cumprod(np.concatenate(([self.last], input_items[0])))
+        cum_product /= np.abs(cum_product)
+        output_items[0][:], self.last = cum_product[:-1], cum_product[-1]
+        return len(input_items[0])
+</value>
     </param>
     <param>
       <key>comment</key>
@@ -521,11 +446,11 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 0)</value>
+      <value>(744, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -533,27 +458,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>frame_bits</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Frame Bits</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>intx</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>0</value>
+      <value>epy_block_CUMM_PHASOR</value>
     </param>
   </block>
   <block>
@@ -572,7 +477,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(136, 8)</value>
+      <value>(184, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -588,6 +493,49 @@ Inner vai ate aqui + o header formatter</value>
     </param>
   </block>
   <block>
+    <key>pad_sink</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1144, 196)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>pad_sink_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>output</value>
+    </param>
+    <param>
+      <key>num_streams</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>optional</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>pad_source</key>
     <param>
       <key>comment</key>
@@ -599,7 +547,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(112, 156)</value>
+      <value>(8, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -607,11 +555,11 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>info</value>
+      <value>pad_source_0</value>
     </param>
     <param>
       <key>label</key>
-      <value>info</value>
+      <value>in</value>
     </param>
     <param>
       <key>num_streams</key>
@@ -646,7 +594,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 4)</value>
+      <value>(376, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -654,11 +602,11 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>id</key>
-      <value>len_tag_name</value>
+      <value>rolloff</value>
     </param>
     <param>
       <key>label</key>
-      <value>Length Tag Key</value>
+      <value></value>
     </param>
     <param>
       <key>short_id</key>
@@ -670,121 +618,90 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>type</key>
-      <value>string</value>
+      <value></value>
     </param>
     <param>
       <key>value</key>
-      <value>'len_key'</value>
+      <value>0.8</value>
     </param>
   </block>
   <block>
-    <key>epy_block</key>
+    <key>root_raised_cosine_filter</key>
     <param>
-      <key>access_code</key>
-      <value>access_code</value>
+      <key>alpha</key>
+      <value>rolloff</value>
     </param>
     <param>
       <key>alias</key>
       <value></value>
     </param>
     <param>
-      <key>_io_cache</key>
-      <value>('My Frammer', 'blk', [('access_code', 'None'), ('payload_length', '100'), ('tag_name', "'length'")], [('0', 'byte', 1)], [('0', 'byte', 1)], '\n    ATTENTION!\n\n    This blocks works with unpacked bits in the input and in the output.\n    ', ['access_code', 'payload_length', 'tag_name'])</value>
-    </param>
-    <param>
-      <key>_source_code</key>
-      <value>"""
-Embedded Python Blocks:
-
-Each time this file is saved, GRC will instantiate the first class it finds
-to get ports and parameters of your block. The arguments to __init__  will
-be the parameters. All of them are required to have default values!
-"""
-
-import numpy as np
-from gnuradio import gr
-import pmt
-
-
-class blk(gr.basic_block):  # other base classes are basic_block, decim_block, interp_block
-    """
-    ATTENTION!
-
-    This blocks works with unpacked bits in the input and in the output.
-    """
-    def __init__(self, access_code=None, payload_length=100, tag_name = "length"):  # only default arguments here
-        """arguments to this function show up as parameters in GRC"""
-        gr.basic_block.__init__(
-            self,
-            name='My Frammer',   # will show up in GRC
-            in_sig=[np.uint8],
-            out_sig=[np.uint8]
-        )
-        # if an attribute with the same name as a parameter is found,
-        # a callback is registered (properties work, too).
-        self.access_code = access_code
-        self.payload_length = payload_length
-        self.tag_name = tag_name
-        # enum      tag_propagation_policy_t { TPP_DONT = 0, TPP_ALL_TO_ALL = 1, TPP_ONE_TO_ONE = 2 }
-        self.set_tag_propagation_policy(0)
-
-
-    def general_work(self, input_items, output_items):
-
-        if len(input_items[0]) &lt; 8*self.payload_length:
-            return 0
-
-        access_code_binary = np.array([int(b) for b in self.access_code], dtype=np.uint8)
-
-        payload = input_items[0][: 8*self.payload_length]
-        packet = np.concatenate([access_code_binary, payload])
-
-        if len(output_items[0]) &lt; len(packet):
-            return 0
-
-        self.add_item_tag(0, # Port number
-                 self.nitems_written(0), # Offset
-                 pmt.intern(self.tag_name), # Key
-                 pmt.to_pmt(len(packet)) # Value
-        )
-        output_items[0][: len(packet)] = packet
-
-        self.consume(0, 8*self.payload_length)
-
-        return len(packet)
-</value>
-    </param>
-    <param>
       <key>comment</key>
       <value></value>
     </param>
     <param>
-      <key>_enabled</key>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>decim</key>
       <value>1</value>
     </param>
     <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>interp_fir_filter_ccf</value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(912, 148)</value>
+      <value>(944, 164)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
     </param>
     <param>
+      <key>gain</key>
+      <value>sps</value>
+    </param>
+    <param>
       <key>id</key>
-      <value>my_framer</value>
+      <value>root_raised_cosine_filter_0</value>
     </param>
     <param>
-      <key>payload_length</key>
-      <value>data_encoded_length</value>
+      <key>interp</key>
+      <value>sps</value>
     </param>
     <param>
-      <key>tag_name</key>
-      <value>len_tag_name</value>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>ntaps</key>
+      <value>11*sps</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>sym_rate</key>
+      <value>1.0</value>
     </param>
   </block>
   <block>
-    <key>pad_sink</key>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
     <param>
       <key>comment</key>
       <value></value>
@@ -795,7 +712,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1112, 156)</value>
+      <value>(272, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -803,62 +720,68 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>id</key>
-      <value>toMod</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
+      <value>sps</value>
     </param>
     <param>
       <key>label</key>
-      <value>toMod</value>
+      <value></value>
     </param>
     <param>
-      <key>num_streams</key>
-      <value>1</value>
+      <key>short_id</key>
+      <value></value>
     </param>
     <param>
-      <key>optional</key>
-      <value>False</value>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
-      <key>vlen</key>
-      <value>1</value>
+      <key>type</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>5</value>
     </param>
   </block>
   <connection>
-    <source_block_id>blocks_repack_bits_bb_tx_convolutional</source_block_id>
-    <sink_block_id>fec_extended_tagged_encoder_tx_convolutional</sink_block_id>
+    <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
+    <sink_block_id>epy_block_CUMM_PHASOR</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_tagged_stream_tx_convolutional</source_block_id>
-    <sink_block_id>digital_crc32_bb_tx_convolutional</sink_block_id>
+    <source_block_id>blocks_repack_bits_bb_0</source_block_id>
+    <sink_block_id>digital_map_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_crc32_bb_tx_convolutional</source_block_id>
-    <sink_block_id>blocks_repack_bits_bb_tx_convolutional</sink_block_id>
+    <source_block_id>digital_chunks_to_symbols_xx_0</source_block_id>
+    <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>fec_extended_tagged_encoder_tx_convolutional</source_block_id>
-    <sink_block_id>my_framer</sink_block_id>
+    <source_block_id>digital_map_bb_0</source_block_id>
+    <sink_block_id>digital_chunks_to_symbols_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>info</source_block_id>
-    <sink_block_id>blocks_stream_to_tagged_stream_tx_convolutional</sink_block_id>
+    <source_block_id>epy_block_CUMM_PHASOR</source_block_id>
+    <sink_block_id>root_raised_cosine_filter_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>my_framer</source_block_id>
-    <sink_block_id>toMod</sink_block_id>
+    <source_block_id>pad_source_0</source_block_id>
+    <sink_block_id>blocks_repack_bits_bb_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>root_raised_cosine_filter_0</source_block_id>
+    <sink_block_id>pad_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

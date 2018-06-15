@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block Amc
-# Generated: Thu Jun  7 02:31:31 2018
+# Generated: Fri Jun 15 15:33:20 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -28,7 +28,6 @@ from gnuradio import channels
 from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import fec
-from gnuradio import filter
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
@@ -80,36 +79,38 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.symbol_rate = symbol_rate = 384000
-        self.samp_rate = samp_rate = 4*288e3
-        self.port = port = 0
         self.packet_counter = packet_counter = 1
         self.info_length = info_length = 500
-        self.controller = controller = 0
+        self.data_length = data_length = (info_length+packet_counter)
+        self.port = port = 0
+        self.packet_length = packet_length = (data_length+4)
+        self.man_control = man_control = 0
         self.control = control = 1
-        self.sps_float = sps_float = samp_rate / symbol_rate
-        self.packet_length = packet_length = (info_length+packet_counter+4)
-        self.mod_choice = mod_choice = port*control + controller
+        self.mod_choice = mod_choice = port*control + man_control
         self.fec_options = fec_options = [0,0,1]
         self.access_code = access_code = '0101110111101101'
-        self.sps = sps = int(sps_float)
+
+
+        self.CE = CE = fec.cc_encoder_make(packet_length*8, 7, 2, ([79,109]), 0, fec.CC_TAILBITING, False)
+
         self.reset_check_faster = reset_check_faster = 0
         self.reset_check = reset_check = 0
-        self.nfilts = nfilts = 32
         self.full_frame_bits_dummy = full_frame_bits_dummy = packet_length*8 + len(access_code)
-        self.full_frame_bits_conv = full_frame_bits_conv = packet_length*2*8 + len(access_code)
+        self.full_frame_bits_conv = full_frame_bits_conv = int(packet_length*CE.rate()*8 + len(access_code))
         self.fec_choice = fec_choice = fec_options[mod_choice]
-        self.excess_bw = excess_bw = 0.35
         self.theta = theta = 0
+        self.symbol_rate = symbol_rate = 384000
+        self.sps = sps = 4
         self.sdr_rate = sdr_rate = 8*288e3
-        self.rrc_taps = rrc_taps = firdes.root_raised_cosine(nfilts, nfilts*sps, 1.0, excess_bw, 45*nfilts)
+        self.samp_rate = samp_rate = 4*288e3
+        self.roll_off = roll_off = 0.35
         self.reset_call = reset_call = (reset_check_faster==reset_check)
-        self.len_tag_name_rx = len_tag_name_rx = "len_key2"
+        self.nfilts = nfilts = 32
         self.len_tag_name = len_tag_name = "len_key"
-        self.is_conv = is_conv = fec_choice == 0
+        self.frequency_offset = frequency_offset = 1e-4
         self.frame_bits = frame_bits = packet_length*8 + packet_length*8*fec_choice
         self.fec_len_menu = fec_len_menu = [full_frame_bits_conv,full_frame_bits_dummy]
-        self.data_length = data_length = (info_length+packet_counter)
+        self.ep = ep = 1.001
 
         self.constellation_qpsk = constellation_qpsk = digital.constellation_qpsk().base()
 
@@ -131,10 +132,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
 
         self.DD = DD = fec.dummy_decoder.make(packet_length*8)
-
-
-
-        self.CE = CE = fec.cc_encoder_make(packet_length*8, 7, 2, ([79,109]), 0, fec.CC_TAILBITING, False)
 
 
 
@@ -238,7 +235,7 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.rx_outer_2 = rx_outer(
             access_code=access_code,
             decoder=DD,
-            len_tag_name_rx=len_tag_name_rx,
+            len_tag_name_rx=len_tag_name,
             packet_length=packet_length,
         )
         self.rx_outer_1 = rx_outer(
@@ -273,18 +270,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         _reset_check_thread.daemon = True
         _reset_check_thread.start()
 
-        self.rational_resampler_xxx_0_0 = filter.rational_resampler_ccc(
-                interpolation=int(samp_rate),
-                decimation=int(sdr_rate),
-                taps=None,
-                fractional_bw=None,
-        )
-        self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
-                interpolation=int(sdr_rate),
-                decimation=int(samp_rate),
-                taps=None,
-                fractional_bw=None,
-        )
         self.qtgui_time_sink_x_0_0_0_0 = qtgui.time_sink_f(
         	1024, #size
         	samp_rate, #samp_rate
@@ -438,61 +423,59 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.tab_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
         self.my_tx_inner_0_1 = my_tx_inner(
             constellation=constellation_8psk,
-            rolloff=excess_bw,
+            rolloff=roll_off,
             sps=sps,
         )
         self.my_tx_inner_0_0 = my_tx_inner(
             constellation=constellation_qpsk,
-            rolloff=excess_bw,
+            rolloff=roll_off,
             sps=sps,
         )
         self.my_tx_inner_0 = my_tx_inner(
             constellation=constellation_bpsk,
-            rolloff=excess_bw,
+            rolloff=roll_off,
             sps=sps,
         )
         self.my_rx_inner_0_1 = my_rx_inner(
             constellation=constellation_8psk,
             phase_rot_after_costas_loop=theta,
-            rolloff=excess_bw,
+            rolloff=roll_off,
             sps=sps,
         )
         self.my_rx_inner_0_0 = my_rx_inner(
             constellation=constellation_qpsk,
             phase_rot_after_costas_loop=theta,
-            rolloff=excess_bw,
+            rolloff=roll_off,
             sps=sps,
         )
         self.my_rx_inner_0 = my_rx_inner(
             constellation=constellation_bpsk,
             phase_rot_after_costas_loop=theta,
-            rolloff=excess_bw,
+            rolloff=roll_off,
             sps=sps,
         )
-        self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
-        	1, samp_rate, symbol_rate, 5e3, firdes.WIN_HAMMING, 6.76))
-        self.fec_selector = fec_selector.selector_3_1_bb(selected_port=fec_choice, data_length=data_length)
-        self._controller_options = (0, 1, 2, )
-        self._controller_labels = ('DBPSK', 'DQPSK', 'D8PSK', )
-        self._controller_group_box = Qt.QGroupBox('Manual Control')
-        self._controller_box = Qt.QVBoxLayout()
+        self._man_control_options = (0, 1, 2, )
+        self._man_control_labels = ('DBPSK', 'DQPSK', 'D8PSK', )
+        self._man_control_group_box = Qt.QGroupBox('Manual Control')
+        self._man_control_box = Qt.QVBoxLayout()
         class variable_chooser_button_group(Qt.QButtonGroup):
             def __init__(self, parent=None):
                 Qt.QButtonGroup.__init__(self, parent)
             @pyqtSlot(int)
             def updateButtonChecked(self, button_id):
                 self.button(button_id).setChecked(True)
-        self._controller_button_group = variable_chooser_button_group()
-        self._controller_group_box.setLayout(self._controller_box)
-        for i, label in enumerate(self._controller_labels):
+        self._man_control_button_group = variable_chooser_button_group()
+        self._man_control_group_box.setLayout(self._man_control_box)
+        for i, label in enumerate(self._man_control_labels):
         	radio_button = Qt.QRadioButton(label)
-        	self._controller_box.addWidget(radio_button)
-        	self._controller_button_group.addButton(radio_button, i)
-        self._controller_callback = lambda i: Qt.QMetaObject.invokeMethod(self._controller_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._controller_options.index(i)))
-        self._controller_callback(self.controller)
-        self._controller_button_group.buttonClicked[int].connect(
-        	lambda i: self.set_controller(self._controller_options[i]))
-        self.tab_grid_layout_1.addWidget(self._controller_group_box, 0,1,1,1)
+        	self._man_control_box.addWidget(radio_button)
+        	self._man_control_button_group.addButton(radio_button, i)
+        self._man_control_callback = lambda i: Qt.QMetaObject.invokeMethod(self._man_control_button_group, "updateButtonChecked", Qt.Q_ARG("int", self._man_control_options.index(i)))
+        self._man_control_callback(self.man_control)
+        self._man_control_button_group.buttonClicked[int].connect(
+        	lambda i: self.set_man_control(self._man_control_options[i]))
+        self.tab_grid_layout_1.addWidget(self._man_control_group_box, 0,1,1,1)
+        self.fec_selector = fec_selector.selector_3_1_bb(selected_port=fec_choice, data_length=data_length)
         self._control_options = (0, 1, )
         self._control_labels = ('Manual', 'Automatic', )
         self._control_group_box = Qt.QGroupBox('Control')
@@ -516,8 +499,8 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.tab_grid_layout_1.addWidget(self._control_group_box, 0,2,1,1)
         self.channels_channel_model_0 = channels.channel_model(
         	noise_voltage=channel_noise,
-        	frequency_offset=1e-4,
-        	epsilon=1.001,
+        	frequency_offset=frequency_offset,
+        	epsilon=ep,
         	taps=(1*np.exp(1j*channel_rotation), ),
         	noise_seed=0,
         	block_tags=True
@@ -540,8 +523,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_file_sink_0_0.set_unbuffered(True)
         self.blocks_delay_0 = blocks.delay(gr.sizeof_char*1, 10)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, port)
-        self.analog_agc_xx_0 = analog.agc_cc(1e-4, 1.0, 1.0)
-        self.analog_agc_xx_0.set_max_gain(65536)
         self.amc_controller = amc_controller.blk(threshold=0.1, window_size=20, modulus=256, average_length=20, reset_call=reset_call, state_tries=10)
         self.RWN_selector_3_1_ff_0 = RWN.selector_3_1_ff(mod_choice, True)
         self.RWN_selector_3_1_cc_1 = RWN.selector_3_1_cc(mod_choice, True)
@@ -552,22 +533,19 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.RWN_selector_3_1_cc_0, 0), (self.rational_resampler_xxx_0, 0))
+        self.connect((self.RWN_selector_3_1_cc_0, 0), (self.channels_channel_model_0, 0))
         self.connect((self.RWN_selector_3_1_cc_1, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_1, 0))
         self.connect((self.RWN_selector_3_1_ff_0, 0), (self.rx_outer_2, 0))
         self.connect((self.amc_controller, 1), (self.probe, 0))
         self.connect((self.amc_controller, 0), (self.qtgui_number_sink_0, 0))
-        self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0, 0))
-        self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_0, 0))
-        self.connect((self.analog_agc_xx_0, 0), (self.my_rx_inner_0_1, 0))
         self.connect((self.analog_const_source_x_1, 0), (self.qtgui_number_sink_0_1, 0))
-        self.connect((self.blocks_delay_0, 0), (self.probe3, 0))
+        self.connect((self.blocks_delay_0, 0), (self.probe2, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.amc_controller, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_delay_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.blocks_file_sink_0_0_0, 0))
-        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.probe2, 0))
+        self.connect((self.blocks_keep_m_in_n_0_0, 0), (self.probe3, 0))
         self.connect((self.blocks_keep_m_in_n_0_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.blocks_keep_m_in_n_0_0_0, 0), (self.blocks_uchar_to_float_0, 0))
         self.connect((self.blocks_keep_m_in_n_1_0, 0), (self.blocks_tag_gate_0_0, 0))
@@ -580,10 +558,11 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_throttle_0_0, 0), (self.blocks_stream_mux_0, 1))
         self.connect((self.blocks_uchar_to_float_0, 0), (self.qtgui_time_sink_x_0_0_0_0, 0))
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_stream_mux_0, 0))
-        self.connect((self.channels_channel_model_0, 0), (self.rational_resampler_xxx_0_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.my_rx_inner_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.my_rx_inner_0_0, 0))
+        self.connect((self.channels_channel_model_0, 0), (self.my_rx_inner_0_1, 0))
         self.connect((self.fec_selector, 0), (self.blocks_keep_m_in_n_0_0, 0))
         self.connect((self.fec_selector, 0), (self.blocks_keep_m_in_n_0_0_0, 0))
-        self.connect((self.low_pass_filter_0, 0), (self.analog_agc_xx_0, 0))
         self.connect((self.my_rx_inner_0, 1), (self.RWN_selector_3_1_cc_1, 0))
         self.connect((self.my_rx_inner_0, 0), (self.RWN_selector_3_1_ff_0, 0))
         self.connect((self.my_rx_inner_0_0, 1), (self.RWN_selector_3_1_cc_1, 1))
@@ -593,8 +572,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.connect((self.my_tx_inner_0, 0), (self.RWN_selector_3_1_cc_0, 0))
         self.connect((self.my_tx_inner_0_0, 0), (self.RWN_selector_3_1_cc_0, 1))
         self.connect((self.my_tx_inner_0_1, 0), (self.RWN_selector_3_1_cc_0, 2))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.channels_channel_model_0, 0))
-        self.connect((self.rational_resampler_xxx_0_0, 0), (self.low_pass_filter_0, 0))
         self.connect((self.rx_outer_1, 0), (self.fec_selector, 0))
         self.connect((self.rx_outer_2, 0), (self.fec_selector, 1))
         self.connect((self.tx_outer_0, 0), (self.blocks_tagged_stream_mux_0, 0))
@@ -605,38 +582,11 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
-    def get_symbol_rate(self):
-        return self.symbol_rate
-
-    def set_symbol_rate(self, symbol_rate):
-        self.symbol_rate = symbol_rate
-        self.set_sps_float(self.samp_rate / self.symbol_rate)
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, self.symbol_rate, 5e3, firdes.WIN_HAMMING, 6.76))
-
-    def get_samp_rate(self):
-        return self.samp_rate
-
-    def set_samp_rate(self, samp_rate):
-        self.samp_rate = samp_rate
-        self.set_sps_float(self.samp_rate / self.symbol_rate)
-        self.qtgui_time_sink_x_0_0_0_0.set_samp_rate(self.samp_rate)
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, self.symbol_rate, 5e3, firdes.WIN_HAMMING, 6.76))
-        self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
-
-    def get_port(self):
-        return self.port
-
-    def set_port(self, port):
-        self.port = port
-        self.set_mod_choice(self.port*self.control + self.controller)
-        self.analog_const_source_x_1.set_offset(self.port)
-
     def get_packet_counter(self):
         return self.packet_counter
 
     def set_packet_counter(self, packet_counter):
         self.packet_counter = packet_counter
-        self.set_packet_length((self.info_length+self.packet_counter+4))
         self.set_data_length((self.info_length+self.packet_counter))
         self.blocks_keep_m_in_n_0_0_0.set_offset(self.packet_counter)
         self.blocks_keep_m_in_n_0_0.set_m(self.packet_counter)
@@ -646,32 +596,28 @@ class top_block_amc(gr.top_block, Qt.QWidget):
 
     def set_info_length(self, info_length):
         self.info_length = info_length
-        self.set_packet_length((self.info_length+self.packet_counter+4))
         self.set_data_length((self.info_length+self.packet_counter))
         self.blocks_keep_m_in_n_0_0_0.set_m(self.info_length)
 
-    def get_controller(self):
-        return self.controller
+    def get_data_length(self):
+        return self.data_length
 
-    def set_controller(self, controller):
-        self.controller = controller
-        self.set_mod_choice(self.port*self.control + self.controller)
-        self._controller_callback(self.controller)
+    def set_data_length(self, data_length):
+        self.data_length = data_length
+        self.set_packet_length((self.data_length+4))
+        self.tx_outer_0_0.set_data_length(self.data_length)
+        self.tx_outer_0.set_data_length(self.data_length)
+        self.fec_selector.data_length = self.data_length
+        self.blocks_keep_m_in_n_0_0_0.set_n(self.data_length)
+        self.blocks_keep_m_in_n_0_0.set_n(self.data_length)
 
-    def get_control(self):
-        return self.control
+    def get_port(self):
+        return self.port
 
-    def set_control(self, control):
-        self.control = control
-        self.set_mod_choice(self.port*self.control + self.controller)
-        self._control_callback(self.control)
-
-    def get_sps_float(self):
-        return self.sps_float
-
-    def set_sps_float(self, sps_float):
-        self.sps_float = sps_float
-        self.set_sps(int(self.sps_float))
+    def set_port(self, port):
+        self.port = port
+        self.set_mod_choice(self.port*self.control + self.man_control)
+        self.analog_const_source_x_1.set_offset(self.port)
 
     def get_packet_length(self):
         return self.packet_length
@@ -681,8 +627,24 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.rx_outer_2.set_packet_length(self.packet_length)
         self.rx_outer_1.set_packet_length(self.packet_length)
         self.set_full_frame_bits_dummy(self.packet_length*8 + len(self.access_code))
-        self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code))
+        self.set_full_frame_bits_conv(int(self.packet_length*CE.rate()*8 + len(self.access_code)))
         self.set_frame_bits(self.packet_length*8 + self.packet_length*8*self.fec_choice)
+
+    def get_man_control(self):
+        return self.man_control
+
+    def set_man_control(self, man_control):
+        self.man_control = man_control
+        self.set_mod_choice(self.port*self.control + self.man_control)
+        self._man_control_callback(self.man_control)
+
+    def get_control(self):
+        return self.control
+
+    def set_control(self, control):
+        self.control = control
+        self.set_mod_choice(self.port*self.control + self.man_control)
+        self._control_callback(self.control)
 
     def get_mod_choice(self):
         return self.mod_choice
@@ -712,20 +674,14 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.rx_outer_2.set_access_code(self.access_code)
         self.rx_outer_1.set_access_code(self.access_code)
         self.set_full_frame_bits_dummy(self.packet_length*8 + len(self.access_code))
-        self.set_full_frame_bits_conv(self.packet_length*2*8 + len(self.access_code))
+        self.set_full_frame_bits_conv(int(self.packet_length*CE.rate()*8 + len(self.access_code)))
 
-    def get_sps(self):
-        return self.sps
+    def get_CE(self):
+        return self.CE
 
-    def set_sps(self, sps):
-        self.sps = sps
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.my_tx_inner_0_1.set_sps(self.sps)
-        self.my_tx_inner_0_0.set_sps(self.sps)
-        self.my_tx_inner_0.set_sps(self.sps)
-        self.my_rx_inner_0_1.set_sps(self.sps)
-        self.my_rx_inner_0_0.set_sps(self.sps)
-        self.my_rx_inner_0.set_sps(self.sps)
+    def set_CE(self, CE):
+        self.CE = CE
+        self.tx_outer_0.set_encoder(self.CE)
 
     def get_reset_check_faster(self):
         return self.reset_check_faster
@@ -740,13 +696,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_reset_check(self, reset_check):
         self.reset_check = reset_check
         self.set_reset_call((self.reset_check_faster==self.reset_check))
-
-    def get_nfilts(self):
-        return self.nfilts
-
-    def set_nfilts(self, nfilts):
-        self.nfilts = nfilts
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
 
     def get_full_frame_bits_dummy(self):
         return self.full_frame_bits_dummy
@@ -768,24 +717,10 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_fec_choice(self, fec_choice):
         self.fec_choice = fec_choice
         self._fec_choice_callback(self.fec_choice)
-        self.set_is_conv(self.fec_choice == 0)
         self.set_frame_bits(self.packet_length*8 + self.packet_length*8*self.fec_choice)
         self.fec_selector.selected_port = self.fec_choice
         self.blocks_keep_m_in_n_1_0.set_offset(self.fec_len_menu[0]*self.fec_choice)
         self.blocks_keep_m_in_n_1_0.set_m(self.fec_len_menu[self.fec_choice])
-
-    def get_excess_bw(self):
-        return self.excess_bw
-
-    def set_excess_bw(self, excess_bw):
-        self.excess_bw = excess_bw
-        self.set_rrc_taps(firdes.root_raised_cosine(self.nfilts, self.nfilts*self.sps, 1.0, self.excess_bw, 45*self.nfilts))
-        self.my_tx_inner_0_1.set_rolloff(self.excess_bw)
-        self.my_tx_inner_0_0.set_rolloff(self.excess_bw)
-        self.my_tx_inner_0.set_rolloff(self.excess_bw)
-        self.my_rx_inner_0_1.set_rolloff(self.excess_bw)
-        self.my_rx_inner_0_0.set_rolloff(self.excess_bw)
-        self.my_rx_inner_0.set_rolloff(self.excess_bw)
 
     def get_theta(self):
         return self.theta
@@ -796,17 +731,49 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.my_rx_inner_0_0.set_phase_rot_after_costas_loop(self.theta)
         self.my_rx_inner_0.set_phase_rot_after_costas_loop(self.theta)
 
+    def get_symbol_rate(self):
+        return self.symbol_rate
+
+    def set_symbol_rate(self, symbol_rate):
+        self.symbol_rate = symbol_rate
+
+    def get_sps(self):
+        return self.sps
+
+    def set_sps(self, sps):
+        self.sps = sps
+        self.my_tx_inner_0_1.set_sps(self.sps)
+        self.my_tx_inner_0_0.set_sps(self.sps)
+        self.my_tx_inner_0.set_sps(self.sps)
+        self.my_rx_inner_0_1.set_sps(self.sps)
+        self.my_rx_inner_0_0.set_sps(self.sps)
+        self.my_rx_inner_0.set_sps(self.sps)
+
     def get_sdr_rate(self):
         return self.sdr_rate
 
     def set_sdr_rate(self, sdr_rate):
         self.sdr_rate = sdr_rate
 
-    def get_rrc_taps(self):
-        return self.rrc_taps
+    def get_samp_rate(self):
+        return self.samp_rate
 
-    def set_rrc_taps(self, rrc_taps):
-        self.rrc_taps = rrc_taps
+    def set_samp_rate(self, samp_rate):
+        self.samp_rate = samp_rate
+        self.qtgui_time_sink_x_0_0_0_0.set_samp_rate(self.samp_rate)
+        self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
+
+    def get_roll_off(self):
+        return self.roll_off
+
+    def set_roll_off(self, roll_off):
+        self.roll_off = roll_off
+        self.my_tx_inner_0_1.set_rolloff(self.roll_off)
+        self.my_tx_inner_0_0.set_rolloff(self.roll_off)
+        self.my_tx_inner_0.set_rolloff(self.roll_off)
+        self.my_rx_inner_0_1.set_rolloff(self.roll_off)
+        self.my_rx_inner_0_0.set_rolloff(self.roll_off)
+        self.my_rx_inner_0.set_rolloff(self.roll_off)
 
     def get_reset_call(self):
         return self.reset_call
@@ -815,12 +782,11 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.reset_call = reset_call
         self.amc_controller.reset_call = self.reset_call
 
-    def get_len_tag_name_rx(self):
-        return self.len_tag_name_rx
+    def get_nfilts(self):
+        return self.nfilts
 
-    def set_len_tag_name_rx(self, len_tag_name_rx):
-        self.len_tag_name_rx = len_tag_name_rx
-        self.rx_outer_2.set_len_tag_name_rx(self.len_tag_name_rx)
+    def set_nfilts(self, nfilts):
+        self.nfilts = nfilts
 
     def get_len_tag_name(self):
         return self.len_tag_name
@@ -829,13 +795,15 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.len_tag_name = len_tag_name
         self.tx_outer_0_0.set_len_tag_name(self.len_tag_name)
         self.tx_outer_0.set_len_tag_name(self.len_tag_name)
+        self.rx_outer_2.set_len_tag_name_rx(self.len_tag_name)
         self.rx_outer_1.set_len_tag_name_rx(self.len_tag_name)
 
-    def get_is_conv(self):
-        return self.is_conv
+    def get_frequency_offset(self):
+        return self.frequency_offset
 
-    def set_is_conv(self, is_conv):
-        self.is_conv = is_conv
+    def set_frequency_offset(self, frequency_offset):
+        self.frequency_offset = frequency_offset
+        self.channels_channel_model_0.set_frequency_offset(self.frequency_offset)
 
     def get_frame_bits(self):
         return self.frame_bits
@@ -852,16 +820,12 @@ class top_block_amc(gr.top_block, Qt.QWidget):
         self.blocks_keep_m_in_n_1_0.set_m(self.fec_len_menu[self.fec_choice])
         self.blocks_keep_m_in_n_1_0.set_n(sum(self.fec_len_menu))
 
-    def get_data_length(self):
-        return self.data_length
+    def get_ep(self):
+        return self.ep
 
-    def set_data_length(self, data_length):
-        self.data_length = data_length
-        self.tx_outer_0_0.set_data_length(self.data_length)
-        self.tx_outer_0.set_data_length(self.data_length)
-        self.fec_selector.data_length = self.data_length
-        self.blocks_keep_m_in_n_0_0_0.set_n(self.data_length)
-        self.blocks_keep_m_in_n_0_0.set_n(self.data_length)
+    def set_ep(self, ep):
+        self.ep = ep
+        self.channels_channel_model_0.set_timing_offset(self.ep)
 
     def get_constellation_qpsk(self):
         return self.constellation_qpsk
@@ -914,13 +878,6 @@ class top_block_amc(gr.top_block, Qt.QWidget):
     def set_DD(self, DD):
         self.DD = DD
         self.rx_outer_2.set_decoder(self.DD)
-
-    def get_CE(self):
-        return self.CE
-
-    def set_CE(self, CE):
-        self.CE = CE
-        self.tx_outer_0.set_encoder(self.CE)
 
     def get_CD(self):
         return self.CD

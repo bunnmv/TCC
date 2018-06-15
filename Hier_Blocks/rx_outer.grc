@@ -101,7 +101,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(672, 4)</value>
+      <value>(736, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -144,7 +144,7 @@
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>Access Code</value>
     </param>
     <param>
       <key>short_id</key>
@@ -160,7 +160,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>'101010'</value>
+      <value>'0101110111101101' </value>
     </param>
   </block>
   <block>
@@ -179,9 +179,7 @@
     </param>
     <param>
       <key>comment</key>
-      <value>Tagged Stream to PDU block up ahead needs packed bytes
-
-MSB -&gt; Because of FEC</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -197,7 +195,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 204)</value>
+      <value>(536, 204)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -236,7 +234,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(944, 204)</value>
+      <value>(864, 204)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -334,7 +332,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(760, 196)</value>
+      <value>(688, 196)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -377,7 +375,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>comment</key>
-      <value>110110 puncture for 3/4 rate</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -393,7 +391,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 188)</value>
+      <value>(328, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -487,7 +485,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 204)</value>
+      <value>(16, 204)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -534,7 +532,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(576, 4)</value>
+      <value>(600, 8)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -546,7 +544,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>Lenght Tag Key</value>
     </param>
     <param>
       <key>short_id</key>
@@ -562,7 +560,7 @@ MSB -&gt; Because of FEC</value>
     </param>
     <param>
       <key>value</key>
-      <value>'len_key2'</value>
+      <value>'len_key'</value>
     </param>
   </block>
   <block>
@@ -675,7 +673,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(192, 192)</value>
+      <value>(144, 192)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -695,7 +693,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>threshold</key>
-      <value>0</value>
+      <value>2</value>
     </param>
   </block>
   <block>
@@ -742,7 +740,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>value</key>
-      <value>500</value>
+      <value>505</value>
     </param>
   </block>
   <block>
@@ -757,7 +755,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 308)</value>
+      <value>(544, 308)</value>
     </param>
     <param>
       <key>_rotation</key>

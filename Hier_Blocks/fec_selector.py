@@ -20,11 +20,12 @@ class selector_3_1_bb(gr.basic_block):
         self.data_length = data_length
 
     def forecast(self, noutput_items, ninput_items_required):
-        for i in range(len(ninput_items_required)):
-            if i == self.selected_port:
-                ninput_items_required[i] = self.data_length
-            else:
-                ninput_items_required[i] = 0
+        if self.selected_port == 0:
+            ninput_items_required[0] = self.data_length
+            ninput_items_required[1] = 0
+        else:
+            ninput_items_required[0] = 0
+            ninput_items_required[1] = self.data_length
 
     def general_work(self, input_items, output_items):
         L = min(len(input_items[self.selected_port]), len(output_items[0]))
