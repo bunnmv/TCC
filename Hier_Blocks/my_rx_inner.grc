@@ -140,7 +140,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 292)</value>
+      <value>(176, 404)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -149,57 +149,6 @@
     <param>
       <key>id</key>
       <value>blocks_multiply_const_vxx_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_multiply_const_vxx</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>const</key>
-      <value>np.exp(1j * phase_rot_after_costas_loop)</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(520, 292)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_multiply_const_vxx_0_0</value>
     </param>
     <param>
       <key>type</key>
@@ -289,7 +238,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 292)</value>
+      <value>(368, 428)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -328,7 +277,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(344, 212)</value>
+      <value>(408, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -379,11 +328,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(504, 212)</value>
+      <value>(540, 264)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>270</value>
     </param>
     <param>
       <key>id</key>
@@ -422,7 +371,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(152, 212)</value>
+      <value>(240, 212)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -512,7 +461,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1096, 292)</value>
+      <value>(528, 380)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -555,7 +504,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 236)</value>
+      <value>(368, 380)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -598,7 +547,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 260)</value>
+      <value>(136, 260)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -645,53 +594,6 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(664, 12)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>phase_rot_after_costas_loop</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Phase Rotation ACL</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>eng_float</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1.0</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
       <value>(568, 12)</value>
     </param>
     <param>
@@ -720,7 +622,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0.8</value>
+      <value>0.35</value>
     </param>
   </block>
   <block>
@@ -767,7 +669,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>3</value>
+      <value>4</value>
     </param>
   </block>
   <connection>
@@ -779,12 +681,6 @@
   <connection>
     <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
     <sink_block_id>pad_sink_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_multiply_const_vxx_0_0</source_block_id>
-    <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -802,7 +698,7 @@
   </connection>
   <connection>
     <source_block_id>digital_diff_phasor_cc_0</source_block_id>
-    <sink_block_id>blocks_multiply_const_vxx_0_0</sink_block_id>
+    <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

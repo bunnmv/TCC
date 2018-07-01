@@ -113,7 +113,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(544, 188)</value>
+      <value>(528, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -172,7 +172,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 188)</value>
+      <value>(208, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -317,7 +317,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(360, 188)</value>
+      <value>(352, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -368,11 +368,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>2</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 268)</value>
+      <value>(816, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -450,7 +450,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(744, 188)</value>
+      <value>(144, 284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -504,7 +504,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 196)</value>
+      <value>(512, 284)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -547,7 +547,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 196)</value>
+      <value>(104, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -657,7 +657,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(944, 164)</value>
+      <value>(336, 260)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -740,7 +740,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>value</key>
-      <value>5</value>
+      <value>4</value>
     </param>
   </block>
   <connection>
@@ -751,19 +751,13 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
   </connection>
   <connection>
     <source_block_id>blocks_repack_bits_bb_0</source_block_id>
-    <sink_block_id>digital_map_bb_0</sink_block_id>
+    <sink_block_id>digital_chunks_to_symbols_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>digital_chunks_to_symbols_xx_0</source_block_id>
     <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>digital_map_bb_0</source_block_id>
-    <sink_block_id>digital_chunks_to_symbols_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

@@ -623,6 +623,33 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(920, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>counter_length</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(832, 4)</value>
     </param>
     <param>
@@ -635,7 +662,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>(info_length+packet_counter)</value>
+      <value>(info_length+counter_length)</value>
     </param>
   </block>
   <block>
@@ -1117,33 +1144,6 @@ mod_choice = 2 Fec_choice =1</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(920, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>packet_counter</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
       <value>1</value>
     </param>
     <param>
@@ -1533,100 +1533,6 @@ Restarts FEC and MOD</value>
     </param>
   </block>
   <block>
-    <key>RWN_selector_3_1_cc</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>consume_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(16, 972)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_3_1_cc_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>mod_choice</value>
-    </param>
-  </block>
-  <block>
-    <key>RWN_selector_3_1_ff</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>consume_nonselected</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(0, 1116)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>RWN_selector_3_1_ff_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>selected</key>
-      <value>mod_choice</value>
-    </param>
-  </block>
-  <block>
     <key>epy_block</key>
     <param>
       <key>average_length</key>
@@ -1810,7 +1716,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1200, 1508)</value>
+      <value>(1296, 1580)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1857,7 +1763,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1120, 1564)</value>
+      <value>(1120, 1580)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2081,7 +1987,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>m</key>
-      <value>packet_counter</value>
+      <value>counter_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2156,7 +2062,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>offset</key>
-      <value>packet_counter</value>
+      <value>counter_length</value>
     </param>
   </block>
   <block>
@@ -2234,7 +2140,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1368, 1772)</value>
+      <value>(1384, 1780)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2265,7 +2171,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1264, 1820)</value>
+      <value>(1272, 1844)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2308,7 +2214,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1112, 1852)</value>
+      <value>(1112, 1844)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2375,7 +2281,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>lengths</key>
-      <value>packet_counter, info_length</value>
+      <value>counter_length, info_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2418,7 +2324,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(368, 636)</value>
+      <value>(368, 652)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2796,7 +2702,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 604)</value>
+      <value>(720, 556)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3262,7 +3168,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 556)</value>
+      <value>(520, 564)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3364,7 +3270,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 708)</value>
+      <value>(520, 692)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3536,7 +3442,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1376, 1692)</value>
+      <value>(1424, 1716)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3571,7 +3477,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1216, 1564)</value>
+      <value>(1216, 1580)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3606,7 +3512,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(984, 1620)</value>
+      <value>(976, 1628)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3996,7 +3902,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1344, 1568)</value>
+      <value>(1424, 1640)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -4227,7 +4133,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1344, 1496)</value>
+      <value>(1424, 1568)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -5144,7 +5050,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(816, 636)</value>
+      <value>(712, 708)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5252,7 +5158,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(512, 1636)</value>
+      <value>(520, 1636)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5306,7 +5212,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 636)</value>
+      <value>(352, 580)</value>
     </param>
     <param>
       <key>_rotation</key>

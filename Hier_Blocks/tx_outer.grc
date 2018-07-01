@@ -207,9 +207,7 @@ So a 1/2 returns  2</value>
     </param>
     <param>
       <key>comment</key>
-      <value>FEC needs unpacked
-
-MSB -&gt; For FEC</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -225,7 +223,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 156)</value>
+      <value>(64, 252)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -272,7 +270,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 156)</value>
+      <value>(64, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -374,7 +372,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 148)</value>
+      <value>(240, 172)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -460,9 +458,7 @@ MSB -&gt; For FEC</value>
     </param>
     <param>
       <key>comment</key>
-      <value>110110 puncture for 3/4 rate
-
-Inner vai ate aqui + o header formatter</value>
+      <value></value>
     </param>
     <param>
       <key>affinity</key>
@@ -478,7 +474,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 144)</value>
+      <value>(208, 240)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -599,7 +595,7 @@ Inner vai ate aqui + o header formatter</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(112, 156)</value>
+      <value>(264, 116)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -764,7 +760,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(912, 148)</value>
+      <value>(96, 324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -795,7 +791,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1112, 156)</value>
+      <value>(288, 332)</value>
     </param>
     <param>
       <key>_rotation</key>

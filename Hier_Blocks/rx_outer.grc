@@ -195,7 +195,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(536, 204)</value>
+      <value>(56, 300)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -234,7 +234,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(864, 204)</value>
+      <value>(352, 300)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -332,7 +332,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 196)</value>
+      <value>(200, 292)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -391,7 +391,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(328, 188)</value>
+      <value>(376, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -544,7 +544,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Lenght Tag Key</value>
+      <value>Length Tag Key</value>
     </param>
     <param>
       <key>short_id</key>
@@ -673,7 +673,7 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(144, 192)</value>
+      <value>(168, 192)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -755,11 +755,11 @@ class blk(gr.basic_block):  # other base classes are basic_block, decim_block, i
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(544, 308)</value>
+      <value>(424, 300)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>id</key>

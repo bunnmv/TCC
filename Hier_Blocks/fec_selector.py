@@ -12,7 +12,7 @@ class selector_3_1_bb(gr.basic_block):
     def __init__(self, selected_port=0, data_length = 501):
         gr.basic_block.__init__(
             self,
-            name='Simple Selector',
+            name='My Packet Selector',
             in_sig=[np.uint8, np.uint8],
             out_sig=[np.uint8]
         )

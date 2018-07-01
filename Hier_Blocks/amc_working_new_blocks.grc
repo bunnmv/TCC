@@ -623,6 +623,33 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(920, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>counter_length</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(832, 4)</value>
     </param>
     <param>
@@ -635,7 +662,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>(info_length+packet_counter)</value>
+      <value>(info_length+counter_length)</value>
     </param>
   </block>
   <block>
@@ -1107,33 +1134,6 @@ mod_choice = 2 Fec_choice =1</value>
     <param>
       <key>value</key>
       <value>32</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(920, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>packet_counter</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1</value>
     </param>
   </block>
   <block>
@@ -2081,7 +2081,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>m</key>
-      <value>packet_counter</value>
+      <value>counter_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2156,7 +2156,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>offset</key>
-      <value>packet_counter</value>
+      <value>counter_length</value>
     </param>
   </block>
   <block>
@@ -2265,7 +2265,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1264, 1820)</value>
+      <value>(1248, 1836)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2375,7 +2375,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>lengths</key>
-      <value>packet_counter, info_length</value>
+      <value>counter_length, info_length</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2418,7 +2418,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(368, 636)</value>
+      <value>(368, 652)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2796,7 +2796,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 604)</value>
+      <value>(720, 556)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3262,7 +3262,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 556)</value>
+      <value>(520, 564)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3364,7 +3364,7 @@ class selector_3_1_bb(gr.basic_block):
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 708)</value>
+      <value>(520, 692)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5144,7 +5144,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(816, 636)</value>
+      <value>(712, 708)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5252,7 +5252,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(512, 1636)</value>
+      <value>(520, 1636)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5306,7 +5306,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(240, 636)</value>
+      <value>(352, 580)</value>
     </param>
     <param>
       <key>_rotation</key>
